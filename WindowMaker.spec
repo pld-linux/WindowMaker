@@ -4,8 +4,8 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.60.0
-Release:	3
+Version:	0.61.1
+Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -19,11 +19,10 @@ Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
 Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
-Patch7:		WindowMaker-ru.po.patch
-Patch8:		Windowmaker-WINGs.h.patch
-Patch9:		WindowMaker-singleclick.patch
+Patch7:		Windowmaker-WINGs.h.patch
+Patch8:		WindowMaker-singleclick.patch
 URL:		http://www.windowmaker.org/
-BuildRequires:	libPropList-devel >= 0.8.3
+BuildRequires:	libPropList-devel >= 0.9.1
 BuildRequires:	xpm-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel >= 6b
@@ -141,9 +140,8 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p0
+%patch7 -p1
 %patch8 -p1
-%patch9 -p1
 
 %build
 autoconf
@@ -153,7 +151,6 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 %configure \
 	--with-nlsdir=%{_datadir}/locale \
-	--enable-kanji \
 	--enable-sound \
 	--enable-gnome \
 	--disable-debug \
@@ -214,8 +211,7 @@ rm -r $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS.gz BUGFORM.gz BUGS.gz 
-%doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
+%doc {AUTHORS,BUGFORM,BUGS,ChangeLog,FAQ,NEWS,README}.gz
 
 %dir /etc/X11/WindowMaker
 %config %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
