@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.53.0
-Release:	3
+Release:	4
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -30,6 +30,8 @@ Requires:	wmconfig
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
+
+%define	_prefix	/usr/X11R6
 
 %description
 WindowMaker is a window manager designed to emulate the look and feel of
@@ -115,9 +117,8 @@ LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 %configure \
-	--prefix=/usr/X11R6 \
-	--with-nlsdir=/usr/X11R6/share/locale \
 	--sysconfdir=/etc/X11 \
+	--with-nlsdir=/usr/X11R6/share/locale \
 	--enable-kanji \
 	--enable-sound \
 	--enable-gnome \
@@ -139,6 +140,8 @@ cd %{name}-extra-%{extraver}
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target_platform} \
 	--prefix=/usr/X11R6 \
+	--mandir=/usr/X11R6/share/man \
+	--with-nlsdir=/usr/X11R6/share/locale \
 	--with-iconsdir=/usr/X11R6/share/pixmaps
 
 %install
@@ -162,13 +165,15 @@ strip --strip-unneeded $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/share/man/man1/* \
 	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
+%find_lang %{name}
+
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %clean
 rm -r $RPM_BUILD_ROOT
 
-%files
+%files -f WindowMaker.lang
 %defattr(644,root,root,755)
 %doc AUTHORS.gz BUGFORM.gz BUGS.gz 
 %doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
@@ -202,29 +207,6 @@ rm -r $RPM_BUILD_ROOT
 
 %attr(755,root,root) /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs
 
-%lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/*
-%lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/*
-%lang(el) /usr/X11R6/share/locale/el/LC_MESSAGES/*
-%lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/*
-%lang(fi) /usr/X11R6/share/locale/fi/LC_MESSAGES/*
-%lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/*
-%lang(gl) /usr/X11R6/share/locale/gl/LC_MESSAGES/*
-%lang(hr) /usr/X11R6/share/locale/hr/LC_MESSAGES/*
-%lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/*
-%lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/*
-%lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/*
-%lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/*
-%lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/*
-%lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/*
-%lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/*
-%lang(ro) /usr/X11R6/share/locale/ro/LC_MESSAGES/*
-%lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/*
-%lang(se) /usr/X11R6/share/locale/se/LC_MESSAGES/*
-%lang(sk) /usr/X11R6/share/locale/sk/LC_MESSAGES/*
-%lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
-%lang(zh_CN) /usr/X11R6/share/locale/zh_CN/LC_MESSAGES/*
-%lang(zh_TW.Big5) /usr/X11R6/share/locale/zh_TW.Big5/LC_MESSAGES/*
-
 /usr/X11R6/GNUstep/Apps/WPrefs.app/tiff
 /usr/X11R6/GNUstep/Apps/WPrefs.app/xpm
 /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
@@ -247,6 +229,11 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/lib/lib*.a
 
 %changelog
+* Mon Jun 07 1999 Jan Rêkorajski <baggins@pld.org.pl>
+  [0.53.0-4]
+- fixed --prefix
+- added find_lang macro
+
 * Sun May  9 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.53.0-3]
 - now package is FHS 2.0 compliant.
