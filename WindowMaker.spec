@@ -1,244 +1,390 @@
+%define		extraver	0.1
+%define		_snap		20040321
+
 Summary:	NeXT-alike window manager
+Summary(es):	Administrador de Ventanas parecido con el NeXT
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
-Summary(pl):	Mened¿er okien w stylu NeXT
+Summary(pl):	Zarz±dca okien w stylu NeXT
+Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
+Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
+Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
-Version:	0.51.0
-Release:	1d
+Version:	0.81.0
+Release:	0.%{_snap}.1
+License:	GPL
 Group:		X11/Window Managers
-Group(pl):	X11/Zarz±dcy Okien
-Copyright:	GPL
-Source:		ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
-Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
-Patch:		WindowMaker-pl.po.patch
-Patch1:		WindowMaker-po.install.patch
-Patch2:		WindowMaker-CFLAGS.patch
-Patch3:		WindowMaker-wmconfig.patch
+Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
+# Source0-md5:	ecbd8f1cee5e2ad1adb99baadb142169
+Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
+# Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
+Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
+# Source2-md5:	07c7700daaaf232bc490f5abaabef085
+Source3:	%{name}.desktop
+Source4:	%{name}.RunWM
+Source5:	%{name}.wm_style
+Source6:	%{name}-xsession.desktop
+Patch0:		%{name}-CFLAGS.patch
+Patch1:		%{name}-wmconfig.patch
+Patch2:		%{name}-pixmaps.patch
+Patch3:		%{name}-shared.patch
+Patch4:		%{name}-areas.patch
+Patch5:		%{name}-IconPosition.patch
+Patch6:		%{name}-singleclick.patch
+Patch7:		%{name}-plmenu.patch
+Patch8:		%{name}-dockit.patch
+Patch9:		%{name}-po.patch
+Patch10:	%{name}-rxvt.patch
+Patch11:	%{name}-pl.po-update.patch
+Patch12:	%{name}-wmchlocale-fixes.patch
+Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
+Patch14:	%{name}-localenames.patch
+Patch15:	%{name}-CVS-before-xft2.patch
 URL:		http://www.windowmaker.org/
-Requires:	wmconfig
-Requires:	libjpeg
-Requires:	libpng
-Requires:	libtiff
-Requires:	libungif
-Requires:	xpm
-Requires:	XFree86-libs
-Requires:	libPropList
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRequires:	Hermes-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
+BuildRequires:	gettext-devel
+BuildRequires:	libpng >= 1.0.8
+BuildRequires:	libjpeg-devel >= 6b
+BuildRequires:	libtiff-devel
+BuildRequires:	libtool
+BuildRequires:	libungif-devel
+Requires:	%{name}-libs = %{version}
+Requires:	cpp
+Requires:	tk
+Requires:	wmconfig >= 0.9.9-5
+Requires:	xinitrc >= 3.0
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_sysconfdir	/etc/X11
+%define		_wmpropsdir	/usr/share/wm-properties
 
 %description
-WindowMaker is a window manager designed to emulate the look and feel of
-part of the NEXTSTEP(tm) GUI. It's supposed to be fast, relatively small,
-feature rich and easy to configure, with a simple and elegant appearance
-borrowed from NEXTSTEP(tm).
+Window Maker is an X11 window manager which emulates the look and feel
+of the NeXTSTEP (TM) graphical user interface. It is relatively fast,
+feature rich and easy to configure and use. Window Maker is part of
+the official GNU project, which means that Window Maker can
+interoperate with other GNU projects, such as GNOME.
+
+Window Maker allows users to switch themes 'on the fly,' to place
+favorite applications on either an application dock, similar to
+AfterStep's Wharf or on a workspace dock, a 'clip' which extends the
+application dock's usefulness.
+
+You should install the WindowMaker package if you use Window Maker as
+your window manager or if you'd like to try using it. If you do
+install the WindowMaker package, you may also want to install the
+AfterStep-APPS package, which includes applets that will work with
+both AfterStep and Window Maker window managers.
+
+%description -l es
+WindowMaker es un administrador de ventanas proyectado para emular la
+apariencia de parte de la interface de usuario del NEXTSTEP(tm). Se
+hizo para ser rápido, relativamente pequeño, rico en características y
+de configuración fácil, con una apariencia sencilla y elegante
+prestada del NEXTSTEP(tm).
 
 %description -l fr
-WindowMaker est un "Window Manager" conçu pour émuler l'apparence et la
-sensation de l'interface graphique NeXTSTEP(tm). Il est suposé être rapide,
-relativement petit, facile a configurer, extremement complet et avec
-l'apparence simple et élégante empruntée a NeXTSTEP(tm).
+Window Maker est un gestionnaire de fenêtres pour X11 qui cherche à
+reproduire l'allure et l'ergonomie ("look & feel") de l'interface
+graphique NeXTSTEP(tm) (aka OpenStep). Il est relativement rapide,
+évolué, et facile à configurer et à utiliser. Window Maker fait
+officiellement partie du projet GNU, ce qui signifie que Window Maker
+peut coopérer avec d'autres projets GNU, comme par exemple GNOME.
+
+Window Maker permet de changer de thèmes facilement, de placer ses
+applications favorites soit sur un "dock" similaire au programme Wharf
+de AfterStep, soit sur un dock intégré à l'espace de travail, appelé
+"clip" (trombone), et qui permet d'étendre les possibilités du dock
+principal.
+
+Vous devriez installer ce package si votre gestionnaire de fenêtres
+est Window Maker, ou si vous voulez l'essayer. Si vous installez le
+package Window Maker, vous voudrez peut-être installer aussi le
+package AfterStep-APPS, qui contient des "applets" (petites
+applications) qui fonctionnent à la fois dans les gestionnaires de
+fenêtres AfterStep et Window Maker.
 
 %description -l pl
-WindowMaker jest mened¿erem okien przypominaj±cy wygl±dem i wygod± obs³ugi
-interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo ma³y, o du¿ych
-mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go myszk±, za pomoc±
-programu WPrefs wchodz±cego w sk³ad tego pakietu.
+WindowMaker jest zarz±dc± okien przypominaj±cym wygl±dem i wygod±
+obs³ugi interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo ma³y,
+o du¿ych mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go
+myszk±, za pomoc± programu WPrefs wchodz±cego w sk³ad tego pakietu.
+
+%description -l pt_BR
+WindowMaker é um gerente de janelas projetado para emular a aparência
+de parte da interface de usuário do NEXTSTEP(tm). Feito para ser
+rápido, relativamente pequeno, rico em características e de
+configuração fácil, com uma aparência simples e elegante emprestada do
+NEXTSTEP(tm).
+
+%description -l ru
+WindowMaker - ÜÔÏ ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ, ÜÍÕÌÉÒÕÀÝÉÊ ÞÁÓÔØ ÜËÒÁÎÎÏÊ ÓÒÅÄÙ
+NEXTSTEP(tm). ðÏÄÒÁÚÕÍÅ×ÁÅÔÓÑ ÞÔÏ ÏÎ ÏÔÎÏÓÉÔÅÌØÎÏ ÎÅ×ÅÌÉË, ÂÙÓÔÒ,
+ÂÏÇÁÔ ×ÏÚÍÏÖÎÏÓÔÑÍÉ, ÌÅÇËÏ ÎÁÓÔÒÁÉ×ÁÅÔÓÑ É ÉÍÅÅÔ ÐÒÏÓÔÕÀ É ÜÌÅÇÁÎÔÎÕÀ
+×ÎÅÛÎÏÓÔØ, ÐÏÚÁÉÍÓÔ×Ï×ÁÎÎÕÀ Õ NEXTSTEP(tm).
+
+%description -l uk
+WindowMaker - ÃÅ ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ, ÝÏ ÅÍÕÌÀ¤ ¦ÎÔÅÒÆÅÊÓ ÅËÒÁÎÎÏÇÏ
+ÓÅÒÅÄÏ×ÉÝÁ NEXTSTEP(tm). êÏÇÏ ××ÁÖÁÀÔØ ×¦ÄÎÏÓÎÏ ÎÅ×ÅÌÉËÉÍ, Û×ÉÄËÉÍ,
+ÂÁÇÁÔÉÍ ÍÏÖÌÉ×ÏÓÔÑÍÉ, ÌÅÇËÉÍ ÄÌÑ ÎÁÌÁÇÏÄÖÅÎÎÑ; ×¦Î ÍÁ¤ ÐÒÏÓÔÕ ÔÁ
+ÅÌÅÇÁÎÔÎÕ ÚÏ×Î¦ÛÎ¦ÓÔØ, ÚÁÐÏÚÉÞÅÎÕ × NEXTSTEP(tm).
+
+%package libs
+Summary:	WindowMaker shared libraries
+Summary(pl):	Biblioteki wspó³dzielone WindowMakera
+Group:		Libraries
+Obsoletes:	libwraster2
+
+%description libs
+This package contains shared libraries for run WindowMaker.
+
+%description libs -l pl
+Ten pakiet zawiera biblioteki wspó³dzielone niezbêdne do pracy
+zarz±dcy okien WindowMaker.
 
 %package devel
-Summary:	WindowMaker libraries
+Summary:	WindowMaker libraries - development part
+Summary(es):	Bibliotecas, archivos de inclusión, e etc. para desarrollar aplicaciones WindowMaker
 Summary(fr):	Librairies de WindowMaker
-Summary(pl):	Biblioteki WindowMakera
+Summary(pl):	Biblioteki WindowMakera - czê¶æ dla programistów
+Summary(pt_BR):	Arquivos de inclusão e bibliotecas para o WindowMaker
+Summary(ru):	âÉÂÌÉÏÔÅËÉ ÐÏÄÄÅÒÖËÉ É .h ÆÁÊÌÙ ÄÌÑ WindowMaker
+Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ Ð¦ÄÔÒÉÍËÉ ÔÁ .h ÆÁÊÌÉ ÄÌÑ WindowMaker
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}
+Requires:	%{name}-libs = %{version}
+Obsoletes:	libwraster2-devel
 
 %description devel
 This package contains libraries for building WindowMaker-enhanced
 applications.
 
+%description devel -l es
+Bibliotecas, archivos de inclusión, e etc. para desarrollar
+aplicaciones WindowMaker
+
 %description devel -l fr
-Ce paquet contient des librairies pour faire des applications mise en valeur
-par WindowMaker.
+Ce paquet contient des librairies pour faire des applications mise en
+valeur par WindowMaker.
 
 %description devel -l pl
-Ten pakiet zawiera pliki nag³ówkowe i biblioteki niezbêdne do tworzenia
-aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
+Ten pakiet zawiera pliki nag³ówkowe i biblioteki niezbêdne do
+tworzenia aplikacji wykorzystuj±cych mo¿liwo¶ci zarz±dcy okien
+WindowMaker.
+
+%description devel -l pt_BR
+Arquivos de inclusão e bibliotecas para o desenvolvimento de programas
+baseados no WindowMaker
+
+%description devel -l ru
+üÔÏÔ ÐÁËÅÔ ÓÏÄÅÒÖÉÔ ÂÉÂÌÉÏÔÅËÉ É .h ÆÁÊÌÙ, ÐÒÅÄÎÁÚÎÁÞÅÎÎÙÅ ÄÌÑ ÓÂÏÒËÉ
+ÐÒÉÌÏÖÅÎÉÊ, ÉÓÐÏÌØÚÕÀÝÉÈ ×ÏÚÍÏÖÎÏÓÔÉ WindowMaker.
+
+%description devel -l uk
+ãÅÊ ÐÁËÅÔ Í¦ÓÔÉÔØ Â¦ÂÌ¦ÏÔÅËÉ ÔÁ .h ÆÁÊÌÉ, ÐÒÉÚÎÁÞÅÎ¦ ÄÌÑ ÐÒÉËÌÁÄÎÉÈ
+ÐÒÏÇÒÁÍ, ÝÏ ×ÉËÏÒÉÓÔÏ×ÕÀÔØ ÍÏÖÌÉ×ÏÓÔ¦ WindowMaker.
 
 %package static
 Summary:	WindowMaker static libraries
 Summary(pl):	Biblioteki statyczne WindowMakera
+Summary(ru):	óÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ ÐÏÄÄÅÒÖËÉ ÄÌÑ WindowMaker
+Summary(uk):	óÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ Ð¦ÄÔÒÉÍËÉ ÄÌÑ WindowMaker
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}
+Summary(pt_BR):	Componentes estáticos de desenvolvimento para o WindowMaker
+Requires:	%{name}-devel = %{version}
 
 %description static
-This package contains static libraries for building WindowMaker-enhanced
-applications.
+This package contains static libraries for building
+WindowMaker-enhanced applications.
 
 %description static -l pl
-Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
-aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
+Ten pakiet zawiera statyczne biblioteki do tworzenia aplikacji
+wykorzystuj±cych mo¿liwo¶ci zarz±dcy okien WindowMaker.
+
+%description static -l pt_BR
+Instale este pacote se você deseja desenvolver para o WindowMaker,
+utilizando componentes estáticos (raramente necessário).
+
+%description static -l ru
+üÔÏÔ ÐÁËÅÔ ÓÏÄÅÒÖÉÔ ÓÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ ÐÒÅÄÎÁÚÎÁÞÅÎÎÙÅ ÄÌÑ ÓÂÏÒËÉ
+ÐÒÉÌÏÖÅÎÉÊ, ÉÓÐÏÌØÚÕÀÝÉÈ ×ÏÚÍÏÖÎÏÓÔÉ WindowMaker.
+
+%description static -l uk
+ãÅÊ ÐÁËÅÔ Í¦ÓÔÉÔØ ÓÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ, ÐÒÉÚÎÁÞÅÎ¦ ÄÌÑ ÐÒÉËÌÁÄÎÉÈ
+ÐÒÏÇÒÁÍ, ÝÏ ×ÉËÏÒÉÓÔÏ×ÕÀÔØ ÍÏÖÌÉ×ÏÓÔ¦ WindowMaker.
 
 %prep
-#%setup -q 
-%setup -q -a 1
-#(cd $RPM_BUILD_DIR/%{name}-%{version}; tar xzf %{SOURCE1})
-
-%patch  -p1
+%setup -q -a 1 -a 2
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+
+for f in WindowMaker/*menu*; do
+	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
+	mv -f $f.new $f
+done
+
+mv -f po/{no,nb}.po
+mv -f po/{zh_TW.Big5,zh_TW}.po
+mv -f WPrefs.app/po/{zh_TW.Big5,zh_TW}.po
 
 %build
-echo "b" | LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
-	--prefix=/usr/X11R6 \
-	--with-nlsdir=/usr/X11R6/share/locale \
-	--enable-kanji \
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+cd %{name}-extra-%{extraver}
+	%{__libtoolize}
+	%{__aclocal}
+	%{__autoconf}
+	%{__automake}
+cd ..
+
+perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
+	WindowMaker/Defaults/WMWindowAttributes.in
+
+%configure \
+	CPP_PATH="/lib/cpp" \
+	LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nb nl pl pt ro ru \
+		 sk sv tr zh_CN zh_TW" \
+	--disable-rpath \
+	--with-nlsdir=%{_datadir}/locale \
+	--with-appspath=%{_libdir}/GNUstep/Apps \
 	--enable-sound \
-	--without-gnome \
-	--disable-shm \
+	--enable-gnome \
 	--disable-debug \
-	--enable-superfluous \
-        --enable-newstyle \
-	--enable-kde
-make \
-	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
-	CFLAGS="$RPM_OPT_FLAGS" \
-	LDFLAGS="-s" 
+	--enable-kde \
+	--enable-shared \
+	--enable-static \
+	--enable-usermenu
+
+touch WindowMaker/Defaults/W*.in
+
+%{__make} \
+	CFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}"
+
+%{__autoconf}
+cd %{name}-extra-%{extraver}
+%configure \
+	--with-nlsdir=%{_datadir}/locale \
+	--with-iconsdir=%{_datadir}/pixmaps
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_pixmapsdir},%{_wmpropsdir}} \
+	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
-make install \
-	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
-	DESTDIR=$RPM_BUILD_ROOT 
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
+install util/bughint $RPM_BUILD_ROOT%{_bindir}
 
-install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install contrib/dockit   $RPM_BUILD_ROOT%{_bindir}
+install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
-strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
+install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
-bzip2 -9 AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.sh
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.names
+install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+cd %{name}-extra-%{extraver}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+cd ..
+
+%find_lang %{name} --all-name
 
 %clean
-rm -r $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
-%files
+%post   libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
+
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS.bz2 BUGFORM.bz2 BUGS.bz2 
-%doc ChangeLog.bz2 FAQ.bz2 NEWS.bz2 README.bz2
+%doc AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
-%attr(644,root, man) /usr/X11R6/man/man1/*
+%dir %{_sysconfdir}/WindowMaker
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
 
-/usr/X11R6/share/pixmaps/*
+%attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
+/etc/sysconfig/wmstyle/*.names
 
-%attr(755,root,root) /usr/X11R6/bin/*
+%{_mandir}/man1/*
+%lang(sk) %{_mandir}/sk/man1/*
 
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+%{_pixmapsdir}/*
+%{_wmpropsdir}/WindowMaker.desktop
 
-%dir /usr/X11R6/share/WINGs
-%dir /usr/X11R6/share/WindowMaker
+%attr(755,root,root) %{_bindir}/bughint
+%attr(755,root,root) %{_bindir}/geticonset
+%attr(755,root,root) %{_bindir}/getstyle
+%attr(755,root,root) %{_bindir}/seticons
+%attr(755,root,root) %{_bindir}/setstyle
+%attr(755,root,root) %{_bindir}/wcopy
+%attr(755,root,root) %{_bindir}/wdwrite
+%attr(755,root,root) %{_bindir}/wdread
+%attr(755,root,root) %{_bindir}/wkdemenu.pl
+%attr(755,root,root) %{_bindir}/wm-oldmenu2new
+%attr(755,root,root) %{_bindir}/wmagnify
+%attr(755,root,root) %{_bindir}/wmaker
+%attr(755,root,root) %{_bindir}/wmaker.inst
+%attr(755,root,root) %{_bindir}/wmsetbg
+%attr(755,root,root) %{_bindir}/wmsetup
+%attr(755,root,root) %{_bindir}/wmchlocale
+%attr(755,root,root) %{_bindir}/wpaste
+%attr(755,root,root) %{_bindir}/wsetfont
+%attr(755,root,root) %{_bindir}/wxcopy
+%attr(755,root,root) %{_bindir}/wxpaste
+%attr(755,root,root) %{_bindir}/dockit
 
-/usr/X11R6/share/WINGs/*
-/usr/X11R6/share/WindowMaker/*
+%{_datadir}/WindowMaker
+%{_datadir}/xsessions/WindowMaker.desktop
 
-%dir /usr/X11R6/GNUstep
-%dir /usr/X11R6/GNUstep/Apps
-%dir /usr/X11R6/GNUstep/Apps/WPrefs.app
+# the first one is shared with gnustep-make...
+%dir %{_libdir}/GNUstep
+%dir %{_libdir}/GNUstep/Apps
+%dir %{_libdir}/GNUstep/Apps/WPrefs.app
 
-%attr(755,root,root) /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs
+%attr(755,root,root) %{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs
 
-/usr/X11R6/GNUstep/Apps/WPrefs.app/tiff
-/usr/X11R6/GNUstep/Apps/WPrefs.app/xpm
-/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
-/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.xpm
+%{_libdir}/GNUstep/Apps/WPrefs.app/tiff
+%{_libdir}/GNUstep/Apps/WPrefs.app/xpm
+%{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs.tiff
+%{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs.xpm
 
-%lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/*
-%lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/*
-%lang(el) /usr/X11R6/share/locale/el/LC_MESSAGES/*
-%lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/*
-%lang(fi) /usr/X11R6/share/locale/fi/LC_MESSAGES/*
-%lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/*
-%lang(gl) /usr/X11R6/share/locale/gl/LC_MESSAGES/*
-%lang(hr) /usr/X11R6/share/locale/hr/LC_MESSAGES/*
-%lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/*
-%lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/*
-%lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/*
-%lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/*
-%lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/*
-%lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/*
-%lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/*
-%lang(ro) /usr/X11R6/share/locale/ro/LC_MESSAGES/*
-%lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/*
-%lang(se) /usr/X11R6/share/locale/se/LC_MESSAGES/*
-%lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%{_datadir}/WINGs
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/X11R6/lib/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
+%attr(755,root,root) %{_bindir}/get-wings-flags
+%attr(755,root,root) %{_bindir}/get-wraster-flags
+%attr(755,root,root) %{_bindir}/get-wutil-flags
+%{_includedir}/*
 
-/usr/X11R6/lib/lib*.a
-/usr/X11R6/lib/lib*.la
-/usr/X11R6/include/*.h
-
-%changelog
-* Wed Feb  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.50.2-1d]
-- added stripping shared libraries,
-- removed SONAME symlinks from main package.
-
-* Fri Jan 15 1999 Artur Frysiak <wiget@usa.net>
-- upgraded to 0.50.2
-- rewrite %{name}-po.patch
-- added icons (WindowMaker-data.tar.gz) 
-  by Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-- added --enable-superfluous and --enable-newstyle configure options 
-  by Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-- added --enable-kde configure options
-- added more Requires
-- added wmconfig support
-
-* Sat Sep 26 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
-  [0.20.0-1d]
-- added --disable-shm option to configure script
-- added patches to fix I18N stuff
-- moved bughint script to /usr/X11R6/bin
-- WPrefs is now back in /usr/X11R6/GNUstep
-- built against Tornado,
-- build from non root's account.
-
-* Mon Sep 21 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
-  [0.19.3-2]
-- fixed problems with paths to icons, styles and WPrefs
-- removed all patches
-- moved WPrefs stuff to /usr/X11R6/share/GNUstep
-- fixed I18N
-- added Polish summary and description
-
-* Thu Sep  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.19.3-1]
-- added -q %setup parameter,
-- changed Buildroot to /tmp/%%{name}-%%{version}-root,
-- added using %%{name} and %%{version} in Source,
-- changeded dependences to "Requires: %%{name} = %%{version}" in devel
-  subpackage,
-- removed "rm -r %%{builddir}" - it's automatically removed if rpm is runed
-  on building with --clean,
-- removed COPYING and INSTALL from %doc (copyright statment is in Copyright
-  field),
-- WindowMaker is now builded from bz2 source tar,
-- removed Packager field (this must be placed in persolan ~/.rpmrc),
-- nls stuff moved to /usr/share/locale,
-- added --disable-debug for configure,
-- adde %lang macros for /usr/share/locale/*/LC_MESSAGES/* files,
-- added WindowMaker-fix_po.patch wit fixing .po files,
-- simplification in %files and added using %defattr macro also.
-
-* Tue Jul 21 1998 W. Reilly Cooley <wcooley@nakedape.ml.org>
-- updated from 16.1 to 17.2; made it use RPM_OPT_FLAGS
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
