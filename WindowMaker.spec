@@ -137,7 +137,7 @@ rm -r $RPM_BUILD_ROOT
 %doc AUTHORS.gz BUGFORM.gz BUGS.gz 
 %doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
 
-%attr(644,root, man) /usr/X11R6/man/man1/*
+/usr/X11R6/man/man1/*
 
 /usr/X11R6/share/pixmaps/*
 
@@ -187,6 +187,10 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/include/*.h
 
 %changelog
+* Wed Mar  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.51.0-2]
+- removed man group from man pages.
+
 * Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
 - gzipping instead bzipping
 - simplification in %files
