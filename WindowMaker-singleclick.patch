@@ -5,15 +5,15 @@
      WMWidget *parent;
  
 -    WMButton *swi[8];
-+    WMButton *swi[9];
++    WMButton *swi[10];
  
  } _Panel;
  
 @@ -54,6 +54,7 @@
-     WMSetButtonSelected(panel->swi[4], GetBoolForKey("WindozeCycling"));
-     WMSetButtonSelected(panel->swi[5], GetBoolForKey("DontConfirmKill"));
      WMSetButtonSelected(panel->swi[6], GetBoolForKey("DisableBlinking"));
-+    WMSetButtonSelected(panel->swi[7], GetBoolForKey("SingleClickLaunch"));
+     if (WMHasAntialiasingSupport(WMWidgetScreen(panel->box)))
+         WMSetButtonSelected(panel->swi[7], GetBoolForKey("AntialiasedText"));
++    WMSetButtonSelected(panel->swi[8], GetBoolForKey("SingleClickLaunch"));
  }
  
  
@@ -21,24 +21,24 @@
      panel->box = WMCreateBox(panel->parent);
      WMSetViewExpandsToParent(WMWidgetView(panel->box), 2, 2, 2, 2);
  
--    for (i=0; i<7; i++) {
-+    for (i=0; i<8; i++) {
+-    for (i=0; i<8; i++) {
++    for (i=0; i<9; i++) {
  	panel->swi[i] = WMCreateSwitchButton(panel->box);
  	WMResizeWidget(panel->swi[i], FRAME_WIDTH-40, 25);
  	WMMoveWidget(panel->swi[i], 20, 20+i*25);
 @@ -79,6 +80,7 @@
-     WMSetButtonText(panel->swi[4], _("Use Windoze style cycling."));
      WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command."));
      WMSetButtonText(panel->swi[6], _("Disable selection animation for selected icons."));
-+    WMSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
+     WMSetButtonText(panel->swi[7], _("Smooth font edges (needs restart)."));
++    WMSetButtonText(panel->swi[8], _("Launch applications and restore windows with a single click"));
  
-     WMRealizeWidget(panel->box);
-     WMMapSubwidgets(panel->box);
+     if (!WMHasAntialiasingSupport(WMWidgetScreen(panel->box)))
+         WMSetButtonEnabled(panel->swi[7], False);
 @@ -101,6 +103,7 @@
-     SetBoolForKey(WMGetButtonSelected(panel->swi[4]), "WindozeCycling");
-     SetBoolForKey(WMGetButtonSelected(panel->swi[5]), "DontConfirmKill");
      SetBoolForKey(WMGetButtonSelected(panel->swi[6]), "DisableBlinking");
-+    SetBoolForKey(WMGetButtonSelected(panel->swi[7]), "SingleClickLaunch");
+     if (WMHasAntialiasingSupport(WMWidgetScreen(panel->box)))
+         SetBoolForKey(WMGetButtonSelected(panel->swi[7]), "AntialiasedText");
++    SetBoolForKey(WMGetButtonSelected(panel->swi[8]), "SingleClickLaunch");
  }
  
  
@@ -97,14 +97,14 @@ diff -ur WindowMaker-0.64.0/src/defaults.c WindowMaker-0.64.0.new/src/defaults.c
 +++ WindowMaker-0.64.0.new/src/defaults.c	Wed Mar 21 19:59:08 2001
 @@ -547,6 +547,9 @@
      {"DisableBlinking",	"NO",		NULL,
- 	   &wPreferences.dont_blink,	getBool,	NULL
+     &wPreferences.dont_blink,	getBool,	NULL
      },
 +    {"SingleClickLaunch", "NO",		NULL,
 +       &wPreferences.single_click,	getBool,	NULL
 +    },
-       /* style options */
+     /* style options */
      {"MenuStyle", 	"normal",  		seMenuStyles,
- 	&wPreferences.menu_style, getEnum, 	setMenuStyle
+     &wPreferences.menu_style, getEnum, 	setMenuStyle
 diff -ur WindowMaker-0.64.0/src/dock.c WindowMaker-0.64.0.new/src/dock.c
 --- WindowMaker-0.64.0/src/dock.c	Thu Jan 18 02:33:45 2001
 +++ WindowMaker-0.64.0.new/src/dock.c	Wed Mar 21 19:59:08 2001

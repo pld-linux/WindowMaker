@@ -18,19 +18,20 @@ Usage:
 ---cut here---cut here-----------cut here---cut here----
 --- wm/src/actions.c.orig	Sat Feb 16 18:46:54 2002
 +++ wm/src/actions.c	Sat Feb 16 19:07:16 2002
-@@ -432,6 +432,7 @@
-     WArea usableArea = wwin->screen_ptr->totalUsableArea;
-     WArea totalArea;
+@@ -432,6 +432,8 @@
+     int changed_h, changed_v, shrink_h, shrink_v;
+     WArea usableArea, totalArea;
  
 +    #define CAPTION_HEIGHT ( WMFontHeight(wwin->screen_ptr->clip_title_font) + 3 )
- 
++
      if (WFLAGP(wwin, no_resizable))
- 	return;
+         return;
+ 
 @@ -498,6 +499,7 @@
- 	    new_y -= wwin->frame->top_width;
- 	    new_height += wwin->frame->bottom_width - 1;
- 	}
+             new_y -= wwin->frame->top_width;
+             new_height += wwin->frame->bottom_width - 1;
+         }
 +      new_height -= CAPTION_HEIGHT;
-     } else {
- 	new_y = wwin->frame_y;
- 	new_height = wwin->frame->core->height;
+     } else if (shrink_v) {
+         new_y = wwin->old_geometry.y;
+         new_height = wwin->old_geometry.height;
