@@ -1,7 +1,7 @@
 diff -Nru WindowMaker-0.64.0/WINGs/Examples/Makefile.am WindowMaker-0.64.0.new/WINGs/Examples/Makefile.am
 --- WindowMaker-0.64.0/WINGs/Examples/Makefile.am	Tue Feb 13 18:58:56 2001
 +++ WindowMaker-0.64.0.new/WINGs/Examples/Makefile.am	Tue Feb 13 18:56:19 2001
-@@ -6,17 +6,17 @@
+@@ -6,20 +6,20 @@
  noinst_PROGRAMS = connect server fontl puzzle
  
  
@@ -23,7 +23,11 @@ diff -Nru WindowMaker-0.64.0/WINGs/Examples/Makefile.am WindowMaker-0.64.0.new/W
 +connect_LDADD = $(top_builddir)/WINGs/libWUtil.la @LIBRARY_SEARCH_PATH@ \
  	@NETLIBS@ @LIBPL@
  
- server_DEPENDENCIES = $(top_builddir)/WINGs/libWUtil.a
+-server_DEPENDENCIES = $(top_builddir)/WINGs/libWUtil.a
++server_DEPENDENCIES = $(top_builddir)/WINGs/libWUtil.la
+ 
+ server_LDADD = $(top_builddir)/WINGs/libWUtil.a @LIBRARY_SEARCH_PATH@ \
+ 	@NETLIBS@ @LIBPL@
 diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WINGs/Extras/Makefile.am
 --- WindowMaker-0.64.0/WINGs/Extras/Makefile.am	Tue Feb 13 18:58:56 2001
 +++ WindowMaker-0.64.0.new/WINGs/Extras/Makefile.am	Tue Feb 13 18:56:19 2001
