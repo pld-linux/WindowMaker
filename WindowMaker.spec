@@ -39,7 +39,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
 Requires:	wmconfig >= 0.9.9-5
-Requires:	/usr/bin/cpp
+Requires:	cpp
 Requires:	%{name}-libs = %{version}
 Requires:	tk
 Requires:	xinitrc >= 3.0
@@ -166,7 +166,7 @@ autoconf
 automake
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
-CPP_PATH="/usr/bin/cpp" ; export CPP_PATH
+CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 %configure \
 	--with-nlsdir=%{_datadir}/locale \
@@ -188,10 +188,7 @@ touch WindowMaker/Defaults/W*.in
 
 autoconf
 cd %{name}-extra-%{extraver}
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target_platform} \
-	--prefix=%{_prefix} \
-	--mandir=%{_mandir} \
+%configure \
 	--with-nlsdir=%{_datadir}/locale \
 	--with-iconsdir=%{_datadir}/pixmaps
 
@@ -219,16 +216,11 @@ install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.names
 (cd %{name}-extra-%{extraver};
 %{__make} DESTDIR=$RPM_BUILD_ROOT install )
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
+gzip -9nf AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
+%find_lang %{name} --all-name
 
-%find_lang %{name}
-%find_lang WPrefs
-cat WPrefs.lang >> %{name}.lang
-
-%post libs -p /sbin/ldconfig
+%post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
 %clean
