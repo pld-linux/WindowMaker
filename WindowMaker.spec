@@ -21,7 +21,7 @@ Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
 Patch7:		WindowMaker-ru.po.patch
 Patch8:		Windowmaker-WINGs.h.patch
-Patch9:		Windowmaker-singleclick.patch
+Patch9:		WindowMaker-singleclick.patch
 URL:		http://www.windowmaker.org/
 BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
