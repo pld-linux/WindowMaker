@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.60.0
-Release:	1
+Release:	2
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -20,6 +20,7 @@ Patch4:		WindowMaker-shared.patch
 Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
 Patch7:		WindowMaker-ru.po.patch
+Patch8:		Windowmaker-WINGs.h.patch
 URL:		http://www.windowmaker.org/
 BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
@@ -114,6 +115,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p0
+%patch8 -p1
 
 %build
 autoconf
@@ -174,6 +176,8 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %find_lang %{name}
+%find_lang WPrefs
+cat WPrefs.lang >> %{name}.lang
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -237,6 +241,12 @@ rm -r $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Sat Jul 10 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.60.0-2]
+- aadde Windowmaker-WINGs.h.patch which fix probems compiling WM on system
+  without installed WindowMaker-devel,
+- fix: include WPrefs .mo files.
+
 * Fri Jun 25 1999 Piotr Czerwiñski <pius@pld.org.pl> 
   [0.60.0-1]
 - updated to 0.60.0,
