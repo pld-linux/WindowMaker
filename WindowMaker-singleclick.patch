@@ -20,7 +20,7 @@ diff -ur WindowMaker-0.64.0/WPrefs.app/Expert.c WindowMaker-0.64.0.new/WPrefs.ap
  
 @@ -66,7 +67,7 @@
      panel->box = WMCreateBox(panel->parent);
-     WMSetBoxExpandsToParent(panel->box, 2, 2, 0, 0);
+     WMSetViewExpandsToParent(WMWidgetView(panel->box), 2, 2, 2, 2);
  
 -    for (i=0; i<7; i++) {
 +    for (i=0; i<8; i++) {
@@ -28,9 +28,9 @@ diff -ur WindowMaker-0.64.0/WPrefs.app/Expert.c WindowMaker-0.64.0.new/WPrefs.ap
  	WMResizeWidget(panel->swi[i], FRAME_WIDTH-40, 25);
  	WMMoveWidget(panel->swi[i], 20, 20+i*25);
 @@ -79,6 +80,7 @@
-     WMSetButtonText(panel->swi[4], _("Use Windoze style cycling"));
-     WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command"));
-     WMSetButtonText(panel->swi[6], _("Disable cycling color highlighting of icons"));
+     WMSetButtonText(panel->swi[4], _("Use Windoze style cycling."));
+     WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command."));
+     WMSetButtonText(panel->swi[6], _("Disable cycling of highlighting color for selected icons."));
 +    WMSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
  
      WMRealizeWidget(panel->box);
@@ -59,23 +59,23 @@ diff -ur WindowMaker-0.64.0/src/WindowMaker.h WindowMaker-0.64.0.new/src/WindowM
 diff -ur WindowMaker-0.64.0/src/appicon.c WindowMaker-0.64.0.new/src/appicon.c
 --- WindowMaker-0.64.0/src/appicon.c	Thu Jan 18 20:21:57 2001
 +++ WindowMaker-0.64.0.new/src/appicon.c	Wed Mar 21 19:59:08 2001
-@@ -717,6 +717,7 @@
+@@ -704,6 +704,7 @@
      int shad_x = 0, shad_y = 0, docking=0, dockable, collapsed = 0;
      int ix, iy;
      int clickButton = event->xbutton.button;
-+	Bool hasMoved;
++     Bool hasMoved;
      Pixmap ghost = None;
      Window wins[2];
- 
-@@ -786,6 +787,7 @@
+     Bool movingSingle = False;
+@@ -785,6 +786,7 @@
          XClearWindow(dpy, scr->dock_shadow);
      }
- 
-+	hasMoved = False;
+     
++    hasMoved = False;
      while (!done) {
  	WMMaskEvent(dpy, PointerMotionMask|ButtonReleaseMask|ButtonPressMask
  		    |ButtonMotionMask|ExposureMask, &ev);
-@@ -795,6 +797,7 @@
+@@ -794,6 +796,7 @@
  	    break;
  
  	 case MotionNotify:
@@ -83,7 +83,7 @@ diff -ur WindowMaker-0.64.0/src/appicon.c WindowMaker-0.64.0.new/src/appicon.c
  	    if (!grabbed) {
  		if (abs(dx-ev.xmotion.x)>=MOVE_THRESHOLD
  		    || abs(dy-ev.xmotion.y)>=MOVE_THRESHOLD) {
-@@ -925,6 +928,9 @@
+@@ -943,6 +946,9 @@
  		wArrangeIcons(scr, True);
  
  	    done = 1;
