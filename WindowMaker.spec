@@ -19,7 +19,7 @@ Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
 Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
-Patch7:		WindowMaker-configure.patch
+#Patch7:		WindowMaker-configure.patch
 URL:		http://www.windowmaker.org/
 BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
@@ -111,13 +111,6 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 #patch7 -p1
 
 %build
-libtoolize --copy --force
-aclocal
-autoconf
-(cd wrlib;
-libtoolize --copy --force
-aclocal
-autoconf)
 
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
