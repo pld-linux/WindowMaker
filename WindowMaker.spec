@@ -49,8 +49,6 @@ Requires:	tk
 Requires:	xinitrc >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 %define		_sysconfdir	/etc/X11
 %define		_wmpropsdir	%{_datadir}/wm-properties
 
