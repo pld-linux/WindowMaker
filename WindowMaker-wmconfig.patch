@@ -47,7 +47,7 @@ diff -urN WindowMaker-0.50.2.old/WindowMaker/menu WindowMaker-0.50.2/WindowMaker
 -		"XKill" EXEC xkill
 -		"Clipboard" EXEC xclipboard
 -	"Utils" END
-+	"Applications" OPEN_MENU | wmconfig --rootmenu=Applications --output=wmaker
++	"Applications" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null 
  
  	"Selection" MENU
  		"Copy" EXEC echo '%s' | wxcopy
@@ -97,7 +97,7 @@ diff -urN WindowMaker-0.50.2.old/WindowMaker/plmenu WindowMaker-0.50.2/WindowMak
 -  ("ASClock", EXEC, "asclock -shape"),
 -  ("Clipboard", EXEC, "xclipboard")
 -  ),
-+ ("Applications", OPEN_MENU, "| wmconfig --rootmenu=Applications --output=wmaker"),
++ ("Applications", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
   ("Selection",
    ("Copy", EXEC, "echo '%s' | wxcopy"),
    ("Mail To", EXEC, "xterm -name mail -T Pine -e pine %s"),
