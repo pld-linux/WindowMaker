@@ -1,42 +1,6 @@
-diff -Nru WindowMaker-0.63.1/WPrefs.app/Expert.c WindowMaker-0.63.1.new/WPrefs.app/Expert.c
---- WindowMaker-0.63.1/WPrefs.app/Expert.c	Sat Jan  6 23:43:21 2001
-+++ WindowMaker-0.63.1.new/WPrefs.app/Expert.c	Sun Jan  7 23:06:09 2001
-@@ -54,6 +54,7 @@
-     WMSetButtonSelected(panel->swi[4], GetBoolForKey("WindozeCycling"));
-     WMSetButtonSelected(panel->swi[5], GetBoolForKey("DontConfirmKill"));
-     WMSetButtonSelected(panel->swi[6], GetBoolForKey("DisableBlinking"));
-+    WMSetButtonSelected(panel->swi[6], GetBoolForKey("SingleClickLaunch"));
- }
- 
- 
-@@ -67,7 +68,7 @@
-     WMResizeWidget(panel->frame, FRAME_WIDTH, FRAME_HEIGHT);
-     WMMoveWidget(panel->frame, FRAME_LEFT, FRAME_TOP);
- 
--    for (i=0; i<7; i++) {
-+    for (i=0; i<8; i++) {
- 	panel->swi[i] = WMCreateSwitchButton(panel->frame);
- 	WMResizeWidget(panel->swi[i], FRAME_WIDTH-40, 25);
- 	WMMoveWidget(panel->swi[i], 20, 20+i*25);
-@@ -80,6 +81,7 @@
-     WMSetButtonText(panel->swi[4], _("Use Windoze style cycling"));
-     WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command"));
-     WMSetButtonText(panel->swi[6], _("Disable cycling color highlighting of icons"));
-+    WMSetButtonText(panel->swi[6], _("Launch applications and restore windows with a single click"));
- 
-     WMRealizeWidget(panel->frame);
-     WMMapSubwidgets(panel->frame);
-@@ -102,6 +104,7 @@
-     SetBoolForKey(WMGetButtonSelected(panel->swi[4]), "WindozeCycling");
-     SetBoolForKey(WMGetButtonSelected(panel->swi[5]), "DontConfirmKill");
-     SetBoolForKey(WMGetButtonSelected(panel->swi[6]), "DisableBlinking");
-+    SetBoolForKey(WMGetButtonSelected(panel->swi[6]), "SingleClickLaunch");
- }
- 
- 
-diff -Nru WindowMaker-0.63.1/src/WindowMaker.h WindowMaker-0.63.1.new/src/WindowMaker.h
+diff -Naur WindowMaker-0.63.1/src/WindowMaker.h WindowMaker-0.63.1-p/src/WindowMaker.h
 --- WindowMaker-0.63.1/src/WindowMaker.h	Fri Nov 17 03:10:32 2000
-+++ WindowMaker-0.63.1.new/src/WindowMaker.h	Sun Jan  7 23:02:54 2001
++++ WindowMaker-0.63.1-p/src/WindowMaker.h	Mon Jan  8 12:15:41 2001
 @@ -424,6 +424,9 @@
      /* shading animation */
      signed char shade_speed;
@@ -47,9 +11,9 @@ diff -Nru WindowMaker-0.63.1/src/WindowMaker.h WindowMaker-0.63.1.new/src/Window
      int edge_resistance;
      char attract;
  
-diff -Nru WindowMaker-0.63.1/src/appicon.c WindowMaker-0.63.1.new/src/appicon.c
+diff -Naur WindowMaker-0.63.1/src/appicon.c WindowMaker-0.63.1-p/src/appicon.c
 --- WindowMaker-0.63.1/src/appicon.c	Wed Nov  1 16:40:16 2000
-+++ WindowMaker-0.63.1.new/src/appicon.c	Sun Jan  7 23:02:54 2001
++++ WindowMaker-0.63.1-p/src/appicon.c	Mon Jan  8 12:15:41 2001
 @@ -717,6 +717,7 @@
      int shad_x = 0, shad_y = 0, docking=0, dockable, collapsed = 0;
      int ix, iy;
@@ -84,9 +48,9 @@ diff -Nru WindowMaker-0.63.1/src/appicon.c WindowMaker-0.63.1.new/src/appicon.c
  	    break;
  	}
      }
-diff -Nru WindowMaker-0.63.1/src/defaults.c WindowMaker-0.63.1.new/src/defaults.c
+diff -Naur WindowMaker-0.63.1/src/defaults.c WindowMaker-0.63.1-p/src/defaults.c
 --- WindowMaker-0.63.1/src/defaults.c	Sat Jan  6 22:28:02 2001
-+++ WindowMaker-0.63.1.new/src/defaults.c	Sun Jan  7 23:02:54 2001
++++ WindowMaker-0.63.1-p/src/defaults.c	Mon Jan  8 12:15:41 2001
 @@ -547,6 +547,9 @@
      {"DisableBlinking",	"NO",		NULL,
  	   &wPreferences.dont_blink,	getBool,	NULL
@@ -97,9 +61,9 @@ diff -Nru WindowMaker-0.63.1/src/defaults.c WindowMaker-0.63.1.new/src/defaults.
        /* style options */
      {"MenuStyle", 	"normal",  		seMenuStyles,
  	&wPreferences.menu_style, getEnum, 	setMenuStyle
-diff -Nru WindowMaker-0.63.1/src/dock.c WindowMaker-0.63.1.new/src/dock.c
+diff -Naur WindowMaker-0.63.1/src/dock.c WindowMaker-0.63.1-p/src/dock.c
 --- WindowMaker-0.63.1/src/dock.c	Wed Nov  1 16:40:16 2000
-+++ WindowMaker-0.63.1.new/src/dock.c	Sun Jan  7 23:02:54 2001
++++ WindowMaker-0.63.1-p/src/dock.c	Mon Jan  8 12:15:41 2001
 @@ -3752,7 +3752,7 @@
  
  
@@ -154,9 +118,9 @@ diff -Nru WindowMaker-0.63.1/src/dock.c WindowMaker-0.63.1.new/src/dock.c
  
      } else if (event->xbutton.button==Button2 && dock->type==WM_CLIP &&
                 aicon==scr->clip_icon) {
-diff -Nru WindowMaker-0.63.1/src/icon.c WindowMaker-0.63.1.new/src/icon.c
+diff -Naur WindowMaker-0.63.1/src/icon.c WindowMaker-0.63.1-p/src/icon.c
 --- WindowMaker-0.63.1/src/icon.c	Sat Jan  6 22:28:02 2001
-+++ WindowMaker-0.63.1.new/src/icon.c	Sun Jan  7 23:02:54 2001
++++ WindowMaker-0.63.1-p/src/icon.c	Mon Jan  8 12:15:41 2001
 @@ -874,6 +874,7 @@
      int dx=event->xbutton.x, dy=event->xbutton.y;
      int grabbed=0;
