@@ -1,5 +1,6 @@
---- WindowMaker-0.61.0/WPrefs.app/Expert.c	Sat Sep 18 02:11:58 1999
-+++ WindowMaker-0.61.0.singleclick/WPrefs.app/Expert.c	Sun Oct 10 16:49:18 1999
+diff -Nru WindowMaker-0.62.1/WPrefs.app/Expert.c WindowMaker-0.62.1.new/WPrefs.app/Expert.c
+--- WindowMaker-0.62.1/WPrefs.app/Expert.c	Mon Aug  7 23:18:24 2000
++++ WindowMaker-0.62.1.new/WPrefs.app/Expert.c	Mon Aug  7 23:19:12 2000
 @@ -53,6 +53,7 @@
      WMSetButtonSelected(panel->swi[3], GetBoolForKey("UseSaveUnders"));
      WMSetButtonSelected(panel->swi[4], GetBoolForKey("DisableBlinking"));
@@ -33,11 +34,12 @@
  }
  
  
---- WindowMaker-0.61.0/src/WindowMaker.h	Fri Sep 17 17:42:07 1999
-+++ WindowMaker-0.61.0.singleclick/src/WindowMaker.h	Sun Oct 10 16:51:11 1999
-@@ -400,6 +400,9 @@
+diff -Nru WindowMaker-0.62.1/src/WindowMaker.h WindowMaker-0.62.1.new/src/WindowMaker.h
+--- WindowMaker-0.62.1/src/WindowMaker.h	Mon Aug  7 23:18:24 2000
++++ WindowMaker-0.62.1.new/src/WindowMaker.h	Mon Aug  7 23:19:12 2000
+@@ -416,6 +416,9 @@
      /* shading animation */
-     char shade_speed;
+     signed char shade_speed;
  
 +	/* single click to lauch applications */
 +	char single_click;
@@ -45,9 +47,10 @@
      int edge_resistance;
      char attract;
  
---- WindowMaker-0.61.0/src/appicon.c	Thu Sep 16 05:22:53 1999
-+++ WindowMaker-0.61.0.singleclick/src/appicon.c	Sun Oct 10 16:51:11 1999
-@@ -739,6 +739,7 @@
+diff -Nru WindowMaker-0.62.1/src/appicon.c WindowMaker-0.62.1.new/src/appicon.c
+--- WindowMaker-0.62.1/src/appicon.c	Mon Aug  7 23:18:24 2000
++++ WindowMaker-0.62.1.new/src/appicon.c	Mon Aug  7 23:19:12 2000
+@@ -717,6 +717,7 @@
      int shad_x = 0, shad_y = 0, docking=0, dockable, collapsed = 0;
      int ix, iy;
      int clickButton = event->xbutton.button;
@@ -55,7 +58,7 @@
      Pixmap ghost = None;
      Window wins[2];
  
-@@ -800,6 +801,7 @@
+@@ -786,6 +787,7 @@
          XClearWindow(dpy, scr->dock_shadow);
      }
  
@@ -63,7 +66,7 @@
      while (!done) {
  	WMMaskEvent(dpy, PointerMotionMask|ButtonReleaseMask|ButtonPressMask
  		    |ButtonMotionMask|ExposureMask, &ev);
-@@ -809,6 +811,7 @@
+@@ -795,6 +797,7 @@
  	    break;
  
  	 case MotionNotify:
@@ -71,7 +74,7 @@
  	    if (!grabbed) {
  		if (abs(dx-ev.xmotion.x)>=MOVE_THRESHOLD
  		    || abs(dy-ev.xmotion.y)>=MOVE_THRESHOLD) {
-@@ -935,6 +938,9 @@
+@@ -925,6 +928,9 @@
  		wArrangeIcons(scr, True);
  
  	    done = 1;
@@ -81,21 +84,23 @@
  	    break;
  	}
      }
---- WindowMaker-0.61.0/src/defaults.c	Fri Sep 17 17:42:09 1999
-+++ WindowMaker-0.61.0.singleclick/src/defaults.c	Sun Oct 10 16:51:11 1999
-@@ -503,6 +503,9 @@
+diff -Nru WindowMaker-0.62.1/src/defaults.c WindowMaker-0.62.1.new/src/defaults.c
+--- WindowMaker-0.62.1/src/defaults.c	Mon Aug  7 23:18:24 2000
++++ WindowMaker-0.62.1.new/src/defaults.c	Mon Aug  7 23:20:35 2000
+@@ -530,6 +530,9 @@
      {"DisableBlinking",	"NO",		NULL,
  	   &wPreferences.dont_blink,	getBool,	NULL
      },
-+	{"SingleClickLaunch", "NO",		NULL,
++    {"SingleClickLaunch", "NO",		NULL,
 +	   &wPreferences.single_click,	getBool,	NULL
-+	},
- #ifdef WEENDOZE_CYCLE
-     {"WindozeCycling","NO", 			NULL,
- 	    &wPreferences.windoze_cycling,	getBool, NULL
---- WindowMaker-0.61.0/src/dock.c	Thu Sep 16 05:22:53 1999
-+++ WindowMaker-0.61.0.singleclick/src/dock.c	Sun Oct 10 16:51:11 1999
-@@ -3806,7 +3806,7 @@
++    },
+       /* style options */
+     {"MenuStyle", 	"normal",  		seMenuStyles,
+ 	&wPreferences.menu_style, getEnum, 	setMenuStyle
+diff -Nru WindowMaker-0.62.1/src/dock.c WindowMaker-0.62.1.new/src/dock.c
+--- WindowMaker-0.62.1/src/dock.c	Mon Aug  7 23:18:24 2000
++++ WindowMaker-0.62.1.new/src/dock.c	Mon Aug  7 23:19:12 2000
+@@ -3750,7 +3750,7 @@
  
  
  
@@ -104,7 +109,7 @@
  handleIconMove(WDock *dock, WAppIcon *aicon, XEvent *event)
  {
      WScreen *scr = dock->screen_ptr;
-@@ -3821,11 +3821,12 @@
+@@ -3765,11 +3765,12 @@
      int ix = aicon->xindex, iy = aicon->yindex;
      int tmp;
      Pixmap ghost = None;
@@ -118,7 +123,7 @@
      if (wPreferences.flags.noupdates)
  	return;
  
-@@ -3876,6 +3877,7 @@
+@@ -3820,6 +3821,7 @@
  	    break;
  
  	 case MotionNotify:
@@ -126,7 +131,7 @@
  	    if (!grabbed) {
  		if (abs(ofs_x-ev.xmotion.x)>=MOVE_THRESHOLD
  		    || abs(ofs_y-ev.xmotion.y)>=MOVE_THRESHOLD) {
-@@ -4018,7 +4020,10 @@
+@@ -3975,7 +3977,10 @@
  #ifdef DEBUG
  	    puts("End icon move");
  #endif
@@ -138,7 +143,7 @@
  	}
      }
  }
-@@ -4158,7 +4163,9 @@
+@@ -4115,7 +4120,9 @@
              else
                  handleDockMove(dock, aicon, event);
          } else
@@ -149,9 +154,10 @@
  
      } else if (event->xbutton.button==Button2 && dock->type==WM_CLIP &&
                 aicon==scr->clip_icon) {
---- WindowMaker-0.61.0/src/icon.c	Sun May 30 07:02:56 1999
-+++ WindowMaker-0.61.0.singleclick/src/icon.c	Sun Oct 10 16:51:11 1999
-@@ -863,6 +863,7 @@
+diff -Nru WindowMaker-0.62.1/src/icon.c WindowMaker-0.62.1.new/src/icon.c
+--- WindowMaker-0.62.1/src/icon.c	Mon Aug  7 23:18:24 2000
++++ WindowMaker-0.62.1.new/src/icon.c	Mon Aug  7 23:19:12 2000
+@@ -874,6 +874,7 @@
      int dx=event->xbutton.x, dy=event->xbutton.y;
      int grabbed=0;
      int clickButton=event->xbutton.button;
@@ -159,7 +165,7 @@
  
      if (WCHECK_STATE(WSTATE_MODAL))
  	return;
-@@ -905,6 +906,7 @@
+@@ -916,6 +917,7 @@
  	wwarning("pointer grab failed for icon move");
  #endif
      }
@@ -167,7 +173,7 @@
      while(1) {
  	WMMaskEvent(dpy, PointerMotionMask|ButtonReleaseMask|ButtonPressMask
  		   |ButtonMotionMask|ExposureMask, &ev);
-@@ -914,6 +916,7 @@
+@@ -925,6 +927,7 @@
  	    break;
  
  	 case MotionNotify:
@@ -175,7 +181,7 @@
  	    if (!grabbed) {
  		if (abs(dx-ev.xmotion.x)>=MOVE_THRESHOLD
  		    || abs(dy-ev.xmotion.y)>=MOVE_THRESHOLD) {
-@@ -951,6 +954,9 @@
+@@ -962,6 +965,9 @@
  
  	    if (wPreferences.auto_arrange_icons)
  		wArrangeIcons(wwin->screen_ptr, True);
