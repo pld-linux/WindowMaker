@@ -135,6 +135,9 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 	--enable-shared \
 	--enable-static \
 	--enable-usermenu
+
+touch WindowMaker/Defaults/W*.in
+
 make \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
