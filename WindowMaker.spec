@@ -34,9 +34,9 @@ Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define	_prefix		/usr/X11R6
-%define	_mandir		%{_prefix}/man
-%define	_sysconfdir	/etc/X11
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
+%define		_sysconfdir	/etc/X11
 
 %description
 WindowMaker is a window manager designed to emulate the look and feel of
