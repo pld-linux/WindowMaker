@@ -127,7 +127,6 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 	--enable-kanji \
 	--enable-sound \
 	--enable-gnome \
-	--disable-shm \
 	--disable-debug \
 	--enable-superfluous \
         --enable-newstyle \
