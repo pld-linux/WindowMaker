@@ -10,7 +10,7 @@ Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
 Version:	0.81.0
-Release:	0.%{_snap}.8
+Release:	0.%{_snap}.9
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
@@ -30,7 +30,6 @@ Patch5:		%{name}-IconPosition.patch
 Patch6:		%{name}-singleclick.patch
 Patch7:		%{name}-plmenu.patch
 Patch8:		%{name}-dockit.patch
-Patch10:	%{name}-xterm-dock.patch
 Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
 Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
@@ -224,7 +223,6 @@ utilizando componentes estáticos (raramente necessário).
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-#%patch10 -p1
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
@@ -232,8 +230,8 @@ utilizando componentes estáticos (raramente necessário).
 %patch15 -p0
 
 for f in WindowMaker/*menu*; do
-	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
-	mv -f $f.new $f
+	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
+	sed -i s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f
 done
 
 mv -f po/{no,nb}.po
