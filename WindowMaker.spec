@@ -51,8 +51,8 @@ BuildRequires:	xft-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	tk
-Requires:	wmconfig >= 0.9.9-5
-Requires:	xinitrc >= 3.0
+Requires:	vfmg
+Requires:	xinitrc-ng
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/X11
