@@ -8,10 +8,6 @@ Version:	0.80.0
 Release:	1
 License:	GPL
 Group:		X11/Window Managers
-Group(de):	X11/Fenstermanager
-Group(es):	X11/Administraadores De Ventanas
-Group(fr):	X11/Gestionnaires De FenЙtres
-Group(pl):	X11/Zarz╠dcy Okien
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
@@ -99,13 +95,6 @@ myszk╠, za pomoc╠ programu WPrefs wchodz╠cego w skЁad tego pakietu.
 Summary:	WindowMaker shared libraries
 Summary(pl):	Biblioteki wspСЁdzielone WindowMakera
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Obsoletes:	libwraster2
 
 %description libs
@@ -120,13 +109,6 @@ Summary:	WindowMaker libraries - development part
 Summary(fr):	Librairies de WindowMaker
 Summary(pl):	Biblioteki WindowMakera - czЙ╤Ф dla programistСw
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
 Obsoletes:	libwraster2-devel
 
@@ -147,13 +129,6 @@ WindowMaker.
 Summary:	WindowMaker static libraries
 Summary(pl):	Biblioteki statyczne WindowMakera
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
