@@ -50,7 +50,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool
 BuildRequires:	libungif-devel
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	tk
 Requires:	wmconfig >= 0.9.9-5
@@ -153,7 +153,8 @@ Summary(pt_BR):	Arquivos de inclusЦo e bibliotecas para o WindowMaker
 Summary(ru):	Библиотеки поддержки и .h файлы для WindowMaker
 Summary(uk):	Б╕бл╕отеки п╕дтримки та .h файли для WindowMaker
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	XFree86-devel
 Obsoletes:	libwraster2-devel
 
 %description devel
@@ -192,7 +193,7 @@ Summary(ru):	Статические библиотеки поддержки для WindowMaker
 Summary(uk):	Статичн╕ б╕бл╕отеки п╕дтримки для WindowMaker
 Group:		Development/Libraries
 Summary(pt_BR):	Componentes estАticos de desenvolvimento para o WindowMaker
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 This package contains static libraries for building
