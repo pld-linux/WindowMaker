@@ -1,0 +1,81 @@
+--- WindowMaker-0.51.0/src/gnome.c.areas	Wed Jan 20 10:00:00 1999
++++ WindowMaker-0.51.0/src/gnome.c	Mon Feb 15 17:23:09 1999
+@@ -94,6 +94,8 @@
+ static Atom _XA_WIN_APP_STATE;
+ static Atom _XA_WIN_EXPANDED_SIZE;
+ static Atom _XA_WIN_ICONS;
++static Atom _XA_WIN_AREA;
++static Atom _XA_WIN_AREA_COUNT;
+ static Atom _XA_WIN_WORKSPACE;
+ static Atom _XA_WIN_WORKSPACE_COUNT;
+ static Atom _XA_WIN_WORKSPACE_NAMES;
+@@ -104,7 +106,7 @@
+ void
+ wGNOMEInitStuff(WScreen *scr)
+ {
+-    Atom supportedStuff[10];
++    Atom supportedStuff[12];
+     int count;
+ 
+     if (!_XA_WIN_SUPPORTING_WM_CHECK) {
+@@ -126,11 +128,16 @@
+ 
+ 	_XA_WIN_ICONS = XInternAtom(dpy, "_WIN_ICONS", False);
+ 
++	_XA_WIN_AREA = XInternAtom(dpy, "_WIN_AREA", False);
++
++	_XA_WIN_AREA_COUNT = 
++	    XInternAtom(dpy, "_WIN_AREA_COUNT", False);
++
+ 	_XA_WIN_WORKSPACE = XInternAtom(dpy, "_WIN_WORKSPACE", False);
+ 
+ 	_XA_WIN_WORKSPACE_COUNT = 
+ 	    XInternAtom(dpy, "_WIN_WORKSPACE_COUNT", False);
+-
++       
+ 	_XA_WIN_WORKSPACE_NAMES = 
+ 	    XInternAtom(dpy, "_WIN_WORKSPACE_NAMES", False);
+ 
+@@ -173,6 +180,8 @@
+     supportedStuff[count++] = _XA_WIN_APP_STATE;
+     supportedStuff[count++] = _XA_WIN_EXPANDED_SIZE;
+     supportedStuff[count++] = _XA_WIN_ICONS;
++    supportedStuff[count++] = _XA_WIN_AREA;
++    supportedStuff[count++] = _XA_WIN_AREA_COUNT;
+     supportedStuff[count++] = _XA_WIN_WORKSPACE;
+     supportedStuff[count++] = _XA_WIN_WORKSPACE_COUNT;
+     supportedStuff[count++] = _XA_WIN_WORKSPACE_NAMES;
+@@ -221,11 +230,16 @@
+ wGNOMEUpdateWorkspaceHints(WScreen *scr)
+ {
+     long val;
++    long val2[2];
+ 
+     val = scr->workspace_count;
++    val2[0] = 1;
++    val2[1] = 1;
+ 
+     XChangeProperty(dpy, scr->root_win, _XA_WIN_WORKSPACE_COUNT, XA_CARDINAL,
+ 		    32, PropModeReplace, (unsigned char*)&val, 1);
++    XChangeProperty(dpy, scr->root_win, _XA_WIN_AREA_COUNT, XA_CARDINAL,
++		    32, PropModeReplace, (unsigned char*)&val2, 2);
+ 
+     wGNOMEUpdateWorkspaceNamesHint(scr);
+ }
+@@ -254,11 +268,16 @@
+ wGNOMEUpdateCurrentWorkspaceHint(WScreen *scr)
+ {
+     long val;
++    long val2[2];
+ 
+     val = scr->current_workspace;
++    val2[0] = 0;
++    val2[1] = 0;
+ 
+     XChangeProperty(dpy, scr->root_win, _XA_WIN_WORKSPACE, XA_CARDINAL,
+ 		    32, PropModeReplace, (unsigned char*)&val, 1);
++    XChangeProperty(dpy, scr->root_win, _XA_WIN_AREA, XA_CARDINAL,
++		    32, PropModeReplace, (unsigned char*)&val2, 2);
+ }
+ 
+ 
