@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.80.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -237,6 +237,9 @@ cd %{name}-extra-%{extraver}
 %{__autoconf}
 %{__automake}
 cd ..
+
+perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
+	WindowMaker/Defaults/WMWindowAttributes.in
 
 LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru \
 	 sk sv tr zh_CN zh_TW.Big5" ; export LINGUAS
