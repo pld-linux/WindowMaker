@@ -7,7 +7,8 @@ Release:	1d
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
-Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
+#######		ftp://ftp.windowmaker.org/pub/beta/srcs/
+Source0:	%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
 Patch0:		%{name}-pl.po.patch
 Patch1:		%{name}-po.install.patch
