@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.62.1
-Release:	4
+Release:	1
 Group:		X11/Window Managers
 Group(es):	X11/Administraadores De Ventanas
 Group(pl):	X11/Zarz±dcy Okien
