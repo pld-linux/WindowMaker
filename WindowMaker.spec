@@ -2,30 +2,22 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.51.0
-Release:	2
+Version:	0.51.2
+Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
 #######		ftp://ftp.windowmaker.org/pub/beta/srcs/
 Source0:	%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
-Patch0:		%{name}-pl.po.patch
-Patch1:		%{name}-po.install.patch
-Patch2:		%{name}-CFLAGS.patch
-Patch3:		%{name}-wmconfig.patch
-Patch4:		%{name}-a_macro.patch
+Patch0:		WindowMaker-pl.po.patch
+Patch1:		WindowMaker-CFLAGS.patch
+Patch2:		WindowMaker-wmconfig.patch
+Patch3:		WindowMaker-a_macro.patch
+Patch4:		WindowMaker-pixmaps.patch
 URL:		http://www.windowmaker.org/
 Requires:	wmconfig
-#Requires:	cpp
-Requires:	libjpeg
-Requires:	libpng
-Requires:	libtiff
-Requires:	libungif
-Requires:	xpm
-Requires:	XFree86-libs
-Requires:	libPropList
-Requires:	zlib
+Requires:	cpp
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -91,7 +83,9 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch4 -p0
 
 %build
-echo "b" | LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
+echo "b" | \
+LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko 
+	 pl ru zh_TW.Big5" \
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
 ./configure \
 	--prefix=/usr/X11R6 \
@@ -105,7 +99,8 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
         --enable-newstyle \
 	--enable-kde
 make \
-	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
+	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko 
+		 pl ru zh_TW.Big5" \
 	CFLAGS="$RPM_OPT_FLAGS" \
 	LDFLAGS="-s" 
 
@@ -114,7 +109,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
 make install \
-	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
+	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko 
+		 pl ru zh_TW.Big5" \
 	DESTDIR=$RPM_BUILD_ROOT 
 
 install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
@@ -160,6 +156,7 @@ rm -r $RPM_BUILD_ROOT
 
 %lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/*
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/*
+%lang(dk) /usr/X11R6/share/locale/dk/LC_MESSAGES/*
 %lang(el) /usr/X11R6/share/locale/el/LC_MESSAGES/*
 %lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/*
 %lang(fi) /usr/X11R6/share/locale/fi/LC_MESSAGES/*
@@ -177,6 +174,7 @@ rm -r $RPM_BUILD_ROOT
 %lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/*
 %lang(se) /usr/X11R6/share/locale/se/LC_MESSAGES/*
 %lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
+%lang(zh_TW.Big5) /usr/X11R6/share/locale/zh_TW.Big5/LC_MESSAGES/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -187,6 +185,14 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/include/*.h
 
 %changelog
+* Fri Mar 12 1999 Artur Frysiak <wiget@pld.org.pl>
+  [0.51.2-1]
+- added more locale (dk and zh_TW.Big5)
+- removed WindowMaker-po.install.patch
+- upgraded WindowMaker-pl.po.patch (sync with i18n CVS)
+- added WindowMaker-pixmaps.patch (add /usr/X11/share/pixmaps to default 
+  icons/pixmaps path)
+
 * Wed Mar  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.51.0-2]
 - removed man group from man pages.
