@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
 Version:	0.80.2
-Release:	6
+Release:	7
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -36,6 +36,7 @@ Patch10:	%{name}-rxvt.patch
 Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
 Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
+Patch14:	%{name}-localenames.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	Hermes-devel
 BuildRequires:	XFree86-devel
@@ -228,11 +229,16 @@ utilizando componentes estáticos (raramente necessário).
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
+%patch14 -p1
 
 for f in WindowMaker/*menu*; do
 	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
 	mv -f $f.new $f
 done
+
+mv -f po/{no,nb}.po
+mv -f po/{zh_TW.Big5,zh_TW}.po
+mv -f WPrefs.app/po/{zh_TW.Big5,zh_TW}.po
 
 %build
 %{__libtoolize}
@@ -249,10 +255,10 @@ cd ..
 perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
 	WindowMaker/Defaults/WMWindowAttributes.in
 
-LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru \
-	 sk sv tr zh_CN zh_TW.Big5" ; export LINGUAS
-CPP_PATH="/lib/cpp" ; export CPP_PATH
 %configure \
+	CPP_PATH="/lib/cpp" \
+	LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nb nl pl pt ro ru \
+		 sk sv tr zh_CN zh_TW" \
 	--disable-rpath \
 	--with-nlsdir=%{_datadir}/locale \
 	--with-appspath=%{_libdir}/GNUstep/Apps \
@@ -267,8 +273,6 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 touch WindowMaker/Defaults/W*.in
 
 %{__make} \
-	LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru \
-	 	sk sv tr zh_CN zh_TW.Big5" \
 	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
@@ -284,8 +288,6 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_pixmapsdir},%{_wmpropsdir}} 
 	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %{__make} install \
-	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
-	 	se sk tr zh_CN zh_TW.Big5" \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install util/bughint $RPM_BUILD_ROOT%{_bindir}
