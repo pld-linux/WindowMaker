@@ -19,7 +19,6 @@ Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
 Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
-#Patch7:		WindowMaker-configure.patch
 URL:		http://www.windowmaker.org/
 BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
@@ -108,15 +107,14 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-#patch7 -p1
 
 %build
-
+autoconf
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
 CPP_PATH="/lib/cpp" ; export CPP_PATH
 
-%configure %{_target} \
+%configure \
 	--prefix=/usr/X11R6 \
 	--with-nlsdir=/usr/X11R6/share/locale \
 	--sysconfdir=/etc/X11 \
@@ -136,8 +134,10 @@ make \
 	CFLAGS="$RPM_OPT_FLAGS" \
 	LDFLAGS="-s" 
 
+autoconf
 cd %{name}-extra-%{extraver}
-./configure \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure %{_target} \
 	--prefix=/usr/X11R6 \
 	--with-iconsdir=/usr/X11R6/share/pixmaps
 
@@ -159,7 +159,7 @@ make DESTDIR=$RPM_BUILD_ROOT install )
 
 strip --strip-unneeded $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/share/man/man1/* \
 	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %post   -p /sbin/ldconfig
@@ -176,7 +176,7 @@ rm -r $RPM_BUILD_ROOT
 %dir /etc/X11/WindowMaker
 %config %verify(not size mtime md5) /etc/X11/WindowMaker/*
 
-/usr/X11R6/man/man1/*
+/usr/X11R6/share/man/man1/*
 
 /usr/X11R6/share/pixmaps/*
 
@@ -247,9 +247,9 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/lib/lib*.a
 
 %changelog
-* Fri Apr 30 1999 Artur Frysiak <wiget@pld.org.pl>
+* Sun May  9 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.53.0-3]
-- build with grep 2.3 and new libtool
+- now package is FHS 2.0 compiliat.
 
 * Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
   [0.53.0-2]
