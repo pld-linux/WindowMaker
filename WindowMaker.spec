@@ -3,7 +3,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.51.0
-Release:	1d
+Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -189,7 +189,7 @@ rm -r $RPM_BUILD_ROOT
 
 %changelog
 * Wed Feb  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.50.2-1d]
+  [0.50.2-1]
 - added stripping shared libraries,
 - removed SONAME symlinks from main package.
 
