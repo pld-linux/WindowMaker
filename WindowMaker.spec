@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.80.2
-Release:	4
+Release:	6
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
