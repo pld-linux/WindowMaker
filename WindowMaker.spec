@@ -52,6 +52,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/X11
 %define		_wmpropsdir	%{_datadir}/wm-properties
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
 
 %description
 Window Maker is an X11 window manager which emulates the look and feel
