@@ -173,7 +173,7 @@ gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/share/man/man1/* \
 %clean
 rm -r $RPM_BUILD_ROOT
 
-%files -f WindowMaker.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS.gz BUGFORM.gz BUGS.gz 
 %doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
