@@ -178,8 +178,8 @@
 -    	"xboing"    EXEC xboing -sound
 -    	"XBill"     EXEC xbill
 -    "Gry" END
-+        "XTerm" EXEC xterm -sb
-+        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
++        "XTerm" EXEC xterm
++        "ATerm"  EXEC aterm
 +	"Pulpity" WORKSPACE_MENU
  	
 -	"Użytki" MENU

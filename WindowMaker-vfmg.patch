@@ -1,12 +1,14 @@
-diff -ur WindowMaker-0.90.0/WindowMaker/plmenu WindowMaker-0.90.0-vfmg/WindowMaker/plmenu
---- WindowMaker-0.90.0/WindowMaker/plmenu	2004-10-23 05:49:23.000000000 +0200
-+++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu	2004-10-28 16:07:17.212615960 +0200
-@@ -9,48 +9,9 @@
+diff -ur WindowMaker-0.91.0.orig/WindowMaker/plmenu WindowMaker-0.91.0/WindowMaker/plmenu
+--- WindowMaker-0.91.0.orig/WindowMaker/plmenu	2004-10-23 05:49:23.000000000 +0200
++++ WindowMaker-0.91.0/WindowMaker/plmenu	2004-11-02 00:53:48.486359400 +0100
+@@ -8,49 +8,10 @@
+   ("Manual Browser", EXEC, "xman")
   ),
   ("Run...", SHEXEC, "%a(Run,Type command to run:)"),
-  ("XTerm", EXEC, "xterm -sb"),
-+ ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+- ("XTerm", EXEC, "xterm -sb"),
 - ("Mozilla Firefox", EXEC, "firefox"),
++ ("XTerm", EXEC, "xterm"),
++ ("ATerm", EXEC, "aterm"),
   ("Workspaces", WORKSPACE_MENU),
 - ("Applications",
 -  ("Gimp", SHEXEC, "gimp >/dev/null"),
@@ -52,7 +54,7 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu WindowMaker-0.90.0-vfmg/WindowMak
   ("Selection",
    ("Copy", SHEXEC, "echo '%s' | wxcopy"),
    ("Mail To", EXEC, "xterm -name mail -T Pine -e pine %s"),
-@@ -93,7 +53,7 @@
+@@ -93,7 +54,7 @@
     ),   
     ("Save Theme", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Theme name)\""),
     ("Save IconSet", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(IconSet name)\""),
@@ -61,12 +63,17 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu WindowMaker-0.90.0-vfmg/WindowMak
     ), 
     ("Session",
      ("Save Session", SAVE_SESSION),
-diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.de WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.de
---- WindowMaker-0.90.0/WindowMaker/plmenu.de	2004-10-17 08:28:07.000000000 +0200
-+++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.de	2004-10-28 15:49:29.774356168 +0200
-@@ -11,45 +11,7 @@
-  ("XTerm", EXEC, "xterm -sb"),
-  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+diff -ur WindowMaker-0.91.0.orig/WindowMaker/plmenu.de WindowMaker-0.91.0/WindowMaker/plmenu.de
+--- WindowMaker-0.91.0.orig/WindowMaker/plmenu.de	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.91.0/WindowMaker/plmenu.de	2004-11-02 00:54:02.439238240 +0100
+@@ -8,48 +8,10 @@
+   ("Man-Page-Betrachter", EXEC, "xman")
+   ),
+  ("Ausführen...", SHEXEC, "%a(Ausführen,Auszuführender Befehl:)"),
+- ("XTerm", EXEC, "xterm -sb"),
+- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
++ ("XTerm", EXEC, "xterm"),
++ ("ATerm", EXEC, "aterm"),
   ("Arbeitsflächen", WORKSPACE_MENU),
 - ("Anwendungen",
 -  ("Grafik",
@@ -139,12 +146,17 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.de WindowMaker-0.90.0-vfmg/Window
    ), 
   ("Beenden",
    ("Neustart", RESTART),
-diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.es WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.es
---- WindowMaker-0.90.0/WindowMaker/plmenu.es	2004-10-23 05:50:00.000000000 +0200
-+++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.es	2004-10-28 15:51:06.099712488 +0200
-@@ -11,45 +11,7 @@
-  ("XTerm", EXEC, "xterm -sb"),
-  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+diff -ur WindowMaker-0.91.0.orig/WindowMaker/plmenu.es WindowMaker-0.91.0/WindowMaker/plmenu.es
+--- WindowMaker-0.91.0.orig/WindowMaker/plmenu.es	2004-10-23 05:50:00.000000000 +0200
++++ WindowMaker-0.91.0/WindowMaker/plmenu.es	2004-11-02 00:54:17.672922368 +0100
+@@ -8,48 +8,10 @@
+   ("Paginas del Manual", EXEC, "xman")
+   ),
+  ("Ejecutar...", SHEXEC, "%a(Run,Type command to run:)"),
+- ("XTerm", EXEC, "xterm -sb"),
+- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
++ ("XTerm", EXEC, "xterm"),
++ ("ATerm", EXEC, "aterm"),
   ("Espacio de Trabajo", WORKSPACE_MENU),
 - ("Aplicaciones",
 -  ("Graficas",
@@ -216,12 +228,17 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.es WindowMaker-0.90.0-vfmg/Window
    ), 
   ("Salir",
    ("Reiniciar", RESTART),
-diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.fr WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.fr
---- WindowMaker-0.90.0/WindowMaker/plmenu.fr	2004-10-17 08:28:07.000000000 +0200
-+++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.fr	2004-10-28 15:52:26.763449736 +0200
-@@ -11,45 +11,7 @@
-   ("Terminal X", EXEC, "xterm -sb"),
-   ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+diff -ur WindowMaker-0.91.0.orig/WindowMaker/plmenu.fr WindowMaker-0.91.0/WindowMaker/plmenu.fr
+--- WindowMaker-0.91.0.orig/WindowMaker/plmenu.fr	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.91.0/WindowMaker/plmenu.fr	2004-11-02 00:54:41.222342312 +0100
+@@ -8,48 +8,10 @@
+     ("Butineur d'aide", EXEC, "xman")
+    ),
+   ("Démarrer...", SHEXEC, "%a(Démarrer,Tapez une commande à démarrer:)"),
+-  ("Terminal X", EXEC, "xterm -sb"),
+-  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
++  ("XTerm", EXEC, "xterm"),
++  ("ATerm", EXEC, "aterm"),
    ("Bureau", WORKSPACE_MENU),
 -  ("Applications",
 -	("Graphismes",
@@ -293,12 +310,17 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.fr WindowMaker-0.90.0-vfmg/Window
    ),
   ("Quitter",
     ("Redémarrer", RESTART),
-diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.it WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.it
---- WindowMaker-0.90.0/WindowMaker/plmenu.it	2004-10-17 08:28:07.000000000 +0200
-+++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.it	2004-10-28 15:54:19.582298664 +0200
-@@ -11,45 +11,7 @@
-  ("XTerm", EXEC, "xterm -sb"),
-  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+diff -ur WindowMaker-0.91.0.orig/WindowMaker/plmenu.it WindowMaker-0.91.0/WindowMaker/plmenu.it
+--- WindowMaker-0.91.0.orig/WindowMaker/plmenu.it	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.91.0/WindowMaker/plmenu.it	2004-11-02 00:54:55.474175704 +0100
+@@ -8,48 +8,10 @@
+   ("Ricerca Manuali", EXEC, "xman")
+   ),
+  ("Esegui...", EXEC, "%a(Esegui,Scrivi il comando da eseguire:)"),
+- ("XTerm", EXEC, "xterm -sb"),
+- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
++ ("XTerm", EXEC, "xterm"),
++ ("ATerm", EXEC, "aterm"),
   ("Workspace", WORKSPACE_MENU),
 - ("Programmi",
 -  ("Grafica",
@@ -371,10 +393,10 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.it WindowMaker-0.90.0-vfmg/Window
    ), 
   ("Esci",
    ("Riavvia", RESTART),
-diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.pl WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.pl
---- WindowMaker-0.90.0/WindowMaker/plmenu.pl	2004-10-17 08:28:07.000000000 +0200
-+++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.pl	2004-10-28 15:58:53.930591384 +0200
-@@ -1,135 +1,39 @@
+diff -ur WindowMaker-0.91.0.orig/WindowMaker/plmenu.pl WindowMaker-0.91.0/WindowMaker/plmenu.pl
+--- WindowMaker-0.91.0.orig/WindowMaker/plmenu.pl	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.91.0/WindowMaker/plmenu.pl	2004-11-02 00:55:13.612418272 +0100
+@@ -1,135 +1,40 @@
  ("WindowMaker",
  	("Informacja",
 -		("Informacja o WMaker...", INFO_PANEL),
@@ -401,7 +423,8 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.pl WindowMaker-0.90.0-vfmg/Window
  	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
 -	("Terminal",   EXEC, "xterm -T 'Mój ulubiony terminal' -sb"),
 -	("Edytor",     EXEC, "xterm -T 'Moj ulubiony edytor' -e vi %a(Edytor,Podaj plik do edycji:)"),
-+	("Terminal",   EXEC, "xterm -sb"),
++	("XTerm",   EXEC, "xterm"),
++	("ATerm",   EXEC, "aterm"),
  	("Pulpity",    WORKSPACE_MENU),
  	
 -	("Aplikacje",
@@ -534,7 +557,7 @@ diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.pl WindowMaker-0.90.0-vfmg/Window
  	("Wygląd",
  		("Tematy",          OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
  		("Style",           OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
-@@ -155,10 +59,11 @@
+@@ -155,10 +60,11 @@
      			("Cieniowany Szary",      EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#636380', '#131318')'"),
      			("Cieniowany Winnny",     EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#600040', '#180010')'")
  			),
