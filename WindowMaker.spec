@@ -2,7 +2,7 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.52.0
+Version:	0.53.0
 Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
@@ -15,13 +15,14 @@ Patch2:		WindowMaker-a_macro.patch
 Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
 URL:		http://www.windowmaker.org/
-BuildPrereq:	libPropList-devel > 0.8.3
+BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
 BuildPrereq:	libpng-devel
 BuildPrereq:	libjpeg-devel >= 6b
 BuildPrereq:	libtiff-devel
+BuildPrereq:	gettext
 Requires:	wmconfig
-Requires:	cpp
+Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
@@ -102,8 +103,8 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %build
 echo "b" | \
-LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko  \
-	 pl ru zh_TW.Big5" \
+LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
+	 se sk tr zh_CN zh_TW.Big5" \
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
 ./configure \
 	--prefix=/usr/X11R6 \
@@ -118,8 +119,8 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
         --enable-newstyle \
 	--enable-kde
 make \
-	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko \
-		 pl ru zh_TW.Big5" \
+	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
+	 	se sk tr zh_CN zh_TW.Big5" \
 	CFLAGS="$RPM_OPT_FLAGS" \
 	LDFLAGS="-s" 
 
@@ -128,8 +129,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
 make install \
-	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko \
-		 pl ru zh_TW.Big5" \
+	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
+	 	se sk tr zh_CN zh_TW.Big5" \
 	DESTDIR=$RPM_BUILD_ROOT 
 
 install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
@@ -181,14 +182,8 @@ rm -r $RPM_BUILD_ROOT
 
 %attr(755,root,root) /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs
 
-/usr/X11R6/GNUstep/Apps/WPrefs.app/tiff
-/usr/X11R6/GNUstep/Apps/WPrefs.app/xpm
-/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
-/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.xpm
-
 %lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/*
 %lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/*
-%lang(dk) /usr/X11R6/share/locale/dk/LC_MESSAGES/*
 %lang(el) /usr/X11R6/share/locale/el/LC_MESSAGES/*
 %lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/*
 %lang(fi) /usr/X11R6/share/locale/fi/LC_MESSAGES/*
@@ -205,8 +200,15 @@ rm -r $RPM_BUILD_ROOT
 %lang(ro) /usr/X11R6/share/locale/ro/LC_MESSAGES/*
 %lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/*
 %lang(se) /usr/X11R6/share/locale/se/LC_MESSAGES/*
+%lang(sk) /usr/X11R6/share/locale/sk/LC_MESSAGES/*
 %lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
+%lang(zh_CN) /usr/X11R6/share/locale/zh_CN/LC_MESSAGES/*
 %lang(zh_TW.Big5) /usr/X11R6/share/locale/zh_TW.Big5/LC_MESSAGES/*
+
+/usr/X11R6/GNUstep/Apps/WPrefs.app/tiff
+/usr/X11R6/GNUstep/Apps/WPrefs.app/xpm
+/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
+/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.xpm
 
 %files libs
 %defattr(644,root,root,755)
