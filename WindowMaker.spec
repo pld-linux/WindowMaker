@@ -4,14 +4,14 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.70.0
-Release:	4
+Version:	0.80.0
+Release:	1
+License:	GPL
 Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
 Group(es):	X11/Administraadores De Ventanas
 Group(fr):	X11/Gestionnaires De Fenêtres
 Group(pl):	X11/Zarz±dcy Okien
-License:	GPL
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
