@@ -1,11 +1,11 @@
 --- WindowMaker-0.61.1/WindowMaker/Defaults/WMState.in	Wed Jan  6 16:22:40 1999
-+++ WindowMaker-0.61.1.dockit/WindowMaker/Defaults/WMState.in	Mon Oct 11 02:30:31 1999
++++ WindowMaker-0.61.1.dockit/WindowMaker/Defaults/WMState.in	Mon Oct 11 15:40:36 1999
 @@ -2,7 +2,7 @@
    Dock = {
      Applications = (
        {
 -        Command = "-";
-+        Command = "dockit";
++        Command = dockit;
          Name = Logo.WMDock;
          AutoLaunch = No;
          Forced = No;
@@ -259,3 +259,53 @@
 +   close $m1
 +}
 +
+--- WindowMaker-0.61.1/contrib/dockit.1	Thu Jan  1 01:00:00 1970
++++ WindowMaker-0.61.1.dockit/contrib/dockit.1	Mon Oct 11 15:39:32 1999
+@@ -0,0 +1,47 @@
++.TH DOCKIT 1 "October 1999" "Window Maker utilities"
++.SH NAME
++dockit \- Dock 'undockable' applications
++.SH SYNOPSIS
++.B dockit
++.SH DESCRIPTION
++.B dockit
++is a tool designed to provide the ability to Dock poorly coded programs within 
++WindowMaker. 
++This is not a 100% accurate solution. It was not designed to be. It will 
++however, generate a dockable icon 99% of the time. For that other 1%, you will 
++need to edit by hand.
++.br
++To run dockit you can also double-click on the Dock's main icon.
++.SH TROUBLESHOOTING
++.TP 
++.B Error: window name starts with an upper-case letter
++This is a limitation of Tcl/Tk. window/pathnames cannot start with an 
++uppercase letter. This behavior is most noticable in Netscape's Navigator.
++It's instance is 'Navigator'. A work-around to this limitation, is to 
++double-define your App settings (ex:'navigator', and 'Navigator').
++.TP 
++.B Error: could not execute "xprop": no such file or directory
++This means that /usr/X11R6/bin (or its equivilent) is not defined in your 
++path. You must add this to your path.
++.TP
++.B AppIcon does not appear as it should
++This could happen for a number of reasons.
++.br
++A: You have NoAppIcon defined for that particular App.
++.br
++B: One word: El Ni~no
++.TP
++.B App Closes, but Dots do not appear / Cannot remove Icon from the Dock
++This is the result of a VERY poorly coded App. As far as WindowMaker can tell,
++the program is still running. 
++The only real fix for this, is CTRL + ALT + BACKSPACE.
++.SH FILES
++.TP
++.B ~/GNUstep/Defaults/WMState
++Information about the Dock and Clip. This is the actual file that gets
++written. DON'T edit this while running Window Maker. It will be overwritten.
++.SH AUTHOR
++Dockit was written by Kenneth W. Persinger Jr.
++.PP
++Man page was written by Piotr Czerwinski <pius@pld.org.pl> for the
++PLD/Linux system.
