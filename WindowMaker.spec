@@ -32,7 +32,6 @@ Patch5:		%{name}-IconPosition.patch
 Patch6:		%{name}-singleclick.patch
 Patch7:		%{name}-plmenu.patch
 Patch8:		%{name}-dockit.patch
-Patch9:		%{name}-po.patch
 Patch10:	%{name}-rxvt.patch
 Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
@@ -226,13 +225,12 @@ utilizando componentes estáticos (raramente necessário).
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
-%patch15 -p1
+%patch15 -p0
 
 for f in WindowMaker/*menu*; do
 	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
