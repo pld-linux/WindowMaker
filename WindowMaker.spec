@@ -47,6 +47,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 %define		_sysconfdir	/etc/X11
+%define		_wmpropsdir	%{_datadir}/wm-properties
 
 %description
 Window Maker is an X11 window manager which emulates the look and feel
@@ -108,9 +109,9 @@ Ten pakiet zawiera biblioteki wspó³dzielone niezbêdne do pracy
 mened¿era okien WindowMaker.
 
 %package devel
-Summary:	WindowMaker libraries
+Summary:	WindowMaker libraries - development part
 Summary(fr):	Librairies de WindowMaker
-Summary(pl):	Biblioteki WindowMakera
+Summary(pl):	Biblioteki WindowMakera - czê¶æ dla programistów
 Group:		Development/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
@@ -182,8 +183,8 @@ touch WindowMaker/Defaults/W*.in
 %{__make} \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
-	CFLAGS="$RPM_OPT_FLAGS" \
-	LDFLAGS="-s" 
+	CFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}"
 
 autoconf
 cd %{name}-extra-%{extraver}
@@ -193,7 +194,7 @@ cd %{name}-extra-%{extraver}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/{pixmaps,gnome/wm-properties} \
+install -d $RPM_BUILD_ROOT{%{_datadir}/pixmaps,%{_wmpropsdir}} \
 	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %{__make} install \
@@ -207,7 +208,7 @@ install contrib/dockit   $RPM_BUILD_ROOT%{_bindir}
 install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
-install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
+install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.sh
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.names
@@ -238,7 +239,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %{_pixmapsdir}/*
-%{_datadir}/gnome/wm-properties/WindowMaker.desktop
+%{_wmpropsdir}/WindowMaker.desktop
 
 %attr(755,root,root) %{_bindir}/bughint
 %attr(755,root,root) %{_bindir}/geticonset
