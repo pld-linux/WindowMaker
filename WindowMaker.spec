@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.80.2
-Release:	4
+Release:	5
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -51,9 +51,9 @@ Requires:	xinitrc >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/X11
-%define		_wmpropsdir	%{_datadir}/wm-properties
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
+%define		_wmpropsdir	%{_datadir}/wm-properties
 
 %description
 Window Maker is an X11 window manager which emulates the look and feel
