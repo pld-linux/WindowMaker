@@ -228,6 +228,24 @@
  	"Wygl±d" MENU
 --- WindowMaker-0.61.1/WindowMaker/plmenu.pl	Thu Feb 10 22:30:02 2000
 +++ WindowMaker-0.61.1.pius/WindowMaker/plmenu.pl	Thu Feb 10 22:46:42 2000
+@@ -16,7 +16,7 @@
+ 		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
+ 		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
+ 		("Serfuj do ...",          EXEC, "netscape %s"),
+-		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)"),
++		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)")
+ 	),
+ 
+ 	("Ekran",
+@@ -54,7 +54,7 @@
+     			("Cieniowany Szary",      EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#636380', '#131318')'"),
+     			("Cieniowany Winnny",     EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#600040', '#180010')'")
+ 			),
+-			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t)")
++			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
+ 		),
+ 		("Zaoamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
+ 		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
 @@ -1,133 +1,32 @@
  ("WindowMaker",
  	("Informacja",
