@@ -9,12 +9,12 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.91.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
 # Source0-md5:	be07953e905d1e42fe7a65ac2193a5f9
-Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
+Source1:	%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
 # Source2-md5:	07c7700daaaf232bc490f5abaabef085
@@ -255,16 +255,13 @@ perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#e
 	CPP_PATH="/lib/cpp" \
 	LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nb nl pl pt ro ru \
 		 sk sv tr zh_CN zh_TW" \
-	--disable-rpath \
-	--with-nlsdir=%{_datadir}/locale \
-	--with-appspath=%{_libdir}/GNUstep/Apps \
-	--enable-sound \
-	--enable-gnome \
 	--disable-debug \
-	--enable-kde \
+	--disable-rpath \
 	--enable-shared \
 	--enable-static \
 	--enable-usermenu \
+	--with-appspath=%{_libdir}/GNUstep/Apps \
+	--with-nlsdir=%{_datadir}/locale
 
 touch WindowMaker/Defaults/W*.in
 
