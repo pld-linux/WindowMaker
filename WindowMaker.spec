@@ -1,16 +1,16 @@
 Summary:     NeXT-alike window manager
 Summary(fr): Gestionnaire de fenêtres avec le look NeXT
+Summary(pl): Mened¿er okien w stylu NeXT
 Name:        WindowMaker
-Version:     0.19.3
+Version:     0.20.1
 Release:     1
 Group:       X11/Window Managers
 Copyright:   GPL
 Vendor:      Dan Pascu <dan@services.iiruc.ro>
 URL:         http://www.windowmaker.org
 Source:      ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
-Patch0:      WindowMaker-autoconf.patc
-Patch1:      WindowMaker-fix_po.patch
-Prereq:      /lib/cpp
+Patch0:      WindowMaker.patch
+Patch1:      WindowMaker-po.patch
 BuildRoot:   /tmp/%{name}-%{version}-root
 
 %description
@@ -25,9 +25,16 @@ sensation de l'interface graphique NeXTSTEP(tm). Il est suposé être rapide,
 relativement petit, facile a configurer, extremement complet et avec
 l'apparence simple et élégante empruntée a NeXTSTEP(tm).
 
+%description -l pl
+WindowMaker jest mened¿erem okien przypominaj±cy wygl±dem i wygod± obs³ugi
+interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo ma³y, o du¿ych
+mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go myszk±, za pomoc±
+programu WPrefs wchodz±cego w sk³ad tego pakietu.
+
 %package devel
 Summary:     WindowMaker libraries
 Summary(fr): Librairies de WindowMaker
+Summary(pl): Biblioteki WindowMakera
 Group:       Development/Libraries
 Requires:    %{name} = %{version}
 
@@ -39,43 +46,46 @@ applications.
 Ce paquet contient des librairies pour faire des applications mise en valeur
 par WindowMaker.
 
+%description devel -l pl
+Ten pakiet zawiera pliki nag³ówkowe i biblioteki niezbêdne do tworzenia
+aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 
-autoconf
-
 %build
-echo "b" | CFLAGS=$RPM_OPT_FLAGS LDFLAGS="-s" ./configure \
-		--prefix=/usr/X11R6 \
-		--includedir=/usr/include/X11 \
-		--with-nlsdir=/usr/share/locale \
-		--enable-sound --with-gnome \
-		--enable-superfluous \
-		--enable-newstyle \
-		--disable-debug
+aclocal; automake; autoconf
+echo "b" | LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
+CFLAGS=$RPM_OPT_FLAGS LDFLAGS="-s" ./configure \
+	--prefix=/usr/X11R6 \
+	--with-nlsdir=/usr/share/locale \
+	--enable-kanji \
+	--enable-sound \
+	--with-gnome \
+	--disable-shm \
+	--disable-debug
 make
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT/usr/{include/X11,X11R6/share/pixmaps}
 
-make	install-strip \
-	prefix=$RPM_BUILD_ROOT/usr/X11R6 \
-	exec_prefix=$RPM_BUILD_ROOT/usr/X11R6 \
-	nlsdir=$RPM_BUILD_ROOT/usr/share/locale \
-	includedir=$RPM_BUILD_ROOT/usr/X11R6/include
+make install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	nlsdir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
+
+install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
 
 %clean
 rm -r $RPM_BUILD_ROOT
 
 %files
-%attr(644, root, root, 755)
-%doc AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README TODO util/bughint
+%defattr(644, root, root, 755)
+%doc AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README TODO 
 %attr(755, root, root) /usr/X11R6/bin/*
-/usr/X11R6/share/*
+/usr/X11R6/share/WINGs
+/usr/X11R6/share/WindowMaker
 
 %dir /usr/X11R6/GNUstep
 %dir /usr/X11R6/GNUstep/Apps
@@ -86,29 +96,46 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
 /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.xpm
 
-%lang(cs) /usr/share/locale/cs/LC_MESSAGES/*
-%lang(de) /usr/share/locale/de/LC_MESSAGES/*
-%lang(el) /usr/share/locale/el/LC_MESSAGES/*
-%lang(es) /usr/share/locale/es/LC_MESSAGES/*
-%lang(fi) /usr/share/locale/fi/LC_MESSAGES/*
-%lang(fr) /usr/share/locale/fr/LC_MESSAGES/*
-%lang(gl) /usr/share/locale/gl/LC_MESSAGES/*
-%lang(hr) /usr/share/locale/hr/LC_MESSAGES/*
-%lang(it) /usr/share/locale/it/LC_MESSAGES/*
-%lang(ko) /usr/share/locale/ko/LC_MESSAGES/*
-%lang(nl) /usr/share/locale/nl/LC_MESSAGES/*
-%lang(no) /usr/share/locale/no/LC_MESSAGES/*
-%lang(pl) /usr/share/locale/pl/LC_MESSAGES/*
-%lang(pt) /usr/share/locale/pt/LC_MESSAGES/*
-%lang(ru) /usr/share/locale/ru/LC_MESSAGES/*
-%lang(se) /usr/share/locale/se/LC_MESSAGES/*
-%lang(tr) /usr/share/locale/tr/LC_MESSAGES/*
+%lang(cs) /usr/X11R6/share/locale/cs/LC_MESSAGES/*
+%lang(de) /usr/X11R6/share/locale/de/LC_MESSAGES/*
+%lang(el) /usr/X11R6/share/locale/el/LC_MESSAGES/*
+%lang(es) /usr/X11R6/share/locale/es/LC_MESSAGES/*
+%lang(fi) /usr/X11R6/share/locale/fi/LC_MESSAGES/*
+%lang(fr) /usr/X11R6/share/locale/fr/LC_MESSAGES/*
+%lang(gl) /usr/X11R6/share/locale/gl/LC_MESSAGES/*
+%lang(hr) /usr/X11R6/share/locale/hr/LC_MESSAGES/*
+%lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/*
+%lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/*
+%lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/*
+%lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/*
+%lang(pl) /usr/X11R6/share/locale/pl/LC_MESSAGES/*
+%lang(pt) /usr/X11R6/share/locale/pt/LC_MESSAGES/*
+%lang(ro) /usr/X11R6/share/locale/ro/LC_MESSAGES/*
+%lang(ru) /usr/X11R6/share/locale/ru/LC_MESSAGES/*
+%lang(se) /usr/X11R6/share/locale/se/LC_MESSAGES/*
+%lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
 
 %files devel
-%attr(644,root,root) /usr/X11R6/include/*.h
-%attr(644,root,root) /usr/X11R6/lib/lib*.a
+%defattr(644, root, root)
+/usr/X11R6/include/*.h
+/usr/X11R6/lib/lib*.a
 
 %changelog
+* Sat Sep 26 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
+  [0.20.0-1]
+- added --disable-shm option to configure script,
+- added patches to fix I18N stuff,
+- moved bughint script to /usr/X11R6/bin.
+- WPrefs is now back in /usr/X11R6/GNUstep.
+
+* Mon Sep 21 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
+  [0.19.3-2]
+- fixed problems with paths to icons, styles and WPrefs,
+- removed all patches,
+- moved WPrefs stuff to /usr/X11R6/share/GNUstep,
+- fixed I18N,
+- added pl translation.
+
 * Thu Sep  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.19.3-1]
 - added -q %setup parameter,
