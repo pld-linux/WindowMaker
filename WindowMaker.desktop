@@ -2,7 +2,7 @@
 Name=Window Maker
 Name[da]=WindowMaker
 Name[gl]=WindowMaker
-Name[ko]=À©µµ¿ì ¸ŞÀÌÄ¿
+Name[ko]=ìœˆë„ìš° ë©”ì´ì»¤
 Name[no]=WindowMaker
 Name[pl]=Window Maker
 Name[uk]=Window Maker
@@ -12,3 +12,4 @@ TryExec=wmaker
 [Window Manager]
 SessionManaged=false
 ConfigExec=/usr/X11R6/lib/GNUstep/Apps/WPrefs.app/WPrefs
+# vi: encoding=utf-8
