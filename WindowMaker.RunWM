@@ -27,12 +27,12 @@ if [ -x /usr/X11R6/bin/wmaker -a -d /usr/X11R6/share/WindowMaker ] ; then
 	fi
 	[ -d $GSDIR/.AppInfo ] || mkdir -p $GSDIR/.AppInfo
 	[ -d $GSDIR/Library/Icons ] || mkdir -p $GSDIR/Library/Icons
-	eval "exec /usr/bin/wmaker"
+	eval "exec /usr/X11R6/bin/wmaker"
 else
 cat <<EOF
  WARNING: You selected WindowMaker as your window manager, but your
  installation of WindowMaker does not appear to be functional. Either
- /usr/X11R6/bin/wmaker was not found or /usr/share/WindowMaker directory
- is missing.
+ /usr/X11R6/bin/wmaker was not found or /usr/X11R6/share/WindowMaker
+ directory is missing.
 EOF
 fi
