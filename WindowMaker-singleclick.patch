@@ -30,7 +30,7 @@
      WMSetButtonText(panel->swi[4], _("Use Windoze style cycling."));
      WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command."));
      WMSetButtonText(panel->swi[6], _("Disable selection animation for selected icons."));
-+    MSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
++    WMSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
  
      WMRealizeWidget(panel->box);
      WMMapSubwidgets(panel->box);
