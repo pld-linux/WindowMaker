@@ -15,6 +15,7 @@ Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
 # Source0-md5:	9f4fabc8831af6c58edf8708ee90126f
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
+# Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
 # Source2-md5:	07c7700daaaf232bc490f5abaabef085
 Source3:	%{name}.desktop
