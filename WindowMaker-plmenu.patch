@@ -1,5 +1,5 @@
---- WindowMaker-0.61.1/WindowMaker/menu.pl	Thu Feb 10 22:30:02 2000
-+++ WindowMaker-0.61.1.pius/WindowMaker/menu.pl	Thu Feb 10 22:29:17 2000
+--- WindowMaker-0.80.1.orig/WindowMaker/menu.pl	Tue Jan  4 22:45:57 2000
++++ WindowMaker-0.80.1/WindowMaker/menu.pl	Fri Aug  2 10:28:45 2002
 @@ -1,13 +1,13 @@
  /*
 - * Definiowanie Menu G³ównego dla WindowMakera
@@ -178,7 +178,10 @@
 -    	"xboing"    EXEC xboing -sound
 -    	"XBill"     EXEC xbill
 -    "Gry" END
--	
++        "XTerm" EXEC xterm -sb
++        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
++	"Pulpity" WORKSPACE_MENU
+ 	
 -	"U¿ytki" MENU
 -		"Kalkulator"          EXEC xcalc
 -		"Zegarek"             EXEC xclock
@@ -189,16 +192,11 @@
 -		"XKill"               EXEC xkill
 -		"Clipboard"           EXEC xclipboard
 -	"U¿ytki" END
--
++	"Aplikacje" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
+ 
 -	"Selekcyjne" MENU
 -		"Kopia"                  EXEC echo '%s' | wxcopy
 -		"Poczta do ..."          EXEC ULUB_TERM -name mail -T "Pine" -e pine %s
-+        "XTerm" EXEC xterm -sb
-+        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
-+	"Pulpity" WORKSPACE_MENU
-+	
-+	"Aplikacje" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
-+
 +	"Zaznaczenie" MENU
 +		"Kopiuj"                  SHEXEC echo '%s' | wxcopy
 +		"Poczta do ..."          EXEC xterm -name mail -T "Pine" -e pine %s
@@ -226,8 +224,9 @@
  	"Ekran" END
  
  	"Wygl±d" MENU
---- WindowMaker-0.61.1/WindowMaker/plmenu.pl	Thu Feb 10 22:30:02 2000
-+++ WindowMaker-0.61.1.pius/WindowMaker/plmenu.pl	Thu Feb 10 22:46:42 2000
+diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/WindowMaker/plmenu.pl
+--- WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl	Tue Jan  4 22:45:57 2000
++++ WindowMaker-0.80.1/WindowMaker/plmenu.pl	Fri Aug  2 10:29:13 2002
 @@ -1,11 +1,11 @@
  ("WindowMaker",
  	("Informacja",
@@ -372,7 +371,7 @@
 +		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
 +  		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
 +  		("Serfuj do ...",          EXEC, "netscape %s"),
-+		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)"),
++		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)")
 +  	),
 +  	("Ekran",
 +		("Ukryj pozosta³e",         HIDE_OTHERS),
