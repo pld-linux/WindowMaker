@@ -40,7 +40,7 @@
  
 --- WindowMaker-0.80.0/WINGs/Extras/Makefile.am.orig	Thu Oct 11 11:59:54 2001
 +++ WindowMaker-0.80.0/WINGs/Extras/Makefile.am	Thu Jan  3 06:12:10 2002
-@@ -2,32 +2,25 @@
+@@ -2,32 +2,26 @@
  
  AUTOMAKE_OPTIONS = no-dependencies
  
@@ -54,6 +54,7 @@
 -
 -lib_LIBRARIES = libExtraWINGs.a 
 +lib_LTLIBRARIES = libExtraWINGs.la
++libExtraWINGs_la_LIBADD = $(top_builddir)/WINGs/libWINGs.la
  
  noinst_PROGRAMS = test
  
@@ -80,7 +81,7 @@
 -
 --- WindowMaker-0.70.0.orig/WINGs/Makefile.am	Thu Oct  4 05:39:17 2001
 +++ WindowMaker-0.70.0/WINGs/Makefile.am	Thu Oct 18 16:54:22 2001
-@@ -4,24 +4,20 @@
+@@ -4,24 +4,21 @@
  
  SUBDIRS = WINGs . po Documentation Resources Examples Extras Tests
  
@@ -91,9 +92,10 @@
  bin_SCRIPTS = get-wings-flags get-wutil-flags
  
 -lib_LIBRARIES = libWINGs.a libWUtil.a
-+LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @INTLIBS@
++LDADD= libWINGs.la $(top_builddir)/wrlib/libwraster.la @INTLIBS@
  
 +lib_LTLIBRARIES = libWINGs.la libWUtil.la
++libWINGs_la_LIBADD = $(top_builddir)/wrlib/libwraster.la $(XFTLIBS)
  
 -LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @INTLIBS@
  
@@ -250,12 +252,13 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
  
 --- WindowMaker-0.70.0.orig/wmlib/Makefile.am	Mon Apr 10 02:59:35 2000
 +++ WindowMaker-0.70.0/wmlib/Makefile.am	Thu Oct 18 16:54:22 2001
-@@ -1,13 +1,13 @@
+@@ -1,13 +1,14 @@
  
  AUTOMAKE_OPTIONS = no-dependencies
  
 -lib_LIBRARIES = libWMaker.a
 +lib_LTLIBRARIES = libWMaker.la
++libWMaker_la_LIBADD = $(X_LIBS) -lX11
  
  include_HEADERS = WMaker.h
  
