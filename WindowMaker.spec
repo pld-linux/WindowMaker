@@ -39,6 +39,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
 BuildRequires:	Hermes-devel
+BuildRequires:	XFree86-devel
 Requires:	wmconfig >= 0.9.9-5
 Requires:	cpp
 Requires:	%{name}-libs = %{version}
