@@ -10,7 +10,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.81.0
-Release:	0.%{_snap}.2
+Release:	0.%{_snap}.3
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
@@ -378,12 +378,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %attr(755,root,root) %{_bindir}/get-wings-flags
 %attr(755,root,root) %{_bindir}/get-wraster-flags
 %attr(755,root,root) %{_bindir}/get-wutil-flags
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_includedir}/*
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
