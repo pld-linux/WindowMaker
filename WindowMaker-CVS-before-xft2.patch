@@ -1,0 +1,2958 @@
+Index: configure.ac
+===================================================================
+RCS file: /cvsroot/wm/configure.ac,v
+retrieving revision 1.43
+diff -u -r1.43 configure.ac
+--- configure.ac	2003/08/14 01:39:27	1.43
++++ configure.ac	2004/03/26 13:50:57
+@@ -532,14 +532,15 @@
+ 	else
+ 		AC_CHECK_PROG(XFTCONFIG, xft-config, xft-config)
+ 	fi
+-	AC_MSG_CHECKING([for the Xft2 library])
+ 	if test "x$XFTCONFIG" != x; then
+ 		XFTLIBS=`$XFTCONFIG --libs`
+ 		XFTFLAGS=`$XFTCONFIG --cflags`
++		AC_MSG_CHECKING([for the Xft2 library])
+ 		AC_MSG_RESULT([found])
++		AC_DEFINE(XFT2, 1, [define if you have Xft version 2 (set by configure)])
+ 	else
+-		xft=no
+-		AC_MSG_RESULT([not found])
++		AC_CHECK_LIB(Xft, XftDrawCreate, [XFTLIBS="-lXft" XFTFLAGS=""],
++			xft=no, $XLFLAGS $XLIBS)
+ 	fi
+ 	if test "$xft" = yes; then
+ 		AC_SUBST(XFTFLAGS)
+Index: WINGs/ChangeLog
+===================================================================
+RCS file: /cvsroot/wm/WINGs/ChangeLog,v
+retrieving revision 1.153
+retrieving revision 1.152
+diff -u -r1.153 -r1.152
+--- WINGs/ChangeLog	2003/08/07 00:26:21	1.153
++++ WINGs/ChangeLog	2003/08/02 21:36:45	1.152
+@@ -12,19 +12,30 @@
+   WMCreateRGBAColor() and WMSetColorAlpha()
+ - Miscelaneous code cleanups in wtext.c
+ - Added Xft support in WINGs (for drawing antialiased fonts with transparency).
+-- New options in WMGLOBAL: AntialiasedText. Check NEWS for details.
++- Added a new function: WMCreateAntialiasedFont() to create a font which will
++  be drawn antialiased using Xft (if available, else function returns NULL)
++- New options in WMGLOBAL: AntialiasedText, AntialiasedSystemFont and
++  AntialiasedBoldSystemFont. Check NEWS for details.
+ - Fixed some improper calls to snprintf in wfont.c
+ - Added double buffering when drawing a WMFrame title with an antialiased font
+   to avoid flickering.
+ - Added double buffering when drawing WMList items to avoid flickering.
+   Double buffering for list also works for user drawn lists. Read NEWS for
+   details and incompatibilities introduced by this change.
++- Added WMIsAntialiasedFont(WMFont *font) to check if a font is antialiased.
+ - Added WMGetColorAlpha(WMColor *color)
+ - Better outline when drawing balloons.
+-- Added WMCreateFontWithAttributes()
++- Added WMCreateFontWithFlags()
+ - You can now pass "SystemFont", "BoldSystemFont", "SystemFont-##" or
+   "BoldSystemFont-##", with ## being the font size to any font creating
+   function to create a font with the (bold) system font font specification.
++- Added WMCreateAntialiasedFontSet() (like WMCreateAntialiasedFont() but for
++  languages with multibyte text). Note however that these specific font
++  creating functions (as well as WMCreateNormalFont() and WMCreateFontSet())
++  are not meant to be called directly except in very special cases.
++  The more generic WMCreateFont() or WMCreateFontWithFlags() should be used.
++- Multibyte languages can now render antialiased text too (only tested on
++  russian since this is the only multibyte language I can test).
+ - Added WMCopyFontWithChanges(). This is a more generic and powerful function
+   meant to replaces the obsoleted WMEmphasizeFont(), WMNormalizeFont(),
+   WMStrenghtenFont() and the other similar functions. To get the same effect
+@@ -34,7 +45,7 @@
+ - Added WMGetWidgetBackgroundColor()
+ - Code cleanup in wtext.c
+ - Fixed a memory leak in wfontpanel.c
+-??- Added a check that only %d is used in a font specification in WMGLOBAL and at
++- Added a check that only %d is used in a font specification in WMGLOBAL and at
+   most once for each font in a fontset (eliminates a possible security exploit)
+ - Fixed WMGetTextDefaultColor() not to retain the returned color. It returns
+   only a reference to the internal color, which you shouldn't release
+Index: WINGs/Makefile.am
+===================================================================
+RCS file: /cvsroot/wm/WINGs/Makefile.am,v
+retrieving revision 1.66
+retrieving revision 1.65
+diff -u -r1.66 -r1.65
+--- WINGs/Makefile.am	2004/02/25 21:26:49	1.66
++++ WINGs/Makefile.am	2003/06/10 01:56:28	1.65
+@@ -107,7 +107,7 @@
+ 	wutil.c
+ 
+ 
+-AM_CPPFLAGS = @CPPFLAGS@ -DLOCALEDIR=\"$(NLSDIR)\"
++CPPFLAGS = @CPPFLAGS@ -DLOCALEDIR=\"$(NLSDIR)\"
+ 
+ INCLUDES = -I$(top_srcdir)/WINGs/WINGs -I$(top_srcdir)/wrlib -I$(top_srcdir)/src \
+ 	-DRESOURCE_PATH=\"$(datadir)/WINGs\" @XFTFLAGS@ @HEADER_SEARCH_PATH@ -DDEBUG
+Index: WINGs/configuration.c
+===================================================================
+RCS file: /cvsroot/wm/WINGs/configuration.c,v
+retrieving revision 1.16
+retrieving revision 1.15
+diff -u -r1.16 -r1.15
+--- WINGs/configuration.c	2003/08/07 00:26:21	1.16
++++ WINGs/configuration.c	2002/11/30 02:13:37	1.15
+@@ -75,6 +75,10 @@
+             ptr = "system font";
+         } else if (xlfd == WINGsConfiguration.boldSystemFont) {
+             ptr = "bold system font";
++        } else if (xlfd == WINGsConfiguration.antialiasedSystemFont) {
++            ptr = "antialiased system font";
++        } else if (xlfd == WINGsConfiguration.antialiasedBoldSystemFont) {
++            ptr = "antialiased bold system font";
+         } else {
+             ptr = "Unknown System Font";
+         }
+@@ -106,6 +110,12 @@
+ 	WINGsConfiguration.boldSystemFont = 
+ 	    WMGetUDStringForKey(defaults, "BoldSystemFont");
+ 
++	WINGsConfiguration.antialiasedSystemFont =
++	    WMGetUDStringForKey(defaults, "AntialiasedSystemFont");
++
++	WINGsConfiguration.antialiasedBoldSystemFont =
++	    WMGetUDStringForKey(defaults, "AntialiasedBoldSystemFont");
++
+ #ifdef XFT
+ 	WINGsConfiguration.antialiasedText =
+             WMGetUDBoolForKey(defaults, "AntialiasedText");
+@@ -173,6 +183,12 @@
+     }
+     if (missingOrInvalidXLFD(WINGsConfiguration.boldSystemFont)) {
+ 	WINGsConfiguration.boldSystemFont = BOLD_SYSTEM_FONT;
++    }
++    if (missingOrInvalidXLFD(WINGsConfiguration.antialiasedSystemFont)) {
++	WINGsConfiguration.antialiasedSystemFont = XFTSYSTEM_FONT;
++    }
++    if (missingOrInvalidXLFD(WINGsConfiguration.antialiasedBoldSystemFont)) {
++	WINGsConfiguration.antialiasedBoldSystemFont = XFTBOLD_SYSTEM_FONT;
+     }
+     if (!WINGsConfiguration.floppyPath) {
+ 	WINGsConfiguration.floppyPath = FLOPPY_PATH;
+Index: WINGs/connection.c
+===================================================================
+RCS file: /cvsroot/wm/WINGs/connection.c,v
+retrieving revision 1.28
+retrieving revision 1.27
+diff -u -r1.28 -r1.27
+--- WINGs/connection.c	2004/02/25 21:26:49	1.28
++++ WINGs/connection.c	2003/01/16 23:30:46	1.27
+@@ -174,8 +174,6 @@
+         clearOutputQueue(cPtr);
+         cPtr->state = WCTimedOut;
+         cPtr->timeoutState = WCTWhileSending;
+-        // should we close it no matter what (after calling the didTimeout
+-        // delegate)? -Dan
+         if (cPtr->delegate && cPtr->delegate->didTimeout) {
+             (*cPtr->delegate->didTimeout)(cPtr->delegate, cPtr);
+         } else {
+Index: WINGs/handlers.c
+===================================================================
+RCS file: /cvsroot/wm/WINGs/handlers.c,v
+retrieving revision 1.7
+retrieving revision 1.6
+diff -u -r1.7 -r1.6
+--- WINGs/handlers.c	2003/08/14 01:39:27	1.7
++++ WINGs/handlers.c	2002/09/09 04:25:52	1.6
+@@ -605,7 +605,7 @@
+ 
+     return (count > 0);
+ #else /* not HAVE_SELECT, not HAVE_POLL */
+-# error   Neither select nor poll. You lose.
++    Neither select nor poll. You lose.
+ #endif /* HAVE_SELECT */
+ #endif /* HAVE_POLL */
+ }
+Index: WINGs/wfont.c
+===================================================================
+RCS file: /cvsroot/wm/WINGs/wfont.c,v
+retrieving revision 1.40
+retrieving revision 1.34
+diff -u -r1.40 -r1.34
+--- WINGs/wfont.c	2003/09/03 19:09:24	1.40
++++ WINGs/wfont.c	2003/06/12 21:21:57	1.34
+@@ -3,655 +3,18 @@
+ 
+ #ifdef XFT
+ # include <X11/Xft/Xft.h>
+-# ifdef HAVE_WCHAR_H
+-#  include <wchar.h>
+-# endif
+-# include <stdlib.h>
+ #endif
+ 
+ #include "WINGsP.h"
+ 
++
+ #include <wraster.h>
+ #include <assert.h>
+ #include <X11/Xlocale.h>
+-
+-
+-#ifdef XFT
+-
+-#if defined(HAVE_MBSNRTOWCS)
+-
+-static size_t
+-wmbsnrtowcs(wchar_t *dest, const char **src, size_t nbytes, size_t len)
+-{
+-    mbstate_t ps;
+-    size_t n;
+-
+-    memset(&ps, 0, sizeof(mbstate_t));
+-    n = mbsnrtowcs(dest, src, nbytes, len, &ps);
+-    if (n!=(size_t)-1 && *src) {
+-        *src -= ps.__count;
+-    }
+-
+-    return n;
+-}
+-
+-#elif defined(HAVE_MBRTOWC)
+-
+-// This is 8 times slower than the version above.
+-static size_t
+-wmbsnrtowcs(wchar_t *dest, const char **src, size_t nbytes, size_t len)
+-{
+-    mbstate_t ps;
+-    const char *ptr;
+-    size_t n;
+-    int nb;
+-
+-    if (nbytes==0)
+-        return 0;
+-
+-    memset(&ps, 0, sizeof(mbstate_t));
+-
+-    if (dest == NULL) {
+-        for (ptr=*src, n=0; nbytes>0; n++) {
+-            nb = mbrtowc(NULL, ptr, nbytes, &ps);
+-            if (nb == -1) {
+-                return ((size_t)-1);
+-            } else if (nb==0 || nb==-2) {
+-                return n;
+-            }
+-            ptr += nb;
+-            nbytes -= nb;
+-        }
+-    }
+-
+-    for (ptr=*src, n=0; n<len && nbytes>0; n++, dest++) {
+-        nb = mbrtowc(dest, ptr, nbytes, &ps);
+-        if (nb == -2) {
+-            *src = ptr;
+-            return n;
+-        } else if (nb == -1) {
+-            *src = ptr;
+-            return ((size_t)-1);
+-        } else if (nb == 0) {
+-            *src = NULL;
+-            return n;
+-        }
+-        ptr += nb;
+-        nbytes -= nb;
+-    }
+-
+-    *src = ptr;
+-    return n;
+-}
+-
+-#else
+-
+-// Not only 8 times slower than the version based on mbsnrtowcs
+-// but also this version is not thread safe nor reentrant
+-
+-static size_t
+-wmbsnrtowcs(wchar_t *dest, const char **src, size_t nbytes, size_t len)
+-{
+-    const char *ptr;
+-    size_t n;
+-    int nb;
+-
+-    if (nbytes==0)
+-        return 0;
+-
+-    mbtowc(NULL, NULL, 0); /* reset shift state */
+-
+-    if (dest == NULL) {
+-        for (ptr=*src, n=0; nbytes>0; n++) {
+-            nb = mbtowc(NULL, ptr, nbytes);
+-            if (nb == -1) {
+-                mbtowc(NULL, NULL, 0);
+-                nb = mbtowc(NULL, ptr, strlen(ptr));
+-                return (nb == -1 ? (size_t)-1 : n);
+-            } else if (nb==0) {
+-                return n;
+-            }
+-            ptr += nb;
+-            nbytes -= nb;
+-        }
+-    }
+-
+-    for (ptr=*src, n=0; n<len && nbytes>0; n++, dest++) {
+-        nb = mbtowc(dest, ptr, nbytes);
+-        if (nb == -1) {
+-            mbtowc(NULL, NULL, 0);
+-            nb = mbtowc(NULL, ptr, strlen(ptr));
+-            *src = ptr;
+-            return (nb == -1 ? (size_t)-1 : n);
+-        } else if (nb == 0) {
+-            *src = NULL;
+-            return n;
+-        }
+-        ptr += nb;
+-        nbytes -= nb;
+-    }
+-
+-    *src = ptr;
+-    return n;
+-}
+-
+-#endif
+-
+-
+-static Bool
+-alreadyHasStringValue(XftPattern *pattern, const char *object, char *value)
+-{
+-    XftResult r;
+-    char *s;
+-    int id;
+-
+-    if (!value || value[0]==0)
+-        return True;
+-
+-    id = 0;
+-    while ((r=XftPatternGetString(pattern, object, id, &s))!=XftResultNoId) {
+-        if (r == XftResultMatch && strcasecmp(value, s) == 0) {
+-            return True;
+-        }
+-        id++;
+-    }
+-
+-    return False;
+-}
+-
+-
+-// check if to add a fallback size too. -Dan
+-// also handle an xlfd with %d for size?
+-static char*
+-makeFontOfSize(char *font, int size, char *fallback)
+-{
+-    XftPattern *pattern;
+-    char *result;
+-    int len;
+-
+-    len = strlen(font) + 64;
+-    pattern = XftNameParse(font);
+-    XftPatternDel(pattern, "pixelsize");
+-    XftPatternAddDouble(pattern, "pixelsize", (double)size);
+-    if (fallback) {
+-        if (!alreadyHasStringValue(pattern, "family", fallback)) {
+-            len += strlen(fallback);
+-            XftPatternAddString(pattern, "family", fallback);
+-        }
+-    }
+-    result = wmalloc(len);
+-    XftNameUnparse(pattern, result, len);
+-    XftPatternDestroy(pattern);
+-
+-    return result;
+-}
+-
+-
+-WMFont*
+-WMCreateFont(WMScreen *scrPtr, char *fontName)
+-{
+-    WMFont *font;
+-    Display *display = scrPtr->display;
+-    char *fname, *ptr;
+-
+-    /* This is for back-compat (to allow reading of old xlfd descriptions) */
+-    if (fontName[0]=='-' && (ptr = strchr(fontName, ','))) {
+-        // warn for deprecation
+-        fname = wmalloc(ptr - fontName + 1);
+-	strncpy(fname, fontName, ptr - fontName);
+-	fname[ptr - fontName] = 0;
+-    } else {
+-	fname = wstrdup(fontName);
+-    }
+-
+-    font = WMHashGet(scrPtr->fontCache, fname);
+-    if (font) {
+-	WMRetainFont(font);
+-	wfree(fname);
+-	return font;
+-    }
+-
+-    font = wmalloc(sizeof(WMFont));
+-    memset(font, 0, sizeof(WMFont));
+-
+-    font->screen = scrPtr;
+-
+-    // remove
+-    printf("%s\n", fname);
+-
+-    if (fname[0] == '-') {
+-        // Backward compat thing. Remove in a later version
+-        font->font = XftFontOpenXlfd(display, scrPtr->screen, fname);
+-    } else {
+-        font->font = XftFontOpenName(display, scrPtr->screen, fname);
+-    }
+-    if (!font->font) {
+-        wfree(font);
+-        wfree(fname);
+-        return NULL;
+-    }
+-    font->height = font->font->ascent+font->font->descent;
+-    font->y = font->font->ascent;
+-
+-    font->refCount = 1;
+-
+-    font->name = fname;
+-
+-    assert(WMHashInsert(scrPtr->fontCache, font->name, font)==NULL);
+-
+-    return font;
+-}
+-
+-
+-WMFont*
+-WMRetainFont(WMFont *font)
+-{
+-    wassertrv(font!=NULL, NULL);
+-
+-    font->refCount++;
+-
+-    return font;
+-}
+-
+-
+-void
+-WMReleaseFont(WMFont *font)
+-{
+-    wassertr(font!=NULL);
+-
+-    font->refCount--;
+-    if (font->refCount < 1) {
+-        XftFontClose(font->screen->display, font->font);
+-        if (font->name) {
+-            WMHashRemove(font->screen->fontCache, font->name);
+-	    wfree(font->name);
+-	}
+-	wfree(font);
+-    }
+-}
+-
+-
+-Bool
+-WMIsAntialiasingEnabled(WMScreen *scrPtr)
+-{
+-    return scrPtr->antialiasedText;
+-}
+-
+-
+-unsigned int
+-WMFontHeight(WMFont *font)
+-{
+-    wassertrv(font!=NULL, 0);
+-
+-    return font->height;
+-}
+-
+-
+-char*
+-WMGetFontName(WMFont *font)
+-{
+-    wassertrv(font!=NULL, NULL);
+-
+-    return font->name;
+-}
+-
+-
+-WMFont*
+-WMDefaultSystemFont(WMScreen *scrPtr)
+-{
+-    return WMRetainFont(scrPtr->normalFont);
+-}
+-
+-
+-WMFont*
+-WMDefaultBoldSystemFont(WMScreen *scrPtr)
+-{
+-    return WMRetainFont(scrPtr->boldFont);
+-}
+-
+-
+-WMFont*
+-WMSystemFontOfSize(WMScreen *scrPtr, int size)
+-{
+-    WMFont *font;
+-    char *fontSpec;
+-
+-    fontSpec = makeFontOfSize(WINGsConfiguration.systemFont, size, "sans");
+-
+-    font = WMCreateFont(scrPtr, fontSpec);
+-
+-    if (!font) {
+-        wwarning(_("could not load font %s."), fontSpec);
+-    }
+-
+-    wfree(fontSpec);
+-
+-    return font;
+-}
+-
+-
+-WMFont*
+-WMBoldSystemFontOfSize(WMScreen *scrPtr, int size)
+-{
+-    WMFont *font;
+-    char *fontSpec;
+-
+-    fontSpec = makeFontOfSize(WINGsConfiguration.boldSystemFont, size, "sans");
+-
+-    font = WMCreateFont(scrPtr, fontSpec);
+-
+-    if (!font) {
+-        wwarning(_("could not load font %s."), fontSpec);
+-    }
+-
+-    wfree(fontSpec);
+-
+-    return font;
+-}
+-
+-
+-int
+-WMWidthOfString(WMFont *font, char *text, int length)
+-{
+-    XGlyphInfo extents;
+-
+-    wassertrv(font!=NULL, 0);
+-    wassertrv(text!=NULL, 0);
+-
+-    if (font->screen->useWideChar) {
+-        wchar_t *wtext;
+-        const char *mtext;
+-        int len;
+-
+-        wtext = (wchar_t *)wmalloc(sizeof(wchar_t)*(length+1));
+-        mtext = text;
+-        len = wmbsnrtowcs(wtext, &mtext, length, length);
+-        if (len>0) {
+-            wtext[len] = L'\0'; /* not really necessary here */
+-            XftTextExtents32(font->screen->display, font->font,
+-                             (XftChar32 *)wtext, len, &extents);
+-        } else {
+-            if (len==-1) {
+-                wwarning(_("Conversion to widechar failed (possible "
+-                           "invalid multibyte sequence): '%s':(pos %d)\n"),
+-                         text, mtext-text+1);
+-            }
+-            extents.xOff = 0;
+-        }
+-        wfree(wtext);
+-    } else {
+-        XftTextExtents8(font->screen->display, font->font,
+-                        (XftChar8 *)text, length, &extents);
+-    }
+-
+-    return extents.xOff; /* don't ask :P */
+-}
+-
+-
+-
+-void
+-WMDrawString(WMScreen *scr, Drawable d, WMColor *color, WMFont *font,
+-             int x, int y, char *text, int length)
+-{
+-    XftColor xftcolor;
+-
+-    wassertr(font!=NULL);
+-
+-    xftcolor.color.red = color->color.red;
+-    xftcolor.color.green = color->color.green;
+-    xftcolor.color.blue = color->color.blue;
+-    xftcolor.color.alpha = color->alpha;;
+-    xftcolor.pixel = W_PIXEL(color);
+-
+-    XftDrawChange(scr->xftdraw, d);
+-
+-    if (font->screen->useWideChar) {
+-        wchar_t *wtext;
+-        const char *mtext;
+-        int len;
+-
+-        wtext = (wchar_t *)wmalloc(sizeof(wchar_t)*(length+1));
+-        mtext = text;
+-        len = wmbsnrtowcs(wtext, &mtext, length, length);
+-        if (len>0) {
+-            XftDrawString32(scr->xftdraw, &xftcolor, font->font,
+-                            x, y + font->y, (XftChar32*)wtext, len);
+-        } else if (len==-1) {
+-            wwarning(_("Conversion to widechar failed (possible invalid "
+-                       "multibyte sequence): '%s':(pos %d)\n"),
+-                     text, mtext-text+1);
+-            /* we can draw normal text, or we can draw as much widechar
+-             * text as was already converted until the error. go figure */
+-            /*XftDrawString8(scr->xftdraw, &xftcolor, font->font,
+-             x, y + font->y, (XftChar8*)text, length);*/
+-        }
+-        wfree(wtext);
+-    } else {
+-        XftDrawString8(scr->xftdraw, &xftcolor, font->font,
+-                       x, y + font->y, (XftChar8*)text, length);
+-    }
+-}
+-
+-
+-void
+-WMDrawImageString(WMScreen *scr, Drawable d, WMColor *color, WMColor *background,
+-                  WMFont *font, int x, int y, char *text, int length)
+-{
+-    XftColor textColor;
+-    XftColor bgColor;
+-
+-    wassertr(font!=NULL);
+-
+-    textColor.color.red = color->color.red;
+-    textColor.color.green = color->color.green;
+-    textColor.color.blue = color->color.blue;
+-    textColor.color.alpha = color->alpha;;
+-    textColor.pixel = W_PIXEL(color);
+-
+-    bgColor.color.red = background->color.red;
+-    bgColor.color.green = background->color.green;
+-    bgColor.color.blue = background->color.blue;
+-    bgColor.color.alpha = background->alpha;;
+-    bgColor.pixel = W_PIXEL(background);
+-
+-    XftDrawChange(scr->xftdraw, d);
+-
+-    XftDrawRect(scr->xftdraw, &bgColor, x, y,
+-                WMWidthOfString(font, text, length),
+-                font->height);
+-
+-    if (font->screen->useWideChar) {
+-        wchar_t *wtext;
+-        const char *mtext;
+-        int len;
+-
+-        mtext = text;
+-        wtext = (wchar_t *)wmalloc(sizeof(wchar_t)*(length+1));
+-        len = wmbsnrtowcs(wtext, &mtext, length, length);
+-        if (len>0) {
+-            XftDrawString32(scr->xftdraw, &textColor, font->font,
+-                            x, y + font->y, (XftChar32*)wtext, len);
+-        } else if (len==-1) {
+-            wwarning(_("Conversion to widechar failed (possible invalid "
+-                       "multibyte sequence): '%s':(pos %d)\n"),
+-                     text, mtext-text+1);
+-            /* we can draw normal text, or we can draw as much widechar
+-             * text as was already converted until the error. go figure */
+-            /*XftDrawString8(scr->xftdraw, &textColor, font->font,
+-             x, y + font->y, (XftChar8*)text, length);*/
+-        }
+-        wfree(wtext);
+-    } else {
+-        XftDrawString8(scr->xftdraw, &textColor, font->font,
+-                       x, y + font->y, (XftChar8*)text, length);
+-    }
+-}
+-
+-
+-WMFont*
+-WMCopyFontWithChanges(WMScreen *scrPtr, WMFont *font,
+-                      const WMFontAttributes *changes)
+-{
+-    int index[FONT_PROPS], count[FONT_PROPS];
+-    int totalProps, i, j, carry;
+-    char fname[512];
+-    WMFontFlags fFlags;
+-    WMBag *props;
+-    WMArray *options;
+-    WMFont *result;
+-    char *prop;
+-
+-    snprintf(fname, 512, "%s", font->name);
+-
+-    fFlags = (font->antialiased ? WFAntialiased : WFNotAntialiased);
+-    fFlags |= (font->notFontSet ? WFNormalFont : WFFontSet);
+-
+-    props = WMCreateBagWithDestructor(1, (WMFreeDataProc*)WMFreeArray);
+-
+-    totalProps = 0;
+-    for (i=0; i<FONT_PROPS; i++) {
+-        prop = ((W_FontAttributes*)changes)->props[i];
+-        count[i] = index[i] = 0;
+-        if (!prop) {
+-            /* No change for this property */
+-            continue;
+-        } else if (strchr(prop, ',')==NULL) {
+-            /* Simple option */
+-            changeFontProp(fname, prop, i);
+-        } else {
+-            /* Option with fallback alternatives */
+-            if ((changes==WFAEmphasized || changes==WFABoldEmphasized) &&
+-                font->antialiased && strcmp(prop, "o,i")==0) {
+-                options = getOptions("i,o");
+-            } else {
+-                options = getOptions(prop);
+-            }
+-            WMInsertInBag(props, i, options);
+-            count[i] = WMGetArrayItemCount(options);
+-            if (totalProps==0)
+-                totalProps = 1;
+-            totalProps = totalProps * count[i];
+-        }
+-    }
+-
+-    if (totalProps == 0) {
+-        /* No options with fallback alternatives at all */
+-        WMFreeBag(props);
+-        return WMCreateFontWithFlags(scrPtr, fname, fFlags);
+-    }
+-
+-    for (i=0; i<totalProps; i++) {
+-        for (j=0; j<FONT_PROPS; j++) {
+-            if (count[j]!=0) {
+-                options = WMGetFromBag(props, j);
+-                prop = WMGetFromArray(options, index[j]);
+-                if (prop) {
+-                    changeFontProp(fname, prop, j);
+-                }
+-            }
+-        }
+-        result = WMCreateFontWithFlags(scrPtr, fname, fFlags);
+-        if (result) {
+-            WMFreeBag(props);
+-            return result;
+-        }
+-        for (j=FONT_PROPS-1, carry=1; j>=0; j--) {
+-            if (count[j]!=0) {
+-                index[j] += carry;
+-                carry = (index[j]==count[j]);
+-                index[j] %= count[j];
+-            }
+-        }
+-    }
+-
+-    WMFreeBag(props);
+-
+-    return NULL;
+-}
+-
+-
+-#if 0
+-
+-#define FONT_PROPS 14
+-
+-typedef struct {
+-    char *props[FONT_PROPS];
+-} W_FontAttributes;
+-
+-
+-static void
+-changeFontProp(char *buf, char *newprop, int position)
+-{
+-    char buf2[512];
+-    char *ptr, *pptr, *rptr;
+-    int count;
+-
+-    if (buf[0]!='-') {
+-        /* // remove warning later. or maybe not */
+-        wwarning(_("Invalid font specification: '%s'\n"), buf);
+-        return;
+-    }
+-
+-    ptr = pptr = rptr = buf;
+-    count = 0;
+-    while (*ptr && *ptr!=',') {
+-        if (*ptr == '-') {
+-            count++;
+-            if (count-1==position+1) {
+-                rptr = ptr;
+-                break;
+-            }
+-            if (count-1==position) {
+-                pptr = ptr+1;
+-            }
+-        }
+-        ptr++;
+-    }
+-    if (position==FONT_PROPS-1) {
+-        rptr = ptr;
+-    }
+-
+-    *pptr = 0;
+-    snprintf(buf2, 512, "%s%s%s", buf, newprop, rptr);
+-    strcpy(buf, buf2);
+-}
+-
+-
+-static WMArray*
+-getOptions(char *options)
+-{
+-    char *ptr, *ptr2, *str;
+-    WMArray *result;
+-    int count;
+-
+-    result = WMCreateArrayWithDestructor(2, (WMFreeDataProc*)wfree);
+-
+-    ptr = options;
+-    while (1) {
+-        ptr2 = strchr(ptr, ',');
+-        if (!ptr2) {
+-            WMAddToArray(result, wstrdup(ptr));
+-            break;
+-        } else {
+-            count = ptr2 - ptr;
+-            str = wmalloc(count+1);
+-            memcpy(str, ptr, count);
+-            str[count] = 0;
+-            WMAddToArray(result, str);
+-            ptr = ptr2 + 1;
+-        }
+-    }
+-
+-    return result;
+-}
+-
+ 
+-#endif
+-
++#include <wchar.h>
+ 
+-#else /* No XFT support */
+ 
+-
+ static char *makeFontSetOfSize(char *fontset, int size);
+ 
+ 
+@@ -913,6 +276,9 @@
+     Display *display = scrPtr->display;
+     char *fname, *ptr;
+ 
++    if (!scrPtr->hasXftSupport)
++        return NULL;
++
+     fontName = xlfdFromFontName(fontName, True);
+ 
+     if ((ptr = strchr(fontName, ','))) {
+@@ -989,6 +355,9 @@
+     Display *display = scrPtr->display;
+     char *fname, *ptr;
+ 
++    if (!scrPtr->hasXftSupport)
++        return NULL;
++
+     fontName = xlfdFromFontName(fontName, True);
+ 
+     if ((ptr = strchr(fontName, ','))) {
+@@ -1153,6 +522,13 @@
+ 
+ 
+ Bool
++WMHasAntialiasingSupport(WMScreen *scrPtr)
++{
++    return scrPtr->hasXftSupport;
++}
++
++
++Bool
+ WMIsAntialiasingEnabled(WMScreen *scrPtr)
+ {
+     return scrPtr->antialiasedText;
+@@ -1704,7 +1080,6 @@
+     return NULL;
+ }
+ 
+-#endif
+ 
+ 
+ // should WFANormal also set "normal" or leave it alone?
+Index: WINGs/wframe.c
+===================================================================
+RCS file: /cvsroot/wm/WINGs/wframe.c,v
+retrieving revision 1.14
+retrieving revision 1.13
+diff -u -r1.14 -r1.13
+--- WINGs/wframe.c	2003/08/14 01:39:27	1.14
++++ WINGs/wframe.c	2002/11/25 04:46:00	1.13
+@@ -198,7 +198,7 @@
+     if (drawTitle) {
+         /* can't draw AA text over and over again because it gets messed */
+         /* // TODO create the dbl buffer pixmap when create/set frame title */
+-        if (scrPtr->antialiasedText) {
++        if (font->antialiased) {
+             Drawable d;
+ 
+             d = XCreatePixmap(display, view->window, tw, th, scrPtr->depth);
+Index: WINGs/widgets.c
+===================================================================
+RCS file: /cvsroot/wm/WINGs/widgets.c,v
+retrieving revision 1.52
+retrieving revision 1.50
+diff -u -r1.52 -r1.50
+--- WINGs/widgets.c	2003/08/15 02:58:04	1.52
++++ WINGs/widgets.c	2003/06/10 01:56:28	1.50
+@@ -622,7 +622,20 @@
+ 
+     scrPtr->fontCache = WMCreateHashTable(WMStringPointerHashCallbacks);
+ 
++    scrPtr->xftFontCache = WMCreateHashTable(WMStringPointerHashCallbacks);
++
++    scrPtr->fontSetCache = WMCreateHashTable(WMStringPointerHashCallbacks);
++
++    scrPtr->xftFontSetCache = WMCreateHashTable(WMStringPointerHashCallbacks);
++
+ #ifdef XFT
++
++# ifdef XFT2
++    scrPtr->hasXftSupport = 1;
++# else
++    scrPtr->hasXftSupport = XftDefaultHasRender(scrPtr->display);
++# endif
++
+     scrPtr->xftdraw = XftDrawCreate(scrPtr->display, W_DRAWABLE(scrPtr),
+                                     scrPtr->visual, scrPtr->colormap);
+ #endif
+@@ -755,9 +768,16 @@
+ 
+     scrPtr->useMultiByte = WINGsConfiguration.useMultiByte;
+ 
+-    scrPtr->useWideChar = 1;
+-
+-    scrPtr->antialiasedText = WINGsConfiguration.antialiasedText;
++    if (scrPtr->hasXftSupport) {
++        scrPtr->antialiasedText = WINGsConfiguration.antialiasedText;
++    } else {
++        if (WINGsConfiguration.antialiasedText) {
++            wwarning(_("Text antialiasing is enabled in the configuration but"
++                       " the X server doesn't have the required capabilities "
++                       "(missing RENDER extension). Disabling text antialiasing."));
++        }
++        scrPtr->antialiasedText = False;
++    }
+ 
+     scrPtr->normalFont = WMSystemFontOfSize(scrPtr, 
+ 		WINGsConfiguration.defaultFontSize);
+@@ -780,16 +800,16 @@
+ 					    CHECK_BUTTON_ON_HEIGHT, False);
+ 
+     scrPtr->checkButtonImageOff = makePixmap(scrPtr, CHECK_BUTTON_OFF,
+-                                             CHECK_BUTTON_OFF_WIDTH,
+-                                             CHECK_BUTTON_OFF_HEIGHT, False);
++					    CHECK_BUTTON_OFF_WIDTH,
++					    CHECK_BUTTON_OFF_HEIGHT, False);
+ 
+     scrPtr->radioButtonImageOn = makePixmap(scrPtr, RADIO_BUTTON_ON,
+ 					    RADIO_BUTTON_ON_WIDTH,
+ 					    RADIO_BUTTON_ON_HEIGHT, False);
+ 
+     scrPtr->radioButtonImageOff = makePixmap(scrPtr, RADIO_BUTTON_OFF,
+-                                             RADIO_BUTTON_OFF_WIDTH,
+-                                             RADIO_BUTTON_OFF_HEIGHT, False);
++					    RADIO_BUTTON_OFF_WIDTH,
++					    RADIO_BUTTON_OFF_HEIGHT, False);
+ 
+     scrPtr->buttonArrow = makePixmap(scrPtr, BUTTON_ARROW, 
+ 				     BUTTON_ARROW_WIDTH, BUTTON_ARROW_HEIGHT, 
+@@ -822,20 +842,20 @@
+ 				    SCROLLER_ARROW_RIGHT_HEIGHT, True);
+ 
+     scrPtr->hiUpArrow = makePixmap(scrPtr, HI_SCROLLER_ARROW_UP,
+-                                   SCROLLER_ARROW_UP_WIDTH,
+-                                   SCROLLER_ARROW_UP_HEIGHT, True);
++				 SCROLLER_ARROW_UP_WIDTH,
++				 SCROLLER_ARROW_UP_HEIGHT, True);
+ 
+     scrPtr->hiDownArrow = makePixmap(scrPtr, HI_SCROLLER_ARROW_DOWN,
+-                                     SCROLLER_ARROW_DOWN_WIDTH,
+-                                     SCROLLER_ARROW_DOWN_HEIGHT, True);
++				   SCROLLER_ARROW_DOWN_WIDTH,
++				   SCROLLER_ARROW_DOWN_HEIGHT, True);
+ 
+     scrPtr->hiLeftArrow = makePixmap(scrPtr, HI_SCROLLER_ARROW_LEFT,
+-                                     SCROLLER_ARROW_LEFT_WIDTH,
+-                                     SCROLLER_ARROW_LEFT_HEIGHT, True);
++				   SCROLLER_ARROW_LEFT_WIDTH,
++				   SCROLLER_ARROW_LEFT_HEIGHT, True);
+ 
+     scrPtr->hiRightArrow = makePixmap(scrPtr, HI_SCROLLER_ARROW_RIGHT,
+-                                      SCROLLER_ARROW_RIGHT_WIDTH,
+-                                      SCROLLER_ARROW_RIGHT_HEIGHT, True);
++				    SCROLLER_ARROW_RIGHT_WIDTH,
++				    SCROLLER_ARROW_RIGHT_HEIGHT, True);
+ 
+     scrPtr->popUpIndicator = makePixmap(scrPtr, POPUP_INDICATOR,
+ 					POPUP_INDICATOR_WIDTH,
+@@ -858,7 +878,7 @@
+     {
+ 	XColor bla;
+ 	Pixmap blank;
+-
++	
+ 	blank = XCreatePixmap(display, scrPtr->stipple, 1, 1, 1);
+ 	XSetForeground(display, scrPtr->monoGC, 0);
+ 	XFillRectangle(display, blank, scrPtr->monoGC, 0, 0, 1, 1);
+Index: WINGs/WINGs/WINGs.h
+===================================================================
+RCS file: /cvsroot/wm/WINGs/WINGs/WINGs.h,v
+retrieving revision 1.42
+retrieving revision 1.41
+diff -u -r1.42 -r1.41
+--- WINGs/WINGs/WINGs.h	2003/08/07 00:26:22	1.42
++++ WINGs/WINGs/WINGs.h	2003/07/16 20:58:50	1.41
+@@ -107,6 +107,22 @@
+ };
+ 
+ 
++/* Font flags */
++typedef enum {
++    WFDefaultFont    = 0,
++    WFNormalFont     = (1<<0),
++    WFFontSet        = (1<<1),
++    WFAntialiased    = (1<<2),
++    WFNotAntialiased = (1<<3)
++} WMFontFlags;
++
++
++/* Use default system font size in system font name */
++enum {
++    WFDefaultSize = -1
++};
++
++
+ /* frame title positions */
+ typedef enum {
+     WTPNoTitle,
+@@ -730,11 +746,18 @@
+ 
+ /* ....................................................................... */
+ 
++WMFont* WMCreateNormalFont(WMScreen *scrPtr, char *fontName);
++
++WMFont* WMCreateFontSet(WMScreen *scrPtr, char *fontName);
++
++WMFont* WMCreateAntialiasedFont(WMScreen *scrPtr, char *fontName);
++
++WMFont* WMCreateAntialiasedFontSet(WMScreen *scrPtr, char *fontName);
++
+ WMFont* WMCreateFont(WMScreen *scrPtr, char *fontName);
+ 
+-//??
+-WMFont* WMCreateFontWithAttributes(WMScreen *scrPtr, char *fontName,
+-                                   WMFontAttributes *attribs);
++WMFont* WMCreateFontWithFlags(WMScreen *scrPtr, char *fontName,
++                              WMFontFlags flags);
+ 
+ WMFont* WMCopyFontWithChanges(WMScreen *scrPtr, WMFont *font,
+                               const WMFontAttributes *changes);
+@@ -747,6 +770,15 @@
+ 
+ unsigned int WMFontHeight(WMFont *font);
+ 
++Bool WMIsAntialiasedFont(WMFont *font);
++
++/*
++WMFont* WMUserFontOfSize(WMScreen *scrPtr, int size);
++
++WMFont* WMUserFixedPitchFontOfSize(WMScreen *scrPtr, int size);
++*/
++
++
+ void WMSetWidgetDefaultFont(WMScreen *scr, WMFont *font);
+ 
+ void WMSetWidgetDefaultBoldFont(WMScreen *scr, WMFont *font);
+@@ -758,6 +790,8 @@
+ WMFont* WMSystemFontOfSize(WMScreen *scrPtr, int size);
+ 
+ WMFont* WMBoldSystemFontOfSize(WMScreen *scrPtr, int size);
++
++XFontSet WMGetFontFontSet(WMFont *font);
+ 
+ /* ....................................................................... */
+ 
+Index: WINGs/WINGs/WINGsP.h
+===================================================================
+RCS file: /cvsroot/wm/WINGs/WINGs/WINGsP.h,v
+retrieving revision 1.19
+retrieving revision 1.16
+diff -u -r1.19 -r1.16
+--- WINGs/WINGs/WINGsP.h	2003/08/15 02:58:04	1.19
++++ WINGs/WINGs/WINGsP.h	2002/11/25 04:46:02	1.16
+@@ -24,7 +24,7 @@
+ 
+ #define DOUBLE_BUFFER
+ 
+-
++    
+ 
+ #define WC_UserWidget	128
+ 
+@@ -47,21 +47,18 @@
+ 
+ typedef struct W_Font {
+     struct W_Screen *screen;
+-
+-#ifdef XFT
+-    struct _XftFont *font;
+-#else
+-    // pick one
+-    //XFontSet font;
+-    XFontStruct *font;
+-#endif
+ 
++    union {
++	XFontSet set;
++        XFontStruct *normal;
++        struct _XftFont *xft;
++    } font;
+     short height;
+     short y;
+     short refCount;
+     char *name;
+-    //unsigned int notFontSet:1;
+-    //unsigned int antialiased:1;
++    unsigned int notFontSet:1;
++    unsigned int antialiased:1;
+ } W_Font;
+ 
+ 
+@@ -100,7 +97,7 @@
+ struct W_DraggingInfo {
+     Window destinationWindow;
+     Window sourceWindow;
+-
++    
+     WMPoint location;
+ 
+     unsigned sourceOperation;
+@@ -119,7 +116,7 @@
+     WMSize mouseOffset;
+     unsigned finished:1;
+ };
+-
++    
+ 
+ typedef struct W_Screen {
+     Display *display;
+@@ -142,6 +139,8 @@
+ 
+     struct _XftDraw *xftdraw;          /* shared XftDraw */
+ 
++    Bool hasXftSupport;                /* if it can antialias text */
++
+     /* application related */
+ 
+     W_FocusInfo *focusInfo;
+@@ -201,9 +200,13 @@
+ 
+     WMHashTable *fontCache;
+ 
+-    Bool useMultiByte;
++    WMHashTable *xftFontCache;
+ 
+-    Bool useWideChar;
++    WMHashTable *fontSetCache;
++
++    WMHashTable *xftFontSetCache;
++
++    Bool useMultiByte;
+ 
+     Bool antialiasedText;
+ 
+@@ -413,6 +416,8 @@
+ typedef struct _WINGsConfiguration {
+     char *systemFont;
+     char *boldSystemFont;
++    char *antialiasedSystemFont;
++    char *antialiasedBoldSystemFont;
+     int  defaultFontSize;
+     Bool antialiasedText;
+     Bool useMultiByte;
+Index: WINGs/po/ca.po
+===================================================================
+RCS file: /cvsroot/wm/WINGs/po/ca.po,v
+retrieving revision 1.2
+retrieving revision 1.1
+diff -u -r1.2 -r1.1
+--- WINGs/po/ca.po	2003/09/16 23:31:30	1.2
++++ WINGs/po/ca.po	2003/02/23 22:12:21	1.1
+@@ -1,25 +1,25 @@
+ # Catalan messages for WINGs.
+-# Copyright (C) 2003 Ernest Adrogué <eadrogue@gmx.net>.
+-# This file is distributed under the terms of the GNU General Public License.
++# Copyright (C) 2003 Free Software Foundation, Inc.
++# This file is distributed under the same license as GNU Window Maker.
++# Ernest Adrogué <eadrogue@gmx.net>, 2003.
+ #
+ # Version history:
+-# 	WM-ver		author		email			date
+-# 	0.80.2		Ernest Adrogué	eadrogue@gmx.net	23 Feb 2003
+-# 	CVS-20030914	Ernest Adrogué	eadrogue@gmx.net	15 Set 2003
++# 	WM-ver	author			email			date
++# 	0.80.2	Ernest Adrogué		eadrogue@gmx.net	23 Feb 2003
+ #
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: WINGs 0.80.2\n"
+-"POT-Creation-Date: 2003-09-16 22:59+0200\n"
+-"PO-Revision-Date: 2003-09-16 23:16+0200\n"
++"POT-Creation-Date: 2003-02-23 16:54+0100\n"
++"PO-Revision-Date: 2002-12-06 14:15+0100\n"
+ "Last-Translator: Ernest Adrogué <eadrogue@gmx.net>\n"
+ "Language-Team: Catalan <ca@dodds.net>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=iso-8859-1\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ 
+-#: ../../WINGs/connection.c:467 ../../WINGs/connection.c:532
+-#: ../../WINGs/connection.c:575
++#: ../../WINGs/connection.c:461 ../../WINGs/connection.c:526
++#: ../../WINGs/connection.c:569
+ msgid "Bad address-service-protocol combination"
+ msgstr "Combinació adreça-servei-protocol incorrecta"
+ 
+@@ -35,40 +35,39 @@
+ 
+ #: ../../WINGs/error.c:110
+ msgid " warning: "
+-msgstr ": atenció: "
++msgstr " atenció: "
+ 
+ #: ../../WINGs/error.c:137
+ msgid " fatal error: "
+-msgstr ": error fatal: "
++msgstr " error fatal: "
+ 
+ #: ../../WINGs/error.c:163 ../../WINGs/error.c:192
+ msgid " error: "
+-msgstr ": error: "
++msgstr " error: "
+ 
+ #: ../../WINGs/findfile.c:48
+ #, c-format
+ msgid "could not get password entry for UID %i"
+-msgstr "no s'ha pogut obtenir l'informació de compte de l'UID %i"
++msgstr "no s'ha pogut obtenir l'informació d'usuari per l'UID %i"
+ 
+ #: ../../WINGs/findfile.c:66
+ #, c-format
+ msgid "could not get password entry for user %s"
+-msgstr "no s'ha pogut obtenir l'informació de compte de l'usuari %s"
++msgstr "no s'ha pogut obtenir l'informació d'usuari per l'usuari %s"
+ 
+ #: ../../WINGs/host.c:114
+ msgid "Cannot get current host name"
+ msgstr "No s'ha pogut obtenir el nom de host actual"
+ 
+-# falten coses per traduïr en el codi font. eac
+ #: ../../WINGs/proplist.c:91
+ #, c-format
+ msgid "syntax error in %s %s, line %i: %s"
+-msgstr "error de sintaxi a %s %s, línia %i: %s"
++msgstr "error de sintaxi en %s %s, línia %i: %s"
+ 
+ #: ../../WINGs/proplist.c:150
+ msgid "Only string or data is supported for a proplist dictionary key"
+ msgstr ""
+-"Una entrada PropList de diccionari només pot contenir dades o una cadena"
++"Les entrades de diccionari PropList només poden contenir dades o una cadena"
+ 
+ #: ../../WINGs/proplist.c:184 ../../WINGs/proplist.c:236
+ #: ../../WINGs/proplist.c:394 ../../WINGs/proplist.c:474
+@@ -76,7 +75,7 @@
+ #: ../../WINGs/proplist.c:1293 ../../WINGs/proplist.c:1372
+ #: ../../WINGs/proplist.c:1493 ../../WINGs/proplist.c:1540
+ msgid "Used proplist functions on non-WMPropLists objects"
+-msgstr "S'han usat funcions PropList en objectes no-WMPropLists"
++msgstr "S'han usat funcions proplist en objectes no-WMPropLists"
+ 
+ #: ../../WINGs/proplist.c:630
+ msgid "unterminated PropList string"
+@@ -120,19 +119,19 @@
+ 
+ #: ../../WINGs/proplist.c:803
+ msgid "error parsing PropList dictionary key"
+-msgstr "error mentre s'analitzava l'entrada PropList de diccionari"
++msgstr "error analitzant l'entrada PropList de diccionari"
+ 
+ #: ../../WINGs/proplist.c:811
+ msgid "missing = in PropList dictionary entry"
+-msgstr "falta un \"=\" a l'entrada PropList de diccionari"
++msgstr "falta un \"=\" a l'entrada de diccionari PropList"
+ 
+ #: ../../WINGs/proplist.c:819
+ msgid "error parsing PropList dictionary entry value"
+-msgstr "error mentre s'analitzava el valor de l'entrada PropList de diccionari"
++msgstr "error analitzant el valor de l'entrada de diccionari PropList"
+ 
+ #: ../../WINGs/proplist.c:827
+ msgid "missing ; in PropList dictionary entry"
+-msgstr "falta un \";\" a l'entrada PropList de diccionari"
++msgstr "falta un \";\" en l'entrada de diccionari PropList"
+ 
+ #: ../../WINGs/proplist.c:888
+ msgid ""
+@@ -144,9 +143,9 @@
+ 
+ #: ../../WINGs/proplist.c:892
+ msgid "Comments are not allowed inside WindowMaker owned domain files."
+-msgstr "No es permeten comentaris en els fitxers de domini de WindowMaker."
++msgstr "No es permeten comentaris en els fitxers de domini de Window Maker."
+ 
+-#: ../../WINGs/proplist.c:1563 ../../WINGs/proplist.c:1630
++#: ../../WINGs/proplist.c:1563 ../../WINGs/proplist.c:1628
+ msgid "extra data after end of property list"
+ msgstr "sobren dades després de la llista de propietats"
+ 
+@@ -155,166 +154,166 @@
+ msgid "could not get size for file '%s'"
+ msgstr "no s'ha pogut obtenir la mida de \"%s\""
+ 
+-#: ../../WINGs/proplist.c:1619
++#: ../../WINGs/proplist.c:1618
+ #, c-format
+ msgid "error reading from file '%s'"
+-msgstr "error mentre es llegia el fitxer \"%s\""
++msgstr "error llegint el fitxer \"%s\""
+ 
+-#: ../../WINGs/proplist.c:1671
++#: ../../WINGs/proplist.c:1669
+ #, c-format
+ msgid "mkstemp (%s) failed"
+ msgstr "la rutina mkstemp (%s) ha fallat"
+ 
+-#: ../../WINGs/proplist.c:1682
++#: ../../WINGs/proplist.c:1680
+ #, c-format
+ msgid "mktemp (%s) failed"
+ msgstr "la rutina mktemp (%s) ha fallat"
+ 
+-#: ../../WINGs/proplist.c:1693
++#: ../../WINGs/proplist.c:1691
+ #, c-format
+ msgid "open (%s) failed"
+ msgstr "la rutina open (%s) ha fallat"
+ 
+-#: ../../WINGs/proplist.c:1700
++#: ../../WINGs/proplist.c:1698
+ #, c-format
+ msgid "writing to file: %s failed"
+ msgstr "l'escriptura del fitxer \"%s\" ha fallat"
+ 
+-#: ../../WINGs/proplist.c:1708
++#: ../../WINGs/proplist.c:1706
+ #, c-format
+ msgid "fclose (%s) failed"
+ msgstr "la rutina fclose (%s) ha fallat"
+ 
+-#: ../../WINGs/proplist.c:1717
++#: ../../WINGs/proplist.c:1715
+ #, c-format
+ msgid "rename ('%s' to '%s') failed"
+ msgstr "el canvi de nom (\"%s\" a \"%s\") ha fallat"
+ 
+ #. something happened with the file. just overwrite it
+-#: ../../WINGs/userdefaults.c:188 ../../WINGs/userdefaults.c:204
++#: ../../WINGs/userdefaults.c:192 ../../WINGs/userdefaults.c:208
+ #, c-format
+ msgid "cannot read domain from file '%s' when syncing"
+ msgstr "no s'ha pogut llegir un domini del fitxer \"%s\" quan es sincronitzava"
+ 
+-#: ../../WINGs/wcolor.c:224 ../../WINGs/wcolor.c:236 ../../WINGs/wcolor.c:275
+-#: ../../WINGs/wcolor.c:316
++#: ../../WINGs/wcolor.c:198 ../../WINGs/wcolor.c:211 ../../WINGs/wcolor.c:250
++#: ../../WINGs/wcolor.c:291
+ #, c-format
+ msgid "could not allocate %s color"
+ msgstr "no s'ha pogut assignar espai pel color \"%s\""
+ 
+-#: ../../WINGs/wcolor.c:224
++#: ../../WINGs/wcolor.c:198
+ msgid "white"
+ msgstr "blanc"
+ 
+-#: ../../WINGs/wcolor.c:236
++#: ../../WINGs/wcolor.c:211
+ msgid "black"
+ msgstr "negre"
+ 
+-#: ../../WINGs/wcolor.c:275
++#: ../../WINGs/wcolor.c:250
+ msgid "gray"
+ msgstr "gris"
+ 
+-#: ../../WINGs/wcolor.c:316
++#: ../../WINGs/wcolor.c:291
+ msgid "dark gray"
+ msgstr "gris fosc"
+ 
+-#: ../../WINGs/wcolorpanel.c:420
++#: ../../WINGs/wcolorpanel.c:415
+ msgid "Colors"
+ msgstr "Colors"
+ 
+-#: ../../WINGs/wcolorpanel.c:610 ../../WINGs/wcolorpanel.c:2829
++#: ../../WINGs/wcolorpanel.c:605 ../../WINGs/wcolorpanel.c:2824
+ msgid "Brightness"
+ msgstr "Claror"
+ 
+-#: ../../WINGs/wcolorpanel.c:612 ../../WINGs/wcolorpanel.c:688
+-#: ../../WINGs/wcolorpanel.c:721 ../../WINGs/wcolorpanel.c:755
+-#: ../../WINGs/wcolorpanel.c:815 ../../WINGs/wcolorpanel.c:849
+-#: ../../WINGs/wcolorpanel.c:883 ../../WINGs/wcolorpanel.c:918
+-#: ../../WINGs/wcolorpanel.c:2169 ../../WINGs/wcolorpanel.c:2831
+-#: ../../WINGs/wcolorpanel.c:2867 ../../WINGs/wcolorpanel.c:2903
+-#: ../../WINGs/wcolorpanel.c:3745
++#: ../../WINGs/wcolorpanel.c:607 ../../WINGs/wcolorpanel.c:683
++#: ../../WINGs/wcolorpanel.c:716 ../../WINGs/wcolorpanel.c:750
++#: ../../WINGs/wcolorpanel.c:810 ../../WINGs/wcolorpanel.c:844
++#: ../../WINGs/wcolorpanel.c:878 ../../WINGs/wcolorpanel.c:913
++#: ../../WINGs/wcolorpanel.c:2164 ../../WINGs/wcolorpanel.c:2826
++#: ../../WINGs/wcolorpanel.c:2862 ../../WINGs/wcolorpanel.c:2898
++#: ../../WINGs/wcolorpanel.c:3746
+ msgid "Color Panel: Could not allocate memory"
+ msgstr "Panell de color: No s'ha pogut assignar memòria"
+ 
+-#: ../../WINGs/wcolorpanel.c:685 ../../WINGs/wcolorpanel.c:686
++#: ../../WINGs/wcolorpanel.c:680 ../../WINGs/wcolorpanel.c:681
+ msgid "Red"
+ msgstr "Roig"
+ 
+-#: ../../WINGs/wcolorpanel.c:718 ../../WINGs/wcolorpanel.c:719
++#: ../../WINGs/wcolorpanel.c:713 ../../WINGs/wcolorpanel.c:714
+ msgid "Green"
+ msgstr "Verd"
+ 
+-#: ../../WINGs/wcolorpanel.c:752 ../../WINGs/wcolorpanel.c:753
++#: ../../WINGs/wcolorpanel.c:747 ../../WINGs/wcolorpanel.c:748
+ msgid "Blue"
+ msgstr "Blau"
+ 
+-#: ../../WINGs/wcolorpanel.c:812 ../../WINGs/wcolorpanel.c:813
++#: ../../WINGs/wcolorpanel.c:807 ../../WINGs/wcolorpanel.c:808
+ msgid "Cyan"
+ msgstr "Cian"
+ 
+-#: ../../WINGs/wcolorpanel.c:846 ../../WINGs/wcolorpanel.c:847
++#: ../../WINGs/wcolorpanel.c:841 ../../WINGs/wcolorpanel.c:842
+ msgid "Magenta"
+ msgstr "Magenta"
+ 
+-#: ../../WINGs/wcolorpanel.c:880 ../../WINGs/wcolorpanel.c:881
++#: ../../WINGs/wcolorpanel.c:875 ../../WINGs/wcolorpanel.c:876
+ msgid "Yellow"
+ msgstr "Groc"
+ 
+-#: ../../WINGs/wcolorpanel.c:915 ../../WINGs/wcolorpanel.c:916
++#: ../../WINGs/wcolorpanel.c:910 ../../WINGs/wcolorpanel.c:911
+ msgid "Black"
+ msgstr "Negre"
+ 
+-#: ../../WINGs/wcolorpanel.c:996
++#: ../../WINGs/wcolorpanel.c:991
+ msgid "Spectrum"
+ msgstr "Espectre"
+ 
+-#: ../../WINGs/wcolorpanel.c:1026
++#: ../../WINGs/wcolorpanel.c:1021
+ msgid "Palette"
+ msgstr "Paleta"
+ 
+-#: ../../WINGs/wcolorpanel.c:1032
++#: ../../WINGs/wcolorpanel.c:1027
+ msgid "New from File..."
+-msgstr "Obtenir d'un fitxer..."
++msgstr "Obté d'un fitxer..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1033 ../../WINGs/wcolorpanel.c:1081
+-#: ../../WINGs/wcolorpanel.c:1098
++#: ../../WINGs/wcolorpanel.c:1028 ../../WINGs/wcolorpanel.c:1076
++#: ../../WINGs/wcolorpanel.c:1093
+ msgid "Rename..."
+-msgstr "Reanomenar..."
++msgstr "Reanomena..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1034 ../../WINGs/wcolorpanel.c:1082
+-#: ../../WINGs/wcolorpanel.c:1099 ../../WINGs/wcolorpanel.c:3326
++#: ../../WINGs/wcolorpanel.c:1029 ../../WINGs/wcolorpanel.c:1077
++#: ../../WINGs/wcolorpanel.c:1094 ../../WINGs/wcolorpanel.c:3321
+ msgid "Remove"
+-msgstr "Eliminar"
++msgstr "Elimina"
+ 
+-#: ../../WINGs/wcolorpanel.c:1035
++#: ../../WINGs/wcolorpanel.c:1030
+ msgid "Copy"
+-msgstr "Copiar"
++msgstr "Copia"
+ 
+-#: ../../WINGs/wcolorpanel.c:1036
++#: ../../WINGs/wcolorpanel.c:1031
+ msgid "New from Clipboard"
+-msgstr "Obtenir del porta-retalls..."
++msgstr "Obté del porta-retalls..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1057
++#: ../../WINGs/wcolorpanel.c:1052
+ msgid "X11-Colors"
+ msgstr "Colors-X11"
+ 
+-#: ../../WINGs/wcolorpanel.c:1074
++#: ../../WINGs/wcolorpanel.c:1069
+ msgid "Color"
+ msgstr "Color"
+ 
+-#: ../../WINGs/wcolorpanel.c:1080
++#: ../../WINGs/wcolorpanel.c:1075
+ msgid "Add..."
+ msgstr "Afegeix..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1090
++#: ../../WINGs/wcolorpanel.c:1085
+ msgid "List"
+ msgstr "Llista"
+ 
+-#: ../../WINGs/wcolorpanel.c:1097
++#: ../../WINGs/wcolorpanel.c:1092
+ msgid "New..."
+ msgstr "Nou..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1236
++#: ../../WINGs/wcolorpanel.c:1231
+ #, c-format
+ msgid ""
+ "Color Panel: Could not create directory %s needed to store configurations"
+@@ -323,105 +322,104 @@
+ "la configuració"
+ 
+ #. Delete the file, it doesn't belong here
+-#: ../../WINGs/wcolorpanel.c:1242 ../../WINGs/wcolorpanel.c:3212
+-#: ../../WINGs/wcolorpanel.c:3216
++#: ../../WINGs/wcolorpanel.c:1237 ../../WINGs/wcolorpanel.c:3207
++#: ../../WINGs/wcolorpanel.c:3211
+ msgid "File Error"
+ msgstr "Error de fitxer"
+ 
+-#: ../../WINGs/wcolorpanel.c:1243
++#: ../../WINGs/wcolorpanel.c:1238
+ msgid "Could not create ColorPanel configuration directory"
+ msgstr "No s'ha pogut crear el directori de configuració del Panell de color"
+ 
+-#: ../../WINGs/wcolorpanel.c:1244 ../../WINGs/wcolorpanel.c:3213
+-#: ../../WINGs/wcolorpanel.c:3218 ../../WINGs/wcolorpanel.c:3245
+-#: ../../WINGs/wfilepanel.c:250 ../../WINGs/wfilepanel.c:650
+-#: ../../WINGs/wfilepanel.c:662 ../../WINGs/wfilepanel.c:763
+-#: ../../WINGs/wfilepanel.c:974 ../../WINGs/wfontpanel.c:751
++#: ../../WINGs/wcolorpanel.c:1239 ../../WINGs/wcolorpanel.c:3208
++#: ../../WINGs/wcolorpanel.c:3213 ../../WINGs/wcolorpanel.c:3240
++#: ../../WINGs/wfilepanel.c:250 ../../WINGs/wfilepanel.c:647
++#: ../../WINGs/wfilepanel.c:659 ../../WINGs/wfilepanel.c:760
++#: ../../WINGs/wfilepanel.c:971 ../../WINGs/wfontpanel.c:709
+ msgid "OK"
+ msgstr "D'acord"
+ 
+-#: ../../WINGs/wcolorpanel.c:1250 ../../WINGs/wcolorpanel.c:1286
+-#: ../../WINGs/wcolorpanel.c:1304
++#: ../../WINGs/wcolorpanel.c:1245 ../../WINGs/wcolorpanel.c:1281
++#: ../../WINGs/wcolorpanel.c:1299
+ msgid "Color Panel: Could not find file"
+ msgstr "Panell de color: No s'ha trobat el fitxer"
+ 
+-#: ../../WINGs/wcolorpanel.c:1491 ../../WINGs/wcolorpanel.c:1556
+-#: ../../WINGs/wcolorpanel.c:1620
++#: ../../WINGs/wcolorpanel.c:1486 ../../WINGs/wcolorpanel.c:1551
++#: ../../WINGs/wcolorpanel.c:1615
+ msgid "Color Panel: X failed request"
+ msgstr "Panell de color: petició X fallida"
+ 
+-#: ../../WINGs/wcolorpanel.c:2865
++#: ../../WINGs/wcolorpanel.c:2860
+ msgid "Saturation"
+ msgstr "Saturació"
+ 
+-#: ../../WINGs/wcolorpanel.c:2901
++#: ../../WINGs/wcolorpanel.c:2896
+ msgid "Hue"
+ msgstr "Matís"
+ 
+-# és el títol d'un quadre de diàleg. eac
+-#: ../../WINGs/wcolorpanel.c:3151
++#: ../../WINGs/wcolorpanel.c:3146
+ msgid "Open Palette"
+ msgstr "Obrir paleta"
+ 
+-#: ../../WINGs/wcolorpanel.c:3213
++#: ../../WINGs/wcolorpanel.c:3208
+ msgid "Invalid file format !"
+ msgstr "El format del fitxer no és vàlid !"
+ 
+-#: ../../WINGs/wcolorpanel.c:3215
++#: ../../WINGs/wcolorpanel.c:3210
+ #, c-format
+ msgid "can't remove file %s"
+ msgstr "no s'ha pogut eliminar el fitxer \"%s\""
+ 
+-#: ../../WINGs/wcolorpanel.c:3217
++#: ../../WINGs/wcolorpanel.c:3212
+ msgid "Couldn't remove file from Configuration Directory !"
+ msgstr "No s'ha pogut eliminar el fitxer del directori de configuració !"
+ 
+-#: ../../WINGs/wcolorpanel.c:3244
++#: ../../WINGs/wcolorpanel.c:3239
+ msgid "Rename"
+ msgstr "Reanomena"
+ 
+-#: ../../WINGs/wcolorpanel.c:3244
++#: ../../WINGs/wcolorpanel.c:3239
+ msgid "Rename palette to:"
+-msgstr "Reanomena la paleta com a:"
++msgstr "Reanomenar la paleta a:"
+ 
+-#: ../../WINGs/wcolorpanel.c:3245 ../../WINGs/wfilepanel.c:259
+-#: ../../WINGs/wfilepanel.c:662 ../../WINGs/wfilepanel.c:763
++#: ../../WINGs/wcolorpanel.c:3240 ../../WINGs/wfilepanel.c:259
++#: ../../WINGs/wfilepanel.c:659 ../../WINGs/wfilepanel.c:760
+ msgid "Cancel"
+ msgstr "Cancel·la"
+ 
+ #. Careful, this palette exists already
+-#: ../../WINGs/wcolorpanel.c:3261 ../../WINGs/wfilepanel.c:763
++#: ../../WINGs/wcolorpanel.c:3256 ../../WINGs/wfilepanel.c:760
+ msgid "Warning"
+ msgstr "Atenció"
+ 
+-#: ../../WINGs/wcolorpanel.c:3262
++#: ../../WINGs/wcolorpanel.c:3257
+ msgid ""
+ "Palette already exists !\n"
+ "\n"
+ "Overwrite ?"
+ msgstr ""
+-"Ja existia una paleta amb aquest nom!\n"
++"La paleta existeix!\n"
+ "\n"
+ "La voleu sobreescriure?"
+ 
+-#: ../../WINGs/wcolorpanel.c:3262 ../../WINGs/wcolorpanel.c:3326
++#: ../../WINGs/wcolorpanel.c:3257 ../../WINGs/wcolorpanel.c:3321
+ msgid "No"
+ msgstr "No"
+ 
+-#: ../../WINGs/wcolorpanel.c:3262 ../../WINGs/wcolorpanel.c:3326
++#: ../../WINGs/wcolorpanel.c:3257 ../../WINGs/wcolorpanel.c:3321
+ msgid "Yes"
+ msgstr "Sí"
+ 
+-#: ../../WINGs/wcolorpanel.c:3294
++#: ../../WINGs/wcolorpanel.c:3289
+ #, c-format
+ msgid "Couldn't rename palette %s to %s\n"
+-msgstr "No s'ha pogut reanomenar la paleta %s com a %s\n"
++msgstr "No s'ha pogut reanomenar la paleta %s a %s\n"
+ 
+-#: ../../WINGs/wcolorpanel.c:3320
++#: ../../WINGs/wcolorpanel.c:3315
+ msgid "This will permanently remove the palette "
+ msgstr "Això eliminarà la paleta per sempre "
+ 
+-#: ../../WINGs/wcolorpanel.c:3323
++#: ../../WINGs/wcolorpanel.c:3318
+ msgid ""
+ ".\n"
+ "\n"
+@@ -431,27 +429,27 @@
+ "\n"
+ "Esteu segurs que voleu eliminar aquesta paleta?"
+ 
+-#: ../../WINGs/wcolorpanel.c:3348
++#: ../../WINGs/wcolorpanel.c:3343
+ #, c-format
+ msgid "Couldn't remove palette %s\n"
+ msgstr "No s'ha pogut eliminar la paleta %s\n"
+ 
+-#: ../../WINGs/wcolorpanel.c:3647
++#: ../../WINGs/wcolorpanel.c:3648
+ #, c-format
+ msgid "Could not open %s"
+ msgstr "No s'ha pogut obrir %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3654
++#: ../../WINGs/wcolorpanel.c:3655
+ #, c-format
+ msgid "Could not create %s"
+ msgstr "No s'ha pogut crear %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3665
++#: ../../WINGs/wcolorpanel.c:3666
+ #, c-format
+ msgid "Write error on file %s"
+ msgstr "Error d'escriptura en el fitxer %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3710
++#: ../../WINGs/wcolorpanel.c:3711
+ msgid "Color Panel: Color unspecified"
+ msgstr "Panell de color: Color no especificat"
+ 
+@@ -467,270 +465,211 @@
+ msgid "Save"
+ msgstr "Desa"
+ 
+-#: ../../WINGs/wfilepanel.c:565
++#: ../../WINGs/wfilepanel.c:562
+ #, c-format
+ msgid "WINGs: could not open directory %s\n"
+ msgstr "WINGs: no s'ha pogut obrir el directori %s\n"
+ 
+-#: ../../WINGs/wfilepanel.c:583
++#: ../../WINGs/wfilepanel.c:580
+ #, c-format
+ msgid "WINGs: could not stat %s\n"
+ msgstr "WINGs: no s'ha pogut determinar l'estat de %s\n"
+ 
+-#: ../../WINGs/wfilepanel.c:650 ../../WINGs/wfilepanel.c:973
+-#: ../../WINGs/wfontpanel.c:750
++#: ../../WINGs/wfilepanel.c:647 ../../WINGs/wfilepanel.c:970
++#: ../../WINGs/wfontpanel.c:708
+ msgid "Error"
+ msgstr "Error"
+ 
+-# és el nom d'un quadre de diàleg. eac
+-#: ../../WINGs/wfilepanel.c:661
++#: ../../WINGs/wfilepanel.c:658
+ msgid "Create Directory"
+ msgstr "Crear directori"
+ 
+-#: ../../WINGs/wfilepanel.c:662
++#: ../../WINGs/wfilepanel.c:659
+ msgid "Enter directory name"
+ msgstr "Entreu el nom del directori"
+ 
+-#: ../../WINGs/wfilepanel.c:698 ../../WINGs/wfilepanel.c:737
+-#: ../../WINGs/wfilepanel.c:768 ../../WINGs/wfilepanel.c:796
++#: ../../WINGs/wfilepanel.c:695 ../../WINGs/wfilepanel.c:734
++#: ../../WINGs/wfilepanel.c:765 ../../WINGs/wfilepanel.c:793
+ msgid "Permission denied."
+ msgstr "Permís denegat."
+ 
+-#: ../../WINGs/wfilepanel.c:701
++#: ../../WINGs/wfilepanel.c:698
+ #, c-format
+ msgid "'%s' already exists."
+ msgstr "\"%s\" existia prèviament."
+ 
+-#: ../../WINGs/wfilepanel.c:704
++#: ../../WINGs/wfilepanel.c:701
+ msgid "Path does not exist."
+-msgstr "L'ubicació no existeix."
++msgstr "El camí no existeix."
+ 
+-#: ../../WINGs/wfilepanel.c:734 ../../WINGs/wfilepanel.c:793
++#: ../../WINGs/wfilepanel.c:731 ../../WINGs/wfilepanel.c:790
+ #, c-format
+ msgid "'%s' does not exist."
+ msgstr "\"%s\" no existeix."
+ 
+-#: ../../WINGs/wfilepanel.c:741 ../../WINGs/wfilepanel.c:800
++#: ../../WINGs/wfilepanel.c:738 ../../WINGs/wfilepanel.c:797
+ msgid "Insufficient memory available."
+ msgstr "No hi ha prou memòria disponible."
+ 
+-#: ../../WINGs/wfilepanel.c:745 ../../WINGs/wfilepanel.c:804
++#: ../../WINGs/wfilepanel.c:742 ../../WINGs/wfilepanel.c:801
+ #, c-format
+ msgid "'%s' is on a read-only filesystem."
+ msgstr "\"%s\" es troba en un sistema de fitxers de només lectura."
+ 
+-#: ../../WINGs/wfilepanel.c:748 ../../WINGs/wfilepanel.c:780
+-#: ../../WINGs/wfilepanel.c:807
++#: ../../WINGs/wfilepanel.c:745 ../../WINGs/wfilepanel.c:777
++#: ../../WINGs/wfilepanel.c:804
+ #, c-format
+ msgid "Can not delete '%s'."
+ msgstr "No s'ha pogut eliminar \"%s\"."
+ 
+-#: ../../WINGs/wfilepanel.c:755
++#: ../../WINGs/wfilepanel.c:752
+ #, c-format
+ msgid "Delete directory %s ?"
+-msgstr "Voleu eliminar el directori %s ?"
++msgstr "Eliminar el directori %s ?"
+ 
+-#: ../../WINGs/wfilepanel.c:759
++#: ../../WINGs/wfilepanel.c:756
+ #, c-format
+ msgid "Delete file %s ?"
+-msgstr "Voleu eliminar el fitxer %s ?"
++msgstr "Eliminar el fitxer %s ?"
+ 
+-#: ../../WINGs/wfilepanel.c:771
++#: ../../WINGs/wfilepanel.c:768
+ #, c-format
+ msgid "Directory '%s' does not exist."
+ msgstr "El directori \"%s\" no existeix."
+ 
+-#: ../../WINGs/wfilepanel.c:774
++#: ../../WINGs/wfilepanel.c:771
+ #, c-format
+ msgid "Directory '%s' is not empty."
+ msgstr "El directori \"%s\" no està buit."
+ 
+-#: ../../WINGs/wfilepanel.c:777
++#: ../../WINGs/wfilepanel.c:774
+ #, c-format
+ msgid "Directory '%s' is busy."
+ msgstr "El directori \"%s\" es troba ocupat."
+ 
+-#: ../../WINGs/wfilepanel.c:790
++#: ../../WINGs/wfilepanel.c:787
+ #, c-format
+ msgid "'%s' is a directory."
+ msgstr "\"%s\" és un directori."
+ 
+-#: ../../WINGs/wfilepanel.c:832
++#: ../../WINGs/wfilepanel.c:829
+ #, c-format
+ msgid "An error occured browsing '%s'."
+ msgstr "S'ha produït un error mentre s'explorava \"%s\"."
+ 
+-#: ../../WINGs/wfilepanel.c:836
++#: ../../WINGs/wfilepanel.c:833
+ #, c-format
+ msgid "'%s' is not a directory."
+ msgstr "\"%s\" no és un directori."
+ 
+-#: ../../WINGs/wfilepanel.c:973
++#: ../../WINGs/wfilepanel.c:970
+ msgid "File does not exist."
+ msgstr "El fitxer no existeix."
+-
+-#: ../../WINGs/wfont.c:324 ../../WINGs/wfont.c:344
+-#, c-format
+-msgid "could not load font %s."
+-msgstr "no s'ha pogut carregar el tipus de lletra %s."
+-
+-#: ../../WINGs/wfont.c:375 ../../WINGs/wfont.c:420 ../../WINGs/wfont.c:475
+-#: ../../WINGs/wfont.c:1337 ../../WINGs/wfont.c:1398 ../../WINGs/wfont.c:1469
+-#, c-format
+-msgid ""
+-"Conversion to widechar failed (possible invalid multibyte sequence): '%s':"
+-"(pos %d)\n"
+-msgstr ""
+-"Ha fallat la conversió a caràcter estès (possible seqüència no vàlida): '%"
+-"s': (pos %d)\n"
+-
+-#. // remove warning later. or maybe not
+-#: ../../WINGs/wfont.c:591 ../../WINGs/wfont.c:1568
+-#, c-format
+-msgid "Invalid font specification: '%s'\n"
+-msgstr "Especificació de font no vàlida: \"%s\"\n"
+-
+-#: ../../WINGs/wfont.c:770 ../../WINGs/wfont.c:780
+-#, c-format
+-msgid "Invalid size specification '%s' in %s. Using default %d\n"
+-msgstr ""
+-"La mida \"%s\" especificada a %s no és vàlida. S'usa el valor per omissió %"
+-"d\n"
+ 
+-#: ../../WINGs/wfont.c:824
++#: ../../WINGs/wfont.c:129
+ #, c-format
+ msgid "the following character sets are missing in %s:"
+ msgstr "els següents conjunts de caràcters falten a %s:"
+ 
+-#: ../../WINGs/wfont.c:830
++#: ../../WINGs/wfont.c:136
+ #, c-format
+ msgid ""
+ "the string \"%s\" will be used in place of any characters from those sets."
+ msgstr ""
+ "la cadena \"%s\" s'usarà en lloc dels caràcters d'aquests conjunts de "
+ "caràcters."
+-
+-#. is arial a good fallback for multibyte?
+-#: ../../WINGs/wfont.c:1232 ../../WINGs/wfont.c:1247
+-#, c-format
+-msgid "could not load font %s. Trying arial."
+-msgstr "no s'ha pogut carregar el tipus de lletra %s. Provant amb \"arial\"."
+ 
+-#: ../../WINGs/wfont.c:1239
+-msgid "could not load antialiased font set. Reverting to standard font sets."
+-msgstr ""
+-"no s'ha pogut carregar el conjunt de fonts amb allisat. S'usarà l'estàndard."
+-
+-#: ../../WINGs/wfont.c:1242
++#: ../../WINGs/wfont.c:300 ../../WINGs/wfont.c:336
+ #, c-format
+-msgid "could not load FontSet %s. Trying fixed."
++msgid "could not load font set %s. Trying fixed."
+ msgstr "no s'ha pogut carregar el tipus de lletra %s. Provant amb \"fixed\"."
+-
+-#: ../../WINGs/wfont.c:1254
+-msgid "could not load antialiased fonts. Reverting to normal fonts."
+-msgstr "no s'han pogut carregar fonts allisades. S'usaran fonts normals."
+ 
+-#: ../../WINGs/wfont.c:1257 ../../WINGs/wfont.c:1268
++#: ../../WINGs/wfont.c:306 ../../WINGs/wfont.c:342
+ #, c-format
+ msgid "could not load font %s. Trying fixed."
+-msgstr "no s'ha pogut carregar la font %s. Provant amb \"fixed\"."
+-
+-#: ../../WINGs/wfont.c:1262
+-#, c-format
+-msgid "could not load font set %s. Trying fixed."
+-msgstr "no s'ha pogut carregar el conjunt de fonts %s. Provant amb \"fixed\"."
++msgstr "no s'ha pogut carregar el tipus de lletra %s. Provant amb \"fixed\"."
+ 
+-#: ../../WINGs/wfont.c:1272
++#: ../../WINGs/wfont.c:310 ../../WINGs/wfont.c:346
+ msgid "could not load fixed font!"
+ msgstr "no s'ha pogut carregar el tipus de lletra \"fixed\" !"
+ 
+-#: ../../WINGs/wfont.c:1520
++#: ../../WINGs/wfont.c:441
+ #, c-format
+ msgid "font description %s is too large."
+ msgstr "la descripció de tipus de lletra %s és massa gran."
+ 
+-#: ../../WINGs/wfontpanel.c:235
++#: ../../WINGs/wfontpanel.c:205
+ msgid "Test!!!"
+ msgstr "Prova!!!"
+ 
+-#: ../../WINGs/wfontpanel.c:241
++#: ../../WINGs/wfontpanel.c:211
+ msgid "Family"
+ msgstr "Familia"
+ 
+-#: ../../WINGs/wfontpanel.c:252
++#: ../../WINGs/wfontpanel.c:222
+ msgid "Typeface"
+ msgstr "Fosa"
+ 
+-#: ../../WINGs/wfontpanel.c:263
++#: ../../WINGs/wfontpanel.c:233
+ msgid "Size"
+ msgstr "Mida"
+ 
+-#: ../../WINGs/wfontpanel.c:282
++#: ../../WINGs/wfontpanel.c:252
+ msgid "Set"
+ msgstr "Conjunt"
+ 
+-#: ../../WINGs/wfontpanel.c:288
++#: ../../WINGs/wfontpanel.c:257
+ msgid "Revert"
+ msgstr "Torna"
+ 
+-#: ../../WINGs/wfontpanel.c:751
++#: ../../WINGs/wfontpanel.c:709
+ msgid "Could not retrieve font list"
+ msgstr "No s'ha pogut obtenir la llista de tipus de lletra"
+ 
+-#: ../../WINGs/wfontpanel.c:765
++#: ../../WINGs/wfontpanel.c:721
+ #, c-format
+ msgid "font name %s is longer than 256, which is invalid."
+ msgstr ""
+ "el nom de tipus de lletra %s ocupa més de 256 caràcters, per tant no és "
+ "vàlid."
+ 
+-#: ../../WINGs/wfontpanel.c:913
++#: ../../WINGs/wfontpanel.c:868
+ msgid "Roman"
+ msgstr "Romana"
+ 
+-#: ../../WINGs/wfontpanel.c:916
++#: ../../WINGs/wfontpanel.c:871
+ msgid "Italic"
+ msgstr "Itàlica"
+ 
+-#: ../../WINGs/wfontpanel.c:918
++#: ../../WINGs/wfontpanel.c:873
+ msgid "Oblique"
+ msgstr "Obliqua"
+ 
+-#: ../../WINGs/wfontpanel.c:920
++#: ../../WINGs/wfontpanel.c:875
+ msgid "Rev Italic"
+-msgstr "Itàlica inv"
++msgstr "Itàlica rev"
+ 
+-#: ../../WINGs/wfontpanel.c:922
++#: ../../WINGs/wfontpanel.c:877
+ msgid "Rev Oblique"
+-msgstr "Obliqua inv"
++msgstr "Obliqua rev"
+ 
+-#: ../../WINGs/wfontpanel.c:928
++#: ../../WINGs/wfontpanel.c:883
+ msgid "Normal"
+ msgstr "Normal"
+ 
+-#: ../../WINGs/widgets.c:419
++#: ../../WINGs/widgets.c:415
+ #, c-format
+ msgid "WINGs: could not load widget images file: %s"
+-msgstr "WINGs: no s'ha pogut carregar el fitxer d'imatges: %s"
++msgstr "WINGs: no s'ha pogut carregar el fitxer d'imatges dels elements: %s"
+ 
+-#: ../../WINGs/widgets.c:772
++#: ../../WINGs/widgets.c:763
+ msgid ""
+ "could not load any fonts. Make sure your font installation and locale "
+ "settings are correct."
+ msgstr ""
+-"no s'ha pogut carregar cap font. Assegureu-vos que heu instal·lat i "
+-"configurat correctament les fonts i el local."
++"no s'ha pogut carregar cap font. Assegureu-vos que l'instal·lació dels tipus "
++"de lletra i la configuració del local és adquada."
+ 
+-#: ../../WINGs/wruler.c:192
++#: ../../WINGs/wruler.c:189
+ msgid "0   inches"
+ msgstr "0   polzades"
+-
+-#~ msgid ""
+-#~ "Text antialiasing is enabled in the configuration but the X server "
+-#~ "doesn't have the required capabilities (missing RENDER extension). "
+-#~ "Disabling text antialiasing."
+-#~ msgstr ""
+-#~ "L'allisat de text està habilitat a la configuració però el servidor X no\n"
+-#~ "té la capacitat necessària (falta l'extensió RENDER) de manera que "
+-#~ "l'allisat\n"
+-#~ "de text es deshabilitarà."
+Index: WINGs/po/sk.po
+===================================================================
+RCS file: /cvsroot/wm/WINGs/po/sk.po,v
+retrieving revision 1.4
+retrieving revision 1.3
+diff -u -r1.4 -r1.3
+--- WINGs/po/sk.po	2004/02/02 02:30:13	1.4
++++ WINGs/po/sk.po	2001/12/20 16:16:09	1.3
+@@ -5,17 +5,16 @@
+ # Currently maintained by Jan "judas" Tomka <judas@linux.sk>
+ #
+ # Version history:
+-# 	WM-ver	author			email			date
+-# 	0.65.1	Jan "judas" Tomka	<judas@linux.sk>	Aug 08 2001
+-# 	0.70.0	Jan "judas" Tomka	<judas@linux.sk>	Oct 15 2001
+-# 	0.70.1	Jan "judas" Tomka	<judas@linux.sk>	Nov 02 2001
+-# 	0.80.0	Jan "judas" Tomka	<judas@linux.sk>	Dec 20 2001
+-# 	0.80.2	Jan "judas" Tomka	<judas@linux.sk>	Jan 31 2004
++#	WM-ver	author			email			date
++#	0.65.1	Jan "judas" Tomka	<judas@linux.sk>	Aug 08 2001
++#	0.70.0	Jan "judas" Tomka	<judas@linux.sk>	Oct 15 2001
++#	0.70.1	Jan "judas" Tomka	<judas@linux.sk>	Nov 02 2001
++#	0.80.0	Jan "judas" Tomka	<judas@linux.sk>	Dec 20 2001
+ #
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: WINGs 0.80.0\n"
+-"POT-Creation-Date: 2004-01-31 18:36+0100\n"
++"POT-Creation-Date: 2001-12-20 03:50+0100\n"
+ "PO-Revision-Date: 2001-12-20 04:00+0100\n"
+ "Last-Translator: Jan \"judas\" Tomka <judas@linux.sk>\n"
+ "Language-Team: Slovak <sk@li.org>\n"
+@@ -23,8 +22,8 @@
+ "Content-Type: text/plain; charset=ISO-8859-2\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ 
+-#: ../../WINGs/connection.c:467 ../../WINGs/connection.c:532
+-#: ../../WINGs/connection.c:575
++#: ../../WINGs/connection.c:461 ../../WINGs/connection.c:526
++#: ../../WINGs/connection.c:569
+ msgid "Bad address-service-protocol combination"
+ msgstr "Nesprávna kombinácia adresa-slu¾ba-protokol"
+ 
+@@ -64,20 +63,15 @@
+ msgid "Cannot get current host name"
+ msgstr "Nemo¾no zisti» aktuálne meno poèítaèa"
+ 
+-#: ../../WINGs/proplist.c:91
+-#, c-format
+-msgid "syntax error in %s %s, line %i: %s"
+-msgstr "chyba syntaxe v %s %s, riadok %i: %s"
+-
+ #: ../../WINGs/proplist.c:150
+ msgid "Only string or data is supported for a proplist dictionary key"
+ msgstr "Pre kµúè slovníka proplist je podporovaný len re»azec alebo dáta"
+ 
+ #: ../../WINGs/proplist.c:184 ../../WINGs/proplist.c:236
+ #: ../../WINGs/proplist.c:394 ../../WINGs/proplist.c:474
+-#: ../../WINGs/proplist.c:1075 ../../WINGs/proplist.c:1127
+-#: ../../WINGs/proplist.c:1293 ../../WINGs/proplist.c:1372
+-#: ../../WINGs/proplist.c:1493 ../../WINGs/proplist.c:1540
++#: ../../WINGs/proplist.c:1071 ../../WINGs/proplist.c:1123
++#: ../../WINGs/proplist.c:1251 ../../WINGs/proplist.c:1330
++#: ../../WINGs/proplist.c:1451 ../../WINGs/proplist.c:1498
+ msgid "Used proplist functions on non-WMPropLists objects"
+ msgstr "Pou¾itá proplist funkcia na iných ako WMPropLists objektoch"
+ 
+@@ -93,51 +87,51 @@
+ msgid "unterminated PropList data (missing hexdigit)"
+ msgstr "neukonèené PropList dáta (chýbajúca hex èíslica)"
+ 
+-#: ../../WINGs/proplist.c:690 ../../WINGs/proplist.c:695
++#: ../../WINGs/proplist.c:690
+ msgid "non hexdigit character in PropList data"
+ msgstr "v PropList dátach je znak, ktorý nie je hex èíslicou"
+ 
+-#: ../../WINGs/proplist.c:729
++#: ../../WINGs/proplist.c:725
+ msgid "unterminated PropList array"
+ msgstr "neukonèené PropList pole"
+ 
+-#: ../../WINGs/proplist.c:737
++#: ../../WINGs/proplist.c:733
+ msgid "missing or unterminated PropList array"
+ msgstr "chýbajúce alebo neukonèené PropList pole"
+ 
+-#: ../../WINGs/proplist.c:747
++#: ../../WINGs/proplist.c:743
+ msgid "could not get PropList array element"
+ msgstr "nemo¾no zisti» prvok PropList poµa"
+ 
+-#: ../../WINGs/proplist.c:776
++#: ../../WINGs/proplist.c:772
+ msgid "unterminated PropList dictionary"
+ msgstr "neukonèený PropList slovník"
+ 
+-#: ../../WINGs/proplist.c:793
++#: ../../WINGs/proplist.c:789
+ msgid "missing PropList dictionary key"
+ msgstr "chýbajúci kµúè PropList slovníka"
+ 
+-#: ../../WINGs/proplist.c:795
++#: ../../WINGs/proplist.c:791
+ msgid "missing PropList dictionary entry key or unterminated dictionary"
+ msgstr "chýbajúci kµúè polo¾ky PropList slovníka alebo neukonèený slovník"
+ 
+-#: ../../WINGs/proplist.c:803
++#: ../../WINGs/proplist.c:799
+ msgid "error parsing PropList dictionary key"
+ msgstr "chyba pri parsovaní kµúèa PropList slovníka"
+ 
+-#: ../../WINGs/proplist.c:811
++#: ../../WINGs/proplist.c:807
+ msgid "missing = in PropList dictionary entry"
+ msgstr "chýbajúce = v polo¾ke PropList slovníka"
+ 
+-#: ../../WINGs/proplist.c:819
++#: ../../WINGs/proplist.c:815
+ msgid "error parsing PropList dictionary entry value"
+ msgstr "chyba pri parsovaní hodnoty polo¾ky PropList slovníka"
+ 
+-#: ../../WINGs/proplist.c:827
++#: ../../WINGs/proplist.c:823
+ msgid "missing ; in PropList dictionary entry"
+ msgstr "chýbajúca ; v polo¾ke PropList slovníka"
+ 
+-#: ../../WINGs/proplist.c:888
++#: ../../WINGs/proplist.c:884
+ msgid ""
+ "was expecting a string, data, array or dictionary. If it's a string, try "
+ "enclosing it with \"."
+@@ -145,179 +139,179 @@
+ "oèakávaný bol re»azec, dáta, pole alebo slovník. Ak je to re»azec, skúste ho "
+ "uzavrie» medzi \"."
+ 
+-#: ../../WINGs/proplist.c:892
++#: ../../WINGs/proplist.c:888
+ msgid "Comments are not allowed inside WindowMaker owned domain files."
+ msgstr "Komentáre v doménových súboroch Window Makera nie sú povolené."
+ 
+-#: ../../WINGs/proplist.c:1563 ../../WINGs/proplist.c:1630
++#: ../../WINGs/proplist.c:1521 ../../WINGs/proplist.c:1586
+ msgid "extra data after end of property list"
+ msgstr "prebytoèné dáta na konci property listu"
+ 
+-#: ../../WINGs/proplist.c:1606
++#: ../../WINGs/proplist.c:1564
+ #, c-format
+ msgid "could not get size for file '%s'"
+ msgstr "nemo¾no zisti» veµkos» súboru '%s'"
+ 
+-#: ../../WINGs/proplist.c:1619
++#: ../../WINGs/proplist.c:1576
+ #, c-format
+ msgid "error reading from file '%s'"
+ msgstr "chyba pri èítaní zo súboru '%s'"
+ 
+-#: ../../WINGs/proplist.c:1671
++#: ../../WINGs/proplist.c:1627
+ #, c-format
+ msgid "mkstemp (%s) failed"
+ msgstr "chyba mkstemp (%s)"
+ 
+-#: ../../WINGs/proplist.c:1682
++#: ../../WINGs/proplist.c:1638
+ #, c-format
+ msgid "mktemp (%s) failed"
+ msgstr "chyba mktemp(%s)"
+ 
+-#: ../../WINGs/proplist.c:1693
++#: ../../WINGs/proplist.c:1649
+ #, c-format
+ msgid "open (%s) failed"
+ msgstr "chyba pri otváraní (%s)"
+ 
+-#: ../../WINGs/proplist.c:1700
++#: ../../WINGs/proplist.c:1656
+ #, c-format
+ msgid "writing to file: %s failed"
+ msgstr "chyba pri zápise do súboru: %s"
+ 
+-#: ../../WINGs/proplist.c:1708
++#: ../../WINGs/proplist.c:1664
+ #, c-format
+ msgid "fclose (%s) failed"
+ msgstr "chyba fclose (%s)"
+ 
+-#: ../../WINGs/proplist.c:1717
++#: ../../WINGs/proplist.c:1673
+ #, c-format
+ msgid "rename ('%s' to '%s') failed"
+ msgstr "chyba rename ('%s' na '%s')"
+ 
+ #. something happened with the file. just overwrite it
+-#: ../../WINGs/userdefaults.c:188 ../../WINGs/userdefaults.c:204
++#: ../../WINGs/userdefaults.c:192 ../../WINGs/userdefaults.c:208
+ #, c-format
+ msgid "cannot read domain from file '%s' when syncing"
+ msgstr "nemo¾no èíta» doménu zo súboru '%s' pri synchronizácii"
+ 
+-#: ../../WINGs/wcolor.c:224 ../../WINGs/wcolor.c:236 ../../WINGs/wcolor.c:275
+-#: ../../WINGs/wcolor.c:316
++#: ../../WINGs/wcolor.c:198 ../../WINGs/wcolor.c:211 ../../WINGs/wcolor.c:250
++#: ../../WINGs/wcolor.c:291
+ #, c-format
+ msgid "could not allocate %s color"
+ msgstr "nemo¾no alokova» %s farbu"
+ 
+-#: ../../WINGs/wcolor.c:224
++#: ../../WINGs/wcolor.c:198
+ msgid "white"
+ msgstr "bielu"
+ 
+-#: ../../WINGs/wcolor.c:236
++#: ../../WINGs/wcolor.c:211
+ msgid "black"
+ msgstr "èiernu"
+ 
+-#: ../../WINGs/wcolor.c:275
++#: ../../WINGs/wcolor.c:250
+ msgid "gray"
+ msgstr "¹edú"
+ 
+-#: ../../WINGs/wcolor.c:316
++#: ../../WINGs/wcolor.c:291
+ msgid "dark gray"
+ msgstr "tmavo¹edú"
+ 
+-#: ../../WINGs/wcolorpanel.c:420
++#: ../../WINGs/wcolorpanel.c:415
+ msgid "Colors"
+ msgstr "Farby"
+ 
+-#: ../../WINGs/wcolorpanel.c:610 ../../WINGs/wcolorpanel.c:2829
++#: ../../WINGs/wcolorpanel.c:605 ../../WINGs/wcolorpanel.c:2824
+ msgid "Brightness"
+ msgstr "Svetlos»"
+ 
+-#: ../../WINGs/wcolorpanel.c:612 ../../WINGs/wcolorpanel.c:688
+-#: ../../WINGs/wcolorpanel.c:721 ../../WINGs/wcolorpanel.c:755
+-#: ../../WINGs/wcolorpanel.c:815 ../../WINGs/wcolorpanel.c:849
+-#: ../../WINGs/wcolorpanel.c:883 ../../WINGs/wcolorpanel.c:918
+-#: ../../WINGs/wcolorpanel.c:2169 ../../WINGs/wcolorpanel.c:2831
+-#: ../../WINGs/wcolorpanel.c:2867 ../../WINGs/wcolorpanel.c:2903
+-#: ../../WINGs/wcolorpanel.c:3745
++#: ../../WINGs/wcolorpanel.c:607 ../../WINGs/wcolorpanel.c:683
++#: ../../WINGs/wcolorpanel.c:716 ../../WINGs/wcolorpanel.c:750
++#: ../../WINGs/wcolorpanel.c:810 ../../WINGs/wcolorpanel.c:844
++#: ../../WINGs/wcolorpanel.c:878 ../../WINGs/wcolorpanel.c:913
++#: ../../WINGs/wcolorpanel.c:2164 ../../WINGs/wcolorpanel.c:2826
++#: ../../WINGs/wcolorpanel.c:2862 ../../WINGs/wcolorpanel.c:2898
++#: ../../WINGs/wcolorpanel.c:3746
+ msgid "Color Panel: Could not allocate memory"
+ msgstr "Panel farieb: Nemo¾no alokova» pamä»"
+ 
+-#: ../../WINGs/wcolorpanel.c:685 ../../WINGs/wcolorpanel.c:686
++#: ../../WINGs/wcolorpanel.c:680 ../../WINGs/wcolorpanel.c:681
+ msgid "Red"
+ msgstr "Èervená"
+ 
+-#: ../../WINGs/wcolorpanel.c:718 ../../WINGs/wcolorpanel.c:719
++#: ../../WINGs/wcolorpanel.c:713 ../../WINGs/wcolorpanel.c:714
+ msgid "Green"
+ msgstr "Zelená"
+ 
+-#: ../../WINGs/wcolorpanel.c:752 ../../WINGs/wcolorpanel.c:753
++#: ../../WINGs/wcolorpanel.c:747 ../../WINGs/wcolorpanel.c:748
+ msgid "Blue"
+ msgstr "Modrá"
+ 
+-#: ../../WINGs/wcolorpanel.c:812 ../../WINGs/wcolorpanel.c:813
++#: ../../WINGs/wcolorpanel.c:807 ../../WINGs/wcolorpanel.c:808
+ msgid "Cyan"
+ msgstr "Azúrová"
+ 
+-#: ../../WINGs/wcolorpanel.c:846 ../../WINGs/wcolorpanel.c:847
++#: ../../WINGs/wcolorpanel.c:841 ../../WINGs/wcolorpanel.c:842
+ msgid "Magenta"
+ msgstr "Purpurová"
+ 
+-#: ../../WINGs/wcolorpanel.c:880 ../../WINGs/wcolorpanel.c:881
++#: ../../WINGs/wcolorpanel.c:875 ../../WINGs/wcolorpanel.c:876
+ msgid "Yellow"
+ msgstr "®ltá"
+ 
+-#: ../../WINGs/wcolorpanel.c:915 ../../WINGs/wcolorpanel.c:916
++#: ../../WINGs/wcolorpanel.c:910 ../../WINGs/wcolorpanel.c:911
+ msgid "Black"
+ msgstr "Èierna"
+ 
+-#: ../../WINGs/wcolorpanel.c:996
++#: ../../WINGs/wcolorpanel.c:991
+ msgid "Spectrum"
+ msgstr "Spektrum"
+ 
+-#: ../../WINGs/wcolorpanel.c:1026
++#: ../../WINGs/wcolorpanel.c:1021
+ msgid "Palette"
+ msgstr "Paleta"
+ 
+-#: ../../WINGs/wcolorpanel.c:1032
++#: ../../WINGs/wcolorpanel.c:1027
+ msgid "New from File..."
+ msgstr "Nová zo súboru..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1033 ../../WINGs/wcolorpanel.c:1081
+-#: ../../WINGs/wcolorpanel.c:1098
++#: ../../WINGs/wcolorpanel.c:1028 ../../WINGs/wcolorpanel.c:1076
++#: ../../WINGs/wcolorpanel.c:1093
+ msgid "Rename..."
+ msgstr "Premenova»..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1034 ../../WINGs/wcolorpanel.c:1082
+-#: ../../WINGs/wcolorpanel.c:1099 ../../WINGs/wcolorpanel.c:3326
++#: ../../WINGs/wcolorpanel.c:1029 ../../WINGs/wcolorpanel.c:1077
++#: ../../WINGs/wcolorpanel.c:1094 ../../WINGs/wcolorpanel.c:3321
+ msgid "Remove"
+ msgstr "Odstráni»"
+ 
+-#: ../../WINGs/wcolorpanel.c:1035
++#: ../../WINGs/wcolorpanel.c:1030
+ msgid "Copy"
+ msgstr "Kopírova»"
+ 
+-#: ../../WINGs/wcolorpanel.c:1036
++#: ../../WINGs/wcolorpanel.c:1031
+ msgid "New from Clipboard"
+ msgstr "Nová z nástenky"
+ 
+-#: ../../WINGs/wcolorpanel.c:1057
++#: ../../WINGs/wcolorpanel.c:1052
+ msgid "X11-Colors"
+ msgstr "Farby X11"
+ 
+-#: ../../WINGs/wcolorpanel.c:1074
++#: ../../WINGs/wcolorpanel.c:1069
+ msgid "Color"
+ msgstr "Farba"
+ 
+-#: ../../WINGs/wcolorpanel.c:1080
++#: ../../WINGs/wcolorpanel.c:1075
+ msgid "Add..."
+ msgstr "Prida»..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1090
++#: ../../WINGs/wcolorpanel.c:1085
+ msgid "List"
+ msgstr "Zoznam"
+ 
+-#: ../../WINGs/wcolorpanel.c:1097
++#: ../../WINGs/wcolorpanel.c:1092
+ msgid "New..."
+ msgstr "Nový..."
+ 
+-#: ../../WINGs/wcolorpanel.c:1236
++#: ../../WINGs/wcolorpanel.c:1231
+ #, c-format
+ msgid ""
+ "Color Panel: Could not create directory %s needed to store configurations"
+@@ -325,77 +319,77 @@
+ "Panel farieb: Nemo¾no vytvori» adresár %s potrebný na ulo¾enie nastavení"
+ 
+ #. Delete the file, it doesn't belong here
+-#: ../../WINGs/wcolorpanel.c:1242 ../../WINGs/wcolorpanel.c:3212
+-#: ../../WINGs/wcolorpanel.c:3216
++#: ../../WINGs/wcolorpanel.c:1237 ../../WINGs/wcolorpanel.c:3207
++#: ../../WINGs/wcolorpanel.c:3211
+ msgid "File Error"
+ msgstr "Chyba súboru"
+ 
+-#: ../../WINGs/wcolorpanel.c:1243
++#: ../../WINGs/wcolorpanel.c:1238
+ msgid "Could not create ColorPanel configuration directory"
+ msgstr "Nemo¾no vytvori» konfiguraèný adresár panelu farieb"
+ 
+-#: ../../WINGs/wcolorpanel.c:1244 ../../WINGs/wcolorpanel.c:3213
+-#: ../../WINGs/wcolorpanel.c:3218 ../../WINGs/wcolorpanel.c:3245
+-#: ../../WINGs/wfilepanel.c:250 ../../WINGs/wfilepanel.c:650
+-#: ../../WINGs/wfilepanel.c:662 ../../WINGs/wfilepanel.c:763
+-#: ../../WINGs/wfilepanel.c:974 ../../WINGs/wfontpanel.c:751
++#: ../../WINGs/wcolorpanel.c:1239 ../../WINGs/wcolorpanel.c:3208
++#: ../../WINGs/wcolorpanel.c:3213 ../../WINGs/wcolorpanel.c:3240
++#: ../../WINGs/wfilepanel.c:250 ../../WINGs/wfilepanel.c:647
++#: ../../WINGs/wfilepanel.c:659 ../../WINGs/wfilepanel.c:760
++#: ../../WINGs/wfilepanel.c:971 ../../WINGs/wfontpanel.c:709
+ msgid "OK"
+ msgstr "OK"
+ 
+-#: ../../WINGs/wcolorpanel.c:1250 ../../WINGs/wcolorpanel.c:1286
+-#: ../../WINGs/wcolorpanel.c:1304
++#: ../../WINGs/wcolorpanel.c:1245 ../../WINGs/wcolorpanel.c:1281
++#: ../../WINGs/wcolorpanel.c:1299
+ msgid "Color Panel: Could not find file"
+ msgstr "Panel farieb: Nemo¾no nájs» súbor"
+ 
+-#: ../../WINGs/wcolorpanel.c:1491 ../../WINGs/wcolorpanel.c:1556
+-#: ../../WINGs/wcolorpanel.c:1620
++#: ../../WINGs/wcolorpanel.c:1486 ../../WINGs/wcolorpanel.c:1551
++#: ../../WINGs/wcolorpanel.c:1615
+ msgid "Color Panel: X failed request"
+ msgstr "Panel farieb: chyba po¾iadavky X"
+ 
+-#: ../../WINGs/wcolorpanel.c:2865
++#: ../../WINGs/wcolorpanel.c:2860
+ msgid "Saturation"
+ msgstr "Saturácia"
+ 
+-#: ../../WINGs/wcolorpanel.c:2901
++#: ../../WINGs/wcolorpanel.c:2896
+ msgid "Hue"
+ msgstr "Odtieò"
+ 
+-#: ../../WINGs/wcolorpanel.c:3151
++#: ../../WINGs/wcolorpanel.c:3146
+ msgid "Open Palette"
+ msgstr "Otvori» paletu"
+ 
+-#: ../../WINGs/wcolorpanel.c:3213
++#: ../../WINGs/wcolorpanel.c:3208
+ msgid "Invalid file format !"
+ msgstr "Nesprávny súborový formát!"
+ 
+-#: ../../WINGs/wcolorpanel.c:3215
++#: ../../WINGs/wcolorpanel.c:3210
+ #, c-format
+ msgid "can't remove file %s"
+ msgstr "namo¾no odstráni» súbor %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3217
++#: ../../WINGs/wcolorpanel.c:3212
+ msgid "Couldn't remove file from Configuration Directory !"
+ msgstr "Nemo¾no odstráni» súbor z konfiguraèného adresára!"
+ 
+-#: ../../WINGs/wcolorpanel.c:3244
++#: ../../WINGs/wcolorpanel.c:3239
+ msgid "Rename"
+ msgstr "Premenova»"
+ 
+-#: ../../WINGs/wcolorpanel.c:3244
++#: ../../WINGs/wcolorpanel.c:3239
+ msgid "Rename palette to:"
+ msgstr "Premenova» paletu:"
+ 
+-#: ../../WINGs/wcolorpanel.c:3245 ../../WINGs/wfilepanel.c:259
+-#: ../../WINGs/wfilepanel.c:662 ../../WINGs/wfilepanel.c:763
++#: ../../WINGs/wcolorpanel.c:3240 ../../WINGs/wfilepanel.c:259
++#: ../../WINGs/wfilepanel.c:659 ../../WINGs/wfilepanel.c:760
+ msgid "Cancel"
+ msgstr "Zru¹i»"
+ 
+ #. Careful, this palette exists already
+-#: ../../WINGs/wcolorpanel.c:3261 ../../WINGs/wfilepanel.c:763
++#: ../../WINGs/wcolorpanel.c:3256 ../../WINGs/wfilepanel.c:760
+ msgid "Warning"
+ msgstr "Varovanie"
+ 
+-#: ../../WINGs/wcolorpanel.c:3262
++#: ../../WINGs/wcolorpanel.c:3257
+ msgid ""
+ "Palette already exists !\n"
+ "\n"
+@@ -405,24 +399,24 @@
+ "\n"
+ "Prepísa»?"
+ 
+-#: ../../WINGs/wcolorpanel.c:3262 ../../WINGs/wcolorpanel.c:3326
++#: ../../WINGs/wcolorpanel.c:3257 ../../WINGs/wcolorpanel.c:3321
+ msgid "No"
+ msgstr "Nie"
+ 
+-#: ../../WINGs/wcolorpanel.c:3262 ../../WINGs/wcolorpanel.c:3326
++#: ../../WINGs/wcolorpanel.c:3257 ../../WINGs/wcolorpanel.c:3321
+ msgid "Yes"
+ msgstr "Áno"
+ 
+-#: ../../WINGs/wcolorpanel.c:3294
++#: ../../WINGs/wcolorpanel.c:3289
+ #, c-format
+ msgid "Couldn't rename palette %s to %s\n"
+ msgstr "Nemo¾no premenova» paletu %s na %s\n"
+ 
+-#: ../../WINGs/wcolorpanel.c:3320
++#: ../../WINGs/wcolorpanel.c:3315
+ msgid "This will permanently remove the palette "
+ msgstr "Paleta bude natrvalo zmazaná"
+ 
+-#: ../../WINGs/wcolorpanel.c:3323
++#: ../../WINGs/wcolorpanel.c:3318
+ msgid ""
+ ".\n"
+ "\n"
+@@ -432,27 +426,27 @@
+ "\n"
+ "Ste si istý, ¾e chcete odstráni» túto paletu?"
+ 
+-#: ../../WINGs/wcolorpanel.c:3348
++#: ../../WINGs/wcolorpanel.c:3343
+ #, c-format
+ msgid "Couldn't remove palette %s\n"
+ msgstr "Nemo¾no odstráni» paletu %s\n"
+ 
+-#: ../../WINGs/wcolorpanel.c:3647
++#: ../../WINGs/wcolorpanel.c:3648
+ #, c-format
+ msgid "Could not open %s"
+ msgstr "Nemo¾no otvori» %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3654
++#: ../../WINGs/wcolorpanel.c:3655
+ #, c-format
+ msgid "Could not create %s"
+ msgstr "Nemo¾no vytvori» %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3665
++#: ../../WINGs/wcolorpanel.c:3666
+ #, c-format
+ msgid "Write error on file %s"
+ msgstr "Chyba zápisu do súboru %s"
+ 
+-#: ../../WINGs/wcolorpanel.c:3710
++#: ../../WINGs/wcolorpanel.c:3711
+ msgid "Color Panel: Color unspecified"
+ msgstr "Panel farieb: Ne¹pecifikovaná farba"
+ 
+@@ -468,252 +462,207 @@
+ msgid "Save"
+ msgstr "Ulo¾i»"
+ 
+-#: ../../WINGs/wfilepanel.c:565
++#: ../../WINGs/wfilepanel.c:562
+ #, c-format
+ msgid "WINGs: could not open directory %s\n"
+ msgstr "WINGs: nemo¾no otvori» adresár %s\n"
+ 
+-#: ../../WINGs/wfilepanel.c:583
++#: ../../WINGs/wfilepanel.c:580
+ #, c-format
+ msgid "WINGs: could not stat %s\n"
+ msgstr "WINGs: nemo¾no zisti» informácie o %s\n"
+ 
+-#: ../../WINGs/wfilepanel.c:650 ../../WINGs/wfilepanel.c:973
+-#: ../../WINGs/wfontpanel.c:750
++#: ../../WINGs/wfilepanel.c:647 ../../WINGs/wfilepanel.c:970
++#: ../../WINGs/wfontpanel.c:708
+ msgid "Error"
+ msgstr "Chyba"
+ 
+-#: ../../WINGs/wfilepanel.c:661
++#: ../../WINGs/wfilepanel.c:658
+ msgid "Create Directory"
+ msgstr "Vytvori» adresár"
+ 
+-#: ../../WINGs/wfilepanel.c:662
++#: ../../WINGs/wfilepanel.c:659
+ msgid "Enter directory name"
+ msgstr "Meno adresára"
+ 
+-#: ../../WINGs/wfilepanel.c:698 ../../WINGs/wfilepanel.c:737
+-#: ../../WINGs/wfilepanel.c:768 ../../WINGs/wfilepanel.c:796
++#: ../../WINGs/wfilepanel.c:695 ../../WINGs/wfilepanel.c:734
++#: ../../WINGs/wfilepanel.c:765 ../../WINGs/wfilepanel.c:793
+ msgid "Permission denied."
+ msgstr "Prístup zamietnutý."
+ 
+-#: ../../WINGs/wfilepanel.c:701
++#: ../../WINGs/wfilepanel.c:698
+ #, c-format
+ msgid "'%s' already exists."
+ msgstr "'%s' u¾ existuje"
+ 
+-#: ../../WINGs/wfilepanel.c:704
++#: ../../WINGs/wfilepanel.c:701
+ msgid "Path does not exist."
+ msgstr "Cesta neexistuje."
+ 
+-#: ../../WINGs/wfilepanel.c:734 ../../WINGs/wfilepanel.c:793
++#: ../../WINGs/wfilepanel.c:731 ../../WINGs/wfilepanel.c:790
+ #, c-format
+ msgid "'%s' does not exist."
+ msgstr "'%s' neexistuje."
+ 
+-#: ../../WINGs/wfilepanel.c:741 ../../WINGs/wfilepanel.c:800
++#: ../../WINGs/wfilepanel.c:738 ../../WINGs/wfilepanel.c:797
+ msgid "Insufficient memory available."
+ msgstr "Nedostatok pamäti."
+ 
+-#: ../../WINGs/wfilepanel.c:745 ../../WINGs/wfilepanel.c:804
++#: ../../WINGs/wfilepanel.c:742 ../../WINGs/wfilepanel.c:801
+ #, c-format
+ msgid "'%s' is on a read-only filesystem."
+ msgstr "'%s' je na súborovom systéme len pre èítanie."
+ 
+-#: ../../WINGs/wfilepanel.c:748 ../../WINGs/wfilepanel.c:780
+-#: ../../WINGs/wfilepanel.c:807
++#: ../../WINGs/wfilepanel.c:745 ../../WINGs/wfilepanel.c:777
++#: ../../WINGs/wfilepanel.c:804
+ #, c-format
+ msgid "Can not delete '%s'."
+ msgstr "Nemo¾no odstráni» '%s'."
+ 
+-#: ../../WINGs/wfilepanel.c:755
++#: ../../WINGs/wfilepanel.c:752
+ #, c-format
+ msgid "Delete directory %s ?"
+ msgstr "Odstráni» adresár %s?"
+ 
+-#: ../../WINGs/wfilepanel.c:759
++#: ../../WINGs/wfilepanel.c:756
+ #, c-format
+ msgid "Delete file %s ?"
+ msgstr "Odstráni» súbor %s?"
+ 
+-#: ../../WINGs/wfilepanel.c:771
++#: ../../WINGs/wfilepanel.c:768
+ #, c-format
+ msgid "Directory '%s' does not exist."
+ msgstr "Adresár '%s' neexistuje."
+ 
+-#: ../../WINGs/wfilepanel.c:774
++#: ../../WINGs/wfilepanel.c:771
+ #, c-format
+ msgid "Directory '%s' is not empty."
+ msgstr "Adresár '%s' nie je prázdny."
+ 
+-#: ../../WINGs/wfilepanel.c:777
++#: ../../WINGs/wfilepanel.c:774
+ #, c-format
+ msgid "Directory '%s' is busy."
+ msgstr "Adresár '%s' je pou¾ívaný."
+ 
+-#: ../../WINGs/wfilepanel.c:790
++#: ../../WINGs/wfilepanel.c:787
+ #, c-format
+ msgid "'%s' is a directory."
+ msgstr "'%s' je adresár."
+ 
+-#: ../../WINGs/wfilepanel.c:832
++#: ../../WINGs/wfilepanel.c:829
+ #, c-format
+ msgid "An error occured browsing '%s'."
+ msgstr "Pri prehliadaní '%s' nastala chyba."
+ 
+-#: ../../WINGs/wfilepanel.c:836
++#: ../../WINGs/wfilepanel.c:833
+ #, c-format
+ msgid "'%s' is not a directory."
+ msgstr "'%s' nie je adresár."
+ 
+-#: ../../WINGs/wfilepanel.c:973
++#: ../../WINGs/wfilepanel.c:970
+ msgid "File does not exist."
+ msgstr "Súbor neexistuje."
+-
+-#: ../../WINGs/wfont.c:324 ../../WINGs/wfont.c:344
+-#, c-format
+-msgid "could not load font %s."
+-msgstr "nemo¾no naèíta» font %s."
+-
+-#: ../../WINGs/wfont.c:375 ../../WINGs/wfont.c:420 ../../WINGs/wfont.c:475
+-#: ../../WINGs/wfont.c:1337 ../../WINGs/wfont.c:1398 ../../WINGs/wfont.c:1469
+-#, c-format
+-msgid ""
+-"Conversion to widechar failed (possible invalid multibyte sequence): '%s':"
+-"(pos %d)\n"
+-msgstr ""
+-"Konverzia do widechar zlyhala (mo¾no nesprávna multibyte sekvencia): '%s':"
+-"(pos %d)\n"
+ 
+-#. // remove warning later. or maybe not
+-#: ../../WINGs/wfont.c:591 ../../WINGs/wfont.c:1568
++#: ../../WINGs/wfont.c:129
+ #, c-format
+-msgid "Invalid font specification: '%s'\n"
+-msgstr "Chybná ¹pecifikácia fontu: '%s'\n"
+-
+-#: ../../WINGs/wfont.c:770 ../../WINGs/wfont.c:780
+-#, c-format
+-msgid "Invalid size specification '%s' in %s. Using default %d\n"
+-msgstr "Chybná ¹pecifikácia veµkosti '%s' v %s. Pou¾ije sa implicitná %d\n"
+-
+-#: ../../WINGs/wfont.c:824
+-#, c-format
+ msgid "the following character sets are missing in %s:"
+ msgstr "nasledujúce sady znakov chýbajú v %s:"
+ 
+-#: ../../WINGs/wfont.c:830
++#: ../../WINGs/wfont.c:136
+ #, c-format
+ msgid ""
+ "the string \"%s\" will be used in place of any characters from those sets."
+ msgstr "re»azec \"%s\" bude pou¾itý namiesto znakov z týchto sád."
+-
+-#. is arial a good fallback for multibyte?
+-#: ../../WINGs/wfont.c:1232 ../../WINGs/wfont.c:1247
+-#, c-format
+-msgid "could not load font %s. Trying arial."
+-msgstr "nemo¾no naèíta» font %s. Skú¹a sa naèíta» arial."
+-
+-#: ../../WINGs/wfont.c:1239
+-msgid "could not load antialiased font set. Reverting to standard font sets."
+-msgstr "nemo¾no naèíta» antialiasovanú sadu fontov. Spä» k ¹tandardnej sade fontov."
+-
+-#: ../../WINGs/wfont.c:1242
+-#, c-format
+-msgid "could not load FontSet %s. Trying fixed."
+-msgstr "nemo¾no naèíta» sadu fontov %s. Skú¹a sa naèíta» fixed."
+-
+-#: ../../WINGs/wfont.c:1254
+-msgid "could not load antialiased fonts. Reverting to normal fonts."
+-msgstr "nemo¾no zavies» antialiasovaný font. Návrat k normálnemu fontu."
+ 
+-#: ../../WINGs/wfont.c:1257 ../../WINGs/wfont.c:1268
++#: ../../WINGs/wfont.c:282 ../../WINGs/wfont.c:318
+ #, c-format
+-msgid "could not load font %s. Trying fixed."
++msgid "could not load font set %s. Trying fixed."
+ msgstr "nemo¾no naèíta» font %s. Skú¹a sa naèíta» fixed."
+ 
+-#: ../../WINGs/wfont.c:1262
++#: ../../WINGs/wfont.c:288 ../../WINGs/wfont.c:324
+ #, c-format
+-msgid "could not load font set %s. Trying fixed."
++msgid "could not load font %s. Trying fixed."
+ msgstr "nemo¾no naèíta» font %s. Skú¹a sa naèíta» fixed."
+ 
+-#: ../../WINGs/wfont.c:1272
++#: ../../WINGs/wfont.c:292 ../../WINGs/wfont.c:328
+ msgid "could not load fixed font!"
+ msgstr "nemo¾no naèíta» font fixed!"
+ 
+-#: ../../WINGs/wfont.c:1520
++#: ../../WINGs/wfont.c:423
+ #, c-format
+ msgid "font description %s is too large."
+ msgstr "popis fontu %s je príli¹ veµký."
+ 
+-#: ../../WINGs/wfontpanel.c:235
++#: ../../WINGs/wfontpanel.c:205
+ msgid "Test!!!"
+ msgstr "Skú¹ka!!!"
+ 
+-#: ../../WINGs/wfontpanel.c:241
++#: ../../WINGs/wfontpanel.c:211
+ msgid "Family"
+ msgstr "Rodina"
+ 
+-#: ../../WINGs/wfontpanel.c:252
++#: ../../WINGs/wfontpanel.c:222
+ msgid "Typeface"
+ msgstr "Vzhµad"
+ 
+-#: ../../WINGs/wfontpanel.c:263
++#: ../../WINGs/wfontpanel.c:233
+ msgid "Size"
+ msgstr "Veµkos»"
+ 
+-#: ../../WINGs/wfontpanel.c:282
++#: ../../WINGs/wfontpanel.c:252
+ msgid "Set"
+ msgstr "Sada"
+ 
+-#: ../../WINGs/wfontpanel.c:288
++#: ../../WINGs/wfontpanel.c:257
+ msgid "Revert"
+ msgstr "Obráti»"
+ 
+-#: ../../WINGs/wfontpanel.c:751
++#: ../../WINGs/wfontpanel.c:709
+ msgid "Could not retrieve font list"
+ msgstr "Nemo¾no obdr¾a» zoznam fontov"
+ 
+-#: ../../WINGs/wfontpanel.c:765
++#: ../../WINGs/wfontpanel.c:721
+ #, c-format
+ msgid "font name %s is longer than 256, which is invalid."
+ msgstr "meno fontu %s je dlh¹ie ako 256, èo je nesprávne."
+ 
+-#: ../../WINGs/wfontpanel.c:913
++#: ../../WINGs/wfontpanel.c:868
+ msgid "Roman"
+ msgstr "roman"
+ 
+-#: ../../WINGs/wfontpanel.c:916
++#: ../../WINGs/wfontpanel.c:871
+ msgid "Italic"
+ msgstr "kurzíva"
+ 
+-#: ../../WINGs/wfontpanel.c:918
++#: ../../WINGs/wfontpanel.c:873
+ msgid "Oblique"
+ msgstr "¹ikmé"
+ 
+-#: ../../WINGs/wfontpanel.c:920
++#: ../../WINGs/wfontpanel.c:875
+ msgid "Rev Italic"
+ msgstr "obr. kurzíva"
+ 
+-#: ../../WINGs/wfontpanel.c:922
++#: ../../WINGs/wfontpanel.c:877
+ msgid "Rev Oblique"
+ msgstr "obr. ¹ikmé"
+ 
+-#: ../../WINGs/wfontpanel.c:928
++#: ../../WINGs/wfontpanel.c:883
+ msgid "Normal"
+ msgstr "normálne"
+ 
+-#: ../../WINGs/widgets.c:419
++#: ../../WINGs/widgets.c:415
+ #, c-format
+ msgid "WINGs: could not load widget images file: %s"
+ msgstr "WINGs: nemo¾no naèíta» súbor s obrázkami pre widgety: %s"
+ 
+-#: ../../WINGs/widgets.c:772
++#: ../../WINGs/widgets.c:761
+ msgid ""
+-"could not load any fonts. Make sure your font installation and locale "
++"could not load any fonts. Make sure your font installationand locale "
+ "settings are correct."
+ msgstr ""
+ "nemo¾no naèíta» ¾iadny font. Ubezpeète sa, ¾e in¹talácia fontov a miestne "
+ "nastavenia sú v poriadku."
+ 
+-#: ../../WINGs/wruler.c:192
++#: ../../WINGs/wruler.c:189
+ msgid "0   inches"
+ msgstr "0    palcov"
+Index: WINGs/python/README
+===================================================================
+RCS file: /cvsroot/wm/WINGs/python/README,v
+retrieving revision 1.2
+retrieving revision 1.1
+diff -u -r1.2 -r1.1
+--- WINGs/python/README	2004/01/15 20:36:48	1.2
++++ WINGs/python/README	2002/12/01 06:01:08	1.1
+@@ -1,6 +1,6 @@
+ 
+-This is a python wrapper for the WINGs library, that can be used to write python
+-based programs with WINGs-based graphic interfaces.
++This is a python wrapper for the WINGs library. With it you can write python
++based programs which will have WINGs based graphic interfaces.
+ 
+ This module in not built by default. To build it you need python2.1 or later
+ and swig-1.3.14 or later.
+@@ -8,13 +8,14 @@
+ To build it, first compile and install WINGs. after that run 'make' in this
+ directory. 'make install' will install the python module into the python tree.
+ 
+-run test.py or WINGs.py for an example.
++run test.py or even WINGs.py for an example.
+ 
+-the code is not finished yet and may fail to work as expected in some cases.
++the code is not yet finished and probably won't do everything you expect it
++to do.
+ 
+ Note: currently the module expects WINGs installed to build. it won't take
+ the WINGs libraries and header files from the source tree. You need to
+ install WINGs first. Even if an old version of WINGs is already installed,
+-you still need to install the newly built WINGs, else the python module will
+-be built against the old version.
++you still need to nstall the newly built WINGs, else the python module will
++be built against the old version
+ 
+Index: WINGs/python/WINGs.py
+===================================================================
+RCS file: /cvsroot/wm/WINGs/python/WINGs.py,v
+retrieving revision 1.4
+retrieving revision 1.3
+diff -u -r1.4 -r1.3
+--- WINGs/python/WINGs.py	2004/01/15 20:36:48	1.4
++++ WINGs/python/WINGs.py	2003/02/20 23:02:28	1.3
+@@ -55,16 +55,6 @@
+             raise Error, "'%s' is a read-only WMScreen attribute" % name
+         self.__dict__[name] = value
+ 
+-    def __delattr__(self, name):
+-        if name in self.__readonly:
+-            #raise AttributeError, "'%s' attribute cannot be deleted from WMScreen instance" % name
+-            raise Error, "'%s' attribute cannot be deleted from WMScreen instance" % name
+-        try:
+-            del(self.__dict__[name])
+-        except KeyError:
+-            raise AttributeError, "%s instance has no attribute '%s'" % \
+-                                  (self.__class__.__name__, name)
+-
+     def mainLoop(self):
+         wings.pyWMScreenMainLoop(self._o)
+ 
+Index: WINGs/python/setup.py
+===================================================================
+RCS file: /cvsroot/wm/WINGs/python/setup.py,v
+retrieving revision 1.3
+retrieving revision 1.2
+diff -u -r1.3 -r1.2
+--- WINGs/python/setup.py	2004/01/15 20:36:48	1.3
++++ WINGs/python/setup.py	2002/12/20 17:47:32	1.2
+@@ -8,21 +8,24 @@
+ 
+ ## Get the include dirs
+ wings = os.popen("get-wings-flags --cflags", "r")
+-flags = wings.read().split()
++lines = [x.strip() for x in wings.readlines()]
++flags = reduce(lambda x,y: x+y, [x.split() for x in lines if x])
+ include_dirs = [x[2:] for x in flags]
+ #include_dirs += [".."]
+ wings.close()
+ 
+ ## Get the library dirs
+ wings = os.popen("get-wings-flags --ldflags", "r")
+-flags = wings.read().split()
++lines = [x.strip() for x in wings.readlines()]
++flags = reduce(lambda x,y: x+y, [x.split() for x in lines if x])
+ library_dirs = [x[2:] for x in flags]
+ #library_dirs += [".."]
+ wings.close()
+ 
+ ## Get the libraries
+ wings = os.popen("get-wings-flags --libs", "r")
+-flags = wings.read().split()
++lines = [x.strip() for x in wings.readlines()]
++flags = reduce(lambda x,y: x+y, [x.split() for x in lines if x])
+ libraries = [x[2:] for x in flags]
+ wings.close()
+ 
