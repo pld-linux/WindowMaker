@@ -196,6 +196,8 @@ rm -r $RPM_BUILD_ROOT
 - upgraded WindowMaker-pl.po.patch (sync with i18n CVS)
 - added WindowMaker-pixmaps.patch (add /usr/X11/share/pixmaps to default 
   icons/pixmaps path)
+- added --sysconfdir=/etc/X11 to ./configure
+- added /etc/X11/WindowMaker to %%files section
 
 * Wed Mar  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.51.0-2]
