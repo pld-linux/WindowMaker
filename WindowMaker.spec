@@ -244,8 +244,9 @@ mv -f WPrefs.app/po/{zh_TW.Big5,zh_TW}.po
 %build
 %{__libtoolize}
 %{__aclocal}
-%{__autoconf}
+%{__autoheader}
 %{__automake}
+%{__autoconf}
 cd %{name}-extra-%{extraver}
 	%{__libtoolize}
 	%{__aclocal}
