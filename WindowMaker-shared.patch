@@ -1,11 +1,11 @@
 --- WindowMaker-0.80.0/WINGs/Examples/Makefile.am.orig	Thu Oct 11 11:59:54 2001
 +++ WindowMaker-0.80.0/WINGs/Examples/Makefile.am	Thu Jan  3 06:09:41 2002
-@@ -2,30 +2,18 @@
+@@ -2,31 +2,18 @@
  
  AUTOMAKE_OPTIONS = no-dependencies
  
 -
- noinst_PROGRAMS = connect server fontl puzzle
+ noinst_PROGRAMS = connect server fontl puzzle colorpick
  
 +LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
 +	$(XFTLIBS) $(INTLIBS)
@@ -13,6 +13,7 @@
 -LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
 -	@XFTLIBS@ @INTLIBS@
 -
+-colorpick_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.a
 -
 -fontl_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.a
 -
@@ -40,7 +41,7 @@
  
 --- WindowMaker-0.80.0/WINGs/Extras/Makefile.am.orig	Thu Oct 11 11:59:54 2001
 +++ WindowMaker-0.80.0/WINGs/Extras/Makefile.am	Thu Jan  3 06:12:10 2002
-@@ -2,32 +2,26 @@
+@@ -2,33 +2,28 @@
  
  AUTOMAKE_OPTIONS = no-dependencies
  
@@ -67,7 +68,8 @@
  	wtableview.h \
  	wtabledelegates.h 
  
--
+ AM_CFLAGS = @NOSTRICTALIASING@
+
  INCLUDES = -I$(top_srcdir)/wrlib -I$(top_srcdir)/WINGs \
 -	-DRESOURCE_PATH=\"$(datadir)/WINGs\" @HEADER_SEARCH_PATH@ -DDEBUG
 +	-DRESOURCE_PATH=\"$(datadir)/WINGs\" $(HEADER_SEARCH_PATH)
@@ -192,11 +194,11 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
  
 -pkgdatadir  = $(datadir)/@PACKAGE@
 -
- bin_PROGRAMS = wxcopy wxpaste wdwrite wdread getstyle setstyle seticons geticonset wmsetbg wmsetup wmagnify
+ bin_PROGRAMS = wxcopy wxpaste wdwrite wdread getstyle setstyle convertfonts \
+ 	seticons geticonset wmsetbg wmsetup wmagnify
  
- bin_SCRIPTS = wmaker.inst wm-oldmenu2new wsetfont wmchlocale wkdemenu.pl\
-@@ -12,41 +10,41 @@
- 		wkdemenu.pl wmchlocale.in wcopy wpaste
+@@ -12,49 +10,49 @@
+ EXTRA_DIST = wmaker.inst.in bughint wm-oldmenu2new directjpeg.c wkdemenu.pl
  
  INCLUDES = $(DFLAGS) -I$(top_srcdir)/WINGs -I$(top_srcdir)/wrlib \
 -	@HEADER_SEARCH_PATH@ \
@@ -222,11 +224,20 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
 -getstyle_LDADD = $(top_builddir)/WINGs/libWUtil.a $(liblist)
 +getstyle_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
  
+ getstyle_SOURCES = getstyle.c fontconv.c
+ 
  setstyle_LDADD = \
 -	$(top_builddir)/WINGs/libWUtil.a \
 -	@XLFLAGS@ @XLIBS@ $(liblist)
 +	$(top_builddir)/WINGs/libWUtil.la \
 +	$(XLFLAGS) $(XLIBS) $(liblist)
+ 
+ setstyle_SOURCES = setstyle.c fontconv.c
+ 
+-convertfonts_LDADD = $(top_builddir)/WINGs/libWUtil.a $(liblist)
++convertfonts_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
+ 
+ convertfonts_SOURCES = convertfonts.c fontconv.c
  
 -seticons_LDADD= $(top_builddir)/WINGs/libWUtil.a $(liblist)
 +seticons_LDADD= $(top_builddir)/WINGs/libWUtil.la $(liblist)

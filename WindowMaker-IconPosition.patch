@@ -6,7 +6,7 @@ diff -rU 2 WindowMaker-0.62.1/WindowMaker/Defaults/WindowMaker.in WindowMaker-0.
    DisableDock = NO;
 -  DisableClip = NO;
 +  DisableClip = YES;
-   Superfluous = NO;
+   Superfluous = YES;
    StickyIcons = NO;
 @@ -52,5 +52,5 @@
    DisableAnimations = NO;
