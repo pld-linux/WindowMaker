@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.64.0
-Release:	3
+Release:	4
 Group:		X11/Window Managers
 Group(es):	X11/Administraadores De Ventanas
 Group(fr):	X11/Gestionnaires De Fenêtres
@@ -170,6 +170,7 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 %configure \
 	--with-nlsdir=%{_datadir}/locale \
+	--with-appspath=%{_libdir}/GNUstep/Apps \
 	--enable-sound \
 	--enable-gnome \
 	--disable-debug \
@@ -262,16 +263,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/WindowMaker
 
-%dir %{_prefix}/GNUstep
-%dir %{_prefix}/GNUstep/Apps
-%dir %{_prefix}/GNUstep/Apps/WPrefs.app
+%dir %{_libdir}/GNUstep
+%dir %{_libdir}/GNUstep/Apps
+%dir %{_libdir}/GNUstep/Apps/WPrefs.app
 
-%attr(755,root,root) %{_prefix}/GNUstep/Apps/WPrefs.app/WPrefs
+%attr(755,root,root) %{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs
 
-%{_prefix}/GNUstep/Apps/WPrefs.app/tiff
-%{_prefix}/GNUstep/Apps/WPrefs.app/xpm
-%{_prefix}/GNUstep/Apps/WPrefs.app/WPrefs.tiff
-%{_prefix}/GNUstep/Apps/WPrefs.app/WPrefs.xpm
+%{_libdir}/GNUstep/Apps/WPrefs.app/tiff
+%{_libdir}/GNUstep/Apps/WPrefs.app/xpm
+%{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs.tiff
+%{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs.xpm
 
 %files libs
 %defattr(644,root,root,755)
