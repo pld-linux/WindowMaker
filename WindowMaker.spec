@@ -8,9 +8,9 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
-Version:	0.80.0
-Release:	10
-License:	GPL2
+Version:	0.80.1
+Release:	1
+License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
@@ -27,6 +27,7 @@ Patch5:		%{name}-IconPosition.patch
 Patch6:		%{name}-singleclick.patch
 Patch7:		%{name}-plmenu.patch
 Patch8:		%{name}-dockit.patch
+Patch9:		%{name}-po.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -207,7 +208,7 @@ utilizando componentes estáticos (raramente necessário).
 %prep
 %setup -q -a 1 -a 2
 %patch0 -p1
-%patch1 -p0
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -215,6 +216,7 @@ utilizando componentes estáticos (raramente necessário).
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 for f in WindowMaker/*menu*; do
 	sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
@@ -233,14 +235,10 @@ aclocal
 %{__automake}
 cd ..
 
-LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
-	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
+LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru \
+	 sk sv tr zh_CN zh_TW.Big5" ; export LINGUAS
 CPP_PATH="/lib/cpp" ; export CPP_PATH
-
-if [ -f %{_pkgconfigdir}/libpng12.pc ] ; then
-	CPPFLAGS="`pkg-config libpng12 --cflags`"
-fi
-%configure CPPFLAGS="$CPPFLAGS" \
+%configure \
 	--with-nlsdir=%{_datadir}/locale \
 	--with-appspath=%{_libdir}/GNUstep/Apps \
 	--enable-sound \
@@ -254,8 +252,8 @@ fi
 touch WindowMaker/Defaults/W*.in
 
 %{__make} \
-	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
-	 	se sk tr zh_CN zh_TW.Big5" \
+	LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru \
+	 	sk sv tr zh_CN zh_TW.Big5" \
 	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
@@ -290,8 +288,6 @@ cd %{name}-extra-%{extraver}
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 cd ..
 
-gzip -9nf AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
-
 %find_lang %{name} --all-name
 
 %post   libs -p /sbin/ldconfig
@@ -302,7 +298,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %dir %{_sysconfdir}/WindowMaker
 %config %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
@@ -311,6 +307,7 @@ rm -rf $RPM_BUILD_ROOT
 /etc/sysconfig/wmstyle/*.names
 
 %{_mandir}/man1/*
+%lang(sk) %{_mandir}/sk/man1/*
 
 %{_pixmapsdir}/*
 %{_wmpropsdir}/WindowMaker.desktop
@@ -320,6 +317,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/getstyle
 %attr(755,root,root) %{_bindir}/seticons
 %attr(755,root,root) %{_bindir}/setstyle
+%attr(755,root,root) %{_bindir}/wcopy
 %attr(755,root,root) %{_bindir}/wdwrite
 %attr(755,root,root) %{_bindir}/wdread
 %attr(755,root,root) %{_bindir}/wkdemenu.pl
@@ -328,7 +326,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wmaker
 %attr(755,root,root) %{_bindir}/wmaker.inst
 %attr(755,root,root) %{_bindir}/wmsetbg
+%attr(755,root,root) %{_bindir}/wmsetup
 %attr(755,root,root) %{_bindir}/wmchlocale
+%attr(755,root,root) %{_bindir}/wpaste
 %attr(755,root,root) %{_bindir}/wsetfont
 %attr(755,root,root) %{_bindir}/wxcopy
 %attr(755,root,root) %{_bindir}/wxpaste

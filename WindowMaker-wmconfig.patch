@@ -1,6 +1,7 @@
---- WindowMaker/menu~	Sun May 30 23:25:19 1999
-+++ WindowMaker/menu	Fri Jun 25 16:16:10 1999
-@@ -113,48 +113,10 @@
+diff -Nur WindowMaker-0.80.1.orig/WindowMaker/menu WindowMaker-0.80.1/WindowMaker/menu
+--- WindowMaker-0.80.1.orig/WindowMaker/menu	Tue Jul  2 02:30:25 2002
++++ WindowMaker-0.80.1/WindowMaker/menu	Mon Jul 15 19:51:47 2002
+@@ -116,49 +116,10 @@
  		"Process List" EXEC xterm -e top
  		"Manual Browser" EXEC xman
  	"Info" END
@@ -25,7 +26,8 @@
 -	"Applications" END
 -	"Editors" MENU
 -		"XFte" EXEC xfte
--		"XEmacs" SHEXEC xemacs || emacs
+-		"XEmacs" EXEC xemacs
+-		"Emacs" EXEC emacs
 -		"XJed" EXEC xjed 
 -		"NEdit" EXEC nedit
 -		"Xedit" EXEC xedit
@@ -50,9 +52,10 @@
  
  	"Selection" MENU
  		"Copy" SHEXEC echo '%s' | wxcopy
---- WindowMaker/plmenu~	Sun May 30 23:25:19 1999
-+++ WindowMaker/plmenu	Fri Jun 25 16:14:06 1999
-@@ -11,45 +11,7 @@
+diff -Nur WindowMaker-0.80.1.orig/WindowMaker/plmenu WindowMaker-0.80.1/WindowMaker/plmenu
+--- WindowMaker-0.80.1.orig/WindowMaker/plmenu	Tue Jul  2 02:30:25 2002
++++ WindowMaker-0.80.1/WindowMaker/plmenu	Mon Jul 15 19:52:58 2002
+@@ -11,46 +11,7 @@
   ("XTerm", EXEC, "xterm -sb"),
   ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
   ("Workspaces", WORKSPACE_MENU),
@@ -73,7 +76,8 @@
 -  ),
 - ("Editors",
 -  ("XFte", EXEC, "xfte"),
--  ("XEmacs", SHEXEC, "xemacs || emacs"),
+-  ("XEmacs", EXEC, "xemacs"),
+-  ("Emacs", EXEC, "emacs"),
 -  ("XJed", EXEC, "xjed"),
 -  ("NEdit", EXEC, "nedit"),
 -  ("Xedit", EXEC, "xedit"),
