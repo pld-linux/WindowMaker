@@ -10,7 +10,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.81.0
-Release:	0.%{_snap}.4
+Release:	0.%{_snap}.5
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
@@ -241,6 +241,12 @@ done
 mv -f po/{no,nb}.po
 mv -f po/{zh_TW.Big5,zh_TW}.po
 mv -f WPrefs.app/po/{zh_TW.Big5,zh_TW}.po
+
+# don't use x86 asm, it's broken
+# (wrlib/x86_specific.c contains far too many assumptions about function
+#  frame used by gcc, so it can crash depending on gcc version and
+#  optimizations - and did so in Ac i686 packages)
+%{__perl} -pi -e 's/test \$x86 = 1/false/' configure.ac
 
 %build
 %{__libtoolize}
