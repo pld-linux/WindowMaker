@@ -238,7 +238,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/*
 
-%{_datadir}/pixmaps/*
+%{_pixmapsdir}/*
 %{_datadir}/gnome/wm-properties/WindowMaker.desktop
 
 %attr(755,root,root) %{_bindir}/geticonset
