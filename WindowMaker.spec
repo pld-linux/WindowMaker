@@ -170,7 +170,7 @@ WindowMaker.
 
 %description devel -l pt_BR
 Arquivos de inclusЦo e bibliotecas para o desenvolvimento de programas
-╨baseados no WindowMaker
+baseados no WindowMaker
 
 %description devel -l ru
 Этот пакет содержит библиотеки и .h файлы, предназначенные для сборки
