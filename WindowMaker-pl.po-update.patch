@@ -3510,7 +3510,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +
 +#: ../src/dialog.c:1752
 +msgid " This fatal error occured probably due to a bug. Please fill the included BUGFORM and report it to bugs@windowmaker.org."
-+msgstr " Ten krytyczy b³±d prawdopodobnie jest skutkiem b³êdu w kodzie. Prosimy o wype³nienie formularza BUGFORM i wys³anie go na adres bugs@windowmaker.org."
++msgstr " Ten krytyczny b³±d prawdopodobnie jest skutkiem b³êdu w kodzie. Prosimy o wype³nienie formularza BUGFORM i wys³anie go na adres bugs@windowmaker.org."
 +
 +#: ../src/dialog.c:1761
 +msgid "What do you want to do now?"
