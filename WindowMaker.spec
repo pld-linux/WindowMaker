@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
 Version:	0.80.2
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -31,6 +31,7 @@ Patch9:		%{name}-po.patch
 Patch10:	%{name}-rxvt.patch
 Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
+Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -221,6 +222,7 @@ utilizando componentes estáticos (raramente necessário).
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch13 -p1
 
 for f in WindowMaker/*menu*; do
 	sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
