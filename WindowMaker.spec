@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
 Version:	0.80.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -28,6 +28,7 @@ Patch6:		%{name}-singleclick.patch
 Patch7:		%{name}-plmenu.patch
 Patch8:		%{name}-dockit.patch
 Patch9:		%{name}-po.patch
+Patch10:	%{name}-rxvt.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -217,6 +218,7 @@ utilizando componentes estáticos (raramente necessário).
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 for f in WindowMaker/*menu*; do
 	sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
