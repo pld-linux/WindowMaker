@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.61.1
-Release:	1
+Release:	2
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -160,8 +160,6 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 	--enable-sound \
 	--enable-gnome \
 	--disable-debug \
-	--enable-superfluous \
-        --enable-newstyle \
 	--enable-kde \
 	--enable-shared \
 	--enable-static \
@@ -194,7 +192,9 @@ make install \
 	DESTDIR=$RPM_BUILD_ROOT 
 
 install util/bughint $RPM_BUILD_ROOT%{_bindir}
-install contrib/dockit $RPM_BUILD_ROOT%{_bindir}
+
+install contrib/dockit   $RPM_BUILD_ROOT%{_bindir}
+install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
