@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.90.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
@@ -228,8 +228,6 @@ for f in WindowMaker/*menu*; do
 done
 
 mv -f po/{no,nb}.po
-mv -f po/{zh_TW.Big5,zh_TW}.po
-mv -f WPrefs.app/po/{zh_TW.Big5,zh_TW}.po
 
 # don't use x86 asm, it's broken
 # (wrlib/x86_specific.c contains far too many assumptions about function
@@ -325,12 +323,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/*
 %{_wmpropsdir}/WindowMaker.desktop
 
+%attr(755,root,root) %{_bindir}/convertfonts
 %attr(755,root,root) %{_bindir}/bughint
 %attr(755,root,root) %{_bindir}/geticonset
 %attr(755,root,root) %{_bindir}/getstyle
 %attr(755,root,root) %{_bindir}/seticons
 %attr(755,root,root) %{_bindir}/setstyle
-%attr(755,root,root) %{_bindir}/wcopy
 %attr(755,root,root) %{_bindir}/wdwrite
 %attr(755,root,root) %{_bindir}/wdread
 %attr(755,root,root) %{_bindir}/wkdemenu.pl
@@ -340,9 +338,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wmaker.inst
 %attr(755,root,root) %{_bindir}/wmsetbg
 %attr(755,root,root) %{_bindir}/wmsetup
-%attr(755,root,root) %{_bindir}/wmchlocale
-%attr(755,root,root) %{_bindir}/wpaste
-%attr(755,root,root) %{_bindir}/wsetfont
 %attr(755,root,root) %{_bindir}/wxcopy
 %attr(755,root,root) %{_bindir}/wxpaste
 %attr(755,root,root) %{_bindir}/dockit
