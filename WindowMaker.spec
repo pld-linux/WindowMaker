@@ -5,26 +5,27 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.61.1
-Release: 4
+Release:	4
 Group:		X11/Window Managers
+Group(es):	X11/Administraadores De Ventanas
 Group(pl):	X11/Zarz±dcy Okien
 License:	GPL
 Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 Source2:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-extra-%{extraver}.tar.gz
-Source3:	WindowMaker.desktop
-Patch0:		WindowMaker-CFLAGS.patch
-Patch1:		WindowMaker-wmconfig.patch
-Patch2:		WindowMaker-a_macro.patch
-Patch3:		WindowMaker-pixmaps.patch
-Patch4:		WindowMaker-shared.patch
-Patch5:		WindowMaker-areas.patch
-Patch6:		WindowMaker-runinst.patch
+Source3:	%{name}.desktop
+Patch0:		%{name}-CFLAGS.patch
+Patch1:		%{name}-wmconfig.patch
+Patch2:		%{name}-a_macro.patch
+Patch3:		%{name}-pixmaps.patch
+Patch4:		%{name}-shared.patch
+Patch5:		%{name}-areas.patch
+Patch6:		%{name}-runinst.patch
 Patch7:		Windowmaker-WINGs.h.patch
-Patch8:		WindowMaker-singleclick.patch
-Patch9:		WindowMaker-cvs19991010.patch
-Patch10:	WindowMaker-plmenu.patch
-Patch11:	WindowMaker-dockit.patch
+Patch8:		%{name}-singleclick.patch
+Patch9:		%{name}-cvs19991010.patch
+Patch10:	%{name}-plmenu.patch
+Patch11:	%{name}-dockit.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	libPropList-devel >= 0.9.1
 BuildRequires:	xpm-devel
@@ -221,7 +222,7 @@ cat WPrefs.lang >> %{name}.lang
 %postun libs -p /sbin/ldconfig
 
 %clean
-rm -r $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
