@@ -50,7 +50,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu WindowMaker-CVS-20040
 -  ("ASClock", EXEC, "asclock -shape"),
 -  ("Clipboard", EXEC, "xclipboard")
 -  ),
-+ ("Applications", OPEN_MENU, "| vfmg -c wmaker-old "),
++ ("Applications", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
   ("Selection",
    ("Copy", SHEXEC, "echo '%s' | wxcopy"),
    ("Mail To", EXEC, "xterm -name mail -T Pine -e pine %s"),
@@ -114,7 +114,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20
 -  ("ASClock", EXEC, "asclock -shape"),
 -  ("Zwischenablage", EXEC, "xclipboard")
 -  ),
-+ ("Anwendungen", OPEN_MENU, "| vfmg -c wmaker-old "),
++ ("Anwendungen", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
   ("Auswahl",
    ("Kopieren", SHEXEC, "echo '%s' | wxcopy"),
    ("Mail an", EXEC, "xterm -name mail -T Pine -e pine %s"),
@@ -197,7 +197,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es WindowMaker-CVS-20
 -  ("ASClock", EXEC, "asclock -shape"),
 -  ("Portapapeles", EXEC, "xclipboard")
 -  ),
-+ ("Aplicaciones", OPEN_MENU, "| vfmg -c wmaker-old "),
++ ("Aplicaciones", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
   ("Seleccion",
    ("Copiar", SHEXEC, "echo '%s' | wxcopy"),
    ("Enviar por correo", EXEC, "xterm -name mail -T Pine -e pine %s"),
@@ -279,7 +279,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr WindowMaker-CVS-20
 -   ("ASClock", EXEC, "asclock -shape"),
 -   ("Sélections", EXEC, "xclipboard")
 -  ),
-+ ("Applications", OPEN_MENU, "| vfmg -c wmaker-old "),
++ ("Applications", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
   ("Sélection",
     ("Copier", SHEXEC, "echo '%s' | wxcopy"),
     ("Envoyer à", EXEC, "xterm -name mail -T Pine -e pine %s"),
@@ -360,7 +360,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20
 -  ("ASClock", EXEC, "asclock -shape"),
 -  ("Clipboard", EXEC, "xclipboard")
 -  ),
-+ ("Programmi", OPEN_MENU, "| vfmg -c wmaker-old "),
++ ("Programmi", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
   ("Selezione",
    ("Copia", EXEC, "echo '%s' | wxcopy"),
    ("Spedisci a...", EXEC, "xterm -name mail -T Pine -e pine %s"),
@@ -534,7 +534,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 -		("Wyczy¶æ zachowan± sesje", CLEAR_SESSION)
 -	),
 -
-+	("Aplikacje", OPEN_MENU, "| vfmg -c wmaker-old "),
++	("Aplikacje", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
 +	("Zaznaczenie",
 +		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
 +  		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
