@@ -36,6 +36,8 @@ Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
 Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 URL:		http://www.windowmaker.org/
+BuildRequires:	Hermes-devel
+BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -44,12 +46,10 @@ BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
-BuildRequires:	Hermes-devel
-BuildRequires:	XFree86-devel
-Requires:	wmconfig >= 0.9.9-5
-Requires:	cpp
 Requires:	%{name}-libs = %{version}
+Requires:	cpp
 Requires:	tk
+Requires:	wmconfig >= 0.9.9-5
 Requires:	xinitrc >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -239,10 +239,10 @@ rm -f {,%{name}-extra-%{extraver}/}missing
 %{__autoconf}
 %{__automake}
 cd %{name}-extra-%{extraver}
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
+	%{__libtoolize}
+	%{__aclocal}
+	%{__autoconf}
+	%{__automake}
 cd ..
 
 perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
@@ -299,7 +299,8 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.sh
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.names
 
 cd %{name}-extra-%{extraver}
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 cd ..
 
 %find_lang %{name} --all-name
