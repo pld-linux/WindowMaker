@@ -1,5 +1,5 @@
---- WindowMaker-0.61.1/WindowMaker/menu.pl	Mon Oct 11 01:26:36 1999
-+++ WindowMaker-0.61.1.new/WindowMaker/menu.pl	Mon Oct 11 01:25:53 1999
+--- WindowMaker-0.61.1/WindowMaker/menu.pl	Thu Feb 10 22:30:02 2000
++++ WindowMaker-0.61.1.pius/WindowMaker/menu.pl	Thu Feb 10 22:29:17 2000
 @@ -1,13 +1,13 @@
  /*
 - * Definiowanie Menu G³ównego dla WindowMakera
@@ -61,7 +61,7 @@
   *  "X11 apps" OPEN_MENU /usr/X11/bin $HOME/bin/X11
   *      // ustawienie t³a
   *  "Background" OPEN_MENU -noext $HOME/images /usr/share/images WITH wmsetbg -u *      // wstawienie menu z pliku style.menu
-@@ -95,19 +94,15 @@
+@@ -95,142 +94,38 @@
                    
  
  #include "wmmacros"
@@ -81,16 +81,16 @@
 +		"Informacja o WindowMakerze..."      INFO_PANEL
 +		"Informacja o licencji..." LEGAL_PANEL
 +		"Konsola systemu"        EXEC xconsole
-+		"Obci±¿enie systemu"     EXEC xosview || xload
-+		"Lista procesów"         EXEC ULUB_TERM -T "Lista procesów" -e top
++		"Obci±¿enie systemu"     SHEXEC xosview || xload
++		"Lista procesów"         EXEC xterm -T "Lista procesów" -e top
 +		"Przegl±darka manuali"   EXEC xman
  	"Informacja" END
  	
- 	"Konfiguracja" MENU	
-@@ -115,122 +110,28 @@
- 		"Ustawienie fontów" EXEC ULUB_TERM -T "Ustawienie fontów" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WMGLOBAL
- 		"Konfiguracja"      EXEC ULUB_TERM -T "Konfiguracja" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WindowMaker
- 	"Konfiguracja" END
+-	"Konfiguracja" MENU	
+-		"Edycja menu"       EXEC ULUB_TERM -T "Edycja menu" -e ULUB_EDYTOR $HOME/GNUstep/Library/WindowMaker/menu
+-		"Ustawienie fontów" EXEC ULUB_TERM -T "Ustawienie fontów" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WMGLOBAL
+-		"Konfiguracja"      EXEC ULUB_TERM -T "Konfiguracja" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WindowMaker
+-	"Konfiguracja" END
 -	
 -	"Uruchom..." EXEC %a(Uruchom,Wpisz komende do uruchomienia:)
 -	"Terminal"   EXEC ULUB_TERM -T "Mój ulubiony terminal" -sb 
@@ -144,7 +144,7 @@
 -		"Ping"       EXEC ULUB_TERM -e ping %a(Ping,Podaj nazwe hosta:)
 -		"Talk"       EXEC ULUB_TERM -e talk %a(Talk,Podaj nazwe uzytkownika, z ktorym chcesz nawiazac polaczenie:)
 -	"Internet" END
- 
+-
 -	"Editory" MENU
 -		"XFte"    EXEC xfte
 -		"XEmacs"  EXEC xemacs || emacs
@@ -178,10 +178,7 @@
 -    	"xboing"    EXEC xboing -sound
 -    	"XBill"     EXEC xbill
 -    "Gry" END
-+        "XTerm" EXEC xterm -sb
-+        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
-+	"Pulpity"    WORKSPACE_MENU
- 	
+-	
 -	"U¿ytki" MENU
 -		"Kalkulator"          EXEC xcalc
 -		"Zegarek"             EXEC xclock
@@ -192,18 +189,26 @@
 -		"XKill"               EXEC xkill
 -		"Clipboard"           EXEC xclipboard
 -	"U¿ytki" END
-+	"Aplikacje" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
- 
- 	"Selekcyjne" MENU
- 		"Kopia"                  EXEC echo '%s' | wxcopy
+-
+-	"Selekcyjne" MENU
+-		"Kopia"                  EXEC echo '%s' | wxcopy
 -		"Poczta do ..."          EXEC ULUB_TERM -name mail -T "Pine" -e pine %s
++        "XTerm" EXEC xterm -sb
++        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
++	"Pulpity" WORKSPACE_MENU
++	
++	"Aplikacje" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
++
++	"Zaznaczenie" MENU
++		"Kopiuj"                  SHEXEC echo '%s' | wxcopy
 +		"Poczta do ..."          EXEC xterm -name mail -T "Pine" -e pine %s
  		"Serfuj do ..."          EXEC netscape %s
 -		"Pobierz Manual ..."     EXEC MANUAL_SEARCH(%s)
 -		"Po³±cz siê z ..."       EXEC telnet %s
 -		"Pobierz plik z FTP ..." EXEC ftp %s
-+		"Szukaj w manualach ..."     EXEC MANUAL_SEARCH(%s)
- 	"Selekcyjne" END
+-	"Selekcyjne" END
++		"Szukaj w manualach ..."     SHEXEC MANUAL_SEARCH(%s)
++	"Zaznaczenie" END
  
  	"Ekran" MENU
 -		"Ukryj Pozosta³e"         HIDE_OTHERS
@@ -211,7 +216,7 @@
  		"Poka¿ wszystko"          SHOW_ALL
 -		"Uporz±dkowanie icon"     ARRANGE_ICONS
 -		"Odswie¿"                 REFRESH
-+		"Uporz±dkowanie ikon"     ARRANGE_ICONS
++		"Uporz±dkuj ikony"        ARRANGE_ICONS
 +		"Od¶wie¿"                 REFRESH
  		"Zablokuj"                EXEC xlock -allowroot -usefirst
 -		"Zachowaj Sesje"          SAVE_SESSION
@@ -221,7 +226,7 @@
  	"Ekran" END
  
  	"Wygl±d" MENU
-@@ -241,34 +142,34 @@
+@@ -241,34 +136,34 @@
  			"Jednolite" MENU
                 	"Czarny"            WS_BACK '(solid, black)'
                 	"Niebieski"         WS_BACK '(solid, "#505075")'
@@ -270,9 +275,9 @@
  		"Wyj¶cie..."       EXIT
  		"Zabicie sesji..." SHUTDOWN
  	"Wyj¶cie" END
---- WindowMaker-0.61.1/WindowMaker/plmenu.pl	Mon Oct 11 01:26:36 1999
-+++ WindowMaker-0.61.1.new/WindowMaker/plmenu.pl	Mon Oct 11 01:25:15 1999
-@@ -1,11 +1,11 @@
+--- WindowMaker-0.61.1/WindowMaker/plmenu.pl	Thu Feb 10 22:30:02 2000
++++ WindowMaker-0.61.1.pius/WindowMaker/plmenu.pl	Thu Feb 10 22:46:42 2000
+@@ -1,133 +1,32 @@
  ("WindowMaker",
  	("Informacja",
 -		("Informacja o WMaker...", INFO_PANEL),
@@ -284,16 +289,17 @@
 +		("Informacja o WindowMakerze...", INFO_PANEL),
 +		("Informacja o licencji...",           LEGAL_PANEL),
 +		("Konsola systemu",        EXEC, "xconsole"),
-+		("Obci±¿enie systemu",     EXEC, "xosview || xload"),
++		("Obci±¿enie systemu",     SHEXEC, "xosview || xload"),
 +		("Lista procesów",         EXEC, "xterm -T 'Lista procesów' -e top"),
 +		("Przegl±darka manuali",   EXEC, "xman")
  	),
  	
- 	("Konfiguracja",	
-@@ -14,120 +14,25 @@
- 		("Konfiguracja",      EXEC, "xterm -T 'Konfiguracja' -e vi $HOME/GNUstep/Defaults/WindowMaker")
- 	),
- 	
+-	("Konfiguracja",	
+-		("Edycja menu",       EXEC, "xterm -T 'Edycja menu' -e vi $HOME/GNUstep/Library/WindowMaker/menu"),
+-		("Ustawienie fontów", EXEC, "xterm -T 'Ustawienie fontów' -e vi $HOME/GNUstep/Defaults/WMGLOBAL"),
+-		("Konfiguracja",      EXEC, "xterm -T 'Konfiguracja' -e vi $HOME/GNUstep/Defaults/WindowMaker")
+-	),
+-	
 -	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
 -	("Terminal",   EXEC, "xterm -T 'Mój ulubiony terminal' -sb"),
 -	("Edytor",     EXEC, "xterm -T 'Moj ulubiony edytor' -e vi %a(Edytor,Podaj plik do edycji:)"),
@@ -393,15 +399,17 @@
 -		("Clipboard",           EXEC, "xclipboard")
 -	),
 -
-+	("Applications", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
- 	("Selekcyjne",
- 		("Kopia",                  EXEC, "echo '%s' | wxcopy"),
+-	("Selekcyjne",
+-		("Kopia",                  EXEC, "echo '%s' | wxcopy"),
++	("Aplikacje", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
++	("Zaznaczenie",
++		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
  		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
  		("Serfuj do ...",          EXEC, "netscape %s"),
 -		("Pobierz Manual ...",     EXEC, "MANUAL_SEARCH(%s)"),
 -		("Po³±cz siê z ...",       EXEC, "telnet %s"),
 -		("Pobierz plik z FTP ...", EXEC, "ftp %s")
-+		("Szukaj w manualach ...",     EXEC, "MANUAL_SEARCH(%s)"),
++		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)"),
  	),
  
  	("Ekran",
@@ -409,8 +417,9 @@
 +		("Ukryj pozosta³e",         HIDE_OTHERS),
  		("Poka¿ wszystko",          SHOW_ALL),
 -		("Uporz±dkowanie icon",     ARRANGE_ICONS),
-+		("Uporz±dkowanie ikon",     ARRANGE_ICONS),
- 		("Odswie¿",                 REFRESH),
+-		("Odswie¿",                 REFRESH),
++		("Uporz±dkuj ikony",     ARRANGE_ICONS),
++		("Od¶wie¿",                 REFRESH),
  		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
 -		("Zachowaj Sesje",          SAVE_SESSION),
 -		("Wyczy¶æ zachowan± sesje", CLEAR_SESSION)
@@ -419,7 +428,7 @@
  	),
  
  	("Wygl±d",
-@@ -138,34 +43,34 @@
+@@ -138,34 +37,34 @@
  			("Jednolite",
                 	("Czarny",            EXEC, "wdwrite WindowMaker WorkspaceBack '(solid, black)'"),
                 	("Niebieski",         EXEC, "wdwrite WindowMaker WorkspaceBack '(solid, '#505075')'"),
