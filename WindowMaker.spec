@@ -224,13 +224,13 @@ done
 %build
 libtoolize --copy --force
 aclocal
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 cd %{name}-extra-%{extraver}
 libtoolize --copy --force
 aclocal
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 cd ..
 
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
@@ -259,7 +259,7 @@ touch WindowMaker/Defaults/W*.in
 	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
-autoconf
+%{__autoconf}
 cd %{name}-extra-%{extraver}
 %configure \
 	--with-nlsdir=%{_datadir}/locale \
