@@ -40,16 +40,42 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 %define		_sysconfdir	/etc/X11
 
 %description
-WindowMaker is a window manager designed to emulate the look and feel of
-part of the NEXTSTEP(tm) GUI. It's supposed to be fast, relatively small,
-feature rich and easy to configure, with a simple and elegant appearance
-borrowed from NEXTSTEP(tm).
+Window Maker is an X11 window manager which emulates the look and feel of
+the NeXTSTEP (TM) graphical user interface. It is relatively fast, feature
+rich and easy to configure and use.  Window Maker is part of the official
+GNU project, which means that Window Maker can interoperate with other GNU
+projects, such as GNOME.
+
+Window Maker allows users to switch themes 'on the fly,' to place favorite
+applications on either an application dock, similar to AfterStep's Wharf or
+on a workspace dock, a 'clip' which extends the application dock's
+usefulness.
+
+You should install the WindowMaker package if you use Window Maker as your
+window manager or if you'd like to try using it. If you do install the
+WindowMaker package, you may also want to install the AfterStep-APPS
+package, which includes applets that will work with both AfterStep and
+Window Maker window managers.
 
 %description -l fr
-WindowMaker est un "Window Manager" conçu pour émuler l'apparence et la
-sensation de l'interface graphique NeXTSTEP(tm). Il est suposé être rapide,
-relativement petit, facile a configurer, extremement complet et avec
-l'apparence simple et élégante empruntée a NeXTSTEP(tm).
+Window Maker est un gestionnaire de fenêtres pour X11 qui cherche à
+reproduire l'allure et l'ergonomie ("look & feel") de l'interface graphique
+NeXTSTEP(tm) (aka OpenStep). Il est relativement rapide, évolué, et facile à
+configurer et à utiliser. Window Maker fait officiellement partie du projet
+GNU, ce qui signifie que Window Maker peut coopérer avec d'autres projets
+GNU, comme par exemple GNOME.
+
+Window Maker permet de changer de thèmes facilement, de placer ses
+applications favorites soit sur un "dock" similaire au programme Wharf de
+AfterStep, soit sur un dock intégré à l'espace de travail, appelé "clip"
+(trombone), et qui permet d'étendre les possibilités du dock principal.
+
+Vous devriez installer ce package si votre gestionnaire de fenêtres est
+Window Maker, ou si vous voulez l'essayer. Si vous installez le package
+Window Maker, vous voudrez peut-être installer aussi le package
+AfterStep-APPS, qui contient des "applets" (petites applications) qui
+fonctionnent à la fois dans les gestionnaires de fenêtres AfterStep et
+Window Maker.
 
 %description -l pl
 WindowMaker jest mened¿erem okien przypominaj±cy wygl±dem i wygod± obs³ugi
@@ -126,7 +152,6 @@ LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 %configure \
-	--sysconfdir=%{_sysconfdir} \
 	--with-nlsdir=%{_datadir}/locale \
 	--enable-kanji \
 	--enable-sound \
