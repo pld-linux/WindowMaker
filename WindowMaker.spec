@@ -165,7 +165,7 @@ rm -r $RPM_BUILD_ROOT
 - added -q %setup parameter,
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
-- changeded dependences to "Requires: %%{name} = %%{version}" in devel
+- changed dependencies to "Requires: %%{name} = %%{version}" in devel
   subpackage,
 - removed "rm -r %%{builddir}" - it's automatically removed if rpm is runed
   on building with --clean,
