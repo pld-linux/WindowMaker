@@ -79,8 +79,8 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p0
+%patch3 -p0
+%patch4 -p1
 
 %build
 echo "b" | \
@@ -90,6 +90,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
 ./configure \
 	--prefix=/usr/X11R6 \
 	--with-nlsdir=/usr/X11R6/share/locale \
+	--sysconfdir=/etc/X11 \
 	--enable-kanji \
 	--enable-sound \
 	--enable-gnome \
@@ -132,6 +133,9 @@ rm -r $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS.gz BUGFORM.gz BUGS.gz 
 %doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
+
+%dir /etc/X11/WindowMaker
+%config %verify(not size mtime md5) /etc/X11/WindowMaker/*
 
 /usr/X11R6/man/man1/*
 
