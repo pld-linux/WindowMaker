@@ -36,6 +36,7 @@ BuildRequires:	gettext-devel
 Requires:	wmconfig
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
+Requires:	tk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
