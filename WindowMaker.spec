@@ -1,5 +1,4 @@
 %define		extraver	0.1
-%define		_snap		20040718
 
 %bcond_without	xft	# disable xft support, doesn't work, bug in sources
 
@@ -11,12 +10,12 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
-Version:	0.81.0
-Release:	0.%{_snap}.1
+Version:	0.90.0
+Release:	0.1
 License:	GPL
 Group:		X11/Window Managers
-Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
-# Source0-md5:	dba7dc37031ecce4c6b71c627c784ece
+Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
+# Source0-md5:	38b7b146fb866269f3541b87c170f529
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
@@ -215,7 +214,7 @@ utilizando componentes estАticos (raramente necessАrio).
 програм, що використовують можливост╕ WindowMaker.
 
 %prep
-%setup -q -a 1 -a 2 -n %{name}-CVS-20040723
+%setup -q -a 1 -a 2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
