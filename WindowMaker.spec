@@ -298,7 +298,7 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.sh
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.names
-install %{SOURCE6} $RPM_BUILD_ROOT%{_dastadir}/xsessions/WindowMaker.desktop
+install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
 cd %{name}-extra-%{extraver}
 %{__make} install \
