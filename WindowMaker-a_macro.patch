@@ -1,34 +1,16 @@
-Date: Tue, 9 Feb 1999 21:52:06 -0600 (EST)
-From: Salvador Ortiz Garcia <sog@msg.com.mx>
-To: bugs@windowmaker.org
-cc: developers@windowmaker.org
-Subject: Yet another fix for %a macro.
-
-Full_Name: Salvador Ortiz
-Version: 0.51.0
-OS: RedHat Linux
-Submission from: lulu.msg.com.mx (200.33.54.10)
-
-The following patch cure two small remaining problems in the parser for
-the %a macro, the first is a trivial one, the other may requiere some
-explanation:
-
-At the exit of the for loop in getuserinput, ptr points to the char
-_after_ the closing perentesis, but in ExpandOptions ptr is incremented
-again, so one char is eaten.
-
---- src/misc.c.orig	Sun Feb 14 01:01:22 1999
-+++ src/misc.c	Sun Feb 14 01:06:38 1999
-@@ -840,7 +840,7 @@
+diff -Nur WindowMaker-0.70.0.orig/src/misc.c WindowMaker-0.70.0/src/misc.c
+--- WindowMaker-0.70.0.orig/src/misc.c	Thu Oct  4 05:39:18 2001
++++ WindowMaker-0.70.0/src/misc.c	Thu Oct 18 16:26:04 2001
+@@ -679,7 +679,7 @@
  	 case _PROMPT:
  	    if (line[*ptr]==')' && j==0) {
  
 -		if (*ptr-begin > 1) {
 +		if (*ptr > begin) {
- 		    strncpy(pbuffer, &line[begin], WMIN(*ptr-begin, 255));
- 		    pbuffer[WMIN(*ptr-begin, 255)] = 0;
+ 		    strncpy(pbuffer, &line[begin], WMIN(*ptr-begin, BUFSIZE));
+ 		    pbuffer[WMIN(*ptr-begin, BUFSIZE)] = 0;
  		    prompt = (char*)pbuffer;
-@@ -858,6 +858,7 @@
+@@ -698,6 +698,7 @@
  #undef _PROMPT
  #undef _DONE
  

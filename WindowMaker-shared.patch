@@ -1,13 +1,12 @@
-diff -Nru WindowMaker-0.64.0/WINGs/Examples/Makefile.am WindowMaker-0.64.0.new/WINGs/Examples/Makefile.am
---- WindowMaker-0.64.0/WINGs/Examples/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/WINGs/Examples/Makefile.am	Tue Feb 13 18:56:19 2001
-@@ -6,22 +6,22 @@
+diff -Nur WindowMaker-0.70.0.orig/WINGs/Examples/Makefile.am WindowMaker-0.70.0/WINGs/Examples/Makefile.am
+--- WindowMaker-0.70.0.orig/WINGs/Examples/Makefile.am	Thu Oct  4 05:39:17 2001
++++ WindowMaker-0.70.0/WINGs/Examples/Makefile.am	Thu Oct 18 16:54:22 2001
+@@ -6,21 +6,21 @@
  noinst_PROGRAMS = connect server fontl puzzle
  
  
--LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
-+LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
- 	@LIBPL@
+-LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la
++LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la
  
  
 -fontl_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.a
@@ -21,19 +20,19 @@ diff -Nru WindowMaker-0.64.0/WINGs/Examples/Makefile.am WindowMaker-0.64.0.new/W
  
 -connect_LDADD = $(top_builddir)/WINGs/libWUtil.a @LIBRARY_SEARCH_PATH@ \
 +connect_LDADD = $(top_builddir)/WINGs/libWUtil.la @LIBRARY_SEARCH_PATH@ \
- 	@NETLIBS@ @LIBPL@
+ 	@NETLIBS@
  
 -server_DEPENDENCIES = $(top_builddir)/WINGs/libWUtil.a
 +server_DEPENDENCIES = $(top_builddir)/WINGs/libWUtil.la
  
--server_LDADD = $(top_builddir)/WINGs/libWUtil.a @LIBRARY_SEARCH_PATH@ \
-+server_LDADD = $(top_builddir)/WINGs/libWUtil.la @LIBRARY_SEARCH_PATH@ \
- 	@NETLIBS@ @LIBPL@
+-server_LDADD = $(top_builddir)/WINGs/libWUtil.a @LIBRARY_SEARCH_PATH@ @NETLIBS@
++server_LDADD = $(top_builddir)/WINGs/libWUtil.la @LIBRARY_SEARCH_PATH@ @NETLIBS@
  
  
-diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WINGs/Extras/Makefile.am
---- WindowMaker-0.64.0/WINGs/Extras/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/WINGs/Extras/Makefile.am	Tue Feb 13 18:56:19 2001
+ INCLUDES = -I$(top_srcdir)/WINGs -I$(top_srcdir)/wrlib -I$(top_srcdir)/src \
+diff -Nur WindowMaker-0.70.0.orig/WINGs/Extras/Makefile.am WindowMaker-0.70.0/WINGs/Extras/Makefile.am
+--- WindowMaker-0.70.0.orig/WINGs/Extras/Makefile.am	Thu Oct  4 05:39:17 2001
++++ WindowMaker-0.70.0/WINGs/Extras/Makefile.am	Thu Oct 18 16:54:22 2001
 @@ -10,13 +10,13 @@
  include_HEADERS = wtableview.h wtabledelegates.h 
  
@@ -54,14 +53,15 @@ diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WIN
  INCLUDES = -I$(top_srcdir)/wrlib -I$(top_srcdir)/WINGs \
  	-DRESOURCE_PATH=\"$(datadir)/WINGs\" @HEADER_SEARCH_PATH@ -DDEBUG
  
--LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
-+LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
-         @LIBPL@ 
+-LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la
++LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la
  
  test_LDADD = wtableview.o wtabledelegates.o $(LDADD)
---- WindowMaker-0.65.1/WINGs/Makefile.am.orig	Wed Jun  6 22:22:55 2001
-+++ WindowMaker-0.65.1/WINGs/Makefile.am	Thu Jul 26 12:05:30 2001
-@@ -4,22 +4,16 @@
+ 
+diff -Nur WindowMaker-0.70.0.orig/WINGs/Makefile.am WindowMaker-0.70.0/WINGs/Makefile.am
+--- WindowMaker-0.70.0.orig/WINGs/Makefile.am	Thu Oct  4 05:39:17 2001
++++ WindowMaker-0.70.0/WINGs/Makefile.am	Thu Oct 18 16:54:22 2001
+@@ -4,22 +4,18 @@
  
  SUBDIRS = WINGs . po Documentation Resources Examples Extras Tests
  
@@ -72,11 +72,12 @@ diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WIN
  bin_SCRIPTS = get-wings-flags get-wutil-flags
  
 -lib_LIBRARIES = libWINGs.a libWUtil.a
--
--
- LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @LIBPL@ @INTLIBS@
++LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @INTLIBS@
  
 +lib_LTLIBRARIES = libWINGs.la libWUtil.la
+ 
+-LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @INTLIBS@
+ 
  
  EXTRA_DIST = BUGS
  
@@ -86,7 +87,7 @@ diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WIN
  	array.c \
  	bagtree.c \
  	configuration.c \
-@@ -77,7 +71,7 @@
+@@ -80,7 +76,7 @@
  	wwindow.c
  
  
@@ -95,16 +96,15 @@ diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WIN
  	array.c \
  	bagtree.c \
  	connection.c \
-diff -Nru WindowMaker-0.64.0/WINGs/Tests/Makefile.am WindowMaker-0.64.0.new/WINGs/Tests/Makefile.am
---- WindowMaker-0.64.0/WINGs/Tests/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/WINGs/Tests/Makefile.am	Tue Feb 13 18:56:19 2001
-@@ -4,13 +4,13 @@
+diff -Nur WindowMaker-0.70.0.orig/WINGs/Tests/Makefile.am WindowMaker-0.70.0/WINGs/Tests/Makefile.am
+--- WindowMaker-0.70.0.orig/WINGs/Tests/Makefile.am	Thu Oct  4 05:39:17 2001
++++ WindowMaker-0.70.0/WINGs/Tests/Makefile.am	Thu Oct 18 16:54:22 2001
+@@ -4,12 +4,12 @@
  
- noinst_PROGRAMS = wtest wmquery wmfile testmywidget testcolorpanel 
+ noinst_PROGRAMS = wtest wmquery wmfile testmywidget 
  
--LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
-+LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
- 	@LIBPL@
+-LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la
++LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la
  
  
  testmywidget_SOURCES = testmywidget.c mywidget.c mywidget.h 
@@ -114,9 +114,9 @@ diff -Nru WindowMaker-0.64.0/WINGs/Tests/Makefile.am WindowMaker-0.64.0.new/WING
  
  
  EXTRA_DIST = logo.xpm upbtn.xpm wm.html wm.png
-diff -Nru WindowMaker-0.64.0/WPrefs.app/Makefile.am WindowMaker-0.64.0.new/WPrefs.app/Makefile.am
---- WindowMaker-0.64.0/WPrefs.app/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/WPrefs.app/Makefile.am	Tue Feb 13 18:56:19 2001
+diff -Nur WindowMaker-0.70.0.orig/WPrefs.app/Makefile.am WindowMaker-0.70.0/WPrefs.app/Makefile.am
+--- WindowMaker-0.70.0.orig/WPrefs.app/Makefile.am	Thu Oct  4 05:39:18 2001
++++ WindowMaker-0.70.0/WPrefs.app/Makefile.am	Thu Oct 18 16:54:22 2001
 @@ -46,10 +46,10 @@
  
  INCLUDES = -I$(top_srcdir)/wrlib -I$(top_srcdir)/WINGs @HEADER_SEARCH_PATH@ 
@@ -128,23 +128,23 @@ diff -Nru WindowMaker-0.64.0/WPrefs.app/Makefile.am WindowMaker-0.64.0.new/WPref
 -	$(top_builddir)/WINGs/libWINGs.a\
 +	$(top_builddir)/WINGs/libWINGs.la\
  	$(top_builddir)/wrlib/libwraster.la \
- 	@LIBPL@ \
  	@INTLIBS@
-diff -Nru WindowMaker-0.64.0/src/Makefile.am WindowMaker-0.64.0.new/src/Makefile.am
---- WindowMaker-0.64.0/src/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/src/Makefile.am	Tue Feb 13 18:56:19 2001
-@@ -113,7 +113,7 @@
+ 
+diff -Nur WindowMaker-0.70.0.orig/src/Makefile.am WindowMaker-0.70.0/src/Makefile.am
+--- WindowMaker-0.70.0.orig/src/Makefile.am	Thu Oct  4 05:39:18 2001
++++ WindowMaker-0.70.0/src/Makefile.am	Thu Oct 18 16:54:22 2001
+@@ -111,7 +111,7 @@
  
  
  wmaker_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a\
 +	$(top_builddir)/WINGs/libWINGs.la\
  	$(top_builddir)/wrlib/libwraster.la\
- 	@LIBPL@ \
  	@XLIBS@ \
-diff -Nru WindowMaker-0.64.0/test/Makefile.am WindowMaker-0.64.0.new/test/Makefile.am
---- WindowMaker-0.64.0/test/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/test/Makefile.am	Tue Feb 13 18:56:19 2001
+ 	@INTLIBS@ \
+diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makefile.am
+--- WindowMaker-0.70.0.orig/test/Makefile.am	Sat Oct  2 23:16:11 1999
++++ WindowMaker-0.70.0/test/Makefile.am	Thu Oct 18 16:54:22 2001
 @@ -8,7 +8,7 @@
  
  wtest_SOURCES = wtest.c
@@ -154,35 +154,58 @@ diff -Nru WindowMaker-0.64.0/test/Makefile.am WindowMaker-0.64.0.new/test/Makefi
  
  
  INCLUDES = -g -D_BSD_SOURCE @XCFLAGS@ -I$(top_srcdir)/wmlib 
-diff -Nru WindowMaker-0.64.0/util/Makefile.am WindowMaker-0.64.0.new/util/Makefile.am
---- WindowMaker-0.64.0/util/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/util/Makefile.am	Tue Feb 13 18:56:19 2001
-@@ -36,19 +36,19 @@
- geticonset_LDADD= $(liblist)
+diff -Nur WindowMaker-0.70.0.orig/util/Makefile.am WindowMaker-0.70.0/util/Makefile.am
+--- WindowMaker-0.70.0.orig/util/Makefile.am	Fri Oct  5 02:40:42 2001
++++ WindowMaker-0.70.0/util/Makefile.am	Thu Oct 18 16:55:06 2001
+@@ -20,36 +20,36 @@
+ # library dependancies using the libPropList.la file
+ liblist= @LIBRARY_SEARCH_PATH@ @X_EXTRA_LIBS@
+ 
+-wdwrite_LDADD = $(top_builddir)/WINGs/libWUtil.a $(liblist)
++wdwrite_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
+ 
+-wdread_LDADD = $(top_builddir)/WINGs/libWUtil.a $(liblist)
++wdread_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
+ 
+ wxcopy_LDADD = @XLFLAGS@ @XLIBS@ 
+ 
+ wxpaste_LDADD = @XLFLAGS@ @XLIBS@
+ 
+-getstyle_LDADD = $(top_builddir)/WINGs/libWUtil.a $(liblist)
++getstyle_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
+ 
+ setstyle_LDADD = \
+-	$(top_builddir)/WINGs/libWUtil.a \
++	$(top_builddir)/WINGs/libWUtil.la \
+ 	@XLFLAGS@ @XLIBS@ $(liblist)
+ 
+-seticons_LDADD= $(top_builddir)/WINGs/libWUtil.a $(liblist)
++seticons_LDADD= $(top_builddir)/WINGs/libWUtil.la $(liblist)
+ 
+-geticonset_LDADD= $(top_builddir)/WINGs/libWUtil.a $(liblist)
++geticonset_LDADD= $(top_builddir)/WINGs/libWUtil.la $(liblist)
  
  wmagnify_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a \
 +	$(top_builddir)/WINGs/libWINGs.la \
  	$(top_builddir)/wrlib/libwraster.la \
- 	@LIBPL@ \
  	@DLLIBS@
  
  wmsetup_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a \
 +	$(top_builddir)/WINGs/libWINGs.la \
  	$(top_builddir)/wrlib/libwraster.la \
- 	@LIBPL@ \
  	@DLLIBS@
  
  wmsetbg_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a \
 +	$(top_builddir)/WINGs/libWINGs.la \
  	$(top_builddir)/wrlib/libwraster.la \
- 	@LIBPL@ \
  	@DLLIBS@
-diff -Nru WindowMaker-0.64.0/wmlib/Makefile.am WindowMaker-0.64.0.new/wmlib/Makefile.am
---- WindowMaker-0.64.0/wmlib/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/wmlib/Makefile.am	Tue Feb 13 18:56:19 2001
+ 
+diff -Nur WindowMaker-0.70.0.orig/wmlib/Makefile.am WindowMaker-0.70.0/wmlib/Makefile.am
+--- WindowMaker-0.70.0.orig/wmlib/Makefile.am	Mon Apr 10 02:59:35 2000
++++ WindowMaker-0.70.0/wmlib/Makefile.am	Thu Oct 18 16:54:22 2001
 @@ -1,13 +1,13 @@
  
  AUTOMAKE_OPTIONS = no-dependencies
