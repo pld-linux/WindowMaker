@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.70.0
-Release:	2
+Release:	3
 Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
 Group(es):	X11/Administraadores De Ventanas
@@ -20,14 +20,13 @@ Source4:	%{name}.RunWM
 Source5:	%{name}.wm_style
 Patch0:		%{name}-CFLAGS.patch
 Patch1:		%{name}-wmconfig.patch
-Patch2:		%{name}-a_macro.patch
-Patch3:		%{name}-pixmaps.patch
-Patch4:		%{name}-shared.patch
-Patch5:		%{name}-areas.patch
-Patch6:		%{name}-IconPosition.patch
-Patch7:		%{name}-singleclick.patch
-Patch8:		%{name}-plmenu.patch
-Patch9:		%{name}-dockit.patch
+Patch2:		%{name}-pixmaps.patch
+Patch3:		%{name}-shared.patch
+Patch4:		%{name}-areas.patch
+Patch5:		%{name}-IconPosition.patch
+Patch6:		%{name}-singleclick.patch
+Patch7:		%{name}-plmenu.patch
+Patch8:		%{name}-dockit.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -174,7 +173,11 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
+
+for f in WindowMaker/*menu*; do
+    sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
+    mv $f.new $f
+done
 
 %build
 libtoolize --copy --force
