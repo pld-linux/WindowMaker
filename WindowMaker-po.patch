@@ -104,22 +104,3 @@
  "Xgettext-Options: --default-domain=WPrefs --add-comments --keyword=_\n"
  "Files: ../../WPrefs/Configurations.c ../../WPrefs/Expert.c ../../WPrefs/Focus.c ../../WPrefs/KeyboardSettings.c ../../WPrefs/KeyboardShortcuts.c ../../WPrefs/Menu.c ../../WPrefs/MenuGuru.c ../../WPrefs/MenuPreferences.c ../../WPrefs/MouseSettings.c ../../WPrefs/Paths.c ../../WPrefs/Preferences.c ../../WPrefs/Text.c ../../WPrefs/TextureAndColor.c ../../WPrefs/WPrefs.c ../../WPrefs/WindowHandling.c ../../WPrefs/Workspace.c ../../WPrefs/main.c ../../WPrefs/xmodifier.c\n"
  
---- WindowMaker-0.80.1/po/pl.po.orig	Wed Feb 17 12:06:47 1999
-+++ WindowMaker-0.80.1/po/pl.po	Mon Jul 15 20:45:25 2002
-@@ -5,7 +5,6 @@
- # Copyright (C) 1999 Free Software Foundation, Inc.
- # Piotr Dembiñski <pdemb@fanthom.math.put.poznan.pl>, 1998.
- #
--#, fuzzy
- msgid ""
- msgstr ""
- "Project-Id-Version: PACKAGE VERSION\n"
-@@ -100,7 +99,7 @@
- msgstr "nie mo¿na za³adowaæ domeny %s z globalnej bazy danych"
- 
- #: ../src/defaults.c:1266
--#, c-format, fuzzy
-+#, c-format
- msgid "wrong option value for key \"%s\". Should be one of %s"
- msgstr "niew³a¶ciwa warto¶æ dla klucza \"%s\". Powinno byæ jedno z: %s"
- 
