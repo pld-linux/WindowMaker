@@ -28,6 +28,7 @@ Patch7:		%{name}-IconPosition.patch
 Patch8:		%{name}-singleclick.patch
 Patch9:		%{name}-plmenu.patch
 Patch10:	%{name}-dockit.patch
+Patch11:	%{name}-gettext.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -159,6 +160,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 aclocal
