@@ -36,7 +36,7 @@ BuildRequires:	gettext-devel
 Requires:	wmconfig
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
@@ -198,7 +198,6 @@ install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
-
 
 (cd %{name}-extra-%{extraver};
 make DESTDIR=$RPM_BUILD_ROOT install )
