@@ -1,28 +1,27 @@
-Summary:     NeXT-alike window manager
-Name:        WindowMaker
-Version:     0.50.2
-Release:     1d
-Group:       X11/Window Managers
-Group(pl):   X11/Zarz±dcy Okien
-Copyright:   GPL
-URL:         http://www.windowmaker.org
-Source:      ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
-Source1:     ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
-Patch:       %{name}-po.patch
-Patch1:      %{name}-aclocal.patch
-Patch2:      %{name}-CFLAGS.patch
-Patch3:      %{name}-wmconfig.patch
-Prereq:      /sbin/ldconfig
-Requires:    wmconfig
-Requires:    libjpeg
-Requires:    libpng
-Requires:    libtiff
-Requires:    libungif
-Requires:    xpm
-Requires:    XFree86-libs
-BuildRoot:   /tmp/%{name}-%{version}-root
-Summary(fr): Gestionnaire de fenêtres avec le look NeXT
-Summary(pl): Mened¿er okien w stylu NeXT
+Summary:	NeXT-alike window manager
+Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
+Summary(pl):	Mened¿er okien w stylu NeXT
+Name:		WindowMaker
+Version:	0.50.2
+Release:	1d
+Group:		X11/Window Managers
+Group(pl):	X11/Zarz±dcy Okien
+Copyright:	GPL
+Source:		ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
+Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
+Patch0:		WindowMaker-po.patch
+Patch1:		WindowMaker-aclocal.patch
+Patch2:		WindowMaker-CFLAGS.patch
+Patch3:		WindowMaker-wmconfig.patch
+URL:		http://www.windowmaker.org/
+Requires:	wmconfig
+Requires:	libjpeg
+Requires:	libpng
+Requires:	libtiff
+Requires:	libungif
+Requires:	xpm
+Requires:	XFree86-libs
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 WindowMaker is a window manager designed to emulate the look and feel of
@@ -44,11 +43,11 @@ programu WPrefs wchodz±cego w sk³ad tego pakietu.
 
 %package devel
 Summary:	WindowMaker libraries
+Summary(fr):	Librairies de WindowMaker
+Summary(pl):	Biblioteki WindowMakera
 Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
-Summary(fr):	Librairies de WindowMaker
-Summary(pl):	Biblioteki WindowMakera
 
 %description devel
 This package contains libraries for building WindowMaker-enhanced
@@ -64,10 +63,10 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %package static
 Summary:	WindowMaker static libraries
+Summary(pl):	Biblioteki statyczne WindowMakera
 Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
-Summary(pl):	Biblioteki statyczne WindowMakera
 
 %description static
 This package contains static libraries for building WindowMaker-enhanced
@@ -79,32 +78,33 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %prep
 %setup -q -b 1
-%patch  -p1
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
 %build
 echo "b" | LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
-		CFLAGS=$RPM_OPT_FLAGS LDFLAGS="-s" ./configure \
-		--prefix=/usr/X11R6 \
-		--with-nlsdir=/usr/X11R6/share/locale \
-		--enable-kanji \
-		--enable-sound \
-		--without-gnome \
-		--disable-shm \
-		--disable-debug \
-		--enable-superfluous \
-	        --enable-newstyle \
-		--enable-kde
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
+	--prefix=/usr/X11R6 \
+	--with-nlsdir=/usr/X11R6/share/locale \
+	--enable-kanji \
+	--enable-sound \
+	--without-gnome \
+	--disable-shm \
+	--disable-debug \
+	--enable-superfluous \
+        --enable-newstyle \
+	--enable-kde
 make \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
 	CFLAGS="$RPM_OPT_FLAGS" \
 	LDFLAGS="-s" 
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
 make install \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
@@ -112,16 +112,12 @@ make install \
 
 install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
 
-chmod 755 $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*
-
-install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 install ../WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
-bzip2 -9 \ $RPM_BUILD_ROOT/usr/X11R6/man/man1/* AUTHORS BUGFORM \
-	    BUGS ChangeLog FAQ NEWS README
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
+bzip2 -9 AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
-%post -p /sbin/ldconfig
-
+%post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %clean
@@ -201,7 +197,7 @@ rm -r $RPM_BUILD_ROOT
 
 %changelog
 * Fri Jan 15 1999 Artur Frysiak <wiget@usa.net>
-[0.50.2-1d]
+  [0.50.2-1d]
 - upgraded to 0.50.2
 - rewrite %{name}-po.patch
 - added icons (WindowMaker-data.tar.gz) 
@@ -213,7 +209,7 @@ rm -r $RPM_BUILD_ROOT
 - added wmconfig support
 
 * Sat Sep 26 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
-[0.20.0-1d]
+  [0.20.0-1d]
 - added --disable-shm option to configure script
 - added patches to fix I18N stuff
 - moved bughint script to /usr/X11R6/bin
@@ -222,16 +218,15 @@ rm -r $RPM_BUILD_ROOT
 - build from non root's account.
 
 * Mon Sep 21 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
-[0.19.3-2]
+  [0.19.3-2]
 - fixed problems with paths to icons, styles and WPrefs
 - removed all patches
-- changed ELF executables attributes to 711
 - moved WPrefs stuff to /usr/X11R6/share/GNUstep
 - fixed I18N
 - added Polish summary and description
 
 * Thu Sep  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-[0.19.3-1]
+  [0.19.3-1]
 - added -q %setup parameter,
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
