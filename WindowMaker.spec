@@ -8,8 +8,8 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
-Version:	0.80.1
-Release:	3
+Version:	0.80.2
+Release:	1
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -242,6 +242,7 @@ LINGUAS="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru \
 	 sk sv tr zh_CN zh_TW.Big5" ; export LINGUAS
 CPP_PATH="/lib/cpp" ; export CPP_PATH
 %configure \
+	--disable-rpath \
 	--with-nlsdir=%{_datadir}/locale \
 	--with-appspath=%{_libdir}/GNUstep/Apps \
 	--enable-sound \
