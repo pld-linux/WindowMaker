@@ -38,7 +38,6 @@ BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
-BuildRequires:	xpm-devel
 Requires:	wmconfig >= 0.9.9-5
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
