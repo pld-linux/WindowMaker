@@ -4,7 +4,7 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.65.1
+Version:	0.70.0
 Release:	1
 Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
@@ -24,21 +24,21 @@ Patch2:		%{name}-a_macro.patch
 Patch3:		%{name}-pixmaps.patch
 Patch4:		%{name}-shared.patch
 Patch5:		%{name}-areas.patch
-Patch6:		%{name}-runinst.patch
-Patch7:		%{name}-IconPosition.patch
-Patch8:		%{name}-singleclick.patch
-Patch9:		%{name}-plmenu.patch
-Patch10:	%{name}-dockit.patch
+Patch6:		%{name}-IconPosition.patch
+Patch7:		%{name}-singleclick.patch
+Patch8:		%{name}-plmenu.patch
+Patch9:		%{name}-dockit.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	gettext-devel
 BuildRequires:	libPropList-devel >= 0.10.1
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool
 BuildRequires:	libungif-devel
+BuildRequires:	Hermes-devel
 Requires:	wmconfig >= 0.9.9-5
 Requires:	cpp
 Requires:	%{name}-libs = %{version}
@@ -104,6 +104,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	âÉÂÌÉÏÔÅËÉ
+Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 
 %description libs
 This package contains shared libraries for run WindowMaker.
@@ -118,8 +121,12 @@ Summary(fr):	Librairies de WindowMaker
 Summary(pl):	Biblioteki WindowMakera - czê¶æ dla programistów
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-libs = %{version}
 
 %description devel
@@ -140,8 +147,12 @@ Summary:	WindowMaker static libraries
 Summary(pl):	Biblioteki statyczne WindowMakera
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -156,7 +167,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %setup -q -a 1 -a 2
 %patch0 -p1
 %patch1 -p0
-%patch2 -p0
+%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
@@ -164,7 +175,6 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-%patch10 -p1
 
 %build
 libtoolize --copy --force
