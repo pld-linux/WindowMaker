@@ -4,7 +4,7 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.65.0
+Version:	0.65.1
 Release:	1
 Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
@@ -29,7 +29,6 @@ Patch7:		%{name}-IconPosition.patch
 Patch8:		%{name}-singleclick.patch
 Patch9:		%{name}-plmenu.patch
 Patch10:	%{name}-dockit.patch
-Patch11:	%{name}-gettext.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -166,13 +165,18 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
-%patch11 -p1
 
 %build
 libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c
+(cd %{name}-extra-%{extraver}
+libtoolize --copy --force
+aclocal
+autoconf
+automake -a -c)
+
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
 CPP_PATH="/lib/cpp" ; export CPP_PATH
