@@ -23,13 +23,13 @@ Patch7:		WindowMaker-ru.po.patch
 Patch8:		Windowmaker-WINGs.h.patch
 Patch9:		WindowMaker-singleclick.patch
 URL:		http://www.windowmaker.org/
-BuildPrereq:	libPropList-devel >= 0.8.3
-BuildPrereq:	xpm-devel
-BuildPrereq:	libpng-devel
-BuildPrereq:	libjpeg-devel >= 6b
-BuildPrereq:	libtiff-devel
-BuildPrereq:	libungif-devel
-BuildPrereq:	gettext
+BuildRequires:	libPropList-devel >= 0.8.3
+BuildRequires:	xpm-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libjpeg-devel >= 6b
+BuildRequires:	libtiff-devel
+BuildRequires:	libungif-devel
+BuildRequires:	gettext
 Requires:	wmconfig
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
