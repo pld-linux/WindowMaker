@@ -1,21 +1,28 @@
 Summary:     NeXT-alike window manager
-Summary(fr): Gestionnaire de fenêtres avec le look NeXT
-Summary(pl): Mened¿er okien w stylu NeXT
 Name:        WindowMaker
-Version:     0.20.1
-Release:     2
+Version:     0.50.2
+Release:     1d
 Group:       X11/Window Managers
+Group(pl):   X11/Zarz±dcy Okien
 Copyright:   GPL
-Vendor:      Dan Pascu <dan@services.iiruc.ro>
 URL:         http://www.windowmaker.org
 Source:      ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:     ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
-Source2:     WindowMaker-asclock.tar.gz
-Patch0:      WindowMaker.patch
-Patch1:      WindowMaker-po.patch
-Patch2:      WindowMaker-0.19.3-wmclock.patch
-Patch3:      WindowMaker-0.20.1-redhat.patch
+Patch:       %{name}-po.patch
+Patch1:      %{name}-aclocal.patch
+Patch2:      %{name}-CFLAGS.patch
+Patch3:      %{name}-wmconfig.patch
+Prereq:      /sbin/ldconfig
+Requires:    wmconfig
+Requires:    libjpeg
+Requires:    libpng
+Requires:    libtiff
+Requires:    libungif
+Requires:    xpm
+Requires:    XFree86-libs
 BuildRoot:   /tmp/%{name}-%{version}-root
+Summary(fr): Gestionnaire de fenêtres avec le look NeXT
+Summary(pl): Mened¿er okien w stylu NeXT
 
 %description
 WindowMaker is a window manager designed to emulate the look and feel of
@@ -36,11 +43,12 @@ mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go myszk±, za pomoc±
 programu WPrefs wchodz±cego w sk³ad tego pakietu.
 
 %package devel
-Summary:     WindowMaker libraries
-Summary(fr): Librairies de WindowMaker
-Summary(pl): Biblioteki WindowMakera
-Group:       Development/Libraries
-Requires:    %{name} = %{version}
+Summary:	WindowMaker libraries
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
+Summary(fr):	Librairies de WindowMaker
+Summary(pl):	Biblioteki WindowMakera
 
 %description devel
 This package contains libraries for building WindowMaker-enhanced
@@ -54,60 +62,108 @@ par WindowMaker.
 Ten pakiet zawiera pliki nag³ówkowe i biblioteki niezbêdne do tworzenia
 aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
+%package static
+Summary:	WindowMaker static libraries
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
+Summary(pl):	Biblioteki statyczne WindowMakera
+
+%description static
+This package contains static libraries for building WindowMaker-enhanced
+applications.
+
+%description static -l pl
+Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
+aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
+
 %prep
-%setup -q -a 1 -a 2
-%patch0 -p1
+%setup -q -b 1
+%patch  -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
 %build
-aclocal; automake; autoconf
 echo "b" | LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
-CFLAGS=$RPM_OPT_FLAGS LDFLAGS="-s" ./configure \
-	--prefix=/usr/X11R6 \
-	--with-nlsdir=/usr/share/locale \
-	--enable-kanji \
-	--enable-sound \
-	--with-gnome \
-	--disable-shm \
-	--enable-superfluous \
-	--enable-newstyle \
-	--disable-debug
-make
-make Makefile -C asclock
-make -C asclock
+		CFLAGS=$RPM_OPT_FLAGS LDFLAGS="-s" ./configure \
+		--prefix=/usr/X11R6 \
+		--with-nlsdir=/usr/X11R6/share/locale \
+		--enable-kanji \
+		--enable-sound \
+		--without-gnome \
+		--disable-shm \
+		--disable-debug \
+		--enable-superfluous \
+	        --enable-newstyle \
+		--enable-kde
+make \
+	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
+	CFLAGS="$RPM_OPT_FLAGS" \
+	LDFLAGS="-s" 
 
-install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
-install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
-make install DESTDIR=$RPM_BUILD_ROOT -C asclock
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 make install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	nlsdir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
+	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
+	DESTDIR=$RPM_BUILD_ROOT 
+
+install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
+
+chmod 755 $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*
 
 install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
-install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
-make install DESTDIR=$RPM_BUILD_ROOT -C asclock
+install ../WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+
+bzip2 -9 \ $RPM_BUILD_ROOT/usr/X11R6/man/man1/* AUTHORS BUGFORM \
+	    BUGS ChangeLog FAQ NEWS README
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 %clean
 rm -r $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
-%doc AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README TODO 
-%attr(755, root, root) /usr/X11R6/bin/*
-/usr/X11R6/share/WINGs
-/usr/X11R6/share/WindowMaker
+%defattr(644,root,root,755)
+%doc AUTHORS.bz2 BUGFORM.bz2 BUGS.bz2 
+%doc ChangeLog.bz2 FAQ.bz2 NEWS.bz2 README.bz2
+
+%attr(644,root, man) /usr/X11R6/man/man1/*
+
 /usr/X11R6/share/pixmaps/*
+
+#%attr(755,root,root) /usr/X11R6/bin/dockit
+%attr(755,root,root) /usr/X11R6/bin/wmaker.inst
+%attr(755,root,root) /usr/X11R6/bin/wsetfont
+%attr(755,root,root) /usr/X11R6/bin/bughint
+%attr(755,root,root) /usr/X11R6/bin/geticonset
+%attr(755,root,root) /usr/X11R6/bin/getstyle
+%attr(755,root,root) /usr/X11R6/bin/seticons
+%attr(755,root,root) /usr/X11R6/bin/setstyle
+%attr(755,root,root) /usr/X11R6/bin/wdwrite
+%attr(755,root,root) /usr/X11R6/bin/wmaker
+%attr(755,root,root) /usr/X11R6/bin/wmsetbg
+%attr(755,root,root) /usr/X11R6/bin/wxcopy
+%attr(755,root,root) /usr/X11R6/bin/wxpaste
+
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*
+
+%dir /usr/X11R6/share/WINGs
+%dir /usr/X11R6/share/WindowMaker
+
+/usr/X11R6/share/WINGs/*
+/usr/X11R6/share/WindowMaker/*
 
 %dir /usr/X11R6/GNUstep
 %dir /usr/X11R6/GNUstep/Apps
 %dir /usr/X11R6/GNUstep/Apps/WPrefs.app
-%attr(755, root, root) /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs
+
+%attr(755,root,root) /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs
+
 /usr/X11R6/GNUstep/Apps/WPrefs.app/tiff
 /usr/X11R6/GNUstep/Apps/WPrefs.app/xpm
 /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
@@ -122,6 +178,7 @@ rm -r $RPM_BUILD_ROOT
 %lang(gl) /usr/X11R6/share/locale/gl/LC_MESSAGES/*
 %lang(hr) /usr/X11R6/share/locale/hr/LC_MESSAGES/*
 %lang(it) /usr/X11R6/share/locale/it/LC_MESSAGES/*
+%lang(ja) /usr/X11R6/share/locale/ja/LC_MESSAGES/*
 %lang(ko) /usr/X11R6/share/locale/ko/LC_MESSAGES/*
 %lang(nl) /usr/X11R6/share/locale/nl/LC_MESSAGES/*
 %lang(no) /usr/X11R6/share/locale/no/LC_MESSAGES/*
@@ -133,39 +190,52 @@ rm -r $RPM_BUILD_ROOT
 %lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
 
 %files devel
-%defattr(644, root, root)
-/usr/X11R6/include/*.h
+%defattr(644,root,root,755)
+
+%attr(755,root,root) /usr/X11R6/bin/WINGs-flags
+%attr(755,root,root) /usr/X11R6/lib/lib*.so
+
 /usr/X11R6/lib/lib*.a
+/usr/X11R6/lib/lib*.la
+/usr/X11R6/include/*.h
 
 %changelog
-* Sun Oct  4 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.20.1-2]
-- added icons (WindowMaker-data.tar.gz),
-- removed installing bughint,
-- added --enable-superfluous and --enable-newstyle configure options,
-- added patches from rawhide.
+* Fri Jan 15 1999 Artur Frysiak <wiget@usa.net>
+[0.50.2-1d]
+- upgraded to 0.50.2
+- rewrite %{name}-po.patch
+- added icons (WindowMaker-data.tar.gz) 
+  by Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+- added --enable-superfluous and --enable-newstyle configure options 
+  by Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+- added --enable-kde configure options
+- added more Requires
+- added wmconfig support
 
 * Sat Sep 26 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
-  [0.20.0-1]
-- added --disable-shm option to configure script,
-- added patches to fix I18N stuff,
-- moved bughint script to /usr/X11R6/bin.
-- WPrefs is now back in /usr/X11R6/GNUstep.
+[0.20.0-1d]
+- added --disable-shm option to configure script
+- added patches to fix I18N stuff
+- moved bughint script to /usr/X11R6/bin
+- WPrefs is now back in /usr/X11R6/GNUstep
+- built against Tornado,
+- build from non root's account.
 
 * Mon Sep 21 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
-  [0.19.3-2]
-- fixed problems with paths to icons, styles and WPrefs,
-- removed all patches,
-- moved WPrefs stuff to /usr/X11R6/share/GNUstep,
-- fixed I18N,
-- added pl translation.
+[0.19.3-2]
+- fixed problems with paths to icons, styles and WPrefs
+- removed all patches
+- changed ELF executables attributes to 711
+- moved WPrefs stuff to /usr/X11R6/share/GNUstep
+- fixed I18N
+- added Polish summary and description
 
 * Thu Sep  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.19.3-1]
+[0.19.3-1]
 - added -q %setup parameter,
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
-- changed dependencies to "Requires: %%{name} = %%{version}" in devel
+- changeded dependences to "Requires: %%{name} = %%{version}" in devel
   subpackage,
 - removed "rm -r %%{builddir}" - it's automatically removed if rpm is runed
   on building with --clean,
