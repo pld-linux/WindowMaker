@@ -59,12 +59,11 @@ diff -Nru WindowMaker-0.64.0/WINGs/Extras/Makefile.am WindowMaker-0.64.0.new/WIN
          @LIBPL@ 
  
  test_LDADD = wtableview.o wtabledelegates.o $(LDADD)
-diff -Nru WindowMaker-0.64.0/WINGs/Makefile.am WindowMaker-0.64.0.new/WINGs/Makefile.am
---- WindowMaker-0.64.0/WINGs/Makefile.am	Tue Feb 13 18:58:56 2001
-+++ WindowMaker-0.64.0.new/WINGs/Makefile.am	Tue Feb 13 19:00:21 2001
-@@ -4,22 +4,19 @@
+--- WindowMaker-0.65.1/WINGs/Makefile.am.orig	Wed Jun  6 22:22:55 2001
++++ WindowMaker-0.65.1/WINGs/Makefile.am	Thu Jul 26 12:05:30 2001
+@@ -4,22 +4,16 @@
  
- SUBDIRS = WINGs . Documentation Resources Examples Extras Tests
+ SUBDIRS = WINGs . po Documentation Resources Examples Extras Tests
  
 -
 -
@@ -74,13 +73,10 @@ diff -Nru WindowMaker-0.64.0/WINGs/Makefile.am WindowMaker-0.64.0.new/WINGs/Make
  
 -lib_LIBRARIES = libWINGs.a libWUtil.a
 -
+-
+ LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @LIBPL@ @INTLIBS@
+ 
 +lib_LTLIBRARIES = libWINGs.la libWUtil.la
- 
--LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @LIBPL@
-+libWINGs_la_LDFLAGS = -version-info 1:1:0
-+libWUtil_la_LDFLAGS = -version-info 1:1:0
- 
-+LDADD= libWINGs.la $(top_builddir)/wrlib/libwraster.la @LIBPL@
  
  EXTRA_DIST = BUGS
  
@@ -90,7 +86,7 @@ diff -Nru WindowMaker-0.64.0/WINGs/Makefile.am WindowMaker-0.64.0.new/WINGs/Make
  	array.c \
  	bagtree.c \
  	configuration.c \
-@@ -74,7 +71,7 @@
+@@ -77,7 +71,7 @@
  	wwindow.c
  
  

@@ -1,6 +1,5 @@
-diff -ur WindowMaker-0.64.0/WPrefs.app/Expert.c WindowMaker-0.64.0.new/WPrefs.app/Expert.c
---- WindowMaker-0.64.0/WPrefs.app/Expert.c	Thu Feb  8 22:54:12 2001
-+++ WindowMaker-0.64.0.new/WPrefs.app/Expert.c	Wed Mar 21 20:00:55 2001
+--- WindowMaker-0.65.1/WPrefs.app/Expert.c.orig	Mon Jun  4 19:47:32 2001
++++ WindowMaker-0.65.1/WPrefs.app/Expert.c	Thu Jul 26 12:09:03 2001
 @@ -33,7 +33,7 @@
      
      WMWidget *parent;
@@ -30,8 +29,8 @@ diff -ur WindowMaker-0.64.0/WPrefs.app/Expert.c WindowMaker-0.64.0.new/WPrefs.ap
 @@ -79,6 +80,7 @@
      WMSetButtonText(panel->swi[4], _("Use Windoze style cycling."));
      WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command."));
-     WMSetButtonText(panel->swi[6], _("Disable cycling of highlighting color for selected icons."));
-+    WMSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
+     WMSetButtonText(panel->swi[6], _("Disable selection animation for selected icons."));
++    MSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
  
      WMRealizeWidget(panel->box);
      WMMapSubwidgets(panel->box);
