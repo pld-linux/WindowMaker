@@ -280,7 +280,7 @@ cd %{name}-extra-%{extraver}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/{pixmaps,xsessions},%{_wmpropsdir}} \
+install -d $RPM_BUILD_ROOT{%{_datadir}/,xsessions,%{_pixmapsdir},%{_wmpropsdir}} \
 	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %{__make} install \
@@ -293,7 +293,7 @@ install util/bughint $RPM_BUILD_ROOT%{_bindir}
 install contrib/dockit   $RPM_BUILD_ROOT%{_bindir}
 install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
-install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
+install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.sh
