@@ -8,12 +8,12 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
-Version:	0.90.0
-Release:	0.4
+Version:	0.91.0
+Release:	1
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
-# Source0-md5:	38b7b146fb866269f3541b87c170f529
+# Source0-md5:	be07953e905d1e42fe7a65ac2193a5f9
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
@@ -315,7 +315,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_sysconfdir}/WindowMaker
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
-
 
 %{_mandir}/man1/*
 %lang(sk) %{_mandir}/sk/man1/*
