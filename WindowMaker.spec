@@ -21,6 +21,8 @@ Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
 Patch7:		Windowmaker-WINGs.h.patch
 Patch8:		WindowMaker-singleclick.patch
+Patch9:		WindowMaker-cvs19991010.patch
+Patch10:	WindowMaker-plmenu.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	libPropList-devel >= 0.9.1
 BuildRequires:	xpm-devel
@@ -132,7 +134,6 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %prep
 %setup -q -a 1 -a 2
-
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
@@ -142,6 +143,8 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
 
 %build
 autoconf
