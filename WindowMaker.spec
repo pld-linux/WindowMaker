@@ -216,7 +216,7 @@ utilizando componentes estАticos (raramente necessАrio).
 програм, що використовують можливост╕ WindowMaker.
 
 %prep
-%setup -q -a 1 -a 2
+%setup -q -a 1 -a 2 -n %{name}-CVS-%{_snap}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
