@@ -21,6 +21,7 @@ Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.
 Source3:	%{name}.desktop
 Source4:	%{name}.RunWM
 Source5:	%{name}.wm_style
+Source6:	%{name}-xsession.desktop
 Patch0:		%{name}-CFLAGS.patch
 Patch1:		%{name}-wmconfig.patch
 Patch2:		%{name}-pixmaps.patch
@@ -279,7 +280,7 @@ cd %{name}-extra-%{extraver}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/pixmaps,%{_wmpropsdir}} \
+install -d $RPM_BUILD_ROOT{%{_datadir}/{pixmaps,xsessions},%{_wmpropsdir}} \
 	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %{__make} install \
@@ -295,8 +296,9 @@ install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
-install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.sh
-install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.names
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.sh
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.names
+install %{SOURCE6} $RPM_BUILD_ROOT%{_dastadir}/xsessions/WindowMaker.desktop
 
 cd %{name}-extra-%{extraver}
 %{__make} install \
@@ -350,6 +352,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dockit
 
 %{_datadir}/WindowMaker
+%{_datadir}/xsessions/WindowMaker.desktop
 
 %dir %{_libdir}/GNUstep
 %dir %{_libdir}/GNUstep/Apps
