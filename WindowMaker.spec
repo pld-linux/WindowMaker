@@ -12,6 +12,7 @@ Copyright:	GPL
 Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
 Source2:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-extra-%{extraver}.tar.gz
+Source3:	WindowMaker.desktop
 Patch0:		WindowMaker-CFLAGS.patch
 Patch1:		WindowMaker-wmconfig.patch
 Patch2:		WindowMaker-a_macro.patch
@@ -183,7 +184,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/pixmaps
+install -d $RPM_BUILD_ROOT%{_datadir}/{pixmaps,gnome/wm-properties}
 
 make install \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
@@ -193,6 +194,7 @@ make install \
 install util/bughint $RPM_BUILD_ROOT%{_bindir}
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
+install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
 
 (cd %{name}-extra-%{extraver};
 make DESTDIR=$RPM_BUILD_ROOT install )
@@ -222,6 +224,7 @@ rm -r $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %{_datadir}/pixmaps/*
+%{_datadir}/gnome/wm-properties/WindowMaker.desktop
 
 %attr(755,root,root) %{_bindir}/geticonset
 %attr(755,root,root) %{_bindir}/getstyle
