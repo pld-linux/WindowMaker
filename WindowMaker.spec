@@ -226,13 +226,14 @@ for f in WindowMaker/*menu*; do
 done
 
 %build
+rm -f {,%{name}-extra-%{extraver}/}missing
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 cd %{name}-extra-%{extraver}
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 cd ..
