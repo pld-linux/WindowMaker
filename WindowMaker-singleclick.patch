@@ -1,52 +1,41 @@
-diff -urN WindowMaker-0.60.0.orig/WPrefs.app/Expert.c WindowMaker-0.60.0/WPrefs.app/Expert.c
---- WindowMaker-0.60.0.orig/WPrefs.app/Expert.c	Sun Apr 25 21:47:28 1999
-+++ WindowMaker-0.60.0/WPrefs.app/Expert.c	Sun Jul 11 01:29:12 1999
-@@ -33,7 +33,7 @@
-     
-     WMWindow *win;
- 
--    WMButton *swi[5];
-+    WMButton *swi[6];
- 
- } _Panel;
- 
-@@ -52,6 +52,7 @@
-     WMSetButtonSelected(panel->swi[2], GetBoolForKey("SaveSessionOnExit"));
+--- WindowMaker-0.61.0/WPrefs.app/Expert.c	Sat Sep 18 02:11:58 1999
++++ WindowMaker-0.61.0.singleclick/WPrefs.app/Expert.c	Sun Oct 10 16:49:18 1999
+@@ -53,6 +53,7 @@
      WMSetButtonSelected(panel->swi[3], GetBoolForKey("UseSaveUnders"));
      WMSetButtonSelected(panel->swi[4], GetBoolForKey("DisableBlinking"));
-+    WMSetButtonSelected(panel->swi[5], GetBoolForKey("SingleClickLaunch"));
+     WMSetButtonSelected(panel->swi[5], GetBoolForKey("DontConfirmKill"));
++    WMSetButtonSelected(panel->swi[6], GetBoolForKey("SingleClickLaunch"));
  }
  
  
-@@ -65,7 +66,7 @@
+@@ -66,7 +67,7 @@
      WMResizeWidget(panel->frame, FRAME_WIDTH, FRAME_HEIGHT);
      WMMoveWidget(panel->frame, FRAME_LEFT, FRAME_TOP);
  
--    for (i=0; i<5; i++) {
-+    for (i=0; i<6; i++) {
+-    for (i=0; i<6; i++) {
++    for (i=0; i<7; i++) {
  	panel->swi[i] = WMCreateSwitchButton(panel->frame);
  	WMResizeWidget(panel->swi[i], FRAME_WIDTH-40, 25);
  	WMMoveWidget(panel->swi[i], 20, 20+i*25);
-@@ -76,6 +77,7 @@
-     WMSetButtonText(panel->swi[2], _("Automatically save session when exiting WindowMaker"));
+@@ -78,6 +79,7 @@
      WMSetButtonText(panel->swi[3], _("Use SaveUnder in window frames, icons, menus and other objects"));
      WMSetButtonText(panel->swi[4], _("Disable cycling color highlighting of icons."));
-+    WMSetButtonText(panel->swi[5], _("Launch applications and restore windows with a single click"));
+     WMSetButtonText(panel->swi[5], _("Disable confirmation panel for the Kill command."));
++    WMSetButtonText(panel->swi[6], _("Launch applications and restore windows with a single click"));
  
      WMRealizeWidget(panel->frame);
      WMMapSubwidgets(panel->frame);
-@@ -96,6 +98,7 @@
-     SetBoolForKey(WMGetButtonSelected(panel->swi[2]), "SaveSessionOnExit");
+@@ -99,6 +101,7 @@
      SetBoolForKey(WMGetButtonSelected(panel->swi[3]), "UseSaveUnders");
      SetBoolForKey(WMGetButtonSelected(panel->swi[4]), "DisableBlinking");
-+    SetBoolForKey(WMGetButtonSelected(panel->swi[5]), "SingleClickLaunch");
+     SetBoolForKey(WMGetButtonSelected(panel->swi[5]), "DontConfirmKill");
++    SetBoolForKey(WMGetButtonSelected(panel->swi[6]), "SingleClickLaunch");
  }
  
  
-diff -urN WindowMaker-0.60.0.orig/src/WindowMaker.h WindowMaker-0.60.0/src/WindowMaker.h
---- WindowMaker-0.60.0.orig/src/WindowMaker.h	Sun May 30 23:25:20 1999
-+++ WindowMaker-0.60.0/src/WindowMaker.h	Sun Jul 11 01:29:12 1999
-@@ -409,6 +409,9 @@
+--- WindowMaker-0.61.0/src/WindowMaker.h	Fri Sep 17 17:42:07 1999
++++ WindowMaker-0.61.0.singleclick/src/WindowMaker.h	Sun Oct 10 16:51:11 1999
+@@ -400,6 +400,9 @@
      /* shading animation */
      char shade_speed;
  
@@ -54,12 +43,11 @@ diff -urN WindowMaker-0.60.0.orig/src/WindowMaker.h WindowMaker-0.60.0/src/Windo
 +	char single_click;
 +
      int edge_resistance;
+     char attract;
  
-     struct {
-diff -urN WindowMaker-0.60.0.orig/src/appicon.c WindowMaker-0.60.0/src/appicon.c
---- WindowMaker-0.60.0.orig/src/appicon.c	Tue Jun  1 12:34:40 1999
-+++ WindowMaker-0.60.0/src/appicon.c	Sun Jul 11 01:29:12 1999
-@@ -737,6 +737,7 @@
+--- WindowMaker-0.61.0/src/appicon.c	Thu Sep 16 05:22:53 1999
++++ WindowMaker-0.61.0.singleclick/src/appicon.c	Sun Oct 10 16:51:11 1999
+@@ -739,6 +739,7 @@
      int shad_x = 0, shad_y = 0, docking=0, dockable, collapsed = 0;
      int ix, iy;
      int clickButton = event->xbutton.button;
@@ -67,7 +55,7 @@ diff -urN WindowMaker-0.60.0.orig/src/appicon.c WindowMaker-0.60.0/src/appicon.c
      Pixmap ghost = None;
      Window wins[2];
  
-@@ -798,6 +799,7 @@
+@@ -800,6 +801,7 @@
          XClearWindow(dpy, scr->dock_shadow);
      }
  
@@ -75,7 +63,7 @@ diff -urN WindowMaker-0.60.0.orig/src/appicon.c WindowMaker-0.60.0/src/appicon.c
      while (!done) {
  	WMMaskEvent(dpy, PointerMotionMask|ButtonReleaseMask|ButtonPressMask
  		    |ButtonMotionMask|ExposureMask, &ev);
-@@ -807,6 +809,7 @@
+@@ -809,6 +811,7 @@
  	    break;
  
  	 case MotionNotify:
@@ -83,7 +71,7 @@ diff -urN WindowMaker-0.60.0.orig/src/appicon.c WindowMaker-0.60.0/src/appicon.c
  	    if (!grabbed) {
  		if (abs(dx-ev.xmotion.x)>=MOVE_THRESHOLD
  		    || abs(dy-ev.xmotion.y)>=MOVE_THRESHOLD) {
-@@ -933,6 +936,9 @@
+@@ -935,6 +938,9 @@
  		wArrangeIcons(scr, True);
  
  	    done = 1;
@@ -93,10 +81,9 @@ diff -urN WindowMaker-0.60.0.orig/src/appicon.c WindowMaker-0.60.0/src/appicon.c
  	    break;
  	}
      }
-diff -urN WindowMaker-0.60.0.orig/src/defaults.c WindowMaker-0.60.0/src/defaults.c
---- WindowMaker-0.60.0.orig/src/defaults.c	Tue Jun  1 12:34:40 1999
-+++ WindowMaker-0.60.0/src/defaults.c	Sun Jul 11 01:29:12 1999
-@@ -495,6 +495,9 @@
+--- WindowMaker-0.61.0/src/defaults.c	Fri Sep 17 17:42:09 1999
++++ WindowMaker-0.61.0.singleclick/src/defaults.c	Sun Oct 10 16:51:11 1999
+@@ -503,6 +503,9 @@
      {"DisableBlinking",	"NO",		NULL,
  	   &wPreferences.dont_blink,	getBool,	NULL
      },
@@ -106,10 +93,9 @@ diff -urN WindowMaker-0.60.0.orig/src/defaults.c WindowMaker-0.60.0/src/defaults
  #ifdef WEENDOZE_CYCLE
      {"WindozeCycling","NO", 			NULL,
  	    &wPreferences.windoze_cycling,	getBool, NULL
-diff -urN WindowMaker-0.60.0.orig/src/dock.c WindowMaker-0.60.0/src/dock.c
---- WindowMaker-0.60.0.orig/src/dock.c	Thu Jun  3 13:29:05 1999
-+++ WindowMaker-0.60.0/src/dock.c	Sun Jul 11 01:34:50 1999
-@@ -3746,7 +3746,7 @@
+--- WindowMaker-0.61.0/src/dock.c	Thu Sep 16 05:22:53 1999
++++ WindowMaker-0.61.0.singleclick/src/dock.c	Sun Oct 10 16:51:11 1999
+@@ -3806,7 +3806,7 @@
  
  
  
@@ -118,7 +104,7 @@ diff -urN WindowMaker-0.60.0.orig/src/dock.c WindowMaker-0.60.0/src/dock.c
  handleIconMove(WDock *dock, WAppIcon *aicon, XEvent *event)
  {
      WScreen *scr = dock->screen_ptr;
-@@ -3761,11 +3761,12 @@
+@@ -3821,11 +3821,12 @@
      int ix = aicon->xindex, iy = aicon->yindex;
      int tmp;
      Pixmap ghost = None;
@@ -132,7 +118,7 @@ diff -urN WindowMaker-0.60.0.orig/src/dock.c WindowMaker-0.60.0/src/dock.c
      if (wPreferences.flags.noupdates)
  	return;
  
-@@ -3816,6 +3817,7 @@
+@@ -3876,6 +3877,7 @@
  	    break;
  
  	 case MotionNotify:
@@ -140,7 +126,7 @@ diff -urN WindowMaker-0.60.0.orig/src/dock.c WindowMaker-0.60.0/src/dock.c
  	    if (!grabbed) {
  		if (abs(ofs_x-ev.xmotion.x)>=MOVE_THRESHOLD
  		    || abs(ofs_y-ev.xmotion.y)>=MOVE_THRESHOLD) {
-@@ -3958,7 +3960,10 @@
+@@ -4018,7 +4020,10 @@
  #ifdef DEBUG
  	    puts("End icon move");
  #endif
@@ -152,7 +138,7 @@ diff -urN WindowMaker-0.60.0.orig/src/dock.c WindowMaker-0.60.0/src/dock.c
  	}
      }
  }
-@@ -4098,7 +4103,9 @@
+@@ -4158,7 +4163,9 @@
              else
                  handleDockMove(dock, aicon, event);
          } else
@@ -163,9 +149,8 @@ diff -urN WindowMaker-0.60.0.orig/src/dock.c WindowMaker-0.60.0/src/dock.c
  
      } else if (event->xbutton.button==Button2 && dock->type==WM_CLIP &&
                 aicon==scr->clip_icon) {
-diff -urN WindowMaker-0.60.0.orig/src/icon.c WindowMaker-0.60.0/src/icon.c
---- WindowMaker-0.60.0.orig/src/icon.c	Sun May 30 23:25:21 1999
-+++ WindowMaker-0.60.0/src/icon.c	Sun Jul 11 01:29:13 1999
+--- WindowMaker-0.61.0/src/icon.c	Sun May 30 07:02:56 1999
++++ WindowMaker-0.61.0.singleclick/src/icon.c	Sun Oct 10 16:51:11 1999
 @@ -863,6 +863,7 @@
      int dx=event->xbutton.x, dy=event->xbutton.y;
      int grabbed=0;
