@@ -4,7 +4,7 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.61.1
+Version:	0.62.1
 Release:	4
 Group:		X11/Window Managers
 Group(es):	X11/Administraadores De Ventanas
@@ -18,16 +18,16 @@ Patch0:		%{name}-CFLAGS.patch
 Patch1:		%{name}-wmconfig.patch
 Patch2:		%{name}-a_macro.patch
 Patch3:		%{name}-pixmaps.patch
-Patch4:		%{name}-shared.patch
+#Patch4:		%{name}-shared.patch
 Patch5:		%{name}-areas.patch
 Patch6:		%{name}-runinst.patch
 Patch7:		Windowmaker-WINGs.h.patch
-Patch8:		%{name}-singleclick.patch
-Patch9:		%{name}-cvs19991010.patch
-Patch10:	%{name}-plmenu.patch
+#Patch8:		%{name}-singleclick.patch
+#Patch9:		%{name}-cvs19991010.patch
+#Patch10:	%{name}-plmenu.patch
 Patch11:	%{name}-dockit.patch
 URL:		http://www.windowmaker.org/
-BuildRequires:	libPropList-devel >= 0.9.1
+BuildRequires:	libPropList-devel >= 0.10.1
 BuildRequires:	xpm-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
@@ -147,13 +147,13 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %patch1 -p0
 %patch2 -p0
 %patch3 -p1
-%patch4 -p1
+#%patch4 -p1
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
+#%patch8 -p1
+#%patch9 -p1
+#%patch10 -p1
 %patch11 -p1
 
 %build
