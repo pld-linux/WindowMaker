@@ -172,7 +172,7 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 touch WindowMaker/Defaults/W*.in
 
-make \
+%{__make} \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
 	CFLAGS="$RPM_OPT_FLAGS" \
@@ -191,7 +191,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/{pixmaps,gnome/wm-properties}
 
-make install \
+%{__make} install \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
 	DESTDIR=$RPM_BUILD_ROOT 
@@ -205,7 +205,7 @@ install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
 
 (cd %{name}-extra-%{extraver};
-make DESTDIR=$RPM_BUILD_ROOT install )
+%{__make} DESTDIR=$RPM_BUILD_ROOT install )
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 
