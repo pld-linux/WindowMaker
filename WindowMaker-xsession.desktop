@@ -7,6 +7,7 @@ Name=WindowMaker
 Name[sv]=Windowmaker
 Comment=A simple window manager that resembles the NeXTStep look very closely
 Comment[nl]=Een eenvoudige window manager die het uiterlijk van NeXTStep zeer dicht benaderd
+Comment[pl]=Prosty zarządca okien bardzo dobrze odtwarzający wygląd NeXTStepa
 Comment[sr]=Једноставан менаџер прозора који одражава врло блиско изглед NeXTStep-а
 Comment[sv]=En enkel fönsterhanterare som mycket nära efterliknar Nextstep-utseendet
 # vi: encoding=utf-8
