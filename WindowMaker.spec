@@ -51,7 +51,7 @@ Requires:	xinitrc >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/X11
-%define		_wmpropsdir	%{_datadir}/wm-properties
+%define		_wmpropsdir	/usr/share/wm-properties
 
 %description
 Window Maker is an X11 window manager which emulates the look and feel
