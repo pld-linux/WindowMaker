@@ -193,8 +193,8 @@ This package contains static libraries for building
 WindowMaker-enhanced applications.
 
 %description static -l pl
-Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
-aplikacji wykorzystuj±cych mo¿liwo¶ci zarz±dcy okien WindowMaker.
+Ten pakiet zawiera statyczne biblioteki do tworzenia aplikacji
+wykorzystuj±cych mo¿liwo¶ci zarz±dcy okien WindowMaker.
 
 %description static -l pt_BR
 Instale este pacote se você deseja desenvolver para o WindowMaker,
@@ -301,11 +301,11 @@ cd ..
 
 %find_lang %{name} --all-name
 
-%post   libs -p /sbin/ldconfig
-%postun libs -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
