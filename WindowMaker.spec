@@ -81,7 +81,7 @@ fonctionnent à la fois dans les gestionnaires de fenêtres AfterStep et
 Window Maker.
 
 %description -l pl
-WindowMaker jest mened¿erem okien przypominaj±cy wygl±dem i wygod± obs³ugi
+WindowMaker jest mened¿erem okien przypominaj±cym wygl±dem i wygod± obs³ugi
 interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo ma³y, o du¿ych
 mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go myszk±, za pomoc±
 programu WPrefs wchodz±cego w sk³ad tego pakietu.
@@ -132,7 +132,7 @@ applications.
 
 %description static -l pl
 Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
-aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
+aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 
 %prep
 %setup -q -a 1 -a 2
