@@ -118,6 +118,8 @@ install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
+strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
+
 gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
 bzip2 -9 AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
@@ -138,7 +140,7 @@ rm -r $RPM_BUILD_ROOT
 
 %attr(755,root,root) /usr/X11R6/bin/*
 
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
 %dir /usr/X11R6/share/WINGs
 %dir /usr/X11R6/share/WindowMaker
@@ -186,8 +188,12 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/include/*.h
 
 %changelog
-* Fri Jan 15 1999 Artur Frysiak <wiget@usa.net>
+* Wed Feb  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.50.2-1d]
+- added stripping shared libraries,
+- removed SONAME symlinks from main package.
+
+* Fri Jan 15 1999 Artur Frysiak <wiget@usa.net>
 - upgraded to 0.50.2
 - rewrite %{name}-po.patch
 - added icons (WindowMaker-data.tar.gz) 
