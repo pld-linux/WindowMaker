@@ -1,5 +1,6 @@
---- WindowMaker-0.61.1/WINGs/Makefile.am	Sun Oct  3 00:17:29 1999
-+++ WindowMaker-0.61.1.shared/WINGs/Makefile.am	Sun Oct 10 19:47:00 1999
+diff -Nru WindowMaker-0.62.1/WINGs/Makefile.am WindowMaker-0.62.1.new/WINGs/Makefile.am
+--- WindowMaker-0.62.1/WINGs/Makefile.am	Tue Aug  8 00:51:57 2000
++++ WindowMaker-0.62.1.new/WINGs/Makefile.am	Tue Aug  8 00:41:38 2000
 @@ -10,11 +10,12 @@
  	-lm @LIBPL@
  
@@ -8,7 +9,7 @@
 +lib_LTLIBRARIES = libWINGs.la libWUtil.la
  
 -lib_LIBRARIES = libWINGs.a libWUtil.a
-+#lib_LIBRARIES = libWINGs.a libWUtil.a
++#lib_LIBRARIES = libWINGs.a libWUtil.la
  
 -#libWINGs_la_LDFLAGS = -version-info 1:1:0
 +libWINGs_la_LDFLAGS = -version-info 1:1:0
@@ -16,7 +17,7 @@
  
  include_HEADERS = WINGs.h WUtil.h WINGsP.h
  
-@@ -22,36 +23,36 @@
+@@ -24,39 +25,39 @@
  
  testmywidget_SOURCES = testmywidget.c mywidget.c mywidget.h
  
@@ -46,11 +47,15 @@
 -testcolorpanel_LDADD = libWINGs.a $(LIBLIST)
 +testcolorpanel_LDADD = libWINGs.la $(LIBLIST)
  
- 
  wmquery_SOURCES = wmquery.c 
  
 -wmquery_LDADD = libWINGs.a $(LIBLIST)
 +wmquery_LDADD = libWINGs.la $(LIBLIST)
+ 
+ connect_SOURCES = connect.c
+ 
+-connect_LDADD = libWUtil.a @LIBRARY_SEARCH_PATH@ @NETLIBS@ @LIBPL@
++connect_LDADD = libWUtil.la @LIBRARY_SEARCH_PATH@ @NETLIBS@ @LIBPL@
  
  
  EXTRA_DIST = logo.xpm BUGS
@@ -61,7 +66,7 @@
  	WINGs.h \
  	WINGsP.h \
  	configuration.c \
-@@ -96,7 +97,7 @@
+@@ -108,7 +109,7 @@
  	usleep.c
  
  
@@ -69,25 +74,11 @@
 +libWUtil_la_SOURCES = 	\
  	WINGs.h \
  	WINGsP.h \
- 	bag.c \
---- WindowMaker-0.61.1/WPrefs.app/Makefile.am	Wed Jun  2 00:25:45 1999
-+++ WindowMaker-0.61.1.shared/WPrefs.app/Makefile.am	Sun Oct 10 19:38:53 1999
-@@ -49,10 +49,10 @@
- 	-I$(top_srcdir)/wrlib \
- 	-I$(top_srcdir)/WINGs @HEADER_SEARCH_PATH@ 
- 
--WPrefs_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.a
-+WPrefs_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.la
- 
- WPrefs_LDADD = \
--	$(top_builddir)/WINGs/libWINGs.a\
-+	$(top_builddir)/WINGs/libWINGs.la\
- 	$(top_builddir)/wrlib/libwraster.la \
- 	@LIBRARY_SEARCH_PATH@ \
- 	@LIBPL@ \
---- WindowMaker-0.61.1/src/Makefile.am	Thu Sep 16 04:58:56 1999
-+++ WindowMaker-0.61.1.shared/src/Makefile.am	Sun Oct 10 19:33:45 1999
-@@ -111,7 +111,7 @@
+ 	bagarray.c \
+diff -Nru WindowMaker-0.62.1/src/Makefile.am WindowMaker-0.62.1.new/src/Makefile.am
+--- WindowMaker-0.62.1/src/Makefile.am	Fri Jan 14 17:30:56 2000
++++ WindowMaker-0.62.1.new/src/Makefile.am	Tue Aug  8 00:52:09 2000
+@@ -114,7 +114,7 @@
  
  
  wmaker_LDADD = \
@@ -96,8 +87,9 @@
  	$(top_builddir)/wrlib/libwraster.la\
  	@LIBRARY_SEARCH_PATH@ \
  	@LIBPL@ \
---- WindowMaker-0.61.1/test/Makefile.am	Wed Jan  6 16:22:49 1999
-+++ WindowMaker-0.61.1.shared/test/Makefile.am	Sun Oct 10 19:35:06 1999
+diff -Nru WindowMaker-0.62.1/test/Makefile.am WindowMaker-0.62.1.new/test/Makefile.am
+--- WindowMaker-0.62.1/test/Makefile.am	Tue Aug  8 00:51:57 2000
++++ WindowMaker-0.62.1.new/test/Makefile.am	Tue Aug  8 00:41:38 2000
 @@ -8,7 +8,7 @@
  
  wtest_SOURCES = wtest.c
@@ -107,8 +99,9 @@
  
  
  INCLUDES = -g -D_BSD_SOURCE @XCFLAGS@ -I$(top_srcdir)/wmlib 
---- WindowMaker-0.61.1/util/Makefile.am	Thu Sep 16 05:01:16 1999
-+++ WindowMaker-0.61.1.shared/util/Makefile.am	Sun Oct 10 19:38:08 1999
+diff -Nru WindowMaker-0.62.1/util/Makefile.am WindowMaker-0.62.1.new/util/Makefile.am
+--- WindowMaker-0.62.1/util/Makefile.am	Tue Aug  8 00:51:57 2000
++++ WindowMaker-0.62.1.new/util/Makefile.am	Tue Aug  8 00:41:38 2000
 @@ -31,7 +31,7 @@
  geticonset_LDADD= $(liblist)
  
@@ -118,8 +111,9 @@
  	$(top_builddir)/wrlib/libwraster.la \
  	@LIBRARY_SEARCH_PATH@ \
  	@LIBPL@ \
---- WindowMaker-0.61.1/wmlib/Makefile.am	Wed Sep 30 00:36:36 1998
-+++ WindowMaker-0.61.1.shared/wmlib/Makefile.am	Sun Oct 10 19:36:39 1999
+diff -Nru WindowMaker-0.62.1/wmlib/Makefile.am WindowMaker-0.62.1.new/wmlib/Makefile.am
+--- WindowMaker-0.62.1/wmlib/Makefile.am	Tue Aug  8 00:51:57 2000
++++ WindowMaker-0.62.1.new/wmlib/Makefile.am	Tue Aug  8 00:41:38 2000
 @@ -1,13 +1,13 @@
  
  AUTOMAKE_OPTIONS = no-dependencies
@@ -141,3 +135,19 @@
  	menu.h	
  
 +libWMaker_la_LDFLAGS = -version-info 1:1:1
+diff -Nru WindowMaker-0.62.1/WPrefs.app/Makefile.am WindowMaker-0.62.1.new/WPrefs.app/Makefile.am
+--- WindowMaker-0.62.1/WPrefs.app/Makefile.am	Sun Apr  2 23:18:15 2000
++++ WindowMaker-0.62.1.new/WPrefs.app/Makefile.am	Tue Aug  8 01:20:38 2000
+@@ -48,10 +48,10 @@
+ 	-I$(top_srcdir)/wrlib \
+ 	-I$(top_srcdir)/WINGs @HEADER_SEARCH_PATH@ 
+ 
+-WPrefs_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.a
++WPrefs_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.la
+ 
+ WPrefs_LDADD = \
+-	$(top_builddir)/WINGs/libWINGs.a\
++	$(top_builddir)/WINGs/libWINGs.la\
+ 	$(top_builddir)/wrlib/libwraster.la \
+ 	@LIBRARY_SEARCH_PATH@ \
+ 	@LIBPL@ \
