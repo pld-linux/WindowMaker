@@ -19,8 +19,9 @@ Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
 Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
+Patch7:		WindowMaker-ru.po.patch
 URL:		http://www.windowmaker.org/
-BuildPrereq:	libPropList-devel >= 0.8.3
+BuildPrereq:	libPropList-devel >= 1.8.3
 BuildPrereq:	xpm-devel
 BuildPrereq:	libpng-devel
 BuildPrereq:	libjpeg-devel >= 6b
@@ -31,8 +32,9 @@ Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define	_prefix	/usr/X11R6
-%define	_mandir	/usr/X11R6/man
+%define	_prefix		/usr/X11R6
+%define	_mandir		%{_prefix}/man
+%define	_sysconfdir	/etc/X11
 
 %description
 WindowMaker is a window manager designed to emulate the look and feel of
@@ -104,12 +106,13 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %setup -q -a 1 -a 2
 
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 %patch2 -p0
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p0
 
 %build
 autoconf
@@ -118,8 +121,8 @@ LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 CPP_PATH="/lib/cpp" ; export CPP_PATH
 
 %configure \
-	--sysconfdir=/etc/X11 \
-	--with-nlsdir=/usr/X11R6/share/locale \
+	--sysconfdir=%{_sysconfdir} \
+	--with-nlsdir=%{_datadir}/locale \
 	--enable-kanji \
 	--enable-sound \
 	--enable-gnome \
@@ -129,7 +132,8 @@ CPP_PATH="/lib/cpp" ; export CPP_PATH
         --enable-newstyle \
 	--enable-kde \
 	--enable-shared \
-	--enable-static
+	--enable-static \
+	--enable-usermenu
 make \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
@@ -140,30 +144,30 @@ autoconf
 cd %{name}-extra-%{extraver}
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target_platform} \
-	--prefix=/usr/X11R6 \
-	--mandir=/usr/X11R6/man \
-	--with-nlsdir=/usr/X11R6/share/locale \
-	--with-iconsdir=/usr/X11R6/share/pixmaps
+	--prefix=%{_prefix} \
+	--mandir=%{_mandir} \
+	--with-nlsdir=%{_datadir}/locale \
+	--with-iconsdir=%{_datadir}/pixmaps
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install -d $RPM_BUILD_ROOT%{_datadir}/pixmaps
 
 make install \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
 	DESTDIR=$RPM_BUILD_ROOT 
 
-install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
+install util/bughint $RPM_BUILD_ROOT%{_bindir}
 
-install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 
 (cd %{name}-extra-%{extraver};
 make DESTDIR=$RPM_BUILD_ROOT install )
 
-strip --strip-unneeded $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*so.*.*
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %find_lang %{name}
@@ -180,56 +184,63 @@ rm -r $RPM_BUILD_ROOT
 %doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
 
 %dir /etc/X11/WindowMaker
-%config %verify(not size mtime md5) /etc/X11/WindowMaker/*
+%config %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
 
-/usr/X11R6/man/man1/*
+%{_mandir}/man1/*
 
-/usr/X11R6/share/pixmaps/*
+%{_datadir}/pixmaps/*
 
-%attr(755,root,root) /usr/X11R6/bin/geticonset
-%attr(755,root,root) /usr/X11R6/bin/getstyle
-%attr(755,root,root) /usr/X11R6/bin/seticons
-%attr(755,root,root) /usr/X11R6/bin/setstyle
-%attr(755,root,root) /usr/X11R6/bin/wdwrite
-%attr(755,root,root) /usr/X11R6/bin/wkdemenu.pl
-%attr(755,root,root) /usr/X11R6/bin/wm-oldmenu2new
-%attr(755,root,root) /usr/X11R6/bin/wmaker
-%attr(755,root,root) /usr/X11R6/bin/wmaker.inst
-%attr(755,root,root) /usr/X11R6/bin/wmsetbg
-%attr(755,root,root) /usr/X11R6/bin/wsetfont
-%attr(755,root,root) /usr/X11R6/bin/wxcopy
-%attr(755,root,root) /usr/X11R6/bin/wxpaste
+%attr(755,root,root) %{_bindir}/geticonset
+%attr(755,root,root) %{_bindir}/getstyle
+%attr(755,root,root) %{_bindir}/seticons
+%attr(755,root,root) %{_bindir}/setstyle
+%attr(755,root,root) %{_bindir}/wdwrite
+%attr(755,root,root) %{_bindir}/wkdemenu.pl
+%attr(755,root,root) %{_bindir}/wm-oldmenu2new
+%attr(755,root,root) %{_bindir}/wmaker
+%attr(755,root,root) %{_bindir}/wmaker.inst
+%attr(755,root,root) %{_bindir}/wmsetbg
+%attr(755,root,root) %{_bindir}/wsetfont
+%attr(755,root,root) %{_bindir}/wxcopy
+%attr(755,root,root) %{_bindir}/wxpaste
 
-/usr/X11R6/share/WindowMaker
+%{_datadir}/WindowMaker
 
-%dir /usr/X11R6/GNUstep
-%dir /usr/X11R6/GNUstep/Apps
-%dir /usr/X11R6/GNUstep/Apps/WPrefs.app
+%dir %{_prefix}/GNUstep
+%dir %{_prefix}/GNUstep/Apps
+%dir %{_prefix}/GNUstep/Apps/WPrefs.app
 
-%attr(755,root,root) /usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs
+%attr(755,root,root) %{_prefix}/GNUstep/Apps/WPrefs.app/WPrefs
 
-/usr/X11R6/GNUstep/Apps/WPrefs.app/tiff
-/usr/X11R6/GNUstep/Apps/WPrefs.app/xpm
-/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.tiff
-/usr/X11R6/GNUstep/Apps/WPrefs.app/WPrefs.xpm
+%{_prefix}/GNUstep/Apps/WPrefs.app/tiff
+%{_prefix}/GNUstep/Apps/WPrefs.app/xpm
+%{_prefix}/GNUstep/Apps/WPrefs.app/WPrefs.tiff
+%{_prefix}/GNUstep/Apps/WPrefs.app/WPrefs.xpm
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
-/usr/X11R6/share/WINGs
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%{_datadir}/WINGs
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/X11R6/lib/lib*.so
-%attr(755,root,root) /usr/X11R6/bin/get-wraster-flags
-/usr/X11R6/include/*.h
-/usr/X11R6/lib/lib*.la
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_bindir}/get-wraster-flags
+%{_includedir}/*.h
+%{_libdir}/lib*.la
 
 %files static
 %defattr(644,root,root,755)
-/usr/X11R6/lib/lib*.a
+%{_libdir}/lib*.a
 
 %changelog
+* Fri Jun 25 1999 Piotr Czerwiñski <pius@pld.org.pl> 
+  [0.60.0-1]
+- updated to 0.60.0,
+- added using more rpm macros,
+- added %{name}-ru.po.patch,
+- added --enable-usermenu to ./configure options.
+
 * Mon Jun 07 1999 Jan Rêkorajski <baggins@pld.org.pl>
   [0.53.0-4]
 - fixed --prefix
