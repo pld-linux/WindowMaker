@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.61.1
-Release:	3
+Release: 4
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 License:	GPL
@@ -28,7 +28,7 @@ Patch11:	WindowMaker-dockit.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	libPropList-devel >= 0.9.1
 BuildRequires:	xpm-devel
-BuildRequires:	libpng-devel
+BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
