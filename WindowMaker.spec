@@ -4,8 +4,8 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.53.0
-Release:	4
+Version:	0.60.0
+Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -32,6 +32,7 @@ Requires:	%{name}-libs = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define	_prefix	/usr/X11R6
+%define	_mandir	/usr/X11R6/man
 
 %description
 WindowMaker is a window manager designed to emulate the look and feel of
@@ -140,7 +141,7 @@ cd %{name}-extra-%{extraver}
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target_platform} \
 	--prefix=/usr/X11R6 \
-	--mandir=/usr/X11R6/share/man \
+	--mandir=/usr/X11R6/man \
 	--with-nlsdir=/usr/X11R6/share/locale \
 	--with-iconsdir=/usr/X11R6/share/pixmaps
 
@@ -162,7 +163,7 @@ make DESTDIR=$RPM_BUILD_ROOT install )
 
 strip --strip-unneeded $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/share/man/man1/* \
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
 	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %find_lang %{name}
@@ -181,7 +182,7 @@ rm -r $RPM_BUILD_ROOT
 %dir /etc/X11/WindowMaker
 %config %verify(not size mtime md5) /etc/X11/WindowMaker/*
 
-/usr/X11R6/share/man/man1/*
+/usr/X11R6/man/man1/*
 
 /usr/X11R6/share/pixmaps/*
 
