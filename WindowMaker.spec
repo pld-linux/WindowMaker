@@ -39,7 +39,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
 Requires:	wmconfig >= 0.9.9-5
-Requires:	/lib/cpp
+Requires:	/usr/bin/cpp
 Requires:	%{name}-libs = %{version}
 Requires:	tk
 Requires:	xinitrc >= 3.0
@@ -166,7 +166,7 @@ autoconf
 automake
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
-CPP_PATH="/lib/cpp" ; export CPP_PATH
+CPP_PATH="/usr/bin/cpp" ; export CPP_PATH
 
 %configure \
 	--with-nlsdir=%{_datadir}/locale \
