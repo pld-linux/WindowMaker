@@ -222,12 +222,12 @@ for f in WindowMaker/*menu*; do
 done
 
 %build
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %{__automake}
 cd %{name}-extra-%{extraver}
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %{__automake}
