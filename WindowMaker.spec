@@ -4,7 +4,7 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.63.1
+Version:	0.64.0
 Release:	1
 Group:		X11/Window Managers
 Group(es):	X11/Administraadores De Ventanas
@@ -24,11 +24,10 @@ Patch3:		%{name}-pixmaps.patch
 Patch4:		%{name}-shared.patch
 Patch5:		%{name}-areas.patch
 Patch6:		%{name}-runinst.patch
-Patch7:		%{name}-WINGs.h.patch
-Patch8:		%{name}-IconPosition.patch
-Patch9:		%{name}-singleclick.patch
-Patch10:	%{name}-plmenu.patch
-Patch11:	%{name}-dockit.patch
+Patch7:		%{name}-IconPosition.patch
+Patch8:		%{name}-singleclick.patch
+Patch9:		%{name}-plmenu.patch
+Patch10:	%{name}-dockit.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -159,11 +158,11 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
-%patch11 -p1
 
 %build
+aclocal
 autoconf
-automake
+automake -a -c
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
 CPP_PATH="/lib/cpp" ; export CPP_PATH
@@ -228,7 +227,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc {AUTHORS,BUGFORM,BUGS,ChangeLog,FAQ,NEWS,README}.gz
+%doc *.gz
 
 %dir %{_sysconfdir}/WindowMaker
 %config %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
@@ -241,16 +240,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/*
 %{_datadir}/gnome/wm-properties/WindowMaker.desktop
 
+%attr(755,root,root) %{_bindir}/bughint
 %attr(755,root,root) %{_bindir}/geticonset
 %attr(755,root,root) %{_bindir}/getstyle
 %attr(755,root,root) %{_bindir}/seticons
 %attr(755,root,root) %{_bindir}/setstyle
 %attr(755,root,root) %{_bindir}/wdwrite
+%attr(755,root,root) %{_bindir}/wdread
 %attr(755,root,root) %{_bindir}/wkdemenu.pl
 %attr(755,root,root) %{_bindir}/wm-oldmenu2new
+%attr(755,root,root) %{_bindir}/wmagnify
 %attr(755,root,root) %{_bindir}/wmaker
 %attr(755,root,root) %{_bindir}/wmaker.inst
 %attr(755,root,root) %{_bindir}/wmsetbg
+%attr(755,root,root) %{_bindir}/wmchlocale
 %attr(755,root,root) %{_bindir}/wsetfont
 %attr(755,root,root) %{_bindir}/wxcopy
 %attr(755,root,root) %{_bindir}/wxpaste
@@ -271,6 +274,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/get-wings-flags
+%attr(755,root,root) %{_bindir}/get-wraster-flags
+%attr(755,root,root) %{_bindir}/get-wutil-flags
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_datadir}/WINGs
 
