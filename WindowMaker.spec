@@ -3,7 +3,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.51.0
-Release:	1d
+Release:	2
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -14,9 +14,18 @@ Patch0:		%{name}-pl.po.patch
 Patch1:		%{name}-po.install.patch
 Patch2:		%{name}-CFLAGS.patch
 Patch3:		%{name}-wmconfig.patch
+Patch4:		%{name}-a_macro.patch
 URL:		http://www.windowmaker.org/
-Requires:	wmconfig, libjpeg, libpng, libtiff, libungif, xpm
-Requires:	XFree86-libs, libPropList
+Requires:	wmconfig
+#Requires:	cpp
+Requires:	libjpeg
+Requires:	libpng
+Requires:	libtiff
+Requires:	libungif
+Requires:	xpm
+Requires:	XFree86-libs
+Requires:	libPropList
+Requires:	zlib
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -73,24 +82,23 @@ Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
 aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %prep
-#%setup -q 
 %setup -q -a 1
-#(cd $RPM_BUILD_DIR/%{name}-%{version}; tar xzf %{SOURCE1})
 
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p0
 
 %build
 echo "b" | LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru se tr" \
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
 ./configure \
 	--prefix=/usr/X11R6 \
 	--with-nlsdir=/usr/X11R6/share/locale \
 	--enable-kanji \
 	--enable-sound \
-	--without-gnome \
+	--enable-gnome \
 	--disable-shm \
 	--disable-debug \
 	--enable-superfluous \
