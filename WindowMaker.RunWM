@@ -3,8 +3,8 @@
 # RunWM - this is a script used to launch window manager
 #
 
-if [ -x /usr/X11R6/bin/wmaker -a -d /usr/X11R6/share/WindowMaker ] ; then
-	WMGLOBALDIR="/usr/X11R6/share/WindowMaker"
+if [ -x /usr/bin/wmaker -a -d /usr/share/WindowMaker ] ; then
+	WMGLOBALDIR="/usr/share/WindowMaker"
 	WMCONFIGDIR="/etc/X11/WindowMaker"
 	GSDIR=$HOME/GNUstep
 	if [ ! -d $GSDIR/Defaults ] ; then
@@ -27,12 +27,12 @@ if [ -x /usr/X11R6/bin/wmaker -a -d /usr/X11R6/share/WindowMaker ] ; then
 	fi
 	[ -d $GSDIR/.AppInfo ] || mkdir -p $GSDIR/.AppInfo
 	[ -d $GSDIR/Library/Icons ] || mkdir -p $GSDIR/Library/Icons
-	eval "exec /usr/X11R6/bin/wmaker"
+	eval "exec /usr/bin/wmaker"
 else
 cat <<EOF
  WARNING: You selected WindowMaker as your window manager, but your
  installation of WindowMaker does not appear to be functional. Either
- /usr/X11R6/bin/wmaker was not found or /usr/share/WindowMaker directory
+ /usr/bin/wmaker was not found or /usr/share/WindowMaker directory
  is missing.
 EOF
 fi
