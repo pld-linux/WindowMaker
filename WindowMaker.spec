@@ -237,7 +237,10 @@ LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
 CPP_PATH="/lib/cpp" ; export CPP_PATH
 
-%configure \
+if [ -f %{_pkgconfigdir}/libpng12.pc ] ; then
+	CPPFLAGS="`pkg-config libpng12 --cflags`"
+fi
+%configure CPPFLAGS="$CPPFLAGS" \
 	--with-nlsdir=%{_datadir}/locale \
 	--with-appspath=%{_libdir}/GNUstep/Apps \
 	--enable-sound \
