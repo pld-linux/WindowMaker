@@ -2,7 +2,7 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.51.2
+Version:	0.52.0
 Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
@@ -14,9 +14,12 @@ Patch1:		WindowMaker-CFLAGS.patch
 Patch2:		WindowMaker-wmconfig.patch
 Patch3:		WindowMaker-a_macro.patch
 Patch4:		WindowMaker-pixmaps.patch
+Patch5:		WindowMaker-shared.patch
 URL:		http://www.windowmaker.org/
+BuildPrereq:	libPropList-devel
 Requires:	wmconfig
 Requires:	cpp
+Requires:	%{name}-libs = %{version}
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -37,13 +40,27 @@ interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo ma³y, o du¿ych
 mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go myszk±, za pomoc±
 programu WPrefs wchodz±cego w sk³ad tego pakietu.
 
+%package libs
+Summary:	WindowMaker shared libraries
+Summary(pl):	Biblioteki wspó³dzielone WindowMakera
+Group:		Libraries
+Group(pl):	Biblioteki
+
+%description libs
+This package contains shared libraries for run WindowMaker.
+
+%description libs -l pl
+Ten pakiet zawiera biblioteki wspó³dzielone niezbêdne do pracy
+mened¿era okien WindowMaker.
+
+
 %package devel
 Summary:	WindowMaker libraries
 Summary(fr):	Librairies de WindowMaker
 Summary(pl):	Biblioteki WindowMakera
 Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}
+Requires:	%{name}-libs = %{version}
 
 %description devel
 This package contains libraries for building WindowMaker-enhanced
@@ -62,7 +79,7 @@ Summary:	WindowMaker static libraries
 Summary(pl):	Biblioteki statyczne WindowMakera
 Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}
+Requires:	%{name}-devel = %{version}
 
 %description static
 This package contains static libraries for building WindowMaker-enhanced
@@ -80,6 +97,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch2 -p1
 %patch3 -p0
 %patch4 -p1
+%patch5 -p1
 
 %build
 echo "b" | \
@@ -119,8 +137,8 @@ install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
-gzip -9nf AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
+	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -140,10 +158,20 @@ rm -r $RPM_BUILD_ROOT
 
 /usr/X11R6/share/pixmaps/*
 
-%attr(755,root,root) /usr/X11R6/bin/*
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+%attr(755,root,root) /usr/X11R6/bin/geticonset
+%attr(755,root,root) /usr/X11R6/bin/getstyle
+%attr(755,root,root) /usr/X11R6/bin/seticons
+%attr(755,root,root) /usr/X11R6/bin/setstyle
+%attr(755,root,root) /usr/X11R6/bin/wdwrite
+%attr(755,root,root) /usr/X11R6/bin/wkdemenu.pl
+%attr(755,root,root) /usr/X11R6/bin/wm-oldmenu2new
+%attr(755,root,root) /usr/X11R6/bin/wmaker
+%attr(755,root,root) /usr/X11R6/bin/wmaker.inst
+%attr(755,root,root) /usr/X11R6/bin/wmsetbg
+%attr(755,root,root) /usr/X11R6/bin/wsetfont
+%attr(755,root,root) /usr/X11R6/bin/wxcopy
+%attr(755,root,root) /usr/X11R6/bin/wxpaste
 
-/usr/X11R6/share/WINGs
 /usr/X11R6/share/WindowMaker
 
 %dir /usr/X11R6/GNUstep
@@ -179,13 +207,21 @@ rm -r $RPM_BUILD_ROOT
 %lang(tr) /usr/X11R6/share/locale/tr/LC_MESSAGES/*
 %lang(zh_TW.Big5) /usr/X11R6/share/locale/zh_TW.Big5/LC_MESSAGES/*
 
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+/usr/X11R6/share/WINGs
+
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
-
-/usr/X11R6/lib/lib*.a
-/usr/X11R6/lib/lib*.la
+%attr(755,root,root) /usr/X11R6/bin/get-wraster-flags
 /usr/X11R6/include/*.h
+/usr/X11R6/lib/lib*.la
+
+%files static
+%defattr(644,root,root,755)
+/usr/X11R6/lib/lib*.a
 
 %changelog
 * Fri Mar 12 1999 Artur Frysiak <wiget@pld.org.pl>
