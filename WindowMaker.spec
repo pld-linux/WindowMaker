@@ -2,15 +2,15 @@ Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
-Version:	0.50.2
+Version:	0.51.0
 Release:	1d
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
 Source:		ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
-Patch0:		WindowMaker-po.patch
-Patch1:		WindowMaker-aclocal.patch
+Patch:		WindowMaker-pl.po.patch
+Patch1:		WindowMaker-po.install.patch
 Patch2:		WindowMaker-CFLAGS.patch
 Patch3:		WindowMaker-wmconfig.patch
 URL:		http://www.windowmaker.org/
@@ -77,8 +77,11 @@ Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
 aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %prep
-%setup -q -b 1
-%patch0 -p1
+#%setup -q 
+%setup -q -a 1
+#(cd $RPM_BUILD_DIR/%{name}-%{version}; tar xzf %{SOURCE1})
+
+%patch  -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -112,7 +115,7 @@ make install \
 
 install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
 
-install ../WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
 gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
 bzip2 -9 AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
@@ -132,19 +135,7 @@ rm -r $RPM_BUILD_ROOT
 
 /usr/X11R6/share/pixmaps/*
 
-#%attr(755,root,root) /usr/X11R6/bin/dockit
-%attr(755,root,root) /usr/X11R6/bin/wmaker.inst
-%attr(755,root,root) /usr/X11R6/bin/wsetfont
-%attr(755,root,root) /usr/X11R6/bin/bughint
-%attr(755,root,root) /usr/X11R6/bin/geticonset
-%attr(755,root,root) /usr/X11R6/bin/getstyle
-%attr(755,root,root) /usr/X11R6/bin/seticons
-%attr(755,root,root) /usr/X11R6/bin/setstyle
-%attr(755,root,root) /usr/X11R6/bin/wdwrite
-%attr(755,root,root) /usr/X11R6/bin/wmaker
-%attr(755,root,root) /usr/X11R6/bin/wmsetbg
-%attr(755,root,root) /usr/X11R6/bin/wxcopy
-%attr(755,root,root) /usr/X11R6/bin/wxpaste
+%attr(755,root,root) /usr/X11R6/bin/*
 
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*
 
@@ -187,8 +178,6 @@ rm -r $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-
-%attr(755,root,root) /usr/X11R6/bin/WINGs-flags
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
 
 /usr/X11R6/lib/lib*.a
