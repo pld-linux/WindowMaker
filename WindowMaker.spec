@@ -21,11 +21,12 @@ Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
 Patch7:		WindowMaker-ru.po.patch
 URL:		http://www.windowmaker.org/
-BuildPrereq:	libPropList-devel >= 1.8.3
+BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
 BuildPrereq:	libpng-devel
 BuildPrereq:	libjpeg-devel >= 6b
 BuildPrereq:	libtiff-devel
+BuildPrereq:	libungif-devel
 BuildPrereq:	gettext
 Requires:	wmconfig
 Requires:	/lib/cpp
