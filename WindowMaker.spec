@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.61.1
-Release:	2
+Release:	3
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -211,8 +211,8 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 %find_lang WPrefs
 cat WPrefs.lang >> %{name}.lang
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %clean
 rm -r $RPM_BUILD_ROOT
