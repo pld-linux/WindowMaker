@@ -1,0 +1,39 @@
+--- WindowMaker-0.80.2/po/Makefile.am.orig	Tue Jan  8 14:44:57 2002
++++ WindowMaker-0.80.2/po/Makefile.am	Fri Jan 30 15:27:08 2004
+@@ -6,8 +6,8 @@
+ 
+ # keep this sorted
+ EXTRA_DIST = bg.po cs.po da.po de.po el.po es.po et.po fi.po fr.po gl.po \
+-	hr.po hu.po it.po ja.po ko.po ms.po nl.po no.po pl.po pt.po ro.po \
+-	ru.po sk.po sv.po tr.po zh_CN.po zh_TW.Big5.po
++	hr.po hu.po it.po ja.po ko.po ms.po nl.po nb.po pl.po pt.po ro.po \
++	ru.po sk.po sv.po tr.po zh_CN.po zh_TW.po
+ 
+ POTFILES  = \
+ 	$(top_builddir)/src/appicon.c \
+--- WindowMaker-0.80.2/WPrefs.app/po/Makefile.am.orig	Fri Jan 30 15:16:44 2004
++++ WindowMaker-0.80.2/WPrefs.app/po/Makefile.am	Fri Jan 30 15:32:38 2004
+@@ -4,7 +4,7 @@
+ 
+ CLEANFILES = $(CATALOGS)
+ 
+-EXTRA_DIST = pt.po hr.po fr.po ko.po cs.po ja.po zh_TW.Big5.po es.po\
++EXTRA_DIST = pt.po hr.po fr.po ko.po cs.po ja.po zh_TW.po es.po\
+ 		zh_CN.po fi.po it.po ru.po de.po hu.po bg.po sk.po\
+ 		et.po pl.po
+ 
+--- WindowMaker-0.80.2/configure.ac.orig	Fri Jan 30 15:16:44 2004
++++ WindowMaker-0.80.2/configure.ac	Fri Jan 30 15:31:17 2004
+@@ -244,9 +244,9 @@
+ 
+ dnl List of supported locales
+ dnl -------------------------
+-supported_locales="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW.Big5"
+-supported_wprefs_locales="bg cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW.Big5"
+-supported_wings_locales="cs de pl sk"
++supported_locales="bg cs da de el es et fi fr gl hr hu it ja ko ms nl nb pl pt ro ru sk sv tr zh_CN zh_TW"
++supported_wprefs_locales="bg cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW"
++supported_wings_locales="cs de fr pl sk"
+ 
+ for lang in $LINGUAS; do
+ 	ok=0
