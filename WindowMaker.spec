@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.91.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
@@ -278,7 +278,8 @@ cd %{name}-extra-%{extraver}
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_pixmapsdir},%{_wmpropsdir}} \
-	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
+	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle \
+	$RPM_BUILD_ROOT%{_datadir}/WindowMaker/{Sounds,SoundSets}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
