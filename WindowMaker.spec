@@ -326,9 +326,9 @@ rm -r $RPM_BUILD_ROOT
   field),
 - WindowMaker is now builded from bz2 source tar,
 - removed Packager field (this must be placed in persolan ~/.rpmrc),
-- nls stuff moved to /usr/share/locale,
+- nls stuff moved to %{_datadir}/locale,
 - added --disable-debug for configure,
-- adde %lang macros for /usr/share/locale/*/LC_MESSAGES/* files,
+- adde %lang macros for %{_datadir}/locale/*/LC_MESSAGES/* files,
 - added WindowMaker-fix_po.patch wit fixing .po files,
 - simplification in %files and added using %defattr macro also.
 
