@@ -5,7 +5,7 @@
 
 if [ -x /usr/bin/wmaker -a -d /usr/share/WindowMaker ] ; then
 	WMGLOBALDIR="/usr/share/WindowMaker"
-	WMCONFIGDIR="/etc/WindowMaker"
+	WMCONFIGDIR="/etc/X11/WindowMaker"
 	GSDIR=$HOME/GNUstep
 	if [ ! -d $GSDIR/Defaults ] ; then
 		mkdir -p $GSDIR/Defaults
