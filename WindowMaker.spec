@@ -139,7 +139,7 @@ zarz±dcy okien WindowMaker.
 
 %package devel
 Summary:	WindowMaker libraries - development part
-Summary(es):	Bibliotecas, archivos de inclusión, e etc. para desarrollar aplicaciones WindowMaker
+Summary(es):	Bibliotecas y archivos de inclusión para WindowMaker
 Summary(fr):	Librairies de WindowMaker
 Summary(pl):	Biblioteki WindowMakera - czê¶æ dla programistów
 Summary(pt_BR):	Arquivos de inclusão e bibliotecas para o WindowMaker
@@ -170,7 +170,7 @@ WindowMaker.
 
 %description devel -l pt_BR
 Arquivos de inclusão e bibliotecas para o desenvolvimento de programas
-baseados no WindowMaker
+ºbaseados no WindowMaker
 
 %description devel -l ru
 üÔÏÔ ĞÁËÅÔ ÓÏÄÅÒÖÉÔ ÂÉÂÌÉÏÔÅËÉ É .h ÆÁÊÌÙ, ĞÒÅÄÎÁÚÎÁŞÅÎÎÙÅ ÄÌÑ ÓÂÏÒËÉ
