@@ -46,6 +46,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
+BuildRequires:	libtool
 BuildRequires:	libungif-devel
 Requires:	%{name}-libs = %{version}
 Requires:	cpp
@@ -229,12 +230,11 @@ utilizando componentes estáticos (raramente necessário).
 %patch13 -p1
 
 for f in WindowMaker/*menu*; do
-	sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
+	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
 	mv -f $f.new $f
 done
 
 %build
-rm -f {,%{name}-extra-%{extraver}/}missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -280,7 +280,7 @@ cd %{name}-extra-%{extraver}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/,xsessions,%{_pixmapsdir},%{_wmpropsdir}} \
+install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_pixmapsdir},%{_wmpropsdir}} \
 	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %{__make} install \
@@ -354,6 +354,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/WindowMaker
 %{_datadir}/xsessions/WindowMaker.desktop
 
+# the first one is shared with gnustep-make...
 %dir %{_libdir}/GNUstep
 %dir %{_libdir}/GNUstep/Apps
 %dir %{_libdir}/GNUstep/Apps/WPrefs.app
