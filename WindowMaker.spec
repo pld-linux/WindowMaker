@@ -21,6 +21,7 @@ Requires:	libtiff
 Requires:	libungif
 Requires:	xpm
 Requires:	XFree86-libs
+Requires:	libPropList
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
