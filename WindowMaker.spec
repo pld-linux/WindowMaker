@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.91.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
@@ -44,6 +44,7 @@ BuildRequires:	libungif-devel
 BuildRequires:	xft-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
+Requires:	gnustep-dirs
 Requires:	tk
 Requires:	vfmg
 Requires:	xinitrc-ng
@@ -343,7 +344,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xsessions/WindowMaker.desktop
 
 # the first one is shared with gnustep-make...
-%dir %{_libdir}/GNUstep
 %dir %{_libdir}/GNUstep/Apps
 %dir %{_libdir}/GNUstep/Apps/WPrefs.app
 
