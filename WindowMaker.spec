@@ -7,6 +7,7 @@ Name:		WindowMaker
 Version:	0.65.0
 Release:	1
 Group:		X11/Window Managers
+Group(de):	X11/Fenstermanager
 Group(es):	X11/Administraadores De Ventanas
 Group(fr):	X11/Gestionnaires De Fenêtres
 Group(pl):	X11/Zarz±dcy Okien
@@ -100,6 +101,8 @@ myszk±, za pomoc± programu WPrefs wchodz±cego w sk³ad tego pakietu.
 Summary:	WindowMaker shared libraries
 Summary(pl):	Biblioteki wspó³dzielone WindowMakera
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 
@@ -115,6 +118,7 @@ Summary:	WindowMaker libraries - development part
 Summary(fr):	Librairies de WindowMaker
 Summary(pl):	Biblioteki WindowMakera - czê¶æ dla programistów
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-libs = %{version}
@@ -136,6 +140,7 @@ WindowMaker.
 Summary:	WindowMaker static libraries
 Summary(pl):	Biblioteki statyczne WindowMakera
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
