@@ -1,0 +1,1648 @@
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu WindowMaker-0.50.2/WindowMaker/menu
+--- WindowMaker-0.50.2.old/WindowMaker/menu	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu	Mon Jan 18 16:36:38 1999
+@@ -65,17 +65,15 @@
+  *	// Opens one or more directories and construct menu with all
+  *	// subdirectories and readable files in them sorted alphabetically,
+  *	// preceding each of them with command.
+- *	OPEN_MENU [options] /some/dir [/some/other/dir ...] WITH command -options
+- *		Options:
+- * 			-noext 	strip whatever is after the last dot in the
+- *				file name
++ *	OPEN_MENU /some/dir [/some/other/dir ...] WITH command -options
++ *
+  *
+  * <Parameters> is the program to execute.
+  *
+  * ** Options for command line in EXEC:
+  * %s - substitute with current selection
+- * %a(title[,prompt]) - opens a input box with the specified title and the
+- *			optional prompt	and do substitution with what you typed
++ * %a(message) - opens a input box with the message and do substitution with
++ *		what you typed
+  * %w - substitute with XID for the current focused window
+  *
+  * You can override special characters (as % and ") with the \ character:
+@@ -94,7 +92,7 @@
+  *		// some X11 apps in different directories
+  *	"X11 apps" OPEN_MENU /usr/X11/bin ~/bin/X11
+  *		// set some background images
+- *	"Background" OPEN_MENU -noext ~/images /usr/share/images WITH wmsetbg -u -t
++ *	"Background" OPEN_MENU ~/images /usr/share/images WITH wmsetbg -u -t
+  *		// inserts the style.menu in this entry
+  *	"Style" OPEN_MENU style.menu
+  * "Test" END
+@@ -111,48 +109,10 @@
+ 		"Process List" EXEC xterm -e top
+ 		"Manual Browser" EXEC xman
+ 	"Info" END
+-	"Run..." EXEC %a(Run,Type command to run:)
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Workspaces" WORKSPACE_MENU
+-	"Applications" MENU
+-		"Graphics" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Graphics" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(GhostView,Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Acrobar,Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"Applications" END
+-	"Editors" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editors" END
+-	"Miscellaneous" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Miscellaneous" END
+-	"Utils" MENU
+-		"Calculator" EXEC xcalc
+-		"Window Properties" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Font Chooser" EXEC xfontsel
+-		"Terminal Emulator" EXEC xminicom
+-		"Magnify" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"Clipboard" EXEC xclipboard
+-	"Utils" END
++	"Applications" OPEN_MENU | wmconfig --rootmenu=Applications --output=wmaker
+ 
+ 	"Selection" MENU
+ 		"Copy" EXEC echo '%s' | wxcopy
+@@ -187,26 +147,22 @@
+                         	"Wine" WS_BACK '(solid, "#400020")'
+ 			"Solid" END
+ 			"Gradient" MENU
+-				"Sunset" WS_BACK '(mvgradient, deepskyblue4, black, deepskyblue4, tomato4)'
++				"Flag" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Sky" WS_BACK '(vgradient, blue4, white)'
+-    				"Blue Shades" WS_BACK '(vgradient, "#7080a5", "#101020")'
+-				"Indigo Shades" WS_BACK '(vgradient, "#746ebc", "#242e4c")'
+-			    	"Purple Shades" WS_BACK '(vgradient, "#654c66", "#151426")'
+-    				"Wheat Shades" WS_BACK '(vgradient, "#a09060", "#302010")'
+-    				"Grey Shades" WS_BACK '(vgradient, "#636380", "#131318")'
+-    				"Wine Shades" WS_BACK '(vgradient, "#600040", "#180010")'
+ 			"Gradient" END
+-			"Images" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Images" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Background" END
+-		"Save Theme" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name,Enter file name:)"
+-		"Save IconSet" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name,Enter file name:)"
++
++//		"Sound Sets" OPEN_MENU ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/SoundSets WITH setsounds 
++		"Save Theme" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
++		"Save IconSet" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+ 	"Appearance" END
+ 
+ 	"Exit"	MENU
+ 		"Restart" RESTART
+ 		"Start AfterStep" RESTART afterstep
+ 		"Exit..."  EXIT
+-		"Kill session..." SHUTDOWN
++		"Exit session..." SHUTDOWN
+ 	"Exit" END
+ "Applications" END
+ 
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.ca WindowMaker-0.50.2/WindowMaker/menu.ca
+--- WindowMaker-0.50.2.old/WindowMaker/menu.ca	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.ca	Mon Jan 18 19:55:32 1999
+@@ -118,44 +118,7 @@
+         "XTerm" EXEC xterm -sb 
+         "Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+         "Escriptoris" WORKSPACE_MENU
+-        "Aplicacions" MENU
+-                "Grΰfics" MENU
+-                        "Gimp" EXEC gimp >/dev/null
+-                        "XV" EXEC xv
+-                        "XPaint" EXEC xpaint
+-                        "XFig" EXEC xfig
+-                "Grΰfics" END
+-                "X File Manager" EXEC xfm
+-                "OffiX Files" EXEC files
+-                "LyX" EXEC lyx
+-                "Netscape" EXEC netscape 
+-                "Ghostview" EXEC ghostview %a(Enter file to view)
+-                "Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-                "TkDesk" EXEC tkdesk
+-        "Aplicacions" END
+-        "Editors" MENU
+-                "XFte" EXEC xfte
+-                "XEmacs" EXEC xemacs || emacs
+-                "XJed" EXEC xjed 
+-                "NEdit" EXEC nedit
+-                "Xedit" EXEC xedit
+-                "VI" EXEC xterm -e vi
+-        "Editors" END
+-        "Miscel·lani" MENU
+-                "Xmcd" EXEC xmcd 2> /dev/null
+-                "Xplaycd" EXEC xplaycd
+-                "Xmixer" EXEC xmixer
+-        "Miscel·lani" END
+-        "Utilitats" MENU
+-                "Calculadora" EXEC xcalc
+-                "Propietats de la finestra" EXEC xprop | xmessage -center -title 'xprop' -file -
+-                "Sel·lecciona una Font" EXEC xfontsel
+-                "Emulador de Terminal" EXEC xminicom
+-                "Lupa" EXEC xmag
+-                "Mapa de Color" EXEC xcmap
+-                "XKill" EXEC xkill
+-                "Portapapers" EXEC xclipboard
+-        "Utilitats" END
++        "Aplicacions" OPEN_MENU | wmconfig --rootmenu=Aplicacions --output=wmaker
+ 
+         "Sel·lecciσ" MENU
+                 "Copiar" EXEC echo '%s' | wxcopy
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.cz WindowMaker-0.50.2/WindowMaker/menu.cz
+--- WindowMaker-0.50.2.old/WindowMaker/menu.cz	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.cz	Mon Jan 18 15:45:21 1999
+@@ -47,70 +47,7 @@
+ //	"XJed"	EXEC xjed
+         "Midnight commander"  EXEC xterm -name 'mc' -e mc -cm
+ 	"Pracovnν plochy" WORKSPACE_MENU
+-	"Aplikace" MENU
+-		"Grafickι" MENU
+-			"Gimp" EXEC gimp
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-			"Gnuplot" EXEC xterm -T "GNU plot" -e gnuplot
+-		"Grafickι" END
+-		"Vμdeckι" MENU
+-			"Astro" EXEC xephem
+-			"MuPAD" EXEC xmupad -bg grey -geometry 590x385
+-		"Vμdeckι" END
+-		"Vύvojovι" MENU
+-			"X Gnu debbuger" EXEC xxgdb
+-			"Emacs" EXEC emacs
+-			"Resource editor" EXEC editres
+-		"Vύvojovι" END                                                                          
+-                "Hry" MENU                                                                   
+-	    		"BludiΉ»μ"      EXEC maze                                      
+-//              	"Karty "        EXEC spider                                         
+-			"©achy "        EXEC xboard                                         
+-			"Xeyes"         EXEC xeyes -geometry 51x23                         
+-			"Xlogo"         EXEC xlogo                                         
+-			"Brouci"        EXEC xroach                                        
+-            		"Xtetris"       EXEC xtetris -color                                
+-			"Xvier"         EXEC xvier                                         
+-			"Xgas"          EXEC xgas                                          
+-	    		"Xkobo"         EXEC xkobo                                         
+-			"xboing"        EXEC xboing -sound                                 
+-			"XBill"         EXEC xbill                                         
+-			"Civilization"   EXEC civ
+-		"Hry" END
+-//		"X File Manager" EXEC xfm
+-		"Sprαvce souborω" EXEC files
+-//		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape
+-  		"Ghostview" EXEC ghostview
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread
+-		"OpenDOS" EXEC runxdos
+-//  		"TkDesk" EXEC tkdesk
+-	"Aplikace" END
+-	"Editory" MENU
+-		"Emacs" EXEC emacs
+-//		"XJed" EXEC xjed
+-//		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-//		"VI" EXEC xterm -e vi
+-		"Joe" EXEC xterm -T 'Joe' -e joe
+-	"Editory" END
+-	"Rωznι" MENU
+-//		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Rωznι" END
+-	"Pomωcky" MENU
+-		"KoΉ" EXEC trash
+-		"Hodiny" EXEC xclock
+-		"Kalkulαtor" EXEC xcalc
+-		"Vύbμr fontu" EXEC xfontsel
+-		"Lupa" EXEC xmag
+-		"Mapa barev" EXEC xcolormap
+-		"XKill" EXEC xkill
+-		"AfterstepClock" EXEC asclock -position +671+-1
+-	"Pomωcky" END
++	"Aplikace" OPEN_MENU | wmconfig --rootmenu=Aplikace --output=wmaker
+ 	"Pracovnν plocha" MENU
+ 		"Barva" MENU
+ 			"-" EXEC CLEARROOT
+@@ -133,6 +70,12 @@
+ 		"Zαmek" EXEC xlock -allowroot -usefirst
+ 		"UloΎ vzhled" EXEC SAVE_WORKSPACE
+ 	"Pracovnν plocha" END
++#if (UID==0)	// root only stuff
++	"Sprαva systιmu" MENU
++		// RedHat control panel pro uΎivatele root
++		"RH ControlPanel" EXEC control-panel
++	"Sprαva systιmu" END
++#endif
+ 	"Konec"	MENU
+ // 'Restartovat' nenν opravdu pψνliΉ θeskι slovo, najde nμkdo lepΉν ?
+ 		"Restartovat" RESTART
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.de WindowMaker-0.50.2/WindowMaker/menu.de
+--- WindowMaker-0.50.2.old/WindowMaker/menu.de	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.de	Mon Jan 18 15:59:46 1999
+@@ -50,42 +50,7 @@
+ 	"XTerm" EXEC xterm -sb || color-xterm -sb || xterm -sb
+ 	"XJed"	EXEC xjed
+ 	"Arbeitsflδche" WORKSPACE_MENU
+-	"Anwendungen" MENU
+-		"Grafik" MENU
+-			"Gimp" EXEC gimp
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafik" END
+-		"X Dateimanager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape
+-               	"Ghostview" EXEC ghostview %a(Ghostview)
+-                "XDvi" EXEC xdvi %a(XDvi)
+-               	"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Acrobat)
+-  		"TkDesk" EXEC tkdesk
+-	"Anwendungen" END
+-	"Editoren" MENU
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editoren" END
+-	"Sonstiges" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Sonstiges" END
+-	"Hilfsmittel" MENU
+-		"Taschenrechner" EXEC xcalc
+-		"Schriftauswahl" EXEC xfontsel
+-		"Lupe" EXEC xmag
+-		"Farbtabelle" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-	"Hilfsmittel" END
++	"Anwendungen" OPEN_MENU | wmconfig --rootmenu=Anwendungen --output=wmaker
+         "Markierung" MENU
+                 "email an" EXEC xterm -name mail -T "Pine" -e pine %s
+                 "Navigate" EXEC netscape -noraise -remote \
+@@ -114,6 +79,12 @@
+ #endif
+ 		"Arbeitsplatz sichern" EXEC SAVE_WORKSPACE
+ 	"Arbeitsplatz" END
++#if (UID==0)	// nur fόr root
++	"System" MENU
++		// das RedHat control panel Programm
++		"RH ControlPanel" EXEC control-panel
++	"System" END
++#endif
+ 	"Beenden"	MENU
+ 		"Neustart" RESTART
+ 		"AfterStep starten" RESTART afterstep
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.dk WindowMaker-0.50.2/WindowMaker/menu.dk
+--- WindowMaker-0.50.2.old/WindowMaker/menu.dk	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.dk	Mon Jan 18 16:38:08 1999
+@@ -111,45 +111,7 @@
+         "Rxvt (lille)" EXEC rxvt -bg black -fg white -fn fixed
+         "Rxvt (stor)" EXEC rxvt -bg black -fg white -fn 9x15
+         "Arbejdsborde" WORKSPACE_MENU
+-        "Applikationer" MENU
+-                "Grafik" MENU
+-                        "Gimp" EXEC gimp >/dev/null
+-                        "XV" EXEC xv
+-                        "XPaint" EXEC xpaint
+-                        "XFig" EXEC xfig
+-                "Grafik" END
+-                "X Filhεndtering" EXEC xfm
+-                "OffiX Files" EXEC files
+-                "LyX" EXEC lyx
+-                "Netscape" EXEC netscape 
+-                "Ghostview" EXEC ghostview %a(Skriv filnavn)
+-                "Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Skriv PDF-filnavn)
+-                "TkDesk" EXEC tkdesk
+-        "Applikationer" END
+-        "Tekstbehandling" MENU
+-                "XFte" EXEC xfte
+-                "Emacs" EXEC xemacs || emacs
+-                "XJed" EXEC xjed 
+-                "NEdit" EXEC nedit
+-                "Xedit" EXEC xedit
+-                "VI" EXEC xterm -e vi
+-        "Tekstbehandling" END
+-        "Diverse" MENU
+-                "Xmcd" EXEC xmcd 2> /dev/null
+-                "Xplaycd" EXEC xplaycd
+-                "Xmixer" EXEC xmixer
+-        "Diverse" END
+-        "Tilbehψr" MENU
+-                "Lommeregner" EXEC xcalc
+-                "Window Egenskaber" EXEC xprop | xmessage -center -title 'xprop' -file
+-                "Vζlg skrifttype" EXEC xfontsel
+-                "Terminalemulator" EXEC xminicom
+-                "Forstψrrelsesglas" EXEC xmag
+-                "Farver" EXEC xcmap
+-                "XKill" EXEC xkill
+-                "ASClock" EXEC asclock -shape
+-                "Udklipsbord" EXEC xclipboard
+-        "Tilbehψr" END
++        "Applikationer" OPEN_MENU |  wmconfig --rootmenu=Applikationer --output=wmaker
+ 
+         "Markering" MENU
+                 "Kopier" EXEC echo '%s' | wxcopy
+@@ -169,9 +131,9 @@
+         "Arbejdsbord" END
+ 
+         "Udseende" MENU
+-                "Temaer" OPEN_MENU -noext  THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
+-                "Stil" OPEN_MENU -noext  STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
+-                "Ikonsζt" OPEN_MENU -noext  ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
++                "Temaer" OPEN_MENU -noext THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
++                "Stil" OPEN_MENU -noext STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
++                "Ikonsζt" OPEN_MENU -noext ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
+                 "Baggrund" MENU
+                         "Ensfarvet" MENU
+                                 "Sort" WS_BACK '(solid, black)'
+@@ -187,7 +149,7 @@
+                                 "Flag" WS_BACK '(mdgradient, green, red, white, green)'
+                                 "Himmel" WS_BACK '(vgradient, blue4, white)'
+                         "Nuancer" END
+-                        "Billeder" OPEN_MENU -noext  BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++                        "Billeder" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+                 "Baggrund" END
+                 "Gem tema" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+                 "Gem ikonsζt" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.el WindowMaker-0.50.2/WindowMaker/menu.el
+--- WindowMaker-0.50.2.old/WindowMaker/menu.el	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.el	Mon Jan 18 16:38:28 1999
+@@ -19,39 +19,39 @@
+  *	MENU - το σημείο που ξεκινά ένα (υπο)μενού
+  *	END  - το σημείο που τελειώνει ένα (υπο)μενού
+  *	OPEN_MENU - ανοίγει ένα μενού από ένα αρχείο, pipe ή τα περιεχόμενα ενός
+- *                  καταλόγου(ων) και αντιστοιχεί μια εντολή στο καθένα.
+- *	WORKSPACE_MENU - προσθέτει ένα υπομενού για τη διαχείρηση των Επιφανειών.
+- *                       Μόνο ένα workspace_menu επιτρέπεται.
++ *              καταλόγου(ων) και αντιστοιχεί μια εντολή στο καθένα.
++ *	WORKSPACE_MENU - προσθέτει ένα υπομενού για τη διαχείρηση των Επιφανειών
++ *                   Εργασίας. Μόνο ένα workspace_menu επιτρέπεται.
+  *	EXEC <program> - εκτέλεση προγράμματος
+  *	EXIT - έξοδος από τον window manager
+- *	RESTART [<window manager>] - επανεκκινεί τον Window Maker ή ξεκινάει ένας
+- *                                   άλλος window manager		
+- *	REFRESH - ανανεώνει την προβολή της Επιφάνειας στην οθόνη
+- *	ARRANGE_ICONS - τακτοποίηση των εικονιδίων στην Επιφάνεια
++ *	RESTART [<window manager>] - επανεκκινεί τον WindowMaker ή ξεκινάει ένας
++ *                               άλλος window manager		
++ *	REFRESH - ανανεώνει την προβολή της επιφάνειας εργασίας στην οθόνη
++ *	ARRANGE_ICONS - τακτοποίηση των εικονιδίων στην επιφάνεια εργασίας
+  *	SHUTDOWN - τερματίζει βίαια όλους τους clients (και τερματίζει το X window
+- *                 session)
+- *	SHOW_ALL - εμφανίζει όλα τα "κρυμένα" παράθυρα στην Επιφάνεια
+- *	HIDE_OTHERS - "κρύβει" όλα τα παράθυρα στην Επιφάνεια, εκτός από
+- *                    αυτό που είναι "ενεργό" (ή το τελευταίο που ήταν "ενεργό")	
+- *	SAVE_SESSION - αποθηκεύει το εκάστοτε "κατάσταση" της Επιφάνειας, το οποίο
++ *             session)
++ *	SHOW_ALL - εμφανίζει όλα τα "κρυμένα" παράθυρα στην επιφάνεια εργασίας
++ *	HIDE_OTHERS - "κρύβει" όλα τα παράθυρα στην επιφάνεια εργασίας, εκτός από
++ *                αυτό που είναι "ενεργό" (ή το τελευταίο που ήταν "ενεργό")	
++ *	SAVE_SESSION - αποθηκεύει το εκάστοτε "Περιβάλλον" εργασίας, το οποίο
+  *                 σημαίνει, όλα τα προγράμματα που εκτελούνται εκείνη τη
+  *                 στιγμή με όλες τους τις ιδιότητες (γεωμετρία, θέση στην
+  *                 οθόνη, επιφάνεια εργασίας στην οποία έχουν εκτελεστεί, Dock ή
+  *                 Clip από όπου εκτελέστηκαν, αν είναι ελαχιστοποιημένα,
+- *                 αναδιπλωμένα ή κρυμμένα). Επίσης αποθηκεύει σε πια Επιφάνεια
++ *                 αναδιπλωμένα ή κρυμμένα). Επίσης αποθηκεύει σε πια επιφάνεια
+  *                 εργασίας ήταν ο χρήστης την τελευταία φορά. Όλες οι
+- *                 θα ανακληθούν την επόμενη φορά που ο χρήστης
+- *                 εκκινίσει τον Window Maker μέχρι η εντολή SAVE_SESSION ή
+- *                 CLEAR_SESSION χρησιμοποιηθούν. Αν στο αρχείο Window Maker του
++ *                 πληροφορίες θα ανακληθούν την επόμενη φορά που ο χρήστης
++ *                 εκκινίσει τον WindowMmaker μέχρι η εντολή SAVE_SESSION ή
++ *                 CLEAR_SESSION χρησιμοποιηθούν. Αν στο αρχείο WindowMaker του
+  *                 καταλόγου "~/GNUstep/Defaults/" υπάρχει η εντολή:
+  *                 "SaveSessionOnExit = Yes;", τότε όλα τα παραπάνω γίνονται
+- *                 αυτόματα με κάθε έξοδο του χρήστη από τον Window Maker,
++ *                 αυτόματα με κάθε έξοδο του χρήστη από τον WindowMaker,
+  *                 ακυρώνοντας ουσιαστικά κάθε προηγούμενη χρήση τως εντολών
+  *                 SAVE_SESSION ή CLEAR_SESSION (βλέπε παρακάτω). 
+  *	CLEAR_SESSION - σβήνει όλες τις πληροφορίες που έχουν αποθηκευθεί σύμφωνα με
+  *                  τα παραπάνω. Δεν θα έχει όμως κανένα αποτέλεσμα αν η εντολή
+  *                  SaveSessionOnExit=Yes.
+- *	INFO - Πληροφορίες σχετικά με τον Window Mmaker
++ *	INFO - Πληροφορίες σχετικά με τον WindowMmaker
+  *
+  * OPEN_MENU σύνταξη:
+  *   1. Χειρισμός ενός αρχείου-μενού.
+@@ -109,8 +109,8 @@
+ 
+ "Μενού" MENU
+ 	"Πληροφορίες" MENU
+-		"Info..." INFO_PANEL
+-		"Legal..." LEGAL_PANEL
++		"Σχετικά..." INFO_PANEL
++		"Νομικά..." LEGAL_PANEL
+ 		"System Console" EXEC xconsole
+ 		"System Load" EXEC xosview || xload
+ 		"Process List" EXEC xterm -e top
+@@ -118,46 +118,8 @@
+ 	"Πληροφορίες" END
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+-	"Επιφάνειες" WORKSPACE_MENU
+-	"Προγράμματα" MENU
+-		"Γραφικά" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Γραφικά" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Αρχείο προς ανάγνωση)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Αρχείο προς ανάγνωση)
+-  		"TkDesk" EXEC tkdesk
+-	"Προγράμματα" END
+-	"Κειμενογράφοι" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Κειμενογράφοι" END
+-	"Διάφορα" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Διάφορα" END
+-	"Εργαλεία" MENU
+-		"Αριθμομηχανή" EXEC xcalc
+-		"Ιδιότητες Παραθύρου" EXEC xprop | xmessage -center -title 'Ιδιότητες Παραθύρου' -file -
+-		"Επιλογή Γραμματοσειράς" EXEC xfontsel
+-		"Εξομοιωτής Τερματικού" EXEC xminicom
+-		"Μεγέθυνση" EXEC xmag
+-		"Χάρτης Χρωμάτων" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Εργαλεία" END
++	"Επιφάνειες Εργασίας" WORKSPACE_MENU
++	"Προγράμματα" OPEN_MENU |  wmconfig --rootmenu=Προγράμματα --output=wmaker
+ 
+ 	"Επιλογή" MENU
+ 		"Αντιγραφή" EXEC echo '%s' | wxcopy
+@@ -166,20 +128,20 @@
+ 		"Αναζήτηση Βοήθειας" EXEC MANUAL_SEARCH(%s)
+ 	"Επιλογή" END
+ 
+-	"Επιφάνεια" MENU
++	"Επιφάνεια Εργασίας" MENU
+ 		"Απόκρυψη των ¶λλων" HIDE_OTHERS
+ 		"Εμφάνιση Όλων" SHOW_ALL
+ 		"Τακτοποίηση Εικονιδίων" ARRANGE_ICONS
+ 		"Ανανέωση Προβολής" REFRESH
+ 		"Κλείδωμα" EXEC xlock -allowroot -usefirst
+-		"Σώσιμο Κατάστασης" SAVE_SESSION
+-		"Διαγραφή σωσμένης Κατάστασης" CLEAR_SESSION
+-	"Επιφάνεια" END
++		"Αποθήκευση Περιβάλλοντος" SAVE_SESSION
++		"Σβήσιμο Αποθηκευμένου Περιβάλλοντος" CLEAR_SESSION
++	"Επιφάνεια Εργασίας" END
+ 
+ 	"Εμφάνιση" MENU
+-		"Θέματα" OPEN_MENU -noext  THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
+-		"Στυλ" OPEN_MENU -noext  STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
+-		"Ομάδα Εικονιδίων" OPEN_MENU -noext  ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
++		"Θέματα" OPEN_MENU -noext THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
++		"Στυλ" OPEN_MENU -noext STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
++		"Ομάδα Εικονιδίων" OPEN_MENU -noext ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
+ 		"Φόντο" MENU
+ 			"Μονόχρωμο" MENU
+                         	"Μαύρο" WS_BACK '(solid, black)'
+@@ -192,20 +154,21 @@
+                         	"Κρασιού" WS_BACK '(solid, "#400020")'
+ 			"Μονόχρωμο" END
+ 			"Διαβαθμισμένο" MENU
+-				"Σημαία" WS_BACK '(mdgradient, green, red, white, green)'
++				"Σημαία" WS_BACK '(mdgradient, blue, white, blue, white)'
+ 				"Ουράνος" WS_BACK '(vgradient, blue4, white)'
+ 			"Διαβαθμισμένο" END
+-			"Εικόνες" OPEN_MENU -noext  BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Εικόνες" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Φόντο" END
+-		"Αποθήκευση Θέματος" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Όνομα Θέματος)"
+-		"Αποθήκευση Ομάδας Εικονιδίων" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(Όνομα Ομάδας)"
++		"Αποθήκευση Θέματος" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
++		"Αποθήκευση Ομάδας Εικονιδίων" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+ 	"Εμφάνιση" END
+ 
+ 	"Έξοδος"	MENU
+ 		"Επανεκκίνηση" RESTART
+ 		"Εκκίνηση του AfterStep" RESTART afterstep
+ 		"Έξοδος..."  EXIT
+-		"Πλήρης Έξοδος..." SHUTDOWN
++		"Έξοδος από το Περιβάλλον..." SHUTDOWN
+ 	"Έξοδος" END
+ "Μενού" END
++
+ 
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.es WindowMaker-0.50.2/WindowMaker/menu.es
+--- WindowMaker-0.50.2.old/WindowMaker/menu.es	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.es	Mon Jan 18 16:38:49 1999
+@@ -100,45 +100,7 @@
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Escritorios" WORKSPACE_MENU
+-	"Aplicaciones" MENU
+-		"Grαficos" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grαficos" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"Aplicaciones" END
+-	"Editores" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editores" END
+-	"Miscelαnea" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Miscelαnea" END
+-	"Utilidades" MENU
+-		"Calculadora" EXEC xcalc
+-		"Propiedades de ventana" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Selector de Fuentes" EXEC xfontsel
+-		"Emulador de Terminal" EXEC xminicom
+-		"Lupa" EXEC xmag
+-		"Mapa de Color" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Utilidades" END
++	"Aplicaciones" OPEN_MENU | wmconfig --rootmenu=Aplicaciones --output=wmaker
+ 
+ 	"Selecciσn" MENU
+ 		"Copiar" EXEC echo '%s' | wxcopy
+@@ -158,9 +120,9 @@
+ 	"Escritorio" END
+ 
+ 	"Apariencia" MENU
+-		"Temas" OPEN_MENU -noext  THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
+-		"Estilos" OPEN_MENU -noext  STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
+-		"Juegos de Iconos" OPEN_MENU -noext  ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
++		"Temas" OPEN_MENU -noext THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
++		"Estilos" OPEN_MENU -noext STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
++		"Juegos de Iconos" OPEN_MENU -noext ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
+ 		"Fondo" MENU
+ 			"Sσlido" MENU
+                         	"Black" WS_BACK '(solid, black)'
+@@ -176,7 +138,7 @@
+ 				"Flag" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Sky" WS_BACK '(vgradient, blue4, white)'
+ 			"Gradiente" END
+-			"Imagenes" OPEN_MENU -noext  BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Imagenes" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Fondo" END
+ 		"Guardar Tema" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Guardar Juego de Iconos" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.fi WindowMaker-0.50.2/WindowMaker/menu.fi
+--- WindowMaker-0.50.2.old/WindowMaker/menu.fi	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.fi	Mon Jan 18 16:39:08 1999
+@@ -104,45 +104,7 @@
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Tyφtilat" WORKSPACE_MENU
+-	"Sovellukset" MENU
+-		"Grafiikka" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafiikka" END
+-		"Xfm" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"Sovellukset" END
+-	"Editorit" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editorit" END
+-	"Muut" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Muut" END
+-	"Tyφkalut" MENU
+-		"Laskin" EXEC xcalc
+-		"Ikkunoiden asetukset" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Kirjasinlajin valitsin" EXEC xfontsel
+-		"Pδδte-emulaattori" EXEC xminicom
+-		"Suurenuslasi" EXEC xmag
+-		"Vδripaletti" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Leikepφytδ" EXEC xclipboard
+-	"Tyφkalut" END
++	"Sovellukset" OPEN_MENU | wmconfig --rootmenu=Sovellukset --output=wmaker
+ 
+ 	"Leikkaa-liimaa" MENU
+ 		"Kopioi" EXEC echo '%s' | wxcopy
+@@ -162,9 +124,9 @@
+ 	"Tyφtilat" END
+ 
+ 	"Ulkonδkφ" MENU
+-		"Teemat" OPEN_MENU -noext  THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
+-		"Tyylit" OPEN_MENU -noext  STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
+-		"Kuvakeryhmδt" OPEN_MENU -noext  ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
++		"Teemat" OPEN_MENU -noext THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
++		"Tyylit" OPEN_MENU -noext STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
++		"Kuvakeryhmδt" OPEN_MENU -noext ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
+ 		"Taustat" MENU
+ 			"Taustavδri" MENU
+                         	"Musta" WS_BACK '(solid, black)'
+@@ -180,7 +142,7 @@
+ 				"Lippu" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Taivas" WS_BACK '(vgradient, blue4, white)'
+ 			"Liukuvδri" END
+-			"Taustakuvat" OPEN_MENU -noext  BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Taustakuvat" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Taustat" END
+ 		"Talleta teema" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Talleta kuvakeryhmδt" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.fr WindowMaker-0.50.2/WindowMaker/menu.fr
+--- WindowMaker-0.50.2.old/WindowMaker/menu.fr	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.fr	Mon Jan 18 16:39:27 1999
+@@ -159,44 +159,7 @@
+ 	"Terminal X" EXEC xterm -sb
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Espaces de travail" WORKSPACE_MENU
+-	"Applications" MENU
+-		"Graphismes" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Graphismes" END
+-		"Xfm" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape
+-		"Ghostview" EXEC ghostview %a(Entrez un fichier)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Entrez un fichier PDF)
+-		"TkDesk" EXEC tkdesk
+-	"Applications" END
+-	"Editeurs" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editeurs" END
+-	"Divers" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Divers" END
+-	"Utilitaires" MENU
+-		"Calculatrice" EXEC xcalc
+-		"Propriιtιs de la fenκtre" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Sιlecteur de polices" EXEC xfontsel
+-		"Emulateur de terminal" EXEC xminicom
+-		"Loupe" EXEC xmag
+-		"Carte des couleurs" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"Sιlections" EXEC xclipboard
+-	"Utilitaires" END
++	"Applications" OPEN_MENU | wmconfig --rootmenu=Applications --output=wmaker
+ 	
+ 	"Sιlection" MENU
+ 		"Copier" EXEC echo '%s' | wxcopy
+@@ -216,9 +179,9 @@
+ 	"Espace de travail" END
+ 
+ 	"Apparence" MENU
+-		"Thθmes" OPEN_MENU THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
+-		"Styles" OPEN_MENU STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
+-		"Jeu d'icτnes" OPEN_MENU ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
++		"Thθmes" OPEN_MENU -noext THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
++		"Styles" OPEN_MENU -noext STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
++		"Jeu d'icτnes" OPEN_MENU -noext ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
+ 		"Fond d'ιcran" MENU
+ 			"Unifiι" MENU
+ 				"Noir" WS_BACK '(solid, black)'
+@@ -231,14 +194,8 @@
+ 				"Bordeaux" WS_BACK '(solid, "#400020")'
+ 			"Unifiι" END
+ 			"Degradι" MENU
+-				"Coucher de Soleil" WS_BACK '(mvgradient, deepskyblue4, black, deepskyblue4, tomato4)'
++				"Drapeau" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Ciel" WS_BACK '(vgradient, blue4, white)'
+-                                "Dιgradιs de Bleu" WS_BACK '(vgradient, "#7080a5", "#101020")'
+-				"Dιgradιs d'Indigo" WS_BACK '(vgradient, "#746ebc", "#242e4c")'
+-				"Dιgradιs de Violet" WS_BACK '(vgradient, "#654c66", "#151426")'
+-				"Dιgradιs de Beige" WS_BACK '(vgradient, "#a09060", "#302010")'
+-				"Dιgradιs de Gris" WS_BACK '(vgradient, "#636380", "#131318")'
+-				"Dιgradιs de Bordeau" WS_BACK '(vgradient, "#600040", "#180010")'
+ 			"Degradι" END
+ 			"Images" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Fond d'ιcran" END
+@@ -250,6 +207,6 @@
+ 		"Redιmarrer" RESTART
+ 		"Dιmarrer AfterStep" RESTART afterstep
+ 		"Quitter..." EXIT
+-		"Tuer la session..." SHUTDOWN
++		"Terminer la session" SHUTDOWN
+ 	"Quitter" END
+ "Applications" END
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.gl WindowMaker-0.50.2/WindowMaker/menu.gl
+--- WindowMaker-0.50.2.old/WindowMaker/menu.gl	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.gl	Mon Jan 18 16:39:41 1999
+@@ -51,48 +51,7 @@
+ 	"Emulador Terminal" EXEC rxvt -ls -fg white -bg black -fn vga
+ 	"XJed"	EXEC xjed 
+ 	"Areas de Traballo" WORKSPACE_MENU
+-	"Aplicaciσns" MENU
+-		"Grαficos" MENU
+-			"Gimp" EXEC gimp
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grαficos" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread
+-  		"TkDesk" EXEC tkdesk
+-	"Aplicaciσns" END
+-	"Editores" MENU
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editores" END
+-	"Variedade" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Variedade" END
+-	"Utiles" MENU
+-		"Calculadora" EXEC xcalc
+-		"Selector de fonte" EXEC xfontsel
+-		"Lupa" EXEC xmag
+-		"Mapa de cor" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Portapapeis" EXEC xclipboard
+-	"Utiles" END
+-
+-	"Selecciσn" MENU
+-		"Correo" EXEC xterm -name mail -T "Pine" -e pine %s
+-		"Navegar" EXEC netscape %s
+-		"Buscar no manual" EXEC xterm -name manualBrowser -e man %s
+-	"Selecciσn" END
++	"Aplicaciσns" OPEN_MENU | wmconfig --rootmenu=Aplicaciσns --output=wmaker
+ 
+ 	"Area Traballo" MENU
+ 		"Fondo" MENU
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.he WindowMaker-0.50.2/WindowMaker/menu.he
+--- WindowMaker-0.50.2.old/WindowMaker/menu.he	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.he	Mon Jan 18 16:39:59 1999
+@@ -103,45 +103,7 @@
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"δγεας ιαηψξ" WORKSPACE_MENU
+-	"νιξεωι" MENU
+-		"δχιτψβ" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"δχιτψβ" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"τιιχρθπ" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"νιξεωι" END
+-	"νιλψες" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"νιλψες" END
+-	"ιμμλ" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"ιμμλ" END
+-	"νιμλ" MENU
+-		"Calculator" EXEC xcalc
+-		"Window Properties" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Font Chooser" EXEC xfontsel
+-		"Terminal Emulator" EXEC xminicom
+-		"Magnify" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"νιμλ" END
++	"νιξεωι" OPEN_MENU | wmconfig --rootmenu=νιξεωι --output=wmaker
+ 
+ 	"δψιηα" MENU
+ 		"χϊςδ" EXEC echo '%s' | wxcopy
+@@ -161,7 +123,7 @@
+ 	"δγεας αηψξ" END
+ 
+ 	"δΰψξ" MENU
+-		"Themes" OPEN_MENU -noext  THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
++		"Themes" OPEN_MENU -noext THEMES_DIR ~/GNUstep/Library/WindowMaker/Themes WITH setstyle
+ 		"ϊεπεπβρ" OPEN_MENU -noext STYLES_DIR ~/GNUstep/Library/WindowMaker/Styles WITH setstyle
+ 		"νιπεχιιΰ θρ" OPEN_MENU -noext ICON_SETS_DIR ~/GNUstep/Library/WindowMaker/IconSets WITH seticons
+ 		"ςχψ" MENU
+@@ -179,7 +141,7 @@
+ 				"Flag" WS_BACK '(vdgradient, blue, white, blue)'
+ 				"Sky" WS_BACK '(vgradient, blue4, white)'
+ 			"Gradient" END
+-			"Images" OPEN_MENU -noext  BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Images" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"ςχψ" END
+ 		"Save Theme" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Save IconSet" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.hr WindowMaker-0.50.2/WindowMaker/menu.hr
+--- WindowMaker-0.50.2.old/WindowMaker/menu.hr	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.hr	Mon Jan 18 16:40:17 1999
+@@ -105,45 +105,7 @@
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Xisp" EXEX xisp
+ 	"Radni prostori" WORKSPACE_MENU
+-	"Programi" MENU
+-		"Grafika" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafika" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"Programi" END
+-	"Editori" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editori" END
+-	"Razno" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Razno" END
+-	"Pomoζni programi" MENU
+-		"Kalkulator" EXEC xcalc
+-		"Informacije o prozoru" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Biraθ fontova" EXEC xfontsel
+-		"Emulator Terminala" EXEC xminicom
+-		"Poveζalo" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Pomoζni programi" END
++	"Programi" OPEN_MENU | wmconfig --rootmenu=Programi --output=wmaker
+ 
+ 	"Odabir" MENU
+ 		"Kopiraj" EXEC echo '%s' | wxcopy
+@@ -181,7 +143,7 @@
+ 				"Zastava" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Nebo" WS_BACK '(vgradient, blue4, white)'
+ 			"Preljev" END
+-			"Slike" OPEN_MENU -noext  BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Slike" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Pozadina" END
+ 		"Snimi temu" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Snimi set ikona" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.hu WindowMaker-0.50.2/WindowMaker/menu.hu
+--- WindowMaker-0.50.2.old/WindowMaker/menu.hu	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.hu	Mon Jan 18 19:54:23 1999
+@@ -117,45 +117,7 @@
+ 	"XTerminal" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Munkafeluletek" WORKSPACE_MENU
+-	"Alkalmazasok" MENU
+-		"Grafikai" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafikai" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"Alkalmazasok" END
+-	"Szerkesztok" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Szerkesztok" END
+-	"Egyeb" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Egyeb" END
+-	"Kellekek" MENU
+-		"Szamologep" EXEC xcalc
+-		"Ablak jellemzok" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Betutipus" EXEC xfontsel
+-		"Terminal emulacio" EXEC xminicom
+-		"Nagyito" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"Ora" EXEC asclock -shape
+-		"Vagolap" EXEC xclipboard
+-	"Kellekek" END
++	"Alkalmazasok" OPEN_MENU | wmconfig --rootmenu=Alkalmazasok --output=wmaker
+ 
+ 	"Valogatas" MENU
+ 		"Masolas" EXEC echo '%s' | wxcopy
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.it WindowMaker-0.50.2/WindowMaker/menu.it
+--- WindowMaker-0.50.2.old/WindowMaker/menu.it	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.it	Mon Jan 18 16:11:26 1999
+@@ -51,43 +51,7 @@
+ 	"XTerm" EXEC xterm -sb || color-xterm -sb || xterm -sb
+ 	"XJed"	EXEC xjed 
+ 	"Area di lavoro" WORKSPACE_MENU
+-	"Applicazioni" MENU
+-		"Grafica" MENU
+-			"Gimp" EXEC gimp
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafica" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Ghostview)
+-                "XDvi" EXEC xdvi %a(XDvi)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Acrobat)
+-  		"TkDesk" EXEC tkdesk
+-	"Applicazioni" END
+-	"Editori" MENU
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editori" END
+-	"Varie" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Varie" END
+-	"Utilita'" MENU
+-		"Calcolatore" EXEC xcalc
+-		"Selezione Font" EXEC xfontsel
+-		"Lente" EXEC xmag
+-		"Mappa Colori" EXEC xcmap
+-		"Assassinio X" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Utilita'" END
++	"Applicazioni" OPEN_MENU | wmconfig --rootmenu=Applicazioni --output=wmaker
+ 
+ 	"Selezione" MENU
+ 		"Invio posta a.." EXEC xterm -name mail -T "Pine" -e pine %s
+@@ -119,6 +83,12 @@
+ 		"Salva area di lavoro" EXEC SAVE_WORKSPACE
+ 	"Area di lavoro" END
+ 	
++#if (UID==0)	// root only stuff
++	"Sistema" MENU
++		// the RedHat control panel program
++		"Pannello di controllo RH"  EXEC control-panel
++	"Sistema" END
++#endif
+ 	"Uscire"	MENU
+ 		"Restart" RESTART
+ 		"Avviare AfterStep" RESTART afterstep
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.ja WindowMaker-0.50.2/WindowMaker/menu.ja
+--- WindowMaker-0.50.2.old/WindowMaker/menu.ja	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.ja	Mon Jan 18 16:40:45 1999
+@@ -109,46 +109,7 @@
+ 	"KTerm" EXEC kterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white
+ 	"¥ο΅Ό¥―¥Ή¥Ϊ΅Ό¥Ή" WORKSPACE_MENU
+-	"¥Ά¥Χ¥κ¥±΅Ό¥·¥η¥σ" MENU
+-		"¥°¥ι¥Υ¥£¥Γ¥―¥Ή" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"¥°¥ι¥Υ¥£¥Γ¥―¥Ή" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"¥Ά¥Χ¥κ¥±΅Ό¥·¥η¥σ" END
+-	"¥¨¥Η¥£¥Ώ" MENU
+-		"Mule" EXEC mule
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC kterm -e vi
+-	"¥¨¥Η¥£¥Ώ" END
+-	"¤¤¤ν¤¤¤ν" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"¤¤¤ν¤¤¤ν" END
+-	"¥ζ΅Ό¥Ζ¥£¥κ¥Ζ¥£" MENU
+-		"ΕΕΒξ" EXEC xcalc
+-		"¥Χ¥ν¥Ρ¥Ζ¥£Ι½Ό¨" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"¥Υ¥©¥σ¥Θ¥»¥μ¥―¥Ώ" EXEC xfontsel
+-		"ΓΌΛφ¥¨¥ί¥ε¥μ΅Ό¥Ώ" EXEC xminicom
+-		"΄γ¶ΐ" EXEC xmag
+-		"¥«¥ι΅Ό¥ή¥Γ¥Χ" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"¥ζ΅Ό¥Ζ¥£¥κ¥Ζ¥£΅Ό" END
++	"¥Ά¥Χ¥κ¥±΅Ό¥·¥η¥σ" OPEN_MENU | wmconfig --rootmenu=¥Ά¥Χ¥κ¥±΅Ό¥·¥η¥σ --output=wmaker
+ 
+ 	"¥»¥μ¥―¥·¥η¥σ" MENU
+ 		"¥³¥Τ΅Ό" EXEC echo '%s' | wxcopy
+@@ -186,7 +147,7 @@
+ 				"Flag" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Sky" WS_BACK '(vgradient, blue4, white)'
+ 			"¥°¥ι¥Η΅Ό¥·¥η¥σ" END
+-			"¥¤¥α΅Ό¥Έ" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"¥¤¥α΅Ό¥Έ" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"ΗΨ·Κ" END
+ 		"Έ½Ίί¤ΞΐίΔκ¤ς¥Ζ΅Ό¥ή¤Θ¤·¤Ζ¥»΅Ό¥Φ" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Έ½Ίί¤Ξ¥Ά¥¤¥³¥σ½Έ¤ς¥»΅Ό¥Φ" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.ko WindowMaker-0.50.2/WindowMaker/menu.ko
+--- WindowMaker-0.50.2.old/WindowMaker/menu.ko	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.ko	Mon Jan 18 16:41:01 1999
+@@ -104,54 +104,7 @@
+ 	"Α¤    ΊΈ" END
+ //	"XTerm" EXEC xterm -sb || color-xterm -sb || xterm -sb
+ 	"ΗΡ    ΕÒ" EXEC hanterm -sb -sl 3000 -fg WHITE -bg black -hfn -kaist-iyagi-bold-r-normal--16-120-100-100-c-160-ksc5601.1987-0
+-	"Η® ±Χ Έ²" MENU
+-		"ΕΝΉΜ³Ξ" MENU
+-			"΄Ί½Ί±Χ·μ" EXEC hanterm -sb -sl 3000 -e slrn
+-			"Ε« ΗΡΕÒ" EXEC hanterm
+-			"ΐΫΐΊ ΗΡΕÒ" EXEC hanterm -fg white -bg black -sb -sl 3000 -geometry 80x7
+-			"xterm" EXEC xterm -sb -sl 3000 
+-		"ΕΝΉΜ³Ξ" END
+-		"PC Ελ½Ε" MENU
+-			"³ªΏμ΄©Έ®" EXEC hanterm -sb -sl 3000 -fg WHITE -bg black -e ztelnet nownuri.net
+-			"ΗΟΐΜΕΪ" EXEC hanterm -sb -sl 3000 -fg WHITE -bg black -e ztelnet home.hitel.net
+-			"ΓµΈ®ΎΘ" EXEC hanterm -sb -sl 3000 -fg WHITE -bg black -e ztelnet chollian.dacom.co.kr
+-			"ΐ―΄ΟΕΪ" EXEC hanterm -sb -sl 3000 -fg WHITE -bg black -e ztelnet uniwin.unitel.co.kr
+-		"PC Ελ½Ε" END
+-		"±Χ·΅ΗΘ Εψ" MENU
+-			"Gimp" EXEC gimp
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"±Χ·΅ΗΘ Εψ" END
+-		"°΅  Ώμ" EXEC gau 
+-                "LynX" EXEC hanterm -sb -sl 3000 -e lynx
+-		"ΈπΑϊ¶σ" EXEC netscape 
+-  		"Ζχ½ΊΖ®½ΊΕ©Έ³Ζ®" EXEC gv %a(gv) || ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Acrobat)
+-  		"TkDesk" EXEC tkdesk
+-                "X File Manager" EXEC xfm
+-                "OffiX Files" EXEC files
+-	"Η® ±Χ Έ²" END
+-	"Ή®Ό­ΖνΑύ" MENU
+-		"vi" EXEC hanterm -sb -sl 3000 -fg white -bg black -e vi
+-		"XEmacs" EXEC xemacs || emacs
+-		"ΗΡ±Ϋ/X" EXEC hwpx 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-	"Ή®Ό­ ΖνΑύ" END
+-	"ΐβµΏ»η΄Ο" MENU
+-		"xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"ΐβµΏ»η΄Ο" END
+-	"ΐ―ΖΏΈ®ΖΌ" MENU
+-		"°θ»κ±β" EXEC xcalc
+-		"±Ϋ²Γ Ό±ΕΓ" EXEC xfontsel
+-		"µΈΊΈ±β" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"ΎξΗΓ ΑΎ·α½ΓΕ°±β" EXEC xkill
+-		"Ε¬Έ³ΊΈµε" EXEC xclipboard
+-		"ΐ©µµΏμ ΌΣΌΊ" EXEC xprop | xmessage -center -title 'xprop' -file -
+-	"ΐ―ΖΏΈ®ΖΌ" END
++	"Η® ±Χ Έ²" OPEN_MENU  | wmconfig --rootmenu="Η® ±Χ Έ²" --output=wmaker
+ 
+ 	"Selection" MENU
+ 		"ΊΉ»ηΗΟ±β" EXEC echo '%s' | wxcopy
+@@ -190,7 +143,7 @@
+ 				"Flag" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Sky" WS_BACK '(vgradient, blue4, white)'
+ 			"Gradient" END
+-			"Images" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Images" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Ήθ°ζΘ­Έι" END
+ 		"ΕΧΈ¶ ΐϊΐε" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"ΎΖΐΜΔάΌΌΖ® ΐϊΐε" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+@@ -210,5 +163,12 @@
+ "Applications" END
+ 
+ 
++	
++#if (UID==0)	// root only stuff
++	"½Γ½ΊΕΫ" MENU
++		// the RedHat control panel program
++		"RH ControlPanel" EXEC control-panel
++	"½Γ½ΊΕΫ" END
++#endif
+ "ΐ©µµΏμΈήΐΜΔΏ" END
+ 
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.nl WindowMaker-0.50.2/WindowMaker/menu.nl
+--- WindowMaker-0.50.2.old/WindowMaker/menu.nl	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.nl	Mon Jan 18 16:26:33 1999
+@@ -41,41 +41,7 @@
+ 	"XTerm" EXEC xterm -sb || color-xterm -sb || xterm -sb
+ 	"XJed"	EXEC xjed
+ 	"Werkplaatsen" WORKSPACE_MENU
+-	"Applicaties" MENU
+-		"Grafische toepassingen" MENU
+-			"Gimp" EXEC gimp
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafische toepassingen" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape
+-  		"Ghostview" EXEC ghostview
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread
+-  		"TkDesk" EXEC tkdesk
+-	"Applicaties" END
+-	"Editors" MENU
+-		"XEmacs" EXEC xemacs
+-		"XJed" EXEC xjed
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editors" END
+-	"Diverse" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Diverse" END
+-	"Utils" MENU
+-		"Calculator" EXEC xcalc
+-		"Font Chooser" EXEC xfontsel
+-		"Magnify" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock
+-	"Utils" END
++	"Applicaties" OPEN_MENU | wmconfig --rootmenu=Applicaties --output=wmaker
+ 	"Werkplaats" MENU
+ 		"Achtergrond" MENU
+ 			"-" 	EXEC CLEARROOT
+@@ -98,6 +64,12 @@
+ 		"Blokkeren" EXEC xlock -allowroot -usefirst
+ 		"Opslaan werkplaats" EXEC SAVE_WORKSPACE
+ 	"Werkplaats" END
++#if (UID==0)	// enkel voor root
++	"Systeem" MENU
++		// the RedHat control panel program
++		"RH Controle Paneel" EXEC control-panel
++	"Systeem" END
++#endif
+ 	"Exit"	MENU
+ 		"Herstart" RESTART
+ 		"Start AfterStep" RESTART afterstep
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.no WindowMaker-0.50.2/WindowMaker/menu.no
+--- WindowMaker-0.50.2.old/WindowMaker/menu.no	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.no	Mon Jan 18 16:41:30 1999
+@@ -106,43 +106,7 @@
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Arbeids-Omrεder" WORKSPACE_MENU
+-	"Applikasjoner" MENU
+-		"Grafikk" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafikk" END
+-		"X Fil Behandler" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Navnet pε fila du vil se)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Skriv inn PDF\'en du ψnsker)
+-  		"TkDesk" EXEC tkdesk
+-	"Applikasjoner" END
+-	"Tekst Redigering" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Tekst Redigering" END
+-	"Diverse" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Diverse" END
+-	"Verktψy" MENU
+-		"Kalkulator" EXEC xcalc
+-		"Font Velger" EXEC xfontsel
+-		"Forstψrrelsesglass" EXEC xmag
+-		"Fargekart" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Verktψy" END
++	"Applikasjoner" OPEN_MENU | wmconfig --rootmenu=Applikasjoner --output=wmaker
+ 
+ 	"Utvalg" MENU
+ 		"Kopier" EXEC echo '%s' | wxcopy
+@@ -178,7 +142,7 @@
+ 				"Flagg"  WS_BACK '(mgradient, green, red, white, green)'
+ 				"Himmel" WS_BACK '(vgradient, blue4, white)'
+ 			"Overganger" END
+-		"Bilder" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/BackGrounds WITH wmsetbg -u -t
++		"Bilder" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/BackGrounds WITH wmsetbg -u -t
+ 		"Bakgrunn" END
+ 		"Lagre Tema" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Lagre Ikonsett" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.pt WindowMaker-0.50.2/WindowMaker/menu.pt
+--- WindowMaker-0.50.2.old/WindowMaker/menu.pt	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.pt	Mon Jan 18 16:41:53 1999
+@@ -66,8 +66,8 @@
+  *	// subdiretσrios e arquivos legνveis neles em ordem alfabιtica,
+  *	// usando o comando para executar cada arquivo.
+  *
+- *	OPEN_MENU [-noext] /algum/dir [/algum/outro/dir ...] WITH comando -opηυes
+- *		
++ *	OPEN_MENU /algum/dir [/algum/outro/dir ...] WITH comando -opηυes
++ *
+  *
+  * <Parβmetros> ι o programa a ser executado.
+  *
+@@ -113,45 +113,7 @@
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Αreas de Trabalho" WORKSPACE_MENU
+-	"Aplicaηυes" MENU
+-		"Grαficos" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grαficos" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"Aplicaηυes" END
+-	"Editores" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Editores" END
+-	"Diversos" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Diversos" END
+-	"Utilitαrios" MENU
+-		"Calculadora" EXEC xcalc
+-		"Propriedades da Janela" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Seletor de Fontes" EXEC xfontsel
+-		"Emulador de Terminal" EXEC xminicom
+-		"Lente de Aumento" EXEC xmag
+-		"Colormap" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Utilitαrios" END
++	"Aplicaηυes" OPEN_MENU | wmconfig --rootmenu=Aplicaηυes --output=wmaker
+ 
+ 	"Seleηγo" MENU
+ 		"Copiar" EXEC echo '%s' | wxcopy
+@@ -189,7 +151,7 @@
+ 				"Bandeira" WS_BACK '(mdgradient, green, green, yellow)'
+ 				"Cιu" WS_BACK '(vgradient, blue4, white)'
+ 			"Degradι" END
+-			"Imagens" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Imagens" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Papιis de Parede" END
+ 		"Salvar Tema" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Nome do Tema)"
+ 		"Salvar Configuraηγo de Νcones" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(Nome do Conjunto de Νcones)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.ru WindowMaker-0.50.2/WindowMaker/menu.ru
+--- WindowMaker-0.50.2.old/WindowMaker/menu.ru	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.ru	Mon Jan 18 16:29:10 1999
+@@ -64,42 +64,7 @@
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"XJed"	EXEC xjed 
+ 	"ςΑΒΟήΙΕ ΝΕΣΤΑ" WORKSPACE_MENU
+-	"πÒΙΜΟΦΕΞΙΡ" MENU
+-		"ηÒΑΖΙήΕΣΛΙΕ" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"ηÒΑΖΙήΕΣΛΙΕ" END
+-		"νΕΞΕΔΦΕÒ ΖΑΚΜΟΧ X" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)
+-  		"TkDesk" EXEC tkdesk
+-	"πÒΙΜΟΦΕΞΙΡ" END
+-	"ςΕΔΑΛΤΟÒΩ" MENU
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"ςΕΔΑΛΤΟÒΩ" END
+-	"ςΑΪΞΟΕ" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"ςΑΪΞΟΕ" END
+-	"υΤΙΜΙΤΩ" MENU
+-		"λΑΜΨΛΥΜΡΤΟÒ" EXEC xcalc
+-		"χΩΒÒΑΤΨ ΫÒΙΖΤ" EXEC xfontsel
+-		"υΧΕΜΙήΙΤΕΜΨ" EXEC xmag
+-		"λΑÒΤΑ ΓΧΕΤΟΧ" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ώΑΣΩ" EXEC asclock -shape
+-		"βΥΖΕÒ ΟΒΝΕΞΑ" EXEC xclipboard
+-	"υΤΙΜΙΤΩ" END
++	"πÒΙΜΟΦΕΞΙΡ" OPEN_MENU | wmconfig --rootmenu=πÒΙΜΟΦΕΞΙΡ --output=wmaker
+ 
+ 	"χΩΔΕΜΕΞΙΕ" MENU
+ 		"λΟΠΙÒΟΧΑΤΨ" EXEC echo '%s' | wxcopy
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.se WindowMaker-0.50.2/WindowMaker/menu.se
+--- WindowMaker-0.50.2.old/WindowMaker/menu.se	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.se	Mon Jan 18 16:42:30 1999
+@@ -113,45 +113,7 @@
+ 	"Rxvt (fixed)" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Rxvt (9x15)" EXEC rxvt -bg black -fg white -fn 9x15
+ 	"Arbetsbord" WORKSPACE_MENU
+-	"Program" MENU
+-		"Grafik" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Grafik" END
+-		"X Filhanterare" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(Enter file to view)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Skriv in PDF-fil som ska visas)
+-  		"TkDesk" EXEC tkdesk
+-	"Program" END
+-	"Textredigerare" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Textredigerare" END
+-	"Diverse" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Diverse" END
+-	"Verktyg" MENU
+-		"Minirδknare" EXEC xcalc
+-		"Window Properties" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Fontvδljare" EXEC xfontsel
+-		"Terminalemulator" EXEC xminicom
+-		"Fφrstora" EXEC xmag
+-		"Fδrgkarta" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Klipphanterare" EXEC xclipboard
+-	"Verktyg" END
++	"Program" OPEN_MENU | wmconfig --rootmenu=Program --output=wmaker
+ 
+ 	"Markering" MENU
+ 		"Kopiera" EXEC echo '%s' | wxcopy
+@@ -189,7 +151,7 @@
+ 				"Flagga" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Himmel" WS_BACK '(vgradient, blue4, white)'
+ 			"Toningar" END
+-			"Bilder" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Bilder" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Bakgrund" END
+ 		"Spara tema" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Spara ikonuppsδttning" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/menu.tr WindowMaker-0.50.2/WindowMaker/menu.tr
+--- WindowMaker-0.50.2.old/WindowMaker/menu.tr	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/menu.tr	Mon Jan 18 16:42:46 1999
+@@ -98,45 +98,7 @@
+ 	"XTerm" EXEC xterm -sb 
+ 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Ηalύώma Alanlarύ" WORKSPACE_MENU
+-	"Uygulamalar" MENU
+-		"Gφrόntό" MENU
+-			"Gimp" EXEC gimp >/dev/null
+-			"XV" EXEC xv
+-			"XPaint" EXEC xpaint
+-			"XFig" EXEC xfig
+-		"Graphics" END
+-		"X File Manager" EXEC xfm
+-		"OffiX Files" EXEC files
+-		"LyX" EXEC lyx
+-		"Netscape" EXEC netscape 
+-  		"Ghostview" EXEC ghostview %a(PS dosyasύnύ girin)
+-		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(PDF dosyasύnύ girin)
+-  		"TkDesk" EXEC tkdesk
+-	"Uygulamalar" END
+-	"Dόzenleyiciler" MENU
+-		"XFte" EXEC xfte
+-		"XEmacs" EXEC xemacs || emacs
+-		"XJed" EXEC xjed 
+-		"NEdit" EXEC nedit
+-		"Xedit" EXEC xedit
+-		"VI" EXEC xterm -e vi
+-	"Dόzenleyiciler" END
+-	"Ηeώitli" MENU
+-		"Xmcd" EXEC xmcd 2> /dev/null
+-		"Xplaycd" EXEC xplaycd
+-		"Xmixer" EXEC xmixer
+-	"Ηeώitli" END
+-	"Yardύmcύlar" MENU
+-		"Hesap Makinasύ" EXEC xcalc
+-		"Pencere Φzellikleri" EXEC xprop | xmessage -center -title 'xprop' -file -
+-		"Yazύ tipi Tarayύcύsύ" EXEC xfontsel
+-		"Terminal Φykόmcόsό" EXEC xminicom
+-		"Bόyόteη" EXEC xmag
+-		"Renk Tablosu" EXEC xcmap
+-		"XKill" EXEC xkill
+-		"ASClock" EXEC asclock -shape
+-		"Clipboard" EXEC xclipboard
+-	"Yardύmcύlar" END
++	"Uygulamalar" OPEN_MENU | wmconfig --rootmenu=Uygulamalar --output=wmaker
+ 
+ 	"Seηim" MENU
+ 		"Kopyala" EXEC echo '%s' | wxcopy
+@@ -174,7 +136,7 @@
+ 				"Flag" WS_BACK '(mdgradient, green, red, white, green)'
+ 				"Sky" WS_BACK '(vgradient, blue4, white)'
+ 			"Renk Geηiώi" END
+-			"Gφrόntόler" OPEN_MENU -noext BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
++			"Gφrόntόler" OPEN_MENU BACKGROUNDS_DIR ~/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t
+ 		"Arkaplan" END
+ 		"Tema Sakla" EXEC getstyle -t ~/GNUstep/Library/WindowMaker/Themes/"%a(Theme name)"
+ 		"Simge Kόmesi Sakla" EXEC geticonset ~/GNUstep/Library/WindowMaker/IconSets/"%a(IconSet name)"
+diff -urN WindowMaker-0.50.2.old/WindowMaker/plmenu WindowMaker-0.50.2/WindowMaker/plmenu
+--- WindowMaker-0.50.2.old/WindowMaker/plmenu	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/plmenu	Mon Jan 18 19:51:05 1999
+@@ -11,45 +11,7 @@
+  ("XTerm", EXEC, "xterm -sb"),
+  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+  ("Workspaces", WORKSPACE_MENU),
+- ("Applications",
+-  ("Graphics",
+-   ("Gimp", EXEC, "gimp >/dev/null"),
+-   ("XV", EXEC, "xv"),
+-   ("XPaint", EXEC, "xpaint"),
+-   ("XFig", EXEC, "xfig")
+-   ),
+-  ("X File Manager", EXEC, "xfm"),
+-  ("OffiX Files", EXEC, "files"),
+-  ("LyX", EXEC, "lyx"),
+-  ("Netscape", EXEC, "netscape"),
+-  ("Ghostview", EXEC, "ghostview %a(Enter file to view)"),
+-  ("Acrobat", EXEC, "/usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)"),
+-  ("TkDesk", EXEC, "tkdesk")
+-  ),
+- ("Editors",
+-  ("XFte", EXEC, "xfte"),
+-  ("XEmacs", EXEC, "xemacs || emacs"),
+-  ("XJed", EXEC, "xjed"),
+-  ("NEdit", EXEC, "nedit"),
+-  ("Xedit", EXEC, "xedit"),
+-  ("VI", EXEC, "xterm -e vi")
+-  ),
+- ("Miscellaneous",
+-  ("Xmcd", EXEC, "xmcd 2> /dev/null"),
+-  ("Xplaycd", EXEC, "xplaycd"),
+-  ("Xmixer", EXEC, "xmixer")
+-  ),
+- ("Utils",
+-  ("Calculator", EXEC, "xcalc"),
+-  ("Window Properties", EXEC, "xprop | xmessage -center -title 'xprop' -file -"),
+-  ("Font Chooser", EXEC, "xfontsel"),
+-  ("Terminal Emulator", EXEC, "xminicom"),
+-  ("Magnify", EXEC, "xmag"),
+-  ("Colormap", EXEC, "xcmap"),
+-  ("XKill", EXEC, "xkill"),
+-  ("ASClock", EXEC, "asclock -shape"),
+-  ("Clipboard", EXEC, "xclipboard")
+-  ),
++ ("Applications", OPEN_MENU, "| wmconfig --rootmenu=Applications --output=wmaker"),
+  ("Selection",
+   ("Copy", EXEC, "echo '%s' | wxcopy"),
+   ("Mail To", EXEC, "xterm -name mail -T Pine -e pine %s"),
+diff -urN WindowMaker-0.50.2.old/WindowMaker/plmenu.fr WindowMaker-0.50.2/WindowMaker/plmenu.fr
+--- WindowMaker-0.50.2.old/WindowMaker/plmenu.fr	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/plmenu.fr	Mon Jan 18 19:51:38 1999
+@@ -10,6 +10,7 @@
+   ("Terminal X", EXEC, "xterm -sb"),
+   ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+   ("Espaces de travail", WORKSPACE_MENU),
++  ("Applications", OPEN_MENU, "| wmconfig --rootmenu=Applications --output=wmaker"),
+   ("Applications",
+ 	("Graphismes",
+           ("Gimp", EXEC, "gimp >/dev/null"),
+diff -urN WindowMaker-0.50.2.old/WindowMaker/plmenu.hr WindowMaker-0.50.2/WindowMaker/plmenu.hr
+--- WindowMaker-0.50.2.old/WindowMaker/plmenu.hr	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/WindowMaker/plmenu.hr	Mon Jan 18 19:51:57 1999
+@@ -12,6 +12,7 @@
+   (XTerm, EXEC, "xterm -sb"),
+   (Rxvt, EXEC, "rxvt -bg black -fg white -fn fixed"),
+   ("Radni Prostori", WORKSPACE_MENU),
++  ("Applications", OPEN_MENU, "| wmconfig --rootmenu=Applications --output=wmaker"),
+   (
+     Programi,
+     (

@@ -1,0 +1,11 @@
+--- WindowMaker-0.50.2.old/wrlib/configure.in	Tue Jan 12 13:48:53 1999
++++ WindowMaker-0.50.2/wrlib/configure.in	Mon Jan 18 15:37:08 1999
+@@ -6,8 +6,6 @@
+ AM_INIT_AUTOMAKE(wrlib, 0.3)
+ 
+ 
+-CFLAGS="$CFLAGS -O2"
+-
+ dnl Checks for programs.
+ dnl ===================
+ AC_PROG_CC
