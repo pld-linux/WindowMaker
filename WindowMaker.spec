@@ -20,7 +20,6 @@ Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
 # Source2-md5:	07c7700daaaf232bc490f5abaabef085
 Source3:	%{name}.desktop
-Source4:	%{name}.RunWM
 Source6:	%{name}-xsession.desktop
 Patch0:		%{name}-CFLAGS.patch
 Patch1:		%{name}-vfmg.patch
@@ -306,7 +305,6 @@ install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
-install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/wmaker.sh
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
 cd %{name}-extra-%{extraver}
@@ -329,7 +327,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/WindowMaker
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
 
-%attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
 
 %{_mandir}/man1/*
 %lang(sk) %{_mandir}/sk/man1/*
