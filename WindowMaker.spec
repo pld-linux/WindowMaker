@@ -7,8 +7,7 @@ Release:	1
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
-#######		ftp://ftp.windowmaker.org/pub/beta/srcs/
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
 Patch0:		WindowMaker-pl.po.patch
 Patch1:		WindowMaker-CFLAGS.patch
@@ -76,7 +75,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %prep
 %setup -q -a 1
 
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
@@ -84,7 +83,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %build
 echo "b" | \
-LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko 
+LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko  \
 	 pl ru zh_TW.Big5" \
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
 ./configure \
@@ -100,7 +99,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
         --enable-newstyle \
 	--enable-kde
 make \
-	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko 
+	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko \
 		 pl ru zh_TW.Big5" \
 	CFLAGS="$RPM_OPT_FLAGS" \
 	LDFLAGS="-s" 
@@ -110,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
 make install \
-	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko 
+	LINGUAS="cs el fr it nl pt se de es gl ja no ro tr dk fi hr ko \
 		 pl ru zh_TW.Big5" \
 	DESTDIR=$RPM_BUILD_ROOT 
 
