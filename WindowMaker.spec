@@ -29,7 +29,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
-BuildRequires:	gettext
+BuildRequires:	gettext-devel
 Requires:	wmconfig
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
