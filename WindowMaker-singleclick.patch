@@ -30,7 +30,7 @@
      WMSetButtonText(panel->swi[4], _("Disable confirmation panel for the Kill command."));
      WMSetButtonText(panel->swi[5], _("Disable selection animation for selected icons."));
      WMSetButtonText(panel->swi[6], _("Smooth font edges (needs restart)."));
-+    WMSetButtonText(panel->swi[8], _("Launch applications and restore windows with a single click"));
++    WMSetButtonText(panel->swi[7], _("Launch applications and restore windows with a single click"));
  
      WMSetButtonEnabled(panel->swi[6], True);
  
@@ -38,7 +38,7 @@
      SetBoolForKey(WMGetButtonSelected(panel->swi[4]), "DontConfirmKill");
      SetBoolForKey(WMGetButtonSelected(panel->swi[5]), "DisableBlinking");
      SetBoolForKey(WMGetButtonSelected(panel->swi[6]), "AntialiasedText");
-+    SetBoolForKey(WMGetButtonSelected(panel->swi[8]), "SingleClickLaunch");
++    SetBoolForKey(WMGetButtonSelected(panel->swi[7]), "SingleClickLaunch");
  }
  
  
