@@ -3,7 +3,7 @@
 Summary:	NeXT-alike window manager
 Summary(es):	Administrador de Ventanas parecido con el NeXT
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
-Summary(pl):	Mened¿er okien w stylu NeXT
+Summary(pl):	Zarz±dca okien w stylu NeXT
 Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
@@ -101,7 +101,7 @@ applications) qui fonctionnent à la fois dans les gestionnaires de
 fenêtres AfterStep et Window Maker.
 
 %description -l pl
-WindowMaker jest mened¿erem okien przypominaj±cym wygl±dem i wygod±
+WindowMaker jest zarz±dc± okien przypominaj±cym wygl±dem i wygod±
 obs³ugi interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo ma³y,
 o du¿ych mo¿liwo¶ciach i ³atwy w konfiguracji. Konfiguruje siê go
 myszk±, za pomoc± programu WPrefs wchodz±cego w sk³ad tego pakietu.
@@ -136,7 +136,7 @@ This package contains shared libraries for run WindowMaker.
 
 %description libs -l pl
 Ten pakiet zawiera biblioteki wspó³dzielone niezbêdne do pracy
-mened¿era okien WindowMaker.
+zarz±dcy okien WindowMaker.
 
 %package devel
 Summary:	WindowMaker libraries - development part
@@ -164,7 +164,7 @@ valeur par WindowMaker.
 
 %description devel -l pl
 Ten pakiet zawiera pliki nag³ówkowe i biblioteki niezbêdne do
-tworzenia aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien
+tworzenia aplikacji wykorzystuj±cych mo¿liwo¶ci zarz±dcy okien
 WindowMaker.
 
 %description devel -l pt_BR
@@ -194,7 +194,7 @@ WindowMaker-enhanced applications.
 
 %description static -l pl
 Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
-aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
+aplikacji wykorzystuj±cych mo¿liwo¶ci zarz±dcy okien WindowMaker.
 
 %description static -l pt_BR
 Instale este pacote se você deseja desenvolver para o WindowMaker,
