@@ -1,3 +1,5 @@
+%define		extraver	0.1
+
 Summary:	NeXT-alike window manager
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
@@ -9,11 +11,14 @@ Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
 Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
+Source2:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-extra-%{extraver}.tar.gz
 Patch0:		WindowMaker-CFLAGS.patch
 Patch1:		WindowMaker-wmconfig.patch
 Patch2:		WindowMaker-a_macro.patch
 Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
+Patch5:		WindowMaker-areas.patch
+Patch6:		WindowMaker-runinst.patch
 URL:		http://www.windowmaker.org/
 BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
@@ -93,13 +98,15 @@ Ten pakiet zawiera statyczne biblioteki niezbêdne do tworzenia
 aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %prep
-%setup -q -a 1
+%setup -q -a 1 -a 2
 
 %patch0 -p1
 %patch1 -p1
 %patch2 -p0
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 %build
 echo "b" | \
@@ -124,6 +131,11 @@ make \
 	CFLAGS="$RPM_OPT_FLAGS" \
 	LDFLAGS="-s" 
 
+cd %{name}-extra-%{extraver}
+./configure \
+	--prefix=/usr/X11R6 \
+	--with-iconsdir=/usr/X11R6/share/pixmaps
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
@@ -137,7 +149,10 @@ install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 
-strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
+(cd %{name}-extra-%{extraver};
+make DESTDIR=$RPM_BUILD_ROOT install )
+
+strip --strip-unneeded $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
 gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
 	AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
