@@ -1,4 +1,5 @@
 %define		extraver	0.1
+%define		_snap		20040321
 
 Summary:	NeXT-alike window manager
 Summary(es):	Administrador de Ventanas parecido con el NeXT
@@ -8,12 +9,12 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
-Version:	0.80.2
-Release:	7
+Version:	0.81.0
+Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Window Managers
-Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
-# Source0-md5:	9f4fabc8831af6c58edf8708ee90126f
+Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
+# Source0-md5:	ecbd8f1cee5e2ad1adb99baadb142169
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
@@ -37,6 +38,7 @@ Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
 Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch14:	%{name}-localenames.patch
+Patch15:	%{name}-CVS-before-xft2.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	Hermes-devel
 BuildRequires:	XFree86-devel
@@ -230,6 +232,7 @@ utilizando componentes estáticos (raramente necessário).
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 for f in WindowMaker/*menu*; do
 	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
