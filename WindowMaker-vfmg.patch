@@ -1,6 +1,6 @@
 diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu WindowMaker-CVS-20040321/WindowMaker/plmenu
 --- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu	2002-05-11 02:44:03.000000000 +0200
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu	2004-07-04 21:56:20.000000000 +0200
++++ WindowMaker-CVS-20040321/WindowMaker/plmenu	2004-07-08 01:18:48.890573952 +0200
 @@ -8,49 +8,10 @@
    ("Manual Browser", EXEC, "xman")
    ),
@@ -65,7 +65,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu WindowMaker-CVS-20040
    ("Restart", RESTART),
 diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20040321/WindowMaker/plmenu.de
 --- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de	2000-01-04 22:45:57.000000000 +0100
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.de	2004-07-04 22:28:15.835496688 +0200
++++ WindowMaker-CVS-20040321/WindowMaker/plmenu.de	2004-07-08 01:19:09.547433632 +0200
 @@ -8,48 +8,10 @@
    ("Man-Page-Betrachter", EXEC, "xman")
    ),
@@ -141,14 +141,14 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20
 -  ("Thema speichern", SHEXEC, "getstyle -t /home/mawa/GNUstep/Library/WindowMaker/Themes/\"%a(Themenname)\""),
 -  ("Iconsatz speichern", SHEXEC, "geticonset /home/mawa/GNUstep/Library/WindowMaker/IconSets/\"%a(Iconsatz-Name)\"")
 +  ("Thema speichern", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Themenname)\""),
-+  ("Iconsatz speichern", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(Iconsatz-Name)\"")
++  ("Iconsatz speichern", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(Iconsatz-Name)\""),
 +  ("Einstellung", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
    ), 
   ("Beenden",
    ("Neustart", RESTART),
 diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es WindowMaker-CVS-20040321/WindowMaker/plmenu.es
 --- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es	2000-06-16 02:16:35.000000000 +0200
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.es	2004-07-04 22:15:33.665364160 +0200
++++ WindowMaker-CVS-20040321/WindowMaker/plmenu.es	2004-07-08 01:18:48.906571520 +0200
 @@ -8,48 +8,10 @@
    ("Paginas del Manual", EXEC, "xman")
    ),
@@ -230,7 +230,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es WindowMaker-CVS-20
    ("Reiniciar", RESTART),
 diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr WindowMaker-CVS-20040321/WindowMaker/plmenu.fr
 --- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr	1999-05-29 23:41:26.000000000 +0200
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.fr	2004-07-04 22:29:44.279051224 +0200
++++ WindowMaker-CVS-20040321/WindowMaker/plmenu.fr	2004-07-08 01:19:24.528156216 +0200
 @@ -8,48 +8,10 @@
      ("Butineur d'aide", EXEC, "xman")
     ),
@@ -304,14 +304,15 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr WindowMaker-CVS-20
 +     ("Images", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
        ),
     ("Sauver le thème", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes /\"%a(Nom du thème,Entrez un nom de fichier:)\""),
-    ("Sauver le jeu d'icônes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icônes,Entrez un nom de fichier:)\"")  
+-   ("Sauver le jeu d'icônes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icônes,Entrez un nom de fichier:)\"")  
++   ("Sauver le jeu d'icônes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icônes,Entrez un nom de fichier:)\""),
 +  ("Préférence", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
    ),
   ("Quitter",
     ("Redémarrer", RESTART),
 diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20040321/WindowMaker/plmenu.it
 --- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it	2000-01-04 22:45:57.000000000 +0100
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.it	2004-07-04 22:32:29.197979736 +0200
++++ WindowMaker-CVS-20040321/WindowMaker/plmenu.it	2004-07-08 01:19:32.131000408 +0200
 @@ -8,48 +8,10 @@
    ("Ricerca Manuali", EXEC, "xman")
    ),
@@ -387,15 +388,15 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20
 -  ("Salva il tema", EXEC, "getstyle -t ~/GNUstep/Library/WindowMaker/Themes/\"%a(Nome Tema)\""),
 -  ("Salva il set icone", EXEC, "geticonset ~/GNUstep/Library/WindowMaker/IconSets/\"%a(Nome IconSet)\"")
 +  ("Salva il tema", EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Nome Tema)\""),
-+  ("Salva il set icone", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(Nome IconSet)\"")
++  ("Salva il set icone", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(Nome IconSet)\""),
 +  ("Preferezioni", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
    ), 
   ("Esci",
    ("Riavvia", RESTART),
 diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20040321/WindowMaker/plmenu.pl
 --- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl	2000-01-04 22:45:57.000000000 +0100
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.pl	2004-07-04 22:32:59.267408488 +0200
-@@ -1,11 +1,11 @@
++++ WindowMaker-CVS-20040321/WindowMaker/plmenu.pl	2004-07-08 01:20:42.817254464 +0200
+@@ -1,135 +1,39 @@
  ("WindowMaker",
  	("Informacja",
 -		("Informacja o WMaker...", INFO_PANEL),
@@ -413,7 +414,10 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
  	),
  	
  	("Konfiguracja",	
-@@ -15,121 +15,25 @@
+-		("Edycja menu",       EXEC, "xterm -T 'Edycja menu' -e vi $HOME/GNUstep/Library/WindowMaker/menu"),
++		("Edycja menu",       EXEC, "xterm -T 'Edycja menu' -e vi $HOME/GNUstep/Library/Defaults/WMRootMenu"),
+ 		("Ustawienie fontów", EXEC, "xterm -T 'Ustawienie fontów' -e vi $HOME/GNUstep/Defaults/WMGLOBAL"),
+ 		("Konfiguracja",      EXEC, "xterm -T 'Konfiguracja' -e vi $HOME/GNUstep/Defaults/WindowMaker")
  	),
  	
  	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
@@ -561,8 +565,9 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 +			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
  		),
 -		("Zaoamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
+-		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
 +		("Zapamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
- 		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
++		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'"),
 +		("Ustawienia", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
  	),
  
