@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.80.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
@@ -153,7 +153,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci menad¿era okien WindowMaker.
 
 for f in WindowMaker/*menu*; do
     sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
-    mv $f.new $f
+    mv -f $f.new $f
 done
 
 %build
@@ -161,11 +161,12 @@ libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c -f
-(cd %{name}-extra-%{extraver}
+cd %{name}-extra-%{extraver}
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c)
+automake -a -c -f
+cd ..
 
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
@@ -217,8 +218,9 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.sh
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.names
 
-(cd %{name}-extra-%{extraver};
-%{__make} DESTDIR=$RPM_BUILD_ROOT install )
+cd %{name}-extra-%{extraver}
+%{__make} DESTDIR=$RPM_BUILD_ROOT install
+cd ..
 
 gzip -9nf AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
@@ -279,18 +281,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/get-wings-flags
-%attr(755,root,root) %{_bindir}/get-wraster-flags
-%attr(755,root,root) %{_bindir}/get-wutil-flags
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_datadir}/WINGs
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+%attr(755,root,root) %{_bindir}/get-wings-flags
 %attr(755,root,root) %{_bindir}/get-wraster-flags
+%attr(755,root,root) %{_bindir}/get-wutil-flags
 %{_includedir}/*
-%{_libdir}/lib*.la
 
 %files static
 %defattr(644,root,root,755)
