@@ -8,10 +8,10 @@
  noinst_PROGRAMS = connect server fontl puzzle
  
 +LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
-+	$(INTLIBS)
++	$(XFTLIBS) $(INTLIBS)
  
 -LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
--	@INTLIBS@
+-	@XFTLIBS@ @INTLIBS@
 -
 -
 -fontl_DEPENDENCIES = $(top_builddir)/WINGs/libWINGs.a
@@ -72,15 +72,15 @@
 +	-DRESOURCE_PATH=\"$(datadir)/WINGs\" $(HEADER_SEARCH_PATH)
  
 -LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
--	@INTLIBS@
+-	@XFTLIBS@ @INTLIBS@
 +LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
-+	$(INTLIBS)
++	$(XFTLIBS) $(INTLIBS)
  
  test_LDADD = wtableview.o wtabledelegates.o $(LDADD)
 -
 --- WindowMaker-0.70.0.orig/WINGs/Makefile.am	Thu Oct  4 05:39:17 2001
 +++ WindowMaker-0.70.0/WINGs/Makefile.am	Thu Oct 18 16:54:22 2001
-@@ -4,22 +4,18 @@
+@@ -4,24 +4,20 @@
  
  SUBDIRS = WINGs . po Documentation Resources Examples Extras Tests
  
@@ -98,7 +98,9 @@
 -LDADD= libWINGs.a $(top_builddir)/wrlib/libwraster.la @INTLIBS@
  
  
- EXTRA_DIST = BUGS
+ EXTRA_DIST = BUGS python/Makefile python/README python/WINGs.i \
+ 	python/WINGs.py python/setup.py python/test.py
+ 
  
  # wbutton.c 
 -libWINGs_a_SOURCES = 	\
@@ -106,7 +108,7 @@
  	array.c \
  	bagtree.c \
  	configuration.c \
-@@ -80,7 +76,7 @@
+@@ -80,7 +78,7 @@
  	wwindow.c
  
  
@@ -122,10 +124,10 @@
  noinst_PROGRAMS = wtest wmquery wmfile testmywidget 
  
 -LDADD= $(top_builddir)/WINGs/libWINGs.a $(top_builddir)/wrlib/libwraster.la \
--	@INTLIBS@
+-	@XFTLIBS@ @INTLIBS@
 -
 +LDADD= $(top_builddir)/WINGs/libWINGs.la $(top_builddir)/wrlib/libwraster.la \
-+	$(INTLIBS)
++	$(XFTLIBS) $(INTLIBS)
  
  testmywidget_SOURCES = testmywidget.c mywidget.c mywidget.h 
  
@@ -152,20 +154,20 @@
 -	$(top_builddir)/WINGs/libWINGs.a\
 +	$(top_builddir)/WINGs/libWINGs.la\
  	$(top_builddir)/wrlib/libwraster.la \
+ 	@XFTLIBS@ \
  	@INTLIBS@
- 
 diff -Nur WindowMaker-0.70.0.orig/src/Makefile.am WindowMaker-0.70.0/src/Makefile.am
 --- WindowMaker-0.70.0.orig/src/Makefile.am	Thu Oct  4 05:39:18 2001
 +++ WindowMaker-0.70.0/src/Makefile.am	Thu Oct 18 16:54:22 2001
-@@ -111,7 +111,7 @@
+@@ -113,7 +113,7 @@
  
  
  wmaker_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a\
 +	$(top_builddir)/WINGs/libWINGs.la\
  	$(top_builddir)/wrlib/libwraster.la\
+ 	@XFTLIBS@ \
  	@XLIBS@ \
- 	@INTLIBS@ \
 diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makefile.am
 --- WindowMaker-0.70.0.orig/test/Makefile.am	Sat Oct  2 23:16:11 1999
 +++ WindowMaker-0.70.0/test/Makefile.am	Thu Oct 18 16:54:22 2001
@@ -189,7 +191,7 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
  bin_PROGRAMS = wxcopy wxpaste wdwrite wdread getstyle setstyle seticons geticonset wmsetbg wmsetup wmagnify
  
  bin_SCRIPTS = wmaker.inst wm-oldmenu2new wsetfont wmchlocale wkdemenu.pl\
-@@ -12,44 +10,44 @@
+@@ -12,41 +10,41 @@
  		wkdemenu.pl wmchlocale.in wcopy wpaste
  
  INCLUDES = $(DFLAGS) -I$(top_srcdir)/WINGs -I$(top_srcdir)/wrlib \
@@ -198,11 +200,8 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
 +	$(HEADER_SEARCH_PATH) \
 +	-DETCDIR=\"$(sysconfdir)\" -DDATADIR=\"$(pkgdatadir)\"
  
- # X_EXTRA_LIBS is for libproplist in systems that need -lsocket
- # remove after we require lPL 0.10.2 which automatically resolves its
- # library dependancies using the libPropList.la file
--liblist= @LIBRARY_SEARCH_PATH@ @X_EXTRA_LIBS@ @INTLIBS@
-+liblist= $(LIBRARY_SEARCH_PATH) $(X_EXTRA_LIBS) $(INTLIBS)
+-liblist= @LIBRARY_SEARCH_PATH@ @INTLIBS@
++liblist= $(LIBRARY_SEARCH_PATH) $(INTLIBS)
  
 -wdwrite_LDADD = $(top_builddir)/WINGs/libWUtil.a $(liblist)
 +wdwrite_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
@@ -235,19 +234,19 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
 -	$(top_builddir)/WINGs/libWINGs.a \
 +	$(top_builddir)/WINGs/libWINGs.la \
  	$(top_builddir)/wrlib/libwraster.la \
- 	@INTLIBS@ @DLLIBS@
+ 	@XFTLIBS@ @INTLIBS@ @DLLIBS@
  
  wmsetup_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a \
 +	$(top_builddir)/WINGs/libWINGs.la \
  	$(top_builddir)/wrlib/libwraster.la \
- 	@INTLIBS@ @DLLIBS@
+ 	@XFTLIBS@ @INTLIBS@ @DLLIBS@
  
  wmsetbg_LDADD = \
 -	$(top_builddir)/WINGs/libWINGs.a \
 +	$(top_builddir)/WINGs/libWINGs.la \
  	$(top_builddir)/wrlib/libwraster.la \
- 	@INTLIBS@ @DLLIBS@
+ 	@XFTLIBS@ @INTLIBS@ @DLLIBS@
  
 --- WindowMaker-0.70.0.orig/wmlib/Makefile.am	Mon Apr 10 02:59:35 2000
 +++ WindowMaker-0.70.0/wmlib/Makefile.am	Thu Oct 18 16:54:22 2001
@@ -267,8 +266,12 @@ diff -Nur WindowMaker-0.70.0.orig/test/Makefile.am WindowMaker-0.70.0/test/Makef
  	menu.c 		\
  	app.c 		\
  	event.c 	\
-@@ -15,3 +15,4 @@
+@@ -15,6 +15,8 @@
  	app.h		\
  	menu.h	
  
 +libWMaker_la_LDFLAGS = -version-info 1:1:1
++
+ DISTCLEANFILES = wmlib.pc
+ 
+ install-exec-local:

@@ -5,8 +5,8 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/Makefile.am WindowMaker-0.80.2/WINGs/
  
  CLEANFILES = $(CATALOGS) WINGs.pot
  
--EXTRA_DIST = cs.po de.po sk.po fr.po
-+EXTRA_DIST = cs.po de.po sk.po fr.po pl.po
+-EXTRA_DIST = bg.po ca.po cs.po de.po fr.po sk.po
++EXTRA_DIST = bg.po ca.po cs.po de.po fr.po sk.po pl.po
  
  POTFILES  = \
  	$(top_builddir)/WINGs/connection.c \
@@ -684,11 +684,11 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 --- WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am	Fri Nov 30 23:38:50 2001
 +++ WindowMaker-0.80.2/WPrefs.app/po/Makefile.am	Tue Nov 19 19:55:39 2002
 @@ -6,7 +6,7 @@
+ CLEANFILES = WPrefs.pot $(CATALOGS)
  
- EXTRA_DIST = pt.po hr.po fr.po ko.po cs.po ja.po zh_TW.Big5.po es.po\
- 		zh_CN.po fi.po it.po ru.po de.po hu.po bg.po sk.po\
--		et.po
-+		et.po pl.po
+ EXTRA_DIST = bg.po ca.po cs.po de.po es.po et.po fi.po fr.po hr.po hu.po \
+-	it.po ja.po ko.po pt.po ru.po sk.po zh_CN.po zh_TW.Big5.po
++	it.po ja.po ko.po pt.po ru.po sk.po zh_CN.po zh_TW.Big5.po pl.po
  
  POTFILES  = \
  	$(top_builddir)/WPrefs.app/Appearance.c \
@@ -2853,7 +2853,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 --- WindowMaker-0.80.2.orig/po/pl.po	Wed Nov 20 23:39:15 2002
 +++ WindowMaker-0.80.2/po/pl.po	Tue Nov 19 00:16:28 2002
-@@ -1,559 +1,1017 @@
+@@ -1,558 +1,1017 @@
 -# Pre-translation has bean done using PePeSza v0.6
 -# get your own copy of PePeSza from http://www.ids.pl/~pkollegu/pepesza.html
 -#
@@ -2865,20 +2865,19 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +# Pre-translation has bean done using PePeSza v0.6
 +# get your own copy of PePeSza from http://www.ids.pl/~pkollegu/pepesza.html
  #
--#, fuzzy
  msgid ""
  msgstr ""
--"Project-Id-Version: PACKAGE VERSION\n"
+-"Project-Id-Version: WindowMaker 0.80.2\n"
 -"POT-Creation-Date: 1999-01-24 14:05+0100\n"
--"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+-"PO-Revision-Date: 2003-04-15 20:21+0200\n"
 +"Project-Id-Version: WindowMaker 0.80.2\n"
 +"POT-Creation-Date: 2002-11-12 20:43+0100\n"
 +"PO-Revision-Date: 2002-11-12 20:44+0100\n"
  "Last-Translator: Piotr Dembiñski <pdemb@fanthom.math.put.poznan.pl>\n"
  "Language-Team: Polish <pl@li.org>\n"
  "MIME-Version: 1.0\n"
--"Content-Type: text/plain; charset=ISO8859-2\n"
--"Content-Transfer-Encoding: ISO8859-2\n"
+-"Content-Type: text/plain; charset=iso-8859-2\n"
+-"Content-Transfer-Encoding: 8-bit\n"
 +"Content-Type: text/plain; charset=ISO-8859-2\n"
 +"Content-Transfer-Encoding: 8-bit\n"
  
@@ -4060,7 +4059,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#: ../src/main.c:505 ../src/main.c:510
  #, c-format
  msgid "%s:could not execute initialization script"
--msgstr "#s:nie mo¿na wykonaæ skryptu inicjalizacji"
+-msgstr "%s:nie mo¿na wykonaæ skryptu inicjalizacji"
 +msgstr "%s:nie mo¿na wykonaæ skryptu inicjalizuj±cego"
  
 -#: ../src/main.c:314
@@ -5393,11 +5392,11 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 @@ -245,8 +245,8 @@
  dnl List of supported locales
  dnl -------------------------
- supported_locales="bg cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW.Big5"
--supported_wprefs_locales="bg cs de es et fi fr hr hu it ja ko pt ru sk zh_CN zh_TW.Big5"
--supported_wings_locales="cs de sk"
-+supported_wprefs_locales="bg cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW.Big5"
-+supported_wings_locales="cs de pl sk"
+ supported_locales="be bg ca cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW.Big5"
+-supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pt ru sk zh_CN zh_TW.Big5"
+-supported_wings_locales="bg ca cs de fr sk"
++supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW.Big5"
++supported_wings_locales="bg ca cs de fr pl sk"
  
  for lang in $LINGUAS; do
  	ok=0
