@@ -1,5 +1,5 @@
 %define		extraver	0.1
-%define		_snap		20040321
+%define		_snap		20040718
 
 Summary:	NeXT-alike window manager
 Summary(es):	Administrador de Ventanas parecido con el NeXT
@@ -14,7 +14,7 @@ Release:	0.%{_snap}.11
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
-# Source0-md5:	ecbd8f1cee5e2ad1adb99baadb142169
+# Source0-md5:	dba7dc37031ecce4c6b71c627c784ece
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
@@ -34,7 +34,7 @@ Patch11:	%{name}-pl.po-update.patch
 Patch12:	%{name}-wmchlocale-fixes.patch
 Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch14:	%{name}-localenames.patch
-Patch15:	%{name}-CVS-before-xft2.patch
+Patch15:	%{name}-enablexft.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -213,7 +213,7 @@ utilizando componentes est·ticos (raramente necess·rio).
 –“œ«“¡Õ, ›œ ◊…Àœ“…”‘œ◊’¿‘ÿ Õœ÷Ã…◊œ”‘¶ WindowMaker.
 
 %prep
-%setup -q -a 1 -a 2 -n %{name}-CVS-%{_snap}
+%setup -q -a 1 -a 2 -n %{name}-CVS-20040723
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
