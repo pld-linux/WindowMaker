@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.53.0
-Release:	2
+Release:	3
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
@@ -19,6 +19,7 @@ Patch3:		WindowMaker-pixmaps.patch
 Patch4:		WindowMaker-shared.patch
 Patch5:		WindowMaker-areas.patch
 Patch6:		WindowMaker-runinst.patch
+Patch7:		WindowMaker-configure.patch
 URL:		http://www.windowmaker.org/
 BuildPrereq:	libPropList-devel >= 0.8.3
 BuildPrereq:	xpm-devel
@@ -107,14 +108,22 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+#patch7 -p1
 
 %build
-echo "b" | \
+libtoolize --copy --force
+aclocal
+autoconf
+(cd wrlib;
+libtoolize --copy --force
+aclocal
+autoconf)
+
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
-	 se sk tr zh_CN zh_TW.Big5" \
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
-./configure %{_target} \
-	--prefix=/usr/X11R6 \
+	 se sk tr zh_CN zh_TW.Big5" ; export LINGUAS
+CPP_PATH="/lib/cpp" ; export CPP_PATH
+
+%configure --prefix=/usr/X11R6 \
 	--with-nlsdir=/usr/X11R6/share/locale \
 	--sysconfdir=/etc/X11 \
 	--enable-kanji \
@@ -124,7 +133,9 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
 	--disable-debug \
 	--enable-superfluous \
         --enable-newstyle \
-	--enable-kde
+	--enable-kde \
+	--enable-shared \
+	--enable-static
 make \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 	se sk tr zh_CN zh_TW.Big5" \
@@ -242,6 +253,10 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/lib/lib*.a
 
 %changelog
+* Fri Apr 30 1999 Artur Frysiak <wiget@pld.org.pl>
+  [0.53.0-3]
+- build with grep 2.3 and new libtool
+
 * Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
   [0.53.0-2]
 - added WindowMaker-extra (more themes)
