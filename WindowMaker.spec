@@ -10,7 +10,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.81.0
-Release:	0.%{_snap}.3
+Release:	0.%{_snap}.4
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
@@ -39,17 +39,16 @@ Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch14:	%{name}-localenames.patch
 Patch15:	%{name}-CVS-before-xft2.patch
 URL:		http://www.windowmaker.org/
-BuildRequires:	Hermes-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool
 BuildRequires:	gettext-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	libungif-devel
+BuildRequires:	xft-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	tk
@@ -155,6 +154,7 @@ Summary(uk):	Б╕бл╕отеки п╕дтримки та .h файли для WindowMaker
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	XFree86-devel
+Requires:	xft-devel
 Obsoletes:	libwraster2-devel
 
 %description devel
