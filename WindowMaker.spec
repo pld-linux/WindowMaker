@@ -160,7 +160,7 @@ done
 libtoolize --copy --force
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 (cd %{name}-extra-%{extraver}
 libtoolize --copy --force
 aclocal
