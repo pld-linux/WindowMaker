@@ -228,25 +228,7 @@
  	"Wygl±d" MENU
 --- WindowMaker-0.61.1/WindowMaker/plmenu.pl	Thu Feb 10 22:30:02 2000
 +++ WindowMaker-0.61.1.pius/WindowMaker/plmenu.pl	Thu Feb 10 22:46:42 2000
-@@ -16,7 +16,7 @@
- 		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
- 		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
- 		("Serfuj do ...",          EXEC, "netscape %s"),
--		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)"),
-+		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)")
- 	),
- 
- 	("Ekran",
-@@ -54,7 +54,7 @@
-     			("Cieniowany Szary",      EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#636380', '#131318')'"),
-     			("Cieniowany Winnny",     EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#600040', '#180010')'")
- 			),
--			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t)")
-+			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
- 		),
- 		("Zaoamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
- 		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
-@@ -1,133 +1,32 @@
+@@ -1,11 +1,11 @@
  ("WindowMaker",
  	("Informacja",
 -		("Informacja o WMaker...", INFO_PANEL),
@@ -263,13 +245,11 @@
 +		("Przegl±darka manuali",   EXEC, "xman")
  	),
  	
--	("Konfiguracja",	
--		("Edycja menu",       EXEC, "xterm -T 'Edycja menu' -e vi $HOME/GNUstep/Library/WindowMaker/menu"),
--		("Ustawienie fontów", EXEC, "xterm -T 'Ustawienie fontów' -e vi $HOME/GNUstep/Defaults/WMGLOBAL"),
--		("Konfiguracja",      EXEC, "xterm -T 'Konfiguracja' -e vi $HOME/GNUstep/Defaults/WindowMaker")
--	),
--	
--	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
+ 	("Konfiguracja",	
+@@ -15,121 +15,25 @@
+ 	),
+ 	
+ 	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
 -	("Terminal",   EXEC, "xterm -T 'Mój ulubiony terminal' -sb"),
 -	("Edytor",     EXEC, "xterm -T 'Moj ulubiony edytor' -e vi %a(Edytor,Podaj plik do edycji:)"),
 +	("XTerm", EXEC, "xterm -sb"),
@@ -370,30 +350,48 @@
 -
 -	("Selekcyjne",
 -		("Kopia",                  EXEC, "echo '%s' | wxcopy"),
-+	("Aplikacje", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
-+	("Zaznaczenie",
-+		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
- 		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
- 		("Serfuj do ...",          EXEC, "netscape %s"),
+-		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
+-		("Serfuj do ...",          EXEC, "netscape %s"),
 -		("Pobierz Manual ...",     EXEC, "MANUAL_SEARCH(%s)"),
 -		("Po³±cz siê z ...",       EXEC, "telnet %s"),
 -		("Pobierz plik z FTP ...", EXEC, "ftp %s")
-+		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)"),
- 	),
- 
- 	("Ekran",
+-	),
+-
+-	("Ekran",
 -		("Ukryj Pozosta³e",         HIDE_OTHERS),
-+		("Ukryj pozosta³e",         HIDE_OTHERS),
- 		("Poka¿ wszystko",          SHOW_ALL),
+-		("Poka¿ wszystko",          SHOW_ALL),
 -		("Uporz±dkowanie icon",     ARRANGE_ICONS),
 -		("Odswie¿",                 REFRESH),
-+		("Uporz±dkuj ikony",     ARRANGE_ICONS),
-+		("Od¶wie¿",                 REFRESH),
- 		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
+-		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
 -		("Zachowaj Sesje",          SAVE_SESSION),
 -		("Wyczy¶æ zachowan± sesje", CLEAR_SESSION)
+-	),
+-
++	("Aplikacje", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
++	("Zaznaczenie",
++		("Kopiuj",                  SHEXEC, "echo '%s' | wxcopy"),
++  		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
++  		("Serfuj do ...",          EXEC, "netscape %s"),
++		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)"),
++  	),
++  	("Ekran",
++		("Ukryj pozosta³e",         HIDE_OTHERS),
++  		("Poka¿ wszystko",          SHOW_ALL),
++		("Uporz±dkuj ikony",     ARRANGE_ICONS),
++		("Od¶wie¿",                 REFRESH),
++  		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
 +		("Zachowaj sesjê",          SAVE_SESSION),
 +		("Wyczy¶æ zachowan± sesjê", CLEAR_SESSION)
- 	),
- 
++  	),
  	("Wygl±d",
+ 		("Tematy",          OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
+ 		("Style",           OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
+@@ -155,7 +59,7 @@
+     			("Cieniowany Szary",      EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#636380', '#131318')'"),
+     			("Cieniowany Winnny",     EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, '#600040', '#180010')'")
+ 			),
+-			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t)")
++			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
+ 		),
+ 		("Zaoamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
+ 		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
