@@ -1,37 +1,24 @@
 --- WindowMaker-0.80.2/po/Makefile.am.orig	Tue Jan  8 14:44:57 2002
 +++ WindowMaker-0.80.2/po/Makefile.am	Fri Jan 30 15:27:08 2004
-@@ -6,8 +6,8 @@
+@@ -6,7 +6,7 @@
  
- # keep this sorted
- EXTRA_DIST = be.po bg.po ca.po cs.po da.po de.po el.po es.po et.po fi.po fr.po \
--	gl.po hr.po hu.po it.po ja.po ko.po ms.po nl.po no.po pl.po pt.po \
--	ro.po ru.po sk.po sv.po tr.po zh_CN.po zh_TW.Big5.po ca.po
-+	gl.po hr.po hu.po it.po ja.po ko.po ms.po nl.po nb.po pl.po pt.po \
-+	ro.po ru.po sk.po sv.po tr.po zh_CN.po zh_TW.po ca.po
- 
- POTFILES  = \
- 	$(top_builddir)/src/appicon.c \
---- WindowMaker-0.80.2/WPrefs.app/po/Makefile.am.orig	Fri Jan 30 15:16:44 2004
-+++ WindowMaker-0.80.2/WPrefs.app/po/Makefile.am	Fri Jan 30 15:32:38 2004
-@@ -4,7 +4,7 @@
- CLEANFILES = WPrefs.pot $(CATALOGS)
- 
- EXTRA_DIST = bg.po ca.po cs.po de.po es.po et.po fi.po fr.po hr.po hu.po \
--	it.po ja.po ko.po pt.po ru.po sk.po zh_CN.po zh_TW.Big5.po pl.po
-+	it.po ja.po ko.po pt.po ru.po sk.po zh_CN.po zh_TW.po pl.po
+ # Please keep this sorted in alphabetic order!
+ EXTRA_DIST = be.po bg.po bs.po ca.po cs.po da.po de.po el.po es.po et.po \
+-	fi.po fr.po gl.po hr.po hu.po it.po ja.po ko.po ms.po nl.po no.po \
++	fi.po fr.po gl.po hr.po hu.po it.po ja.po ko.po ms.po nl.po nb.po \
+ 	pl.po pt.po ro.po ru.po sk.po sv.po tr.po zh_CN.po zh_TW.po
  
  POTFILES  = \
- 	$(top_builddir)/WPrefs.app/Appearance.c \
 --- WindowMaker-0.80.2/configure.ac.orig	Fri Jan 30 15:16:44 2004
 +++ WindowMaker-0.80.2/configure.ac	Fri Jan 30 15:31:17 2004
 @@ -244,9 +244,9 @@
  
  dnl List of supported locales
  dnl -------------------------
--supported_locales="be bg ca cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW.Big5"
+-supported_locales="be bg bs ca cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW.Big5"
 -supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW.Big5"
 -supported_wings_locales="bg ca cs de fr pl sk"
-+supported_locales="be bg ca cs da de el es et fi fr gl hr hu it ja ko ms nl nb pl pt ro ru sk sv tr zh_CN zh_TW"
++supported_locales="be bg bs ca cs da de el es et fi fr gl hr hu it ja ko ms nl nb pl pt ro ru sk sv tr zh_CN zh_TW"
 +supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW"
 +supported_wings_locales="bg ca cs de fr pl sk"
  

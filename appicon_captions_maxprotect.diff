@@ -24,7 +24,7 @@ Usage:
  
 +    #define CAPTION_HEIGHT ( WMFontHeight(wwin->screen_ptr->clip_title_font) + 3 )
 +
-     if (WFLAGP(wwin, no_resizable))
+     if (!IS_RESIZABLE(wwin))
          return;
  
 @@ -498,6 +499,7 @@
