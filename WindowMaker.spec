@@ -24,6 +24,7 @@ Patch7:		Windowmaker-WINGs.h.patch
 Patch8:		WindowMaker-singleclick.patch
 Patch9:		WindowMaker-cvs19991010.patch
 Patch10:	WindowMaker-plmenu.patch
+Patch11:	WindowMaker-dockit.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	libPropList-devel >= 0.9.1
 BuildRequires:	xpm-devel
@@ -146,6 +147,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 autoconf
@@ -192,9 +194,11 @@ make install \
 	DESTDIR=$RPM_BUILD_ROOT 
 
 install util/bughint $RPM_BUILD_ROOT%{_bindir}
+install contrib/dockit $RPM_BUILD_ROOT%{_bindir}
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
+
 
 (cd %{name}-extra-%{extraver};
 make DESTDIR=$RPM_BUILD_ROOT install )
@@ -239,6 +243,7 @@ rm -r $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wsetfont
 %attr(755,root,root) %{_bindir}/wxcopy
 %attr(755,root,root) %{_bindir}/wxpaste
+%attr(755,root,root) %{_bindir}/dockit
 
 %{_datadir}/WindowMaker
 
