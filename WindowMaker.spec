@@ -7,21 +7,15 @@ Release:	1d
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Copyright:	GPL
-Source:		ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
-Patch:		WindowMaker-pl.po.patch
-Patch1:		WindowMaker-po.install.patch
-Patch2:		WindowMaker-CFLAGS.patch
-Patch3:		WindowMaker-wmconfig.patch
+Patch0:		%{name}-pl.po.patch
+Patch1:		%{name}-po.install.patch
+Patch2:		%{name}-CFLAGS.patch
+Patch3:		%{name}-wmconfig.patch
 URL:		http://www.windowmaker.org/
-Requires:	wmconfig
-Requires:	libjpeg
-Requires:	libpng
-Requires:	libtiff
-Requires:	libungif
-Requires:	xpm
-Requires:	XFree86-libs
-Requires:	libPropList
+Requires:	wmconfig, libjpeg, libpng, libtiff, libungif, xpm
+Requires:	XFree86-libs, libPropList
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -82,7 +76,7 @@ aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 %setup -q -a 1
 #(cd $RPM_BUILD_DIR/%{name}-%{version}; tar xzf %{SOURCE1})
 
-%patch  -p1
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -121,7 +115,7 @@ install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*so.*.*
 
 gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/*
-bzip2 -9 AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
+gzip -9nf AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -131,22 +125,18 @@ rm -r $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS.bz2 BUGFORM.bz2 BUGS.bz2 
-%doc ChangeLog.bz2 FAQ.bz2 NEWS.bz2 README.bz2
+%doc AUTHORS.gz BUGFORM.gz BUGS.gz 
+%doc ChangeLog.gz FAQ.gz NEWS.gz README.gz
 
 %attr(644,root, man) /usr/X11R6/man/man1/*
 
 /usr/X11R6/share/pixmaps/*
 
 %attr(755,root,root) /usr/X11R6/bin/*
-
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
-%dir /usr/X11R6/share/WINGs
-%dir /usr/X11R6/share/WindowMaker
-
-/usr/X11R6/share/WINGs/*
-/usr/X11R6/share/WindowMaker/*
+/usr/X11R6/share/WINGs
+/usr/X11R6/share/WindowMaker
 
 %dir /usr/X11R6/GNUstep
 %dir /usr/X11R6/GNUstep/Apps
@@ -188,6 +178,11 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/include/*.h
 
 %changelog
+* Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com>
+- gzipping instead bzipping
+- simplification in %files
+- cosmetic changes
+
 * Wed Feb  3 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.50.2-1d]
 - added stripping shared libraries,
