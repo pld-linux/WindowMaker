@@ -10,28 +10,26 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/Makefile.am WindowMaker-0.80.2/WINGs/
  
  POTFILES  = \
  	$(top_builddir)/WINGs/connection.c \
-diff -Nur WindowMaker-0.80.2.orig/WINGs/po/pl.po WindowMaker-0.80.2/WINGs/po/pl.po
---- WindowMaker-0.80.2.orig/WINGs/po/pl.po	Thu Jan  1 01:00:00 1970
-+++ WindowMaker-0.80.2/WINGs/po/pl.po	Tue Nov 19 19:48:49 2002
-@@ -0,0 +1,666 @@
-+# Polish translations for WINGs
-+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+--- WindowMaker-CVS-20040321/WINGs/po/pl.po.orig	1970-01-01 01:00:00.000000000 +0100
++++ WindowMaker-CVS-20040321/WINGs/po/pl.po	2004-04-24 18:48:12.007622152 +0200
+@@ -0,0 +1,692 @@
++# Polish translation for WINGs.
 +# This file is distributed under the same license as the WINGs package.
-+# Jakub Bogusz <qboosh@pld.org.pl>, 2002.
++# Jakub Bogusz <qboosh@pld-linux.org>, 2002, 2004.
 +#
 +msgid ""
 +msgstr ""
-+"Project-Id-Version: WINGs 0.80.2\n"
-+"POT-Creation-Date: 2002-11-12 20:27+0100\n"
-+"PO-Revision-Date: 2002-11-19 00:13+0100\n"
-+"Last-Translator: Jakub Bogusz <qboosh@pld.org.pl>\n"
-+"Language-Team: Polish <pl@li.org>\n"
++"Project-Id-Version: WINGs 0.81-cvs\n"
++"POT-Creation-Date: 2004-04-24 18:33+0200\n"
++"PO-Revision-Date: 2004-04-24 18:40+0200\n"
++"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
++"Language-Team: Polish <translation-team-pl@lists.sourceforge.org>\n"
 +"MIME-Version: 1.0\n"
 +"Content-Type: text/plain; charset=ISO-8859-2\n"
 +"Content-Transfer-Encoding: 8bit\n"
 +
-+#: ../../WINGs/connection.c:461 ../../WINGs/connection.c:526
-+#: ../../WINGs/connection.c:569
++#: ../../WINGs/connection.c:467 ../../WINGs/connection.c:532
++#: ../../WINGs/connection.c:575
 +msgid "Bad address-service-protocol combination"
 +msgstr "B³êdna kombinacja adres-us³uga-protokó³"
 +
@@ -145,18 +143,14 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/pl.po WindowMaker-0.80.2/WINGs/po/pl.
 +msgstr "brakuj±cy ; we wpisie s³ownika PropList"
 +
 +#: ../../WINGs/proplist.c:888
-+msgid ""
-+"was expecting a string, data, array or dictionary. If it's a string, try "
-+"enclosing it with \"."
-+msgstr ""
-+"oczekiwano ³añcucha, danych, tablicy lub s³ownika. Je¶li to jest ³añcuch, "
-+"proszê spróbowaæ zamkn±æ go w \"."
++msgid "was expecting a string, data, array or dictionary. If it's a string, try enclosing it with \"."
++msgstr "oczekiwano ³añcucha, danych, tablicy lub s³ownika. Je¶li to jest ³añcuch, proszê spróbowaæ zamkn±æ go w \"."
 +
 +#: ../../WINGs/proplist.c:892
 +msgid "Comments are not allowed inside WindowMaker owned domain files."
 +msgstr "Komentarze wewn±trz plików domen WindowMakera nie s± dozwolone."
 +
-+#: ../../WINGs/proplist.c:1563 ../../WINGs/proplist.c:1628
++#: ../../WINGs/proplist.c:1563 ../../WINGs/proplist.c:1630
 +msgid "extra data after end of property list"
 +msgstr "nadmiarowe dane za koñcem listy w³asno¶ci"
 +
@@ -165,244 +159,242 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/pl.po WindowMaker-0.80.2/WINGs/po/pl.
 +msgid "could not get size for file '%s'"
 +msgstr "nie mo¿na odczytaæ rozmiaru pliku '%s'"
 +
-+#: ../../WINGs/proplist.c:1618
++#: ../../WINGs/proplist.c:1619
 +#, c-format
 +msgid "error reading from file '%s'"
 +msgstr "b³±d podczas czytania z pliku '%s'"
 +
-+#: ../../WINGs/proplist.c:1669
++#: ../../WINGs/proplist.c:1671
 +#, c-format
 +msgid "mkstemp (%s) failed"
 +msgstr "mkstemp (%s) nie powiod³o siê"
 +
-+#: ../../WINGs/proplist.c:1680
++#: ../../WINGs/proplist.c:1682
 +#, c-format
 +msgid "mktemp (%s) failed"
 +msgstr "mktemp (%s) nie powiod³o siê"
 +
-+#: ../../WINGs/proplist.c:1691
++#: ../../WINGs/proplist.c:1693
 +#, c-format
 +msgid "open (%s) failed"
 +msgstr "open (%s) nie powiod³o siê"
 +
-+#: ../../WINGs/proplist.c:1698
++#: ../../WINGs/proplist.c:1700
 +#, c-format
 +msgid "writing to file: %s failed"
 +msgstr "zapis do pliku: %s nie powiód³ siê"
 +
-+#: ../../WINGs/proplist.c:1706
++#: ../../WINGs/proplist.c:1708
 +#, c-format
 +msgid "fclose (%s) failed"
 +msgstr "fclose (%s) nie powiod³o siê"
 +
-+#: ../../WINGs/proplist.c:1715
++#: ../../WINGs/proplist.c:1717
 +#, c-format
 +msgid "rename ('%s' to '%s') failed"
 +msgstr "rename ('%s' na '%s') nie powiod³o siê"
 +
 +#. something happened with the file. just overwrite it
-+#: ../../WINGs/userdefaults.c:192 ../../WINGs/userdefaults.c:208
++#: ../../WINGs/userdefaults.c:188 ../../WINGs/userdefaults.c:204
 +#, c-format
 +msgid "cannot read domain from file '%s' when syncing"
 +msgstr "nie mo¿na odczytaæ domeny z pliku '%s' podczas synchronizacji"
 +
-+#: ../../WINGs/wcolor.c:198 ../../WINGs/wcolor.c:211 ../../WINGs/wcolor.c:250
-+#: ../../WINGs/wcolor.c:291
++#: ../../WINGs/wcolor.c:224 ../../WINGs/wcolor.c:236 ../../WINGs/wcolor.c:275
++#: ../../WINGs/wcolor.c:316
 +#, c-format
 +msgid "could not allocate %s color"
 +msgstr "nie mo¿na przydzieliæ koloru %s"
 +
-+#: ../../WINGs/wcolor.c:198
++#: ../../WINGs/wcolor.c:224
 +msgid "white"
 +msgstr "bia³ego"
 +
-+#: ../../WINGs/wcolor.c:211
++#: ../../WINGs/wcolor.c:236
 +msgid "black"
 +msgstr "czarnego"
 +
-+#: ../../WINGs/wcolor.c:250
++#: ../../WINGs/wcolor.c:275
 +msgid "gray"
 +msgstr "szarego"
 +
-+#: ../../WINGs/wcolor.c:291
++#: ../../WINGs/wcolor.c:316
 +msgid "dark gray"
 +msgstr "ciemnoszarego"
 +
-+#: ../../WINGs/wcolorpanel.c:415
++#: ../../WINGs/wcolorpanel.c:420
 +msgid "Colors"
 +msgstr "Kolory"
 +
-+#: ../../WINGs/wcolorpanel.c:605 ../../WINGs/wcolorpanel.c:2824
++#: ../../WINGs/wcolorpanel.c:610 ../../WINGs/wcolorpanel.c:2829
 +msgid "Brightness"
 +msgstr "Jasno¶æ"
 +
-+#: ../../WINGs/wcolorpanel.c:607 ../../WINGs/wcolorpanel.c:683
-+#: ../../WINGs/wcolorpanel.c:716 ../../WINGs/wcolorpanel.c:750
-+#: ../../WINGs/wcolorpanel.c:810 ../../WINGs/wcolorpanel.c:844
-+#: ../../WINGs/wcolorpanel.c:878 ../../WINGs/wcolorpanel.c:913
-+#: ../../WINGs/wcolorpanel.c:2164 ../../WINGs/wcolorpanel.c:2826
-+#: ../../WINGs/wcolorpanel.c:2862 ../../WINGs/wcolorpanel.c:2898
-+#: ../../WINGs/wcolorpanel.c:3746
++#: ../../WINGs/wcolorpanel.c:612 ../../WINGs/wcolorpanel.c:688
++#: ../../WINGs/wcolorpanel.c:721 ../../WINGs/wcolorpanel.c:755
++#: ../../WINGs/wcolorpanel.c:815 ../../WINGs/wcolorpanel.c:849
++#: ../../WINGs/wcolorpanel.c:883 ../../WINGs/wcolorpanel.c:918
++#: ../../WINGs/wcolorpanel.c:2169 ../../WINGs/wcolorpanel.c:2831
++#: ../../WINGs/wcolorpanel.c:2867 ../../WINGs/wcolorpanel.c:2903
++#: ../../WINGs/wcolorpanel.c:3745
 +msgid "Color Panel: Could not allocate memory"
 +msgstr "Panel Kolorów: Nie mo¿na przydzieliæ pamiêci"
 +
-+#: ../../WINGs/wcolorpanel.c:680 ../../WINGs/wcolorpanel.c:681
++#: ../../WINGs/wcolorpanel.c:685 ../../WINGs/wcolorpanel.c:686
 +msgid "Red"
 +msgstr "Czerwony"
 +
-+#: ../../WINGs/wcolorpanel.c:713 ../../WINGs/wcolorpanel.c:714
++#: ../../WINGs/wcolorpanel.c:718 ../../WINGs/wcolorpanel.c:719
 +msgid "Green"
 +msgstr "Zielony"
 +
-+#: ../../WINGs/wcolorpanel.c:747 ../../WINGs/wcolorpanel.c:748
++#: ../../WINGs/wcolorpanel.c:752 ../../WINGs/wcolorpanel.c:753
 +msgid "Blue"
 +msgstr "Niebieski"
 +
-+#: ../../WINGs/wcolorpanel.c:807 ../../WINGs/wcolorpanel.c:808
++#: ../../WINGs/wcolorpanel.c:812 ../../WINGs/wcolorpanel.c:813
 +msgid "Cyan"
 +msgstr "Turkusowy"
 +
-+#: ../../WINGs/wcolorpanel.c:841 ../../WINGs/wcolorpanel.c:842
++#: ../../WINGs/wcolorpanel.c:846 ../../WINGs/wcolorpanel.c:847
 +msgid "Magenta"
 +msgstr "Purpurowy"
 +
-+#: ../../WINGs/wcolorpanel.c:875 ../../WINGs/wcolorpanel.c:876
++#: ../../WINGs/wcolorpanel.c:880 ../../WINGs/wcolorpanel.c:881
 +msgid "Yellow"
 +msgstr "¯ó³ty"
 +
-+#: ../../WINGs/wcolorpanel.c:910 ../../WINGs/wcolorpanel.c:911
++#: ../../WINGs/wcolorpanel.c:915 ../../WINGs/wcolorpanel.c:916
 +msgid "Black"
 +msgstr "Czarny"
 +
-+#: ../../WINGs/wcolorpanel.c:991
++#: ../../WINGs/wcolorpanel.c:996
 +msgid "Spectrum"
 +msgstr "Widmo"
 +
-+#: ../../WINGs/wcolorpanel.c:1021
++#: ../../WINGs/wcolorpanel.c:1026
 +msgid "Palette"
 +msgstr "Paleta"
 +
-+#: ../../WINGs/wcolorpanel.c:1027
++#: ../../WINGs/wcolorpanel.c:1032
 +msgid "New from File..."
 +msgstr "Nowy z pliku..."
 +
-+#: ../../WINGs/wcolorpanel.c:1028 ../../WINGs/wcolorpanel.c:1076
-+#: ../../WINGs/wcolorpanel.c:1093
++#: ../../WINGs/wcolorpanel.c:1033 ../../WINGs/wcolorpanel.c:1081
++#: ../../WINGs/wcolorpanel.c:1098
 +msgid "Rename..."
 +msgstr "Zmieñ nazwê..."
 +
-+#: ../../WINGs/wcolorpanel.c:1029 ../../WINGs/wcolorpanel.c:1077
-+#: ../../WINGs/wcolorpanel.c:1094 ../../WINGs/wcolorpanel.c:3321
++#: ../../WINGs/wcolorpanel.c:1034 ../../WINGs/wcolorpanel.c:1082
++#: ../../WINGs/wcolorpanel.c:1099 ../../WINGs/wcolorpanel.c:3326
 +msgid "Remove"
 +msgstr "Usuñ"
 +
-+#: ../../WINGs/wcolorpanel.c:1030
++#: ../../WINGs/wcolorpanel.c:1035
 +msgid "Copy"
 +msgstr "Kopiuj"
 +
-+#: ../../WINGs/wcolorpanel.c:1031
++#: ../../WINGs/wcolorpanel.c:1036
 +msgid "New from Clipboard"
 +msgstr "Nowy ze schowka"
 +
-+#: ../../WINGs/wcolorpanel.c:1052
++#: ../../WINGs/wcolorpanel.c:1057
 +msgid "X11-Colors"
 +msgstr "Kolory X11"
 +
-+#: ../../WINGs/wcolorpanel.c:1069
++#: ../../WINGs/wcolorpanel.c:1074
 +msgid "Color"
 +msgstr "Kolor"
 +
-+#: ../../WINGs/wcolorpanel.c:1075
++#: ../../WINGs/wcolorpanel.c:1080
 +msgid "Add..."
 +msgstr "Dodaj"
 +
-+#: ../../WINGs/wcolorpanel.c:1085
++#: ../../WINGs/wcolorpanel.c:1090
 +msgid "List"
 +msgstr "Lista"
 +
-+#: ../../WINGs/wcolorpanel.c:1092
++#: ../../WINGs/wcolorpanel.c:1097
 +msgid "New..."
 +msgstr "Nowy..."
 +
-+#: ../../WINGs/wcolorpanel.c:1231
++#: ../../WINGs/wcolorpanel.c:1236
 +#, c-format
-+msgid ""
-+"Color Panel: Could not create directory %s needed to store configurations"
-+msgstr ""
-+"Panel Koloru: Nie mo¿na utworzyæ katalogu %s potrzebnego do zapisania ustawieñ"
++msgid "Color Panel: Could not create directory %s needed to store configurations"
++msgstr "Panel Koloru: Nie mo¿na utworzyæ katalogu %s potrzebnego do zapisania ustawieñ"
 +
 +#. Delete the file, it doesn't belong here
-+#: ../../WINGs/wcolorpanel.c:1237 ../../WINGs/wcolorpanel.c:3207
-+#: ../../WINGs/wcolorpanel.c:3211
++#: ../../WINGs/wcolorpanel.c:1242 ../../WINGs/wcolorpanel.c:3212
++#: ../../WINGs/wcolorpanel.c:3216
 +msgid "File Error"
 +msgstr "B³±d plikowy"
 +
-+#: ../../WINGs/wcolorpanel.c:1238
++#: ../../WINGs/wcolorpanel.c:1243
 +msgid "Could not create ColorPanel configuration directory"
 +msgstr "Nie mo¿na utworzyæ katalogu z ustawieniami Panelu Koloru"
 +
-+#: ../../WINGs/wcolorpanel.c:1239 ../../WINGs/wcolorpanel.c:3208
-+#: ../../WINGs/wcolorpanel.c:3213 ../../WINGs/wcolorpanel.c:3240
-+#: ../../WINGs/wfilepanel.c:250 ../../WINGs/wfilepanel.c:647
-+#: ../../WINGs/wfilepanel.c:659 ../../WINGs/wfilepanel.c:760
-+#: ../../WINGs/wfilepanel.c:971 ../../WINGs/wfontpanel.c:709
++#: ../../WINGs/wcolorpanel.c:1244 ../../WINGs/wcolorpanel.c:3213
++#: ../../WINGs/wcolorpanel.c:3218 ../../WINGs/wcolorpanel.c:3245
++#: ../../WINGs/wfilepanel.c:250 ../../WINGs/wfilepanel.c:650
++#: ../../WINGs/wfilepanel.c:662 ../../WINGs/wfilepanel.c:763
++#: ../../WINGs/wfilepanel.c:974 ../../WINGs/wfontpanel.c:751
 +msgid "OK"
 +msgstr "OK"
 +
-+#: ../../WINGs/wcolorpanel.c:1245 ../../WINGs/wcolorpanel.c:1281
-+#: ../../WINGs/wcolorpanel.c:1299
++#: ../../WINGs/wcolorpanel.c:1250 ../../WINGs/wcolorpanel.c:1286
++#: ../../WINGs/wcolorpanel.c:1304
 +msgid "Color Panel: Could not find file"
 +msgstr "Panel Koloru: Nie mo¿na odnale¼æ pliku"
 +
-+#: ../../WINGs/wcolorpanel.c:1486 ../../WINGs/wcolorpanel.c:1551
-+#: ../../WINGs/wcolorpanel.c:1615
++#: ../../WINGs/wcolorpanel.c:1491 ../../WINGs/wcolorpanel.c:1556
++#: ../../WINGs/wcolorpanel.c:1620
 +msgid "Color Panel: X failed request"
 +msgstr "Panel Koloru: ¿±danie X nie powiod³o siê"
 +
-+#: ../../WINGs/wcolorpanel.c:2860
++#: ../../WINGs/wcolorpanel.c:2865
 +msgid "Saturation"
 +msgstr "Nasycenie"
 +
-+#: ../../WINGs/wcolorpanel.c:2896
++#: ../../WINGs/wcolorpanel.c:2901
 +msgid "Hue"
 +msgstr "Odcieñ"
 +
-+#: ../../WINGs/wcolorpanel.c:3146
++#: ../../WINGs/wcolorpanel.c:3151
 +msgid "Open Palette"
 +msgstr "Otwórz paletê"
 +
-+#: ../../WINGs/wcolorpanel.c:3208
++#: ../../WINGs/wcolorpanel.c:3213
 +msgid "Invalid file format !"
 +msgstr "B³êdny format pliku!"
 +
-+#: ../../WINGs/wcolorpanel.c:3210
++#: ../../WINGs/wcolorpanel.c:3215
 +#, c-format
 +msgid "can't remove file %s"
 +msgstr "nie mo¿na usun±æ pliku %s"
 +
-+#: ../../WINGs/wcolorpanel.c:3212
++#: ../../WINGs/wcolorpanel.c:3217
 +msgid "Couldn't remove file from Configuration Directory !"
 +msgstr "Nie mo¿na usun±æ pliku z katalogu ustawieñ!"
 +
-+#: ../../WINGs/wcolorpanel.c:3239
++#: ../../WINGs/wcolorpanel.c:3244
 +msgid "Rename"
 +msgstr "Zmieñ nazwê"
 +
-+#: ../../WINGs/wcolorpanel.c:3239
++#: ../../WINGs/wcolorpanel.c:3244
 +msgid "Rename palette to:"
 +msgstr "Zmieñ nazwê palety na:"
 +
-+#: ../../WINGs/wcolorpanel.c:3240 ../../WINGs/wfilepanel.c:259
-+#: ../../WINGs/wfilepanel.c:659 ../../WINGs/wfilepanel.c:760
++#: ../../WINGs/wcolorpanel.c:3245 ../../WINGs/wfilepanel.c:259
++#: ../../WINGs/wfilepanel.c:662 ../../WINGs/wfilepanel.c:763
 +msgid "Cancel"
 +msgstr "Anuluj"
 +
 +#. Careful, this palette exists already
-+#: ../../WINGs/wcolorpanel.c:3256 ../../WINGs/wfilepanel.c:760
++#: ../../WINGs/wcolorpanel.c:3261 ../../WINGs/wfilepanel.c:763
 +msgid "Warning"
 +msgstr "Ostrze¿enie"
 +
-+#: ../../WINGs/wcolorpanel.c:3257
++#: ../../WINGs/wcolorpanel.c:3262
 +msgid ""
 +"Palette already exists !\n"
 +"\n"
@@ -412,24 +404,24 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/pl.po WindowMaker-0.80.2/WINGs/po/pl.
 +"\n"
 +"Nadpisaæ?"
 +
-+#: ../../WINGs/wcolorpanel.c:3257 ../../WINGs/wcolorpanel.c:3321
++#: ../../WINGs/wcolorpanel.c:3262 ../../WINGs/wcolorpanel.c:3326
 +msgid "No"
 +msgstr "Nie"
 +
-+#: ../../WINGs/wcolorpanel.c:3257 ../../WINGs/wcolorpanel.c:3321
++#: ../../WINGs/wcolorpanel.c:3262 ../../WINGs/wcolorpanel.c:3326
 +msgid "Yes"
 +msgstr "Tak"
 +
-+#: ../../WINGs/wcolorpanel.c:3289
++#: ../../WINGs/wcolorpanel.c:3294
 +#, c-format
 +msgid "Couldn't rename palette %s to %s\n"
 +msgstr "Nie mo¿na zmieniæ nazwy palety %s na %s\n"
 +
-+#: ../../WINGs/wcolorpanel.c:3315
++#: ../../WINGs/wcolorpanel.c:3320
 +msgid "This will permanently remove the palette "
 +msgstr "To trwale usunie paletê "
 +
-+#: ../../WINGs/wcolorpanel.c:3318
++#: ../../WINGs/wcolorpanel.c:3323
 +msgid ""
 +".\n"
 +"\n"
@@ -439,27 +431,27 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/pl.po WindowMaker-0.80.2/WINGs/po/pl.
 +"\n"
 +"Na pewno usun±æ tê paletê?"
 +
-+#: ../../WINGs/wcolorpanel.c:3343
++#: ../../WINGs/wcolorpanel.c:3348
 +#, c-format
 +msgid "Couldn't remove palette %s\n"
 +msgstr "Nie mo¿na usun±æ palety %s\n"
 +
-+#: ../../WINGs/wcolorpanel.c:3648
++#: ../../WINGs/wcolorpanel.c:3647
 +#, c-format
 +msgid "Could not open %s"
 +msgstr "Nie mo¿na otworzyæ %s"
 +
-+#: ../../WINGs/wcolorpanel.c:3655
++#: ../../WINGs/wcolorpanel.c:3654
 +#, c-format
 +msgid "Could not create %s"
 +msgstr "Nie mo¿na utworzyæ %s"
 +
-+#: ../../WINGs/wcolorpanel.c:3666
++#: ../../WINGs/wcolorpanel.c:3665
 +#, c-format
 +msgid "Write error on file %s"
 +msgstr "B³±d zapisu pliku %s"
 +
-+#: ../../WINGs/wcolorpanel.c:3711
++#: ../../WINGs/wcolorpanel.c:3710
 +msgid "Color Panel: Color unspecified"
 +msgstr "Panel Koloru: Nie okre¶lono koloru"
 +
@@ -475,209 +467,242 @@ diff -Nur WindowMaker-0.80.2.orig/WINGs/po/pl.po WindowMaker-0.80.2/WINGs/po/pl.
 +msgid "Save"
 +msgstr "Zapisz"
 +
-+#: ../../WINGs/wfilepanel.c:562
++#: ../../WINGs/wfilepanel.c:565
 +#, c-format
 +msgid "WINGs: could not open directory %s\n"
 +msgstr "WINGs: nie mo¿na otworzyæ katalogu %s\n"
 +
-+#: ../../WINGs/wfilepanel.c:580
++#: ../../WINGs/wfilepanel.c:583
 +#, c-format
 +msgid "WINGs: could not stat %s\n"
 +msgstr "WINGs: nie mo¿na wykonaæ stat na %s\n"
 +
-+#: ../../WINGs/wfilepanel.c:647 ../../WINGs/wfilepanel.c:970
-+#: ../../WINGs/wfontpanel.c:708
++#: ../../WINGs/wfilepanel.c:650 ../../WINGs/wfilepanel.c:973
++#: ../../WINGs/wfontpanel.c:750
 +msgid "Error"
 +msgstr "B³±d"
 +
-+#: ../../WINGs/wfilepanel.c:658
++#: ../../WINGs/wfilepanel.c:661
 +msgid "Create Directory"
 +msgstr "Utwórz katalog"
 +
-+#: ../../WINGs/wfilepanel.c:659
++#: ../../WINGs/wfilepanel.c:662
 +msgid "Enter directory name"
 +msgstr "Nazwa katalogu"
 +
-+#: ../../WINGs/wfilepanel.c:695 ../../WINGs/wfilepanel.c:734
-+#: ../../WINGs/wfilepanel.c:765 ../../WINGs/wfilepanel.c:793
++#: ../../WINGs/wfilepanel.c:698 ../../WINGs/wfilepanel.c:737
++#: ../../WINGs/wfilepanel.c:768 ../../WINGs/wfilepanel.c:796
 +msgid "Permission denied."
 +msgstr "Brak uprawnieñ."
 +
-+#: ../../WINGs/wfilepanel.c:698
++#: ../../WINGs/wfilepanel.c:701
 +#, c-format
 +msgid "'%s' already exists."
 +msgstr "'%s' ju¿ istnieje."
 +
-+#: ../../WINGs/wfilepanel.c:701
++#: ../../WINGs/wfilepanel.c:704
 +msgid "Path does not exist."
 +msgstr "¦cie¿ka nie istnieje."
 +
-+#: ../../WINGs/wfilepanel.c:731 ../../WINGs/wfilepanel.c:790
++#: ../../WINGs/wfilepanel.c:734 ../../WINGs/wfilepanel.c:793
 +#, c-format
 +msgid "'%s' does not exist."
 +msgstr "'%s' nie istnieje."
 +
-+#: ../../WINGs/wfilepanel.c:738 ../../WINGs/wfilepanel.c:797
++#: ../../WINGs/wfilepanel.c:741 ../../WINGs/wfilepanel.c:800
 +msgid "Insufficient memory available."
 +msgstr "Za ma³o dostêpnej pamiêci."
 +
-+#: ../../WINGs/wfilepanel.c:742 ../../WINGs/wfilepanel.c:801
++#: ../../WINGs/wfilepanel.c:745 ../../WINGs/wfilepanel.c:804
 +#, c-format
 +msgid "'%s' is on a read-only filesystem."
 +msgstr "'%s' jest na systemie plików tylko do odczytu."
 +
-+#: ../../WINGs/wfilepanel.c:745 ../../WINGs/wfilepanel.c:777
-+#: ../../WINGs/wfilepanel.c:804
++#: ../../WINGs/wfilepanel.c:748 ../../WINGs/wfilepanel.c:780
++#: ../../WINGs/wfilepanel.c:807
 +#, c-format
 +msgid "Can not delete '%s'."
 +msgstr "Nie mo¿na usun±æ '%s'."
 +
-+#: ../../WINGs/wfilepanel.c:752
++#: ../../WINGs/wfilepanel.c:755
 +#, c-format
 +msgid "Delete directory %s ?"
 +msgstr "Usun±æ katalog %s?"
 +
-+#: ../../WINGs/wfilepanel.c:756
++#: ../../WINGs/wfilepanel.c:759
 +#, c-format
 +msgid "Delete file %s ?"
 +msgstr "Usun±æ plik %s?"
 +
-+#: ../../WINGs/wfilepanel.c:768
++#: ../../WINGs/wfilepanel.c:771
 +#, c-format
 +msgid "Directory '%s' does not exist."
 +msgstr "Katalog '%s' nie istnieje."
 +
-+#: ../../WINGs/wfilepanel.c:771
++#: ../../WINGs/wfilepanel.c:774
 +#, c-format
 +msgid "Directory '%s' is not empty."
 +msgstr "Katalog '%s' nie jest pusty."
 +
-+#: ../../WINGs/wfilepanel.c:774
++#: ../../WINGs/wfilepanel.c:777
 +#, c-format
 +msgid "Directory '%s' is busy."
 +msgstr "Katalog '%s' jest w u¿yciu."
 +
-+#: ../../WINGs/wfilepanel.c:787
++#: ../../WINGs/wfilepanel.c:790
 +#, c-format
 +msgid "'%s' is a directory."
 +msgstr "'%s' jest katalogiem."
 +
-+#: ../../WINGs/wfilepanel.c:829
++#: ../../WINGs/wfilepanel.c:832
 +#, c-format
 +msgid "An error occured browsing '%s'."
 +msgstr "Wyst±pi³ b³±d podczas przegl±dania '%s'."
 +
-+#: ../../WINGs/wfilepanel.c:833
++#: ../../WINGs/wfilepanel.c:836
 +#, c-format
 +msgid "'%s' is not a directory."
 +msgstr "'%s' nie jest katalogiem."
 +
-+#: ../../WINGs/wfilepanel.c:970
++#: ../../WINGs/wfilepanel.c:973
 +msgid "File does not exist."
 +msgstr "Plik nie istnieje."
 +
-+#: ../../WINGs/wfont.c:129
++#: ../../WINGs/wfont.c:133 ../../WINGs/wfont.c:143
++#, c-format
++msgid "Invalid size specification '%s' in %s. Using default %d\n"
++msgstr "B³êdne okre¶lenie rozmiaru '%s' w %s. U¿ycie domy¶lnego %d\n"
++
++#: ../../WINGs/wfont.c:187
 +#, c-format
 +msgid "the following character sets are missing in %s:"
 +msgstr "nastêpuj±cych zestawów znaków brakuje w %s:"
 +
-+#: ../../WINGs/wfont.c:136
++#: ../../WINGs/wfont.c:193
 +#, c-format
-+msgid ""
-+"the string \"%s\" will be used in place of any characters from those sets."
-+msgstr ""
-+"³añcuch \"%s\" bêdzie u¿ywany zamiast wszystkich znaków z tych zestawów."
++msgid "the string \"%s\" will be used in place of any characters from those sets."
++msgstr "³añcuch \"%s\" bêdzie u¿ywany zamiast wszystkich znaków z tych zestawów."
 +
-+#: ../../WINGs/wfont.c:300 ../../WINGs/wfont.c:336
++#. is arial a good fallback for multibyte?
++#: ../../WINGs/wfont.c:608 ../../WINGs/wfont.c:623
 +#, c-format
-+msgid "could not load font set %s. Trying fixed."
++msgid "could not load font %s. Trying arial."
++msgstr "nie mo¿na za³adowaæ fontu %s. Próbowanie fontu arial."
++
++#: ../../WINGs/wfont.c:615
++msgid "could not load antialiased font set. Reverting to standard font sets."
++msgstr "nie mo¿na za³adowaæ zestawu fontów z antyaliasingiem. Powrót do standardowych zestawów fontów."
++
++#: ../../WINGs/wfont.c:618
++#, c-format
++msgid "could not load FontSet %s. Trying fixed."
 +msgstr "nie mo¿na za³adowaæ zestawu fontów %s. Próbowanie fontu fixed."
 +
-+#: ../../WINGs/wfont.c:306 ../../WINGs/wfont.c:342
++#: ../../WINGs/wfont.c:630
++msgid "could not load antialiased fonts. Reverting to normal fonts."
++msgstr "nie mo¿na za³adowaæ fontów z antyaliasingiem. Powrót do zwyk³ych fontów."
++
++#: ../../WINGs/wfont.c:633 ../../WINGs/wfont.c:644
 +#, c-format
 +msgid "could not load font %s. Trying fixed."
 +msgstr "nie mo¿na za³adowaæ fontu %s. Próbowanie fontu fixed."
 +
-+#: ../../WINGs/wfont.c:310 ../../WINGs/wfont.c:346
++#: ../../WINGs/wfont.c:638
++#, c-format
++msgid "could not load font set %s. Trying fixed."
++msgstr "nie mo¿na za³adowaæ zestawu fontów %s. Próbowanie fontu fixed."
++
++#: ../../WINGs/wfont.c:648
 +msgid "could not load fixed font!"
 +msgstr "nie mo¿na za³adowaæ fontu fixed!"
 +
-+#: ../../WINGs/wfont.c:441
++#: ../../WINGs/wfont.c:713 ../../WINGs/wfont.c:774 ../../WINGs/wfont.c:845
++#, c-format
++msgid "Conversion to widechar failed (possible invalid multibyte sequence): '%s':(pos %d)\n"
++msgstr "Konwersja do znaków wielobajtowych nie powiod³a siê (prawdopodobnie b³êdna sekwencja wielobajtowa): '%s':(poz %d)\n"
++
++#: ../../WINGs/wfont.c:896
 +#, c-format
 +msgid "font description %s is too large."
 +msgstr "opis fontu %s jest zbyt du¿y."
 +
-+#: ../../WINGs/wfontpanel.c:205
++#. // remove warning later. or maybe not
++#: ../../WINGs/wfont.c:944
++#, c-format
++msgid "Invalid font specification: '%s'\n"
++msgstr "B³êdne okre¶lenie fontu: '%s'\n"
++
++#: ../../WINGs/wfontpanel.c:235
 +msgid "Test!!!"
 +msgstr "Test!!!"
 +
-+#: ../../WINGs/wfontpanel.c:211
++#: ../../WINGs/wfontpanel.c:241
 +msgid "Family"
 +msgstr "Rodzina"
 +
-+#: ../../WINGs/wfontpanel.c:222
++#: ../../WINGs/wfontpanel.c:252
 +msgid "Typeface"
 +msgstr "Krój"
 +
-+#: ../../WINGs/wfontpanel.c:233
++#: ../../WINGs/wfontpanel.c:263
 +msgid "Size"
 +msgstr "Rozmiar"
 +
-+#: ../../WINGs/wfontpanel.c:252
++#: ../../WINGs/wfontpanel.c:282
 +msgid "Set"
 +msgstr "Ustaw"
 +
-+#: ../../WINGs/wfontpanel.c:257
++#: ../../WINGs/wfontpanel.c:288
 +msgid "Revert"
 +msgstr "Cofnij"
 +
-+#: ../../WINGs/wfontpanel.c:709
++#: ../../WINGs/wfontpanel.c:751
 +msgid "Could not retrieve font list"
 +msgstr "Nie mo¿na odczytaæ listy fontów"
 +
-+#: ../../WINGs/wfontpanel.c:721
++#: ../../WINGs/wfontpanel.c:765
 +#, c-format
 +msgid "font name %s is longer than 256, which is invalid."
 +msgstr "nazwa fontu %s jest d³u¿sza ni¿ 256, wiêc jest niepoprawna."
 +
-+#: ../../WINGs/wfontpanel.c:868
++#: ../../WINGs/wfontpanel.c:913
 +msgid "Roman"
 +msgstr "antykwa"
 +
-+#: ../../WINGs/wfontpanel.c:871
++#: ../../WINGs/wfontpanel.c:916
 +msgid "Italic"
 +msgstr "kursywa"
 +
-+#: ../../WINGs/wfontpanel.c:873
++#: ../../WINGs/wfontpanel.c:918
 +msgid "Oblique"
 +msgstr "uko¶ny"
 +
-+#: ../../WINGs/wfontpanel.c:875
++#: ../../WINGs/wfontpanel.c:920
 +msgid "Rev Italic"
 +msgstr "odwr. kursywa"
 +
-+#: ../../WINGs/wfontpanel.c:877
++#: ../../WINGs/wfontpanel.c:922
 +msgid "Rev Oblique"
 +msgstr "odwr. uko¶ny"
 +
-+#: ../../WINGs/wfontpanel.c:883
++#: ../../WINGs/wfontpanel.c:928
 +msgid "Normal"
 +msgstr "normalny"
 +
-+#: ../../WINGs/widgets.c:415
++#: ../../WINGs/widgets.c:419
 +#, c-format
 +msgid "WINGs: could not load widget images file: %s"
 +msgstr "WINGs: nie mo¿na za³adowaæ pliku obrazów widgetów: %s"
 +
-+#: ../../WINGs/widgets.c:763
-+msgid ""
-+"could not load any fonts. Make sure your font installation and locale "
-+"settings are correct."
-+msgstr ""
-+"nie mo¿na za³adowaæ ¿adnych fontów. Proszê siê upewniæ, ¿e instalacja fontów "
-+"oraz ustawienia lokalne s± poprawne."
++#: ../../WINGs/widgets.c:775
++msgid "Text antialiasing is enabled in the configuration but the X server doesn't have the required capabilities (missing RENDER extension). Disabling text antialiasing."
++msgstr "Antyaliasing tekstu jest w³±czony w konfiguracji, ale X serwer nie ma wymaganych mo¿liwo¶ci (brak rozszerzenie RENDER). Wy³±czenie antyaliasingu tekstu."
 +
-+#: ../../WINGs/wruler.c:189
++#: ../../WINGs/widgets.c:792
++msgid "could not load any fonts. Make sure your font installation and locale settings are correct."
++msgstr "nie mo¿na za³adowaæ ¿adnych fontów. Proszê siê upewniæ, ¿e instalacja fontów oraz ustawienia lokalne s± poprawne."
++
++#: ../../WINGs/wruler.c:192
 +msgid "0   inches"
 +msgstr "0   cali"
 diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/WPrefs.app/po/Makefile.am
@@ -692,91 +717,90 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  
  POTFILES  = \
  	$(top_builddir)/WPrefs.app/Appearance.c \
-diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.app/po/pl.po
---- WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po	Thu Jan  1 01:00:00 1970
-+++ WindowMaker-0.80.2/WPrefs.app/po/pl.po	Wed Nov 20 23:35:38 2002
-@@ -0,0 +1,2154 @@
-+# Polish translations for WPrefs.app
-+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-+# This file is distributed under the same license as the PACKAGE package.
-+# Jakub Bogusz <qboosh@pld.org.pl>, 2002.
+--- WindowMaker-CVS-20040321/WPrefs.app/po/pl.po.orig	1970-01-01 01:00:00.000000000 +0100
++++ WindowMaker-CVS-20040321/WPrefs.app/po/pl.po	2004-04-24 19:30:52.573356992 +0200
+@@ -0,0 +1,2201 @@
++# Polish translations for WPrefs.app.
++# This file is distributed under the same license as the WPrefs package.
++# Jakub Bogusz <qboosh@pld-linux.org.pl>, 2002, 2004.
 +#
 +msgid ""
 +msgstr ""
 +"Project-Id-Version: WPrefs.app 0.45\n"
-+"POT-Creation-Date: 2002-11-12 20:28+0100\n"
-+"PO-Revision-Date: 2002-11-19 19:52+0100\n"
-+"Last-Translator: Jakub Bogusz <qboosh@pld.org.pl>\n"
-+"Language-Team: Polish <pl@li.org>\n"
++"POT-Creation-Date: 2004-04-24 19:13+0200\n"
++"PO-Revision-Date: 2004-04-24 19:20+0200\n"
++"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
++"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 +"MIME-Version: 1.0\n"
 +"Content-Type: text/plain; charset=ISO-8859-2\n"
 +"Content-Transfer-Encoding: 8bit\n"
 +
-+#: ../../WPrefs.app/Appearance.c:1131
++#: ../../WPrefs.app/Appearance.c:1154
 +msgid "Select File"
 +msgstr "Wybór pliku"
 +
-+#: ../../WPrefs.app/Appearance.c:1533
++#: ../../WPrefs.app/Appearance.c:1555
 +msgid "Focused Window"
 +msgstr "Okno aktywne"
 +
-+#: ../../WPrefs.app/Appearance.c:1537
++#: ../../WPrefs.app/Appearance.c:1560
 +msgid "Unfocused Window"
 +msgstr "Okno nieaktywne"
 +
-+#: ../../WPrefs.app/Appearance.c:1541
++#: ../../WPrefs.app/Appearance.c:1565
 +msgid "Owner of Focused Window"
 +msgstr "W³a¶ciciel okna aktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1545 ../../WPrefs.app/Appearance.c:1862
++#: ../../WPrefs.app/Appearance.c:1570 ../../WPrefs.app/Appearance.c:1893
++#: ../../WPrefs.app/Font.c:408
 +msgid "Menu Title"
 +msgstr "Tytu³ menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1549 ../../WPrefs.app/Appearance.c:1551
++#: ../../WPrefs.app/Appearance.c:1575 ../../WPrefs.app/Appearance.c:1578
 +msgid "Normal Item"
 +msgstr "Normalny"
 +
-+#: ../../WPrefs.app/Appearance.c:1555
++#: ../../WPrefs.app/Appearance.c:1583
 +msgid "Disabled Item"
 +msgstr "Wy³±czony"
 +
-+#: ../../WPrefs.app/Appearance.c:1564
++#: ../../WPrefs.app/Appearance.c:1595
 +msgid "Highlighted"
 +msgstr "Pod¶wietlony"
 +
-+#: ../../WPrefs.app/Appearance.c:1755
++#: ../../WPrefs.app/Appearance.c:1786
 +msgid "Texture"
 +msgstr "Tekstura"
 +
-+#: ../../WPrefs.app/Appearance.c:1763
++#: ../../WPrefs.app/Appearance.c:1794
 +msgid "Titlebar of Focused Window"
 +msgstr "Pasek tytu³owy okna aktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1764
++#: ../../WPrefs.app/Appearance.c:1795
 +msgid "Titlebar of Unfocused Windows"
 +msgstr "Pasek tytu³owy okna nieaktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1765
++#: ../../WPrefs.app/Appearance.c:1796
 +msgid "Titlebar of Focused Window's Owner"
 +msgstr "Pasek tytu³owy w³a¶ciciela aktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1766
++#: ../../WPrefs.app/Appearance.c:1797
 +msgid "Window Resizebar"
 +msgstr "Pasek zmiany rozmiaru okna"
 +
-+#: ../../WPrefs.app/Appearance.c:1767
++#: ../../WPrefs.app/Appearance.c:1798
 +msgid "Titlebar of Menus"
 +msgstr "Pasek tytu³owy menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1768
++#: ../../WPrefs.app/Appearance.c:1799
 +msgid "Menu Items"
 +msgstr "Elementy menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1769
++#: ../../WPrefs.app/Appearance.c:1800
 +msgid "Icon Background"
 +msgstr "T³o ikony"
 +
-+#: ../../WPrefs.app/Appearance.c:1784
++#: ../../WPrefs.app/Appearance.c:1815
 +msgid ""
 +"Double click in the texture you want to use\n"
 +"for the selected item."
@@ -784,87 +808,87 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"Proszê klikn±æ na teksturze, która ma byæ\n"
 +"u¿ywana dla wybranego elementu."
 +
-+#: ../../WPrefs.app/Appearance.c:1798
++#: ../../WPrefs.app/Appearance.c:1829
 +msgid "New"
 +msgstr "Nowa"
 +
-+#: ../../WPrefs.app/Appearance.c:1802
++#: ../../WPrefs.app/Appearance.c:1833
 +msgid "Create a new texture."
 +msgstr "Utworzenie nowej tekstury."
 +
-+#: ../../WPrefs.app/Appearance.c:1810
++#: ../../WPrefs.app/Appearance.c:1841
 +msgid "Extract..."
 +msgstr "Wyci±gnij..."
 +
-+#: ../../WPrefs.app/Appearance.c:1814
++#: ../../WPrefs.app/Appearance.c:1845
 +msgid "Extract texture(s) from a theme or a style file."
 +msgstr "Wyci±gniêcie tekstur(y) z pliku motywu lub stylu."
 +
-+#: ../../WPrefs.app/Appearance.c:1824
++#: ../../WPrefs.app/Appearance.c:1855
 +msgid "Edit"
 +msgstr "Edycja"
 +
-+#: ../../WPrefs.app/Appearance.c:1827
++#: ../../WPrefs.app/Appearance.c:1858
 +msgid "Edit the highlighted texture."
 +msgstr "Edycja pod¶wietlonej tekstury."
 +
-+#: ../../WPrefs.app/Appearance.c:1835 ../../WPrefs.app/TexturePanel.c:1316
++#: ../../WPrefs.app/Appearance.c:1866 ../../WPrefs.app/TexturePanel.c:1318
 +msgid "Delete"
 +msgstr "Usuñ"
 +
-+#: ../../WPrefs.app/Appearance.c:1839
++#: ../../WPrefs.app/Appearance.c:1870
 +msgid "Delete the highlighted texture."
 +msgstr "Usuniêcie pod¶wietlonej tekstury."
 +
-+#: ../../WPrefs.app/Appearance.c:1852
++#: ../../WPrefs.app/Appearance.c:1883
 +msgid "Color"
 +msgstr "Kolor"
 +
-+#: ../../WPrefs.app/Appearance.c:1859
++#: ../../WPrefs.app/Appearance.c:1890
 +msgid "Focused Window Title"
 +msgstr "Tytu³ okna aktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1860
++#: ../../WPrefs.app/Appearance.c:1891
 +msgid "Unfocused Window Title"
 +msgstr "Tytu³ okna nieaktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1861
++#: ../../WPrefs.app/Appearance.c:1892
 +msgid "Owner of Focused Window Title"
 +msgstr "Tytu³ w³a¶ciciela okna aktywnego"
 +
-+#: ../../WPrefs.app/Appearance.c:1863
++#: ../../WPrefs.app/Appearance.c:1894
 +msgid "Menu Item Text"
 +msgstr "Tekst elementu menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1864
++#: ../../WPrefs.app/Appearance.c:1895
 +msgid "Disabled Menu Item Text"
 +msgstr "Tekst wy³±czonego elementu menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1865
++#: ../../WPrefs.app/Appearance.c:1896
 +msgid "Menu Highlight Color"
 +msgstr "Kolor pod¶wietlenia menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1866
++#: ../../WPrefs.app/Appearance.c:1897
 +msgid "Highlighted Menu Text Color"
 +msgstr "Kolor pod¶wietlonego tekstu menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1905
++#: ../../WPrefs.app/Appearance.c:1936
 +msgid "Background"
 +msgstr "T³o"
 +
-+#: ../../WPrefs.app/Appearance.c:1917 ../../WPrefs.app/TexturePanel.c:1503
++#: ../../WPrefs.app/Appearance.c:1948 ../../WPrefs.app/TexturePanel.c:1504
 +msgid "Browse..."
 +msgstr "Przegl±daj..."
 +
-+#: ../../WPrefs.app/Appearance.c:1930
++#: ../../WPrefs.app/Appearance.c:1961
 +msgid "Options"
 +msgstr "Opcje"
 +
-+#: ../../WPrefs.app/Appearance.c:1937
++#: ../../WPrefs.app/Appearance.c:1968
 +msgid "Menu Style"
 +msgstr "Styl menu"
 +
-+#: ../../WPrefs.app/Appearance.c:1965 ../../WPrefs.app/Configurations.c:242
++#: ../../WPrefs.app/Appearance.c:1996 ../../WPrefs.app/Configurations.c:242
 +#: ../../WPrefs.app/Configurations.c:254 ../../WPrefs.app/Focus.c:288
 +#: ../../WPrefs.app/Focus.c:299 ../../WPrefs.app/MenuPreferences.c:134
 +#: ../../WPrefs.app/MenuPreferences.c:145
@@ -876,28 +900,28 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgid "could not load icon file %s"
 +msgstr "nie mo¿na za³adowaæ pliku ikony %s"
 +
-+#: ../../WPrefs.app/Appearance.c:1979
++#: ../../WPrefs.app/Appearance.c:2010
 +msgid "Title Alignment"
 +msgstr "Wyrównanie tytu³u"
 +
-+#: ../../WPrefs.app/Appearance.c:1986
++#: ../../WPrefs.app/Appearance.c:2017
 +msgid "Left"
 +msgstr "Do lewej"
 +
-+#: ../../WPrefs.app/Appearance.c:1989 ../../WPrefs.app/TexturePanel.c:1517
++#: ../../WPrefs.app/Appearance.c:2020 ../../WPrefs.app/TexturePanel.c:1518
 +#: ../../WPrefs.app/Workspace.c:270
 +msgid "Center"
 +msgstr "Po¶rodku"
 +
-+#: ../../WPrefs.app/Appearance.c:1992
++#: ../../WPrefs.app/Appearance.c:2023
 +msgid "Right"
 +msgstr "Do prawej"
 +
-+#: ../../WPrefs.app/Appearance.c:2216
++#: ../../WPrefs.app/Appearance.c:2247
 +msgid "Appearance Preferences"
 +msgstr "Ustawienia wygl±du"
 +
-+#: ../../WPrefs.app/Appearance.c:2218
++#: ../../WPrefs.app/Appearance.c:2249
 +msgid ""
 +"Background texture configuration for windows,\n"
 +"menus and icons."
@@ -905,19 +929,19 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"Ustawienia tekstury w tle dla okien, menu\n"
 +"i ikon."
 +
-+#: ../../WPrefs.app/Appearance.c:2263
++#: ../../WPrefs.app/Appearance.c:2294
 +msgid "Extract Texture"
 +msgstr "Wyci±gnij teksturê"
 +
-+#: ../../WPrefs.app/Appearance.c:2283
++#: ../../WPrefs.app/Appearance.c:2314
 +msgid "Textures"
 +msgstr "Tekstury"
 +
-+#: ../../WPrefs.app/Appearance.c:2294 ../../WPrefs.app/WPrefs.c:302
++#: ../../WPrefs.app/Appearance.c:2325 ../../WPrefs.app/WPrefs.c:302
 +msgid "Close"
 +msgstr "Zamknij"
 +
-+#: ../../WPrefs.app/Appearance.c:2299
++#: ../../WPrefs.app/Appearance.c:2330
 +msgid "Extract"
 +msgstr "Wyci±gnij"
 +
@@ -1069,45 +1093,47 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"ró¿nych opcji i ustawienie liczby kolorów\n"
 +"zarezerwowanych dla Window Makera przy 8bpp."
 +
-+#: ../../WPrefs.app/Expert.c:76
-+msgid ""
-+"Disable miniwindows (icons for miniaturized windows). For use with KDE/GNOME."
-+msgstr ""
-+"Wy³±cz miniokna (ikony dla pomniejszonych okien). Do u¿ywania z KDE/GNOME."
++#: ../../WPrefs.app/Expert.c:78
++msgid "Disable miniwindows (icons for miniaturized windows). For use with KDE/GNOME."
++msgstr "Wy³±cz miniokna (ikony dla pomniejszonych okien). Do u¿ywania z KDE/GNOME."
 +
-+#: ../../WPrefs.app/Expert.c:77
++#: ../../WPrefs.app/Expert.c:79
 +msgid "Do not set non-WindowMaker specific parameters (do not use xset)."
 +msgstr "Nie ustawiaj parametrów innych ni¿ WindowMakerowe (nie u¿ywaj xset)."
 +
-+#: ../../WPrefs.app/Expert.c:78
++#: ../../WPrefs.app/Expert.c:80
 +msgid "Automatically save session when exiting Window Maker."
 +msgstr "Automatycznie zachowuj sesjê przy opuszczaniu Window Makera."
 +
-+#: ../../WPrefs.app/Expert.c:79
++#: ../../WPrefs.app/Expert.c:81
 +msgid "Use SaveUnder in window frames, icons, menus and other objects."
 +msgstr "U¿ywaj ZapiszPod w ramkach okien, ikonach, menu i innych obiektach."
 +
-+#: ../../WPrefs.app/Expert.c:80
++#: ../../WPrefs.app/Expert.c:82
 +msgid "Use Windoze style cycling."
 +msgstr "U¿ywaj prze³±czania w stylu Windoze."
 +
-+#: ../../WPrefs.app/Expert.c:81
++#: ../../WPrefs.app/Expert.c:83
 +msgid "Disable confirmation panel for the Kill command."
 +msgstr "Wy³±cz panel potwierdzenia dla polecenia Zabij."
 +
-+#: ../../WPrefs.app/Expert.c:82
++#: ../../WPrefs.app/Expert.c:84
 +msgid "Disable selection animation for selected icons."
 +msgstr "Wy³±cz animacjê wyboru dla zaznaczonych ikon."
 +
-+#: ../../WPrefs.app/Expert.c:83
++#: ../../WPrefs.app/Expert.c:85
++msgid "Smooth font edges (needs restart)."
++msgstr "G³adkie krawêdzie fontów (wymagaj± restartu)."
++
++#: ../../WPrefs.app/Expert.c:86
 +msgid "Launch applications and restore windows with a single click"
 +msgstr "Uruchamiaj aplikacje i odtwarzaj okna pojedynczym klikniêciem"
 +
-+#: ../../WPrefs.app/Expert.c:118
++#: ../../WPrefs.app/Expert.c:126
 +msgid "Expert User Preferences"
 +msgstr "Ustawienia zaawansowanego u¿ytkownika"
 +
-+#: ../../WPrefs.app/Expert.c:120
++#: ../../WPrefs.app/Expert.c:128
 +msgid ""
 +"Options for people who know what they're doing...\n"
 +"Also have some other misc. options."
@@ -1185,15 +1211,39 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"Sposób przejmowania klawiatury, prze³±czania mapy\n"
 +"kolorów przy 8bpp i inne podobne opcje."
 +
-+#: ../../WPrefs.app/Font.c:276
++#: ../../WPrefs.app/Font.c:400 ../../WPrefs.app/Font.c:1872
++msgid "Window Title Font"
++msgstr "Font tytu³u okna"
++
++#: ../../WPrefs.app/Font.c:404
++msgid "Display"
++msgstr "Wy¶wietl"
++
++#: ../../WPrefs.app/Font.c:412
++msgid "Menu Item"
++msgstr "Element menu"
++
++#: ../../WPrefs.app/Font.c:418
++msgid "Clip title"
++msgstr "Tytu³ spinacza"
++
++#: ../../WPrefs.app/Font.c:422
++msgid "Icon Title"
++msgstr "Tytu³ ikony"
++
++#: ../../WPrefs.app/Font.c:726
++msgid "error capturing \"original\" tile image"
++msgstr "b³±d przy ³apaniu \"oryginalnego\" obrazu"
++
++#: ../../WPrefs.app/Font.c:1130
 +msgid "Could not locate font information file WPrefs.app/font.data"
 +msgstr "Nie mo¿na znale¼æ pliku informacji o fontach WPrefs.app/font.data"
 +
-+#: ../../WPrefs.app/Font.c:282
++#: ../../WPrefs.app/Font.c:1136
 +msgid "Could not read font information file WPrefs.app/font.data"
 +msgstr "Nie mo¿na odczytaæ pliku informacji o fontach WPrefs.app/font.data"
 +
-+#: ../../WPrefs.app/Font.c:293
++#: ../../WPrefs.app/Font.c:1147
 +msgid ""
 +"Invalid data in font information file WPrefs.app/font.data.\n"
 +"Encodings data not found."
@@ -1201,58 +1251,107 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"B³êdne dane w pliku informacji o fontach WPrefs.app/font.data.\n"
 +"Nie znaleziono danych dotycz±cych kodowania."
 +
-+#: ../../WPrefs.app/Font.c:298
-+msgid "- Custom -"
-+msgstr "- W³asny -"
++#: ../../WPrefs.app/Font.c:1152
++msgid "Current"
++msgstr "Bie¿±cy"
 +
-+#: ../../WPrefs.app/Font.c:329 ../../WPrefs.app/Menu.c:1594
++#: ../../WPrefs.app/Font.c:1197 ../../WPrefs.app/Menu.c:1592
 +#: ../../WPrefs.app/MouseSettings.c:140 ../../WPrefs.app/MouseSettings.c:160
-+#: ../../WPrefs.app/TexturePanel.c:613 ../../WPrefs.app/TexturePanel.c:693
-+#: ../../WPrefs.app/Themes.c:96 ../../WPrefs.app/WPrefs.c:758
-+#: ../../WPrefs.app/WPrefs.c:763 ../../WPrefs.app/WPrefs.c:780
-+#: ../../WPrefs.app/WPrefs.c:790 ../../WPrefs.app/WPrefs.c:800
-+#: ../../WPrefs.app/WPrefs.c:838 ../../WPrefs.app/WPrefs.c:843
++#: ../../WPrefs.app/TexturePanel.c:615 ../../WPrefs.app/TexturePanel.c:695
++#: ../../WPrefs.app/Themes.c:96 ../../WPrefs.app/WPrefs.c:759
++#: ../../WPrefs.app/WPrefs.c:764 ../../WPrefs.app/WPrefs.c:781
++#: ../../WPrefs.app/WPrefs.c:791 ../../WPrefs.app/WPrefs.c:801
++#: ../../WPrefs.app/WPrefs.c:839 ../../WPrefs.app/WPrefs.c:844
 +msgid "Error"
 +msgstr "B³±d"
 +
-+#: ../../WPrefs.app/Font.c:329 ../../WPrefs.app/Menu.c:1594
-+#: ../../WPrefs.app/MouseSettings.c:142 ../../WPrefs.app/MouseSettings.c:162
-+#: ../../WPrefs.app/TexturePanel.c:614 ../../WPrefs.app/TexturePanel.c:695
-+#: ../../WPrefs.app/TexturePanel.c:1528 ../../WPrefs.app/Themes.c:98
-+#: ../../WPrefs.app/WPrefs.c:758 ../../WPrefs.app/WPrefs.c:763
-+#: ../../WPrefs.app/WPrefs.c:782 ../../WPrefs.app/WPrefs.c:794
-+#: ../../WPrefs.app/WPrefs.c:800 ../../WPrefs.app/WPrefs.c:807
-+#: ../../WPrefs.app/WPrefs.c:838 ../../WPrefs.app/WPrefs.c:843
-+#: ../../WPrefs.app/imagebrowser.c:105
++#: ../../WPrefs.app/Font.c:1197 ../../WPrefs.app/Font.c:1307
++#: ../../WPrefs.app/Menu.c:1592 ../../WPrefs.app/MouseSettings.c:142
++#: ../../WPrefs.app/MouseSettings.c:162 ../../WPrefs.app/TexturePanel.c:616
++#: ../../WPrefs.app/TexturePanel.c:697 ../../WPrefs.app/TexturePanel.c:1529
++#: ../../WPrefs.app/Themes.c:98 ../../WPrefs.app/WPrefs.c:759
++#: ../../WPrefs.app/WPrefs.c:764 ../../WPrefs.app/WPrefs.c:783
++#: ../../WPrefs.app/WPrefs.c:795 ../../WPrefs.app/WPrefs.c:801
++#: ../../WPrefs.app/WPrefs.c:808 ../../WPrefs.app/WPrefs.c:839
++#: ../../WPrefs.app/WPrefs.c:844 ../../WPrefs.app/imagebrowser.c:105
 +msgid "OK"
 +msgstr "OK"
 +
-+#: ../../WPrefs.app/Font.c:376
-+msgid "Default Font Sets"
-+msgstr "Domy¶lne zestawy fontów"
++#: ../../WPrefs.app/Font.c:1307 ../../WPrefs.app/Menu.c:1627
++#: ../../WPrefs.app/WPrefs.c:808
++msgid "Warning"
++msgstr "Ostrze¿enie"
 +
-+#: ../../WPrefs.app/Font.c:389
++#: ../../WPrefs.app/Font.c:1503 ../../WPrefs.app/Menu.c:1404
++msgid "Yes"
++msgstr "Tak"
++
++#: ../../WPrefs.app/Font.c:1507
++msgid "Auto"
++msgstr "Automatycznie"
++
++#: ../../WPrefs.app/Font.c:1873
++msgid "Large Display Font"
++msgstr "Du¿y font"
++
++#: ../../WPrefs.app/Font.c:1874
++msgid "Menu Title Font"
++msgstr "Font tytu³u menu"
++
++#: ../../WPrefs.app/Font.c:1875
++msgid "Menu Item Font"
++msgstr "Font elementu menu"
++
++#: ../../WPrefs.app/Font.c:1876
++msgid "Clip Title Font"
++msgstr "Font tytu³u spinacza"
++
++#: ../../WPrefs.app/Font.c:1877
++msgid "Icon Title Font"
++msgstr "Font tytu³u ikony"
++
++#: ../../WPrefs.app/Font.c:1887
++msgid "MultiByte"
++msgstr "Wielobajtowy"
++
++#: ../../WPrefs.app/Font.c:1901
++msgid "Default Font Encodings"
++msgstr "Domy¶lne kodowania fontów"
++
++#: ../../WPrefs.app/Font.c:1917
++msgid "Smooth Fonts"
++msgstr "G³adkie fonty"
++
++#: ../../WPrefs.app/Font.c:1918
++msgid ""
++"Smooth Font edges for the eye candy\n"
++"requires a restart after saving"
++msgstr ""
++"G³adkie krawêdzie fontów dla ³adnego wygl±du\n"
++"wymagaj± restartu po zapisaniu"
++
++#: ../../WPrefs.app/Font.c:1927
 +msgid "Font Set"
 +msgstr "Zestaw fontów"
 +
-+#: ../../WPrefs.app/Font.c:418
++#: ../../WPrefs.app/Font.c:1957
 +msgid "Add..."
 +msgstr "Dodaj..."
 +
-+#: ../../WPrefs.app/Font.c:423 ../../WPrefs.app/Font.c:438
++#: ../../WPrefs.app/Font.c:1963 ../../WPrefs.app/Font.c:1999
 +msgid "Change..."
 +msgstr "Zmieñ..."
 +
-+#: ../../WPrefs.app/Font.c:428 ../../WPrefs.app/Paths.c:288
-+#: ../../WPrefs.app/Paths.c:319
++#: ../../WPrefs.app/Font.c:1969 ../../WPrefs.app/Paths.c:284
++#: ../../WPrefs.app/Paths.c:315
 +msgid "Remove"
 +msgstr "Usuñ"
 +
-+#: ../../WPrefs.app/Font.c:477
++#: ../../WPrefs.app/Font.c:2095
 +msgid "Font Preferences"
 +msgstr "Ustawienia fontów"
 +
-+#: ../../WPrefs.app/Font.c:478
++#: ../../WPrefs.app/Font.c:2096
 +msgid "Font Configurations for Windows, Menus etc"
 +msgstr "Ustawienia fontów dla okien, menu itp."
 +
@@ -1337,23 +1436,23 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgid "Not done"
 +msgstr "Nie skoñczone"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:306 ../../WPrefs.app/Menu.c:360
-+#: ../../WPrefs.app/TexturePanel.c:1534 ../../WPrefs.app/imagebrowser.c:100
++#: ../../WPrefs.app/KeyboardShortcuts.c:307 ../../WPrefs.app/Menu.c:360
++#: ../../WPrefs.app/TexturePanel.c:1535 ../../WPrefs.app/imagebrowser.c:100
 +msgid "Cancel"
 +msgstr "Anuluj"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:307
++#: ../../WPrefs.app/KeyboardShortcuts.c:308
 +msgid "Press the desired shortcut key(s) or click Cancel to stop capturing."
 +msgstr "Proszê nacisn±æ klawisz(e) skrótu lub klikn±æ Anuluj aby przerwaæ."
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:327
-+#: ../../WPrefs.app/KeyboardShortcuts.c:577 ../../WPrefs.app/Menu.c:371
++#: ../../WPrefs.app/KeyboardShortcuts.c:328
++#: ../../WPrefs.app/KeyboardShortcuts.c:575 ../../WPrefs.app/Menu.c:371
 +#: ../../WPrefs.app/Menu.c:830
 +msgid "Capture"
 +msgstr "Z³ap"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:328
-+#: ../../WPrefs.app/KeyboardShortcuts.c:585
++#: ../../WPrefs.app/KeyboardShortcuts.c:329
++#: ../../WPrefs.app/KeyboardShortcuts.c:583
 +msgid "Click Capture to interactively define the shortcut key."
 +msgstr "Klikniêcie Z³ap pozwala interaktywnie zdefiniowaæ klawisz skrótu."
 +
@@ -1361,207 +1460,207 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgid "Actions"
 +msgstr "Akcje"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:499
++#: ../../WPrefs.app/KeyboardShortcuts.c:497
 +msgid "Open applications menu"
 +msgstr "Otworzenie menu aplikacji"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:500
++#: ../../WPrefs.app/KeyboardShortcuts.c:498
 +msgid "Open window list menu"
 +msgstr "Otworzenie menu z list± okien"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:501
++#: ../../WPrefs.app/KeyboardShortcuts.c:499
 +msgid "Open window commands menu"
 +msgstr "Otworzenie menu poleceñ dla okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:502
++#: ../../WPrefs.app/KeyboardShortcuts.c:500
 +msgid "Hide active application"
 +msgstr "Ukrycie aktywnej aplikacji"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:503
++#: ../../WPrefs.app/KeyboardShortcuts.c:501
 +msgid "Hide other applications"
 +msgstr "Ukrycie innej aplikacji"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:504
++#: ../../WPrefs.app/KeyboardShortcuts.c:502
 +msgid "Miniaturize active window"
 +msgstr "Pomniejszenie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:505
++#: ../../WPrefs.app/KeyboardShortcuts.c:503
 +msgid "Close active window"
 +msgstr "Zamkniêcie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:506
++#: ../../WPrefs.app/KeyboardShortcuts.c:504
 +msgid "Maximize active window"
 +msgstr "Powiêkszenie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:507
++#: ../../WPrefs.app/KeyboardShortcuts.c:505
 +msgid "Maximize active window vertically"
 +msgstr "Pionowe powiêkszenie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:508
++#: ../../WPrefs.app/KeyboardShortcuts.c:506
 +msgid "Maximize active window horizontally"
 +msgstr "Poziome powiêkszenie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:509
++#: ../../WPrefs.app/KeyboardShortcuts.c:507
 +msgid "Raise active window"
 +msgstr "Podniesienie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:510
++#: ../../WPrefs.app/KeyboardShortcuts.c:508
 +msgid "Lower active window"
 +msgstr "Opuszczenie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:511
++#: ../../WPrefs.app/KeyboardShortcuts.c:509
 +msgid "Raise/Lower window under mouse pointer"
 +msgstr "Podniesienie/opuszczenie okna pod kursorem myszy"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:512
++#: ../../WPrefs.app/KeyboardShortcuts.c:510
 +msgid "Shade active window"
 +msgstr "Zas³oniêcie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:513
++#: ../../WPrefs.app/KeyboardShortcuts.c:511
 +msgid "Move/Resize active window"
 +msgstr "Przesuniêcie/zmiana rozmiaru aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:514
++#: ../../WPrefs.app/KeyboardShortcuts.c:512
 +msgid "Select active window"
 +msgstr "Wybranie aktywnego okna"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:515
++#: ../../WPrefs.app/KeyboardShortcuts.c:513
 +msgid "Focus next window"
 +msgstr "Prze³±czenie na nastêpne okno"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:516
++#: ../../WPrefs.app/KeyboardShortcuts.c:514
 +msgid "Focus previous window"
 +msgstr "Prze³±czenie na poprzednie okno"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:517
++#: ../../WPrefs.app/KeyboardShortcuts.c:515
 +msgid "Switch to next workspace"
 +msgstr "Prze³±czenie na nastêpny pulpit"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:518
++#: ../../WPrefs.app/KeyboardShortcuts.c:516
 +msgid "Switch to previous workspace"
 +msgstr "Prze³±czenie na poprzedni pulpit"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:519
++#: ../../WPrefs.app/KeyboardShortcuts.c:517
 +msgid "Switch to next ten workspaces"
 +msgstr "Prze³±czenie na nastêpne 10 pulpitów"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:520
++#: ../../WPrefs.app/KeyboardShortcuts.c:518
 +msgid "Switch to previous ten workspaces"
 +msgstr "Prze³±czenie na poprzednie 10 pulpitów"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:521
++#: ../../WPrefs.app/KeyboardShortcuts.c:519
 +msgid "Switch to workspace 1"
 +msgstr "Prze³±czenie na pulpit 1"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:522
++#: ../../WPrefs.app/KeyboardShortcuts.c:520
 +msgid "Switch to workspace 2"
 +msgstr "Prze³±czenie na pulpit 2"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:523
++#: ../../WPrefs.app/KeyboardShortcuts.c:521
 +msgid "Switch to workspace 3"
 +msgstr "Prze³±czenie na pulpit 3"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:524
++#: ../../WPrefs.app/KeyboardShortcuts.c:522
 +msgid "Switch to workspace 4"
 +msgstr "Prze³±czenie na pulpit 4"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:525
++#: ../../WPrefs.app/KeyboardShortcuts.c:523
 +msgid "Switch to workspace 5"
 +msgstr "Prze³±czenie na pulpit 5"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:526
++#: ../../WPrefs.app/KeyboardShortcuts.c:524
 +msgid "Switch to workspace 6"
 +msgstr "Prze³±czenie na pulpit 6"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:527
++#: ../../WPrefs.app/KeyboardShortcuts.c:525
 +msgid "Switch to workspace 7"
 +msgstr "Prze³±czenie na pulpit 7"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:528
++#: ../../WPrefs.app/KeyboardShortcuts.c:526
 +msgid "Switch to workspace 8"
 +msgstr "Prze³±czenie na pulpit 8"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:529
++#: ../../WPrefs.app/KeyboardShortcuts.c:527
 +msgid "Switch to workspace 9"
 +msgstr "Prze³±czenie na pulpit 9"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:530
++#: ../../WPrefs.app/KeyboardShortcuts.c:528
 +msgid "Switch to workspace 10"
 +msgstr "Prze³±czenie na pulpit 10"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:531
++#: ../../WPrefs.app/KeyboardShortcuts.c:529
 +msgid "Shortcut for window 1"
 +msgstr "Skrót dla okna 1"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:532
++#: ../../WPrefs.app/KeyboardShortcuts.c:530
 +msgid "Shortcut for window 2"
 +msgstr "Skrót dla okna 2"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:533
++#: ../../WPrefs.app/KeyboardShortcuts.c:531
 +msgid "Shortcut for window 3"
 +msgstr "Skrót dla okna 3"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:534
++#: ../../WPrefs.app/KeyboardShortcuts.c:532
 +msgid "Shortcut for window 4"
 +msgstr "Skrót dla okna 4"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:535
++#: ../../WPrefs.app/KeyboardShortcuts.c:533
 +msgid "Shortcut for window 5"
 +msgstr "Skrót dla okna 5"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:536
++#: ../../WPrefs.app/KeyboardShortcuts.c:534
 +msgid "Shortcut for window 6"
 +msgstr "Skrót dla okna 6"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:537
++#: ../../WPrefs.app/KeyboardShortcuts.c:535
 +msgid "Shortcut for window 7"
 +msgstr "Skrót dla okna 7"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:538
++#: ../../WPrefs.app/KeyboardShortcuts.c:536
 +msgid "Shortcut for window 8"
 +msgstr "Skrót dla okna 8"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:539
++#: ../../WPrefs.app/KeyboardShortcuts.c:537
 +msgid "Shortcut for window 9"
 +msgstr "Skrót dla okna 9"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:540
++#: ../../WPrefs.app/KeyboardShortcuts.c:538
 +msgid "Shortcut for window 10"
 +msgstr "Skrót dla okna 10"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:541
++#: ../../WPrefs.app/KeyboardShortcuts.c:539
 +msgid "Switch to Next Screen/Monitor"
 +msgstr "Prze³±czenie na nastêpny ekran/monitor"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:542
++#: ../../WPrefs.app/KeyboardShortcuts.c:540
 +msgid "Raise Clip"
 +msgstr "Podniesienie Spinacza"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:543
++#: ../../WPrefs.app/KeyboardShortcuts.c:541
 +msgid "Lower Clip"
 +msgstr "Opuszczenie Spinacza"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:544
++#: ../../WPrefs.app/KeyboardShortcuts.c:542
 +msgid "Raise/Lower Clip"
 +msgstr "Podniesienie/opuszczenie Spinacza"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:546
++#: ../../WPrefs.app/KeyboardShortcuts.c:544
 +msgid "Toggle keyboard language"
 +msgstr "Prze³±czenie jêzyka klawiatury"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:560
++#: ../../WPrefs.app/KeyboardShortcuts.c:558
 +msgid "Shortcut"
 +msgstr "Skrót"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:571 ../../WPrefs.app/Menu.c:836
++#: ../../WPrefs.app/KeyboardShortcuts.c:569 ../../WPrefs.app/Menu.c:836
 +msgid "Clear"
 +msgstr "Wyczy¶æ"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:633
++#: ../../WPrefs.app/KeyboardShortcuts.c:631
 +msgid "Keyboard Shortcut Preferences"
 +msgstr "Ustawienia skrótów klawiszowych"
 +
-+#: ../../WPrefs.app/KeyboardShortcuts.c:635
++#: ../../WPrefs.app/KeyboardShortcuts.c:633
 +msgid ""
 +"Change the keyboard shortcuts for actions such\n"
 +"as changing workspaces and opening menus."
@@ -1857,7 +1956,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgid "Do not confirm action."
 +msgstr "Nie potwierdzaj akcji."
 +
-+#: ../../WPrefs.app/Menu.c:898
++#: ../../WPrefs.app/Menu.c:896
 +msgid ""
 +"Instructions:\n"
 +"\n"
@@ -1877,44 +1976,44 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +" - podwójne klikniêcie na elemencie menu zmienia etykietê\n"
 +" - klikniêcie na elemencie menu zmienia powi±zane informacje"
 +
-+#: ../../WPrefs.app/Menu.c:1122
++#: ../../WPrefs.app/Menu.c:1120
 +#, c-format
 +msgid "unknown command '%s' in menu"
 +msgstr "nieznane polecenie '%s' w menu"
 +
-+#: ../../WPrefs.app/Menu.c:1154
++#: ../../WPrefs.app/Menu.c:1152
 +msgid ": Execute Program"
 +msgstr ": Uruchom program"
 +
-+#: ../../WPrefs.app/Menu.c:1158
++#: ../../WPrefs.app/Menu.c:1156
 +msgid ": Perform Internal Command"
 +msgstr ": Wywo³aj polecenie wewnêtrzne"
 +
-+#: ../../WPrefs.app/Menu.c:1162
++#: ../../WPrefs.app/Menu.c:1160
 +msgid ": Open a Submenu"
 +msgstr ": Otwórz podmenu"
 +
-+#: ../../WPrefs.app/Menu.c:1166
++#: ../../WPrefs.app/Menu.c:1164
 +msgid ": Program Generated Submenu"
 +msgstr ": Podmenu wygenerowane przez program"
 +
-+#: ../../WPrefs.app/Menu.c:1170
++#: ../../WPrefs.app/Menu.c:1168
 +msgid ": Directory Contents Menu"
 +msgstr ": Menu z zawarto¶ci± katalogu"
 +
-+#: ../../WPrefs.app/Menu.c:1174
++#: ../../WPrefs.app/Menu.c:1172
 +msgid ": Open Workspaces Submenu"
 +msgstr ": Otwórz podmenu pulpitów"
 +
-+#: ../../WPrefs.app/Menu.c:1178
++#: ../../WPrefs.app/Menu.c:1176
 +msgid ": Open Window List Submenu"
 +msgstr ": Otwórz podmenu listy okien"
 +
-+#: ../../WPrefs.app/Menu.c:1403
++#: ../../WPrefs.app/Menu.c:1401
 +msgid "Remove Submenu"
 +msgstr "Usuñ podmenu"
 +
-+#: ../../WPrefs.app/Menu.c:1404
++#: ../../WPrefs.app/Menu.c:1402
 +msgid ""
 +"Removing this item will destroy all items inside\n"
 +"the submenu. Do you really want to do that?"
@@ -1922,34 +2021,26 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"Usuniêcie tego elementu zniszczy wszystkie\n"
 +"elementy wewn±trz podmenu. Naprawdê to zrobiæ?"
 +
-+#: ../../WPrefs.app/Menu.c:1406
-+msgid "Yes"
-+msgstr "Tak"
-+
-+#: ../../WPrefs.app/Menu.c:1406
++#: ../../WPrefs.app/Menu.c:1404
 +msgid "No"
 +msgstr "Nie"
 +
-+#: ../../WPrefs.app/Menu.c:1407
++#: ../../WPrefs.app/Menu.c:1405
 +msgid "Yes, don't ask again."
 +msgstr "Tak, nie pytaj wiêcej."
 +
 +#. if there is a localized plmenu for the tongue put it's filename here
-+#: ../../WPrefs.app/Menu.c:1575 ../../WPrefs.app/Menu.c:1582
++#: ../../WPrefs.app/Menu.c:1573 ../../WPrefs.app/Menu.c:1580
 +#, c-format
 +msgid "%s/Library/WindowMaker/plmenu"
 +msgstr "%s/Library/WindowMaker/plmenu"
 +
-+#: ../../WPrefs.app/Menu.c:1591
++#: ../../WPrefs.app/Menu.c:1589
 +#, c-format
 +msgid "Could not open default menu from '%s'"
 +msgstr "Nie mo¿na otworzyæ domy¶lnego menu z '%s'"
 +
-+#: ../../WPrefs.app/Menu.c:1629 ../../WPrefs.app/WPrefs.c:807
-+msgid "Warning"
-+msgstr "Ostrze¿enie"
-+
-+#: ../../WPrefs.app/Menu.c:1630
++#: ../../WPrefs.app/Menu.c:1628
 +msgid ""
 +"The menu file format currently in use is not supported\n"
 +"by this tool. Do you want to discard the current menu\n"
@@ -1959,19 +2050,19 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"przez to narzêdzie. Czy odrzuciæ aktualne menu, ¿eby\n"
 +"u¿ywaæ tego narzêdzia?"
 +
-+#: ../../WPrefs.app/Menu.c:1633
++#: ../../WPrefs.app/Menu.c:1631
 +msgid "Yes, Discard and Update"
 +msgstr "Tak, odrzuæ i uaktualnij"
 +
-+#: ../../WPrefs.app/Menu.c:1634
++#: ../../WPrefs.app/Menu.c:1632
 +msgid "No, Keep Current Menu"
 +msgstr "Nie, zachowaj aktualne menu"
 +
-+#: ../../WPrefs.app/Menu.c:1897
++#: ../../WPrefs.app/Menu.c:1895
 +msgid "Applications Menu Definition"
 +msgstr "Definicja menu aplikacji"
 +
-+#: ../../WPrefs.app/Menu.c:1899
++#: ../../WPrefs.app/Menu.c:1897
 +msgid "Edit the menu for launching applications."
 +msgstr "Edycja menu do uruchamiania aplikacji."
 +
@@ -2012,12 +2103,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgstr "B³êdna warto¶æ przyspieszenia myszy. Musi byæ dodatni± liczb± rzeczywist±."
 +
 +#: ../../WPrefs.app/MouseSettings.c:161
-+msgid ""
-+"Invalid mouse acceleration threshold value. Must be the number of pixels to "
-+"travel before accelerating."
-+msgstr ""
-+"B³êdna warto¶æ progu przyspieszenia myszy. Musi byæ liczb± pikseli do przebycia "
-+"przed przyspieszeniem."
++msgid "Invalid mouse acceleration threshold value. Must be the number of pixels to travel before accelerating."
++msgstr "B³êdna warto¶æ progu przyspieszenia myszy. Musi byæ liczb± pikseli do przebycia przed przyspieszeniem."
 +
 +#: ../../WPrefs.app/MouseSettings.c:262 ../../WPrefs.app/MouseSettings.c:274
 +#: ../../WPrefs.app/MouseSettings.c:286 ../../WPrefs.app/MouseSettings.c:298
@@ -2027,12 +2114,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +
 +#: ../../WPrefs.app/MouseSettings.c:357
 +#, c-format
-+msgid ""
-+"modifier key %s for option ModifierKey was not recognized. Using %s as "
-+"default"
-+msgstr ""
-+"klawisz modyfikuj±cy %s dla opcji ModifierKey nie rozpoznany. U¿ycie %s "
-+"jako domy¶lnego"
++msgid "modifier key %s for option ModifierKey was not recognized. Using %s as default"
++msgstr "klawisz modyfikuj±cy %s dla opcji ModifierKey nie rozpoznany. U¿ycie %s jako domy¶lnego"
 +
 +#: ../../WPrefs.app/MouseSettings.c:382
 +msgid "could not retrieve keyboard modifier mapping"
@@ -2167,36 +2250,36 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"Szybko¶æ i przyspieszenie myszy, opó¼nienie podwójnego\n"
 +"klikniêcia, przypisanie przycisków myszy itp."
 +
-+#: ../../WPrefs.app/Paths.c:84
++#: ../../WPrefs.app/Paths.c:85
 +msgid "bad value in option IconPath. Using default path list"
 +msgstr "b³êdna warto¶æ w opcji IconPath. U¿ycie domy¶lnej listy ¶cie¿ek"
 +
-+#: ../../WPrefs.app/Paths.c:101
++#: ../../WPrefs.app/Paths.c:102
 +msgid "bad value in option PixmapPath. Using default path list"
 +msgstr "b³êdna warto¶æ w opcji PixmapPath. U¿ycie domy¶lnej listy ¶cie¿ek"
 +
-+#: ../../WPrefs.app/Paths.c:149
++#: ../../WPrefs.app/Paths.c:150
 +msgid "Select directory"
 +msgstr "Wybór katalogu"
 +
-+#: ../../WPrefs.app/Paths.c:270
++#: ../../WPrefs.app/Paths.c:266
 +msgid "Icon Search Paths"
 +msgstr "¦cie¿ki poszukiwania ikon"
 +
-+#: ../../WPrefs.app/Paths.c:281 ../../WPrefs.app/Paths.c:312
-+#: ../../WPrefs.app/TexturePanel.c:1310
++#: ../../WPrefs.app/Paths.c:277 ../../WPrefs.app/Paths.c:308
++#: ../../WPrefs.app/TexturePanel.c:1312
 +msgid "Add"
 +msgstr "Dodaj"
 +
-+#: ../../WPrefs.app/Paths.c:301
++#: ../../WPrefs.app/Paths.c:297
 +msgid "Pixmap Search Paths"
 +msgstr "¦cie¿ki poszukiwania pixmap"
 +
-+#: ../../WPrefs.app/Paths.c:341
++#: ../../WPrefs.app/Paths.c:337
 +msgid "Search Path Configuration"
 +msgstr "Ustawienia ¶cie¿ek poszukiwania"
 +
-+#: ../../WPrefs.app/Paths.c:343
++#: ../../WPrefs.app/Paths.c:339
 +msgid ""
 +"Search paths to use when looking for pixmaps\n"
 +"and icons."
@@ -2205,10 +2288,12 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"pixmap oraz ikon."
 +
 +#: ../../WPrefs.app/Preferences.c:75
++#, c-format
 +msgid "OFF"
 +msgstr "WY£¡CZONE"
 +
 +#: ../../WPrefs.app/Preferences.c:77
++#, c-format
 +msgid "1 pixel"
 +msgstr "1 piksel"
 +
@@ -2340,89 +2425,89 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgid "Hue"
 +msgstr "Odcieñ"
 +
-+#: ../../WPrefs.app/TexturePanel.c:610
++#: ../../WPrefs.app/TexturePanel.c:612
 +msgid "Could not load the selected file: "
 +msgstr "Nie mo¿na za³adowaæ wybranego pliku: "
 +
-+#: ../../WPrefs.app/TexturePanel.c:664
++#: ../../WPrefs.app/TexturePanel.c:666
 +msgid "Open Image"
 +msgstr "Otwieranie obrazka"
 +
-+#: ../../WPrefs.app/TexturePanel.c:694
++#: ../../WPrefs.app/TexturePanel.c:696
 +msgid "The selected file does not contain a supported image."
 +msgstr "Wybrany plik nie zawiera obs³ugiwanego obrazka."
 +
-+#: ../../WPrefs.app/TexturePanel.c:945
++#: ../../WPrefs.app/TexturePanel.c:947
 +#, c-format
 +msgid "could not load file '%s': %s"
 +msgstr "nie mo¿na za³adowaæ pliku '%s': %s"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1064
++#: ../../WPrefs.app/TexturePanel.c:1066
 +#, c-format
 +msgid "error creating texture %s"
 +msgstr "b³±d podczas tworzenia tekstury %s"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1254
++#: ../../WPrefs.app/TexturePanel.c:1256
 +msgid "Texture Panel"
 +msgstr "Panel Tekstur"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1262
++#: ../../WPrefs.app/TexturePanel.c:1264
 +msgid "Texture Name"
 +msgstr "Nazwa tekstury"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1274
++#: ../../WPrefs.app/TexturePanel.c:1276
 +msgid "Solid Color"
 +msgstr "Jednolity kolor"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1275
++#: ../../WPrefs.app/TexturePanel.c:1277
 +msgid "Gradient Texture"
 +msgstr "Tekstura gradientowa"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1276
++#: ../../WPrefs.app/TexturePanel.c:1278
 +msgid "Simple Gradient Texture"
 +msgstr "Prosta tekstura gradientowa"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1277
++#: ../../WPrefs.app/TexturePanel.c:1279
 +msgid "Textured Gradient"
 +msgstr "Gradient teksturowany"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1278
++#: ../../WPrefs.app/TexturePanel.c:1280
 +msgid "Image Texture"
 +msgstr "Obrazek tekstury"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1286
++#: ../../WPrefs.app/TexturePanel.c:1288
 +msgid "Default Color"
 +msgstr "Domy¶lny kolor"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1298
++#: ../../WPrefs.app/TexturePanel.c:1300
 +msgid "Gradient Colors"
 +msgstr "Kolory gradientu"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1394
++#: ../../WPrefs.app/TexturePanel.c:1396
 +msgid "Direction"
 +msgstr "Kierunek"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1422
++#: ../../WPrefs.app/TexturePanel.c:1424
 +msgid "Gradient"
 +msgstr "Gradient"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1440
++#: ../../WPrefs.app/TexturePanel.c:1442
 +msgid "Gradient Opacity"
 +msgstr "Nieprzezroczysto¶æ gradientu"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1483
++#: ../../WPrefs.app/TexturePanel.c:1484
 +msgid "Image"
 +msgstr "Obrazek"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1515
++#: ../../WPrefs.app/TexturePanel.c:1516
 +msgid "Tile"
 +msgstr "Powielony"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1516
++#: ../../WPrefs.app/TexturePanel.c:1517
 +msgid "Scale"
 +msgstr "Przeskalowany"
 +
-+#: ../../WPrefs.app/TexturePanel.c:1518
++#: ../../WPrefs.app/TexturePanel.c:1519
 +msgid "Maximize"
 +msgstr "Na ca³y ekran"
 +
@@ -2520,7 +2605,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +msgid "Initializing configuration panels..."
 +msgstr "Inicjalizacja paneli konfiguracyjnych..."
 +
-+#: ../../WPrefs.app/WPrefs.c:727
++#: ../../WPrefs.app/WPrefs.c:728
 +msgid ""
 +"WPrefs is free software and is distributed WITHOUT ANY\n"
 +"WARRANTY under the terms of the GNU General Public License."
@@ -2528,43 +2613,33 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"WPrefs jest wolnodostêpnym oprogramowaniem, rozprowadzanym BEZ\n"
 +"¯ADNEJ GWARANCJI, podlegaj±cym Powszechnej Licencji Publicznej GNU."
 +
-+#: ../../WPrefs.app/WPrefs.c:757 ../../WPrefs.app/WPrefs.c:837
++#: ../../WPrefs.app/WPrefs.c:758 ../../WPrefs.app/WPrefs.c:838
 +#, c-format
 +msgid "Window Maker domain (%s) is corrupted!"
 +msgstr "Domena Window Makera (%s) jest uszkodzona!"
 +
-+#: ../../WPrefs.app/WPrefs.c:761
++#: ../../WPrefs.app/WPrefs.c:762
 +#, c-format
 +msgid "Could not load Window Maker domain (%s) from defaults database."
 +msgstr "Nie mo¿na za³adowaæ domeny Window Makera (%s) z bazy ustawieñ domy¶lnych."
 +
-+#: ../../WPrefs.app/WPrefs.c:777
++#: ../../WPrefs.app/WPrefs.c:778
 +msgid "could not extract version information from Window Maker"
 +msgstr "nie mo¿na wyci±gn±æ informacji o wersji z Window Makera"
 +
-+#: ../../WPrefs.app/WPrefs.c:778
++#: ../../WPrefs.app/WPrefs.c:779
 +msgid "Make sure wmaker is in your search path."
 +msgstr "Proszê upewniæ siê, ¿e wmaker jest w ¶cie¿ce poszukiwania."
 +
-+#: ../../WPrefs.app/WPrefs.c:781
-+msgid ""
-+"Could not extract version from Window Maker. Make sure it is correctly "
-+"installed and is in your PATH environment variable."
-+msgstr ""
-+"Nie mo¿na wyci±gn±æ wersji z Window Makera. Proszê upewniæ siê, ¿e jest "
-+"poprawnie zainstalowany i jest w zmiennej ¶rodowiskowej PATH."
++#: ../../WPrefs.app/WPrefs.c:782
++msgid "Could not extract version from Window Maker. Make sure it is correctly installed and is in your PATH environment variable."
++msgstr "Nie mo¿na wyci±gn±æ wersji z Window Makera. Proszê upewniæ siê, ¿e jest poprawnie zainstalowany i jest w zmiennej ¶rodowiskowej PATH."
 +
-+#: ../../WPrefs.app/WPrefs.c:791
-+msgid ""
-+"Could not extract version from Window Maker. Make sure it is correctly "
-+"installed and the path where it installed is in the PATH environment "
-+"variable."
-+msgstr ""
-+"Nie mo¿na wyci±gn±æ wersji z Window Makera. Proszê upewniæ siê, ¿e jest "
-+"poprawnie zainstalowany i ¶cie¿ka, pod któr± jest zainstalowany, jest w "
-+"zmiennej ¶rodowiskowej PATH."
++#: ../../WPrefs.app/WPrefs.c:792
++msgid "Could not extract version from Window Maker. Make sure it is correctly installed and the path where it installed is in the PATH environment variable."
++msgstr "Nie mo¿na wyci±gn±æ wersji z Window Makera. Proszê upewniæ siê, ¿e jest poprawnie zainstalowany i ¶cie¿ka, pod któr± jest zainstalowany, jest w zmiennej ¶rodowiskowej PATH."
 +
-+#: ../../WPrefs.app/WPrefs.c:798
++#: ../../WPrefs.app/WPrefs.c:799
 +#, c-format
 +msgid ""
 +"WPrefs only supports Window Maker 0.18.0 or newer.\n"
@@ -2573,26 +2648,22 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +"WPrefs obs³uguje tylko Window Makera 0.18.0 lub nowszego.\n"
 +"Zainstalowana wersja to %i.%i.%i\n"
 +
-+#: ../../WPrefs.app/WPrefs.c:805
++#: ../../WPrefs.app/WPrefs.c:806
 +#, c-format
-+msgid ""
-+"Window Maker %i.%i.%i, which is installed in your system, is not fully "
-+"supported by this version of WPrefs."
-+msgstr ""
-+"Zainstalowany w systemie Window Maker %i.%i.%i nie jest w pe³ni "
-+"obs³ugiwany przez tê wersjê WPrefs."
++msgid "Window Maker %i.%i.%i, which is installed in your system, is not fully supported by this version of WPrefs."
++msgstr "Zainstalowany w systemie Window Maker %i.%i.%i nie jest w pe³ni obs³ugiwany przez tê wersjê WPrefs."
 +
-+#: ../../WPrefs.app/WPrefs.c:818
++#: ../../WPrefs.app/WPrefs.c:819
 +#, c-format
 +msgid "could not run \"%s --global_defaults_path\"."
 +msgstr "nie mo¿na uruchomiæ \"%s --global_defaults_path\"."
 +
-+#: ../../WPrefs.app/WPrefs.c:841
++#: ../../WPrefs.app/WPrefs.c:842
 +#, c-format
 +msgid "Could not load global Window Maker domain (%s)."
 +msgstr "Nie mo¿na za³adowaæ globalnej domeny Window Makera (%s)."
 +
-+#: ../../WPrefs.app/WPrefs.c:1090
++#: ../../WPrefs.app/WPrefs.c:1091
 +#, c-format
 +msgid ""
 +"bad speed value for option %s\n"
@@ -2850,17 +2921,16 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/pl.po WindowMaker-0.80.2/WPrefs.
 +#: ../../WPrefs.app/main.c:161
 +msgid "could not initialize application"
 +msgstr "nie mo¿na zainicjalizowaæ aplikacji"
-diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
---- WindowMaker-0.80.2.orig/po/pl.po	Wed Nov 20 23:39:15 2002
-+++ WindowMaker-0.80.2/po/pl.po	Tue Nov 19 00:16:28 2002
-@@ -1,558 +1,1017 @@
+--- WindowMaker-CVS-20040321/po/pl.po.orig	2003-04-20 07:01:04.000000000 +0200
++++ WindowMaker-CVS-20040321/po/pl.po	2004-04-24 20:03:51.435524216 +0200
+@@ -1,558 +1,1039 @@
 -# Pre-translation has bean done using PePeSza v0.6
 -# get your own copy of PePeSza from http://www.ids.pl/~pkollegu/pepesza.html
 -#
  # Window Maker Polish translation.
  # Copyright (C) 1999 Free Software Foundation, Inc.
  # Piotr Dembiñski <pdemb@fanthom.math.put.poznan.pl>, 1998.
-+# Jakub Bogusz <qboosh@pld.org.pl>, 2002.
++# Jakub Bogusz <qboosh@pld-linux.org.pl>, 2002, 2004.
 +#
 +# Pre-translation has bean done using PePeSza v0.6
 +# get your own copy of PePeSza from http://www.ids.pl/~pkollegu/pepesza.html
@@ -2870,28 +2940,28 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -"Project-Id-Version: WindowMaker 0.80.2\n"
 -"POT-Creation-Date: 1999-01-24 14:05+0100\n"
 -"PO-Revision-Date: 2003-04-15 20:21+0200\n"
-+"Project-Id-Version: WindowMaker 0.80.2\n"
-+"POT-Creation-Date: 2002-11-12 20:43+0100\n"
-+"PO-Revision-Date: 2002-11-12 20:44+0100\n"
++"Project-Id-Version: WindowMaker 0.81-CVS\n"
++"POT-Creation-Date: 2004-04-24 19:32+0200\n"
++"PO-Revision-Date: 2004-04-24 20:00+0200\n"
  "Last-Translator: Piotr Dembiñski <pdemb@fanthom.math.put.poznan.pl>\n"
- "Language-Team: Polish <pl@li.org>\n"
+-"Language-Team: Polish <pl@li.org>\n"
++"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
  "MIME-Version: 1.0\n"
 -"Content-Type: text/plain; charset=iso-8859-2\n"
--"Content-Transfer-Encoding: 8-bit\n"
 +"Content-Type: text/plain; charset=ISO-8859-2\n"
-+"Content-Transfer-Encoding: 8-bit\n"
+ "Content-Transfer-Encoding: 8-bit\n"
  
 -#: ../src/appicon.c:509 ../src/dialog.c:216 ../src/dialog.c:272
 -#: ../src/dock.c:3059 ../src/dockedapp.c:206 ../src/winspector.c:283
 -#: ../src/winspector.c:299
-+#: ../src/appicon.c:426 ../src/dialog.c:304 ../src/dock.c:3326
-+#: ../src/dockedapp.c:230 ../src/main.c:273 ../src/rootmenu.c:1854
++#: ../src/appicon.c:415 ../src/dialog.c:295 ../src/dock.c:3361
++#: ../src/dockedapp.c:231 ../src/main.c:273 ../src/rootmenu.c:1854
 +#: ../src/winspector.c:389 ../src/winspector.c:406
  msgid "Error"
  msgstr "B³±d"
  
 -#: ../src/appicon.c:510
-+#: ../src/appicon.c:427
++#: ../src/appicon.c:416
  msgid "Could not open specified icon file"
  msgstr "Nie mo¿na otworzyæ pliku z ikon±"
  
@@ -2899,16 +2969,16 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/dialog.c:272 ../src/dialog.c:460 ../src/dock.c:424
 -#: ../src/dock.c:3060 ../src/dockedapp.c:206 ../src/dockedapp.c:350
 -#: ../src/winspector.c:284 ../src/winspector.c:300
-+#: ../src/appicon.c:428 ../src/dialog.c:201 ../src/dialog.c:304
-+#: ../src/dialog.c:751 ../src/dialog.c:1850 ../src/dock.c:526
-+#: ../src/dock.c:534 ../src/dock.c:558 ../src/dock.c:3327
-+#: ../src/dockedapp.c:231 ../src/dockedapp.c:426 ../src/main.c:273
++#: ../src/appicon.c:417 ../src/dialog.c:192 ../src/dialog.c:295
++#: ../src/dialog.c:724 ../src/dialog.c:1780 ../src/dock.c:533
++#: ../src/dock.c:541 ../src/dock.c:565 ../src/dock.c:3362
++#: ../src/dockedapp.c:232 ../src/dockedapp.c:427 ../src/main.c:273
 +#: ../src/rootmenu.c:1858 ../src/winspector.c:390 ../src/winspector.c:407
  msgid "OK"
  msgstr "OK"
  
 -#: ../src/appicon.c:532 ../src/dock.c:272 ../src/winmenu.c:123
-+#: ../src/appicon.c:456 ../src/dock.c:264
++#: ../src/appicon.c:445 ../src/dock.c:262
 +msgid ""
 +" will be forcibly closed.\n"
 +"Any unsaved changes will be lost.\n"
@@ -2918,7 +2988,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"Wszystkie nie zachowane zmiany zostan± stracone.\n"
 +"Proszê potwierdziæ."
 +
-+#: ../src/appicon.c:464 ../src/dock.c:283 ../src/winmenu.c:125
++#: ../src/appicon.c:453 ../src/dock.c:281 ../src/winmenu.c:125
  msgid "Kill Application"
  msgstr "Zabij Aplikacjê"
  
@@ -2927,40 +2997,40 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -msgstr "To zabije aplikacjê.\nWszystkie nie zachowane zmiany zostan± stracone.\nProszê potwierdziæ."
 -
 -#: ../src/appicon.c:534 ../src/dock.c:274 ../src/winmenu.c:125
-+#: ../src/appicon.c:465 ../src/dock.c:284 ../src/winmenu.c:127
++#: ../src/appicon.c:454 ../src/dock.c:282 ../src/winmenu.c:127
  msgid "Yes"
  msgstr "Tak"
  
 -#: ../src/appicon.c:534 ../src/dock.c:274 ../src/winmenu.c:125
-+#: ../src/appicon.c:465 ../src/dock.c:284 ../src/winmenu.c:127
++#: ../src/appicon.c:454 ../src/dock.c:282 ../src/winmenu.c:127
  msgid "No"
  msgstr "Nie"
  
 -#: ../src/appicon.c:548 ../src/dock.c:1065
-+#: ../src/appicon.c:495 ../src/dock.c:1178 ../src/dock.c:3492
++#: ../src/appicon.c:484 ../src/dock.c:1186 ../src/dock.c:3527
  msgid "Unhide Here"
  msgstr "Odkryj Tutaj"
  
 -#: ../src/appicon.c:549 ../src/appicon.c:574 ../src/winmenu.c:441
-+#: ../src/appicon.c:496 ../src/appicon.c:521 ../src/dock.c:1180
-+#: ../src/dock.c:1182 ../src/dock.c:3504 ../src/winmenu.c:465
++#: ../src/appicon.c:485 ../src/appicon.c:510 ../src/dock.c:1188
++#: ../src/dock.c:1190 ../src/dock.c:3539 ../src/winmenu.c:467
  msgid "Hide"
  msgstr "Ukryj"
  
 -#: ../src/appicon.c:550
-+#: ../src/appicon.c:497
++#: ../src/appicon.c:486
  msgid "Set Icon..."
  msgstr "Ustaw Ikonê..."
  
 -#: ../src/appicon.c:551 ../src/dock.c:1071 ../src/rootmenu.c:225
 -#: ../src/rootmenu.c:239 ../src/winmenu.c:488
-+#: ../src/appicon.c:498 ../src/dock.c:1186 ../src/rootmenu.c:248
-+#: ../src/rootmenu.c:264 ../src/winmenu.c:520
++#: ../src/appicon.c:487 ../src/dock.c:1194 ../src/rootmenu.c:248
++#: ../src/rootmenu.c:264 ../src/winmenu.c:522
  msgid "Kill"
  msgstr "Zabij"
  
 -#: ../src/appicon.c:572
-+#: ../src/appicon.c:519 ../src/dock.c:3502
++#: ../src/appicon.c:508 ../src/dock.c:3537
  msgid "Unhide"
  msgstr "Odkryj"
  
@@ -2971,40 +3041,45 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +msgid "recreating missing icon '%s'"
 +msgstr "odtwarzanie brakuj±cej ikony '%s'"
 +
-+#: ../src/defaults.c:925 ../src/defaults.c:1014
++#: ../src/defaults.c:924 ../src/defaults.c:1085
 +#, c-format
 +msgid "Domain %s (%s) of global defaults database is corrupted!"
 +msgstr "Domena %s (%s) w globalnej bazie danych jest zniszczona!"
 +
-+#: ../src/defaults.c:930
++#: ../src/defaults.c:929
 +#, c-format
 +msgid "could not load domain %s from global defaults database"
 +msgstr "nie mo¿na za³adowaæ domeny %s z globalnej bazy danych"
 +
-+#: ../src/defaults.c:952 ../src/startup.c:884 ../src/startup.c:902
-+#: ../src/startup.c:908
++#: ../src/defaults.c:980 ../src/defaults.c:995
++#, c-format
++msgid "invalid global menu file %s"
++msgstr "b³êdny plik globalnego menu %s"
++
++#: ../src/defaults.c:1023 ../src/startup.c:884 ../src/startup.c:902
++#: ../src/startup.c:909
  #, c-format
  msgid "could not read domain \"%s\" from defaults database"
  msgstr "nie mo¿na odczytaæ domeny \"%s\" z bazy danych"
  
 -#: ../src/defaults.c:781 ../src/defaults.c:905 ../src/defaults.c:944
 -#: ../src/defaults.c:974
-+#: ../src/defaults.c:998 ../src/defaults.c:1102 ../src/defaults.c:1143
-+#: ../src/defaults.c:1199
++#: ../src/defaults.c:1069 ../src/defaults.c:1174 ../src/defaults.c:1215
++#: ../src/defaults.c:1271
  #, c-format
  msgid "Domain %s (%s) of defaults database is corrupted!"
  msgstr "Domena %s (%s) w bazie danych jest zniszczona!"
  
 -#: ../src/defaults.c:786 ../src/defaults.c:926 ../src/defaults.c:957
 -#: ../src/defaults.c:983
-+#: ../src/defaults.c:1003 ../src/defaults.c:1122 ../src/defaults.c:1179
-+#: ../src/defaults.c:1208
++#: ../src/defaults.c:1074 ../src/defaults.c:1194 ../src/defaults.c:1251
++#: ../src/defaults.c:1281 ../src/menureader.c:397
  #, c-format
  msgid "could not load domain %s from user defaults database"
  msgstr "nie mo¿na za³adowaæ domeny %s z bazy danych u¿ytkownika"
  
 -#: ../src/defaults.c:797 ../src/defaults.c:890
-+#: ../src/defaults.c:1033
++#: ../src/defaults.c:1104
  #, c-format
 -msgid "Domain %s (%s) of global defaults database is corrupted!"
 -msgstr "Domena %s (%s) w globalnej bazie danych jest zniszczona!"
@@ -3012,23 +3087,23 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +msgstr "nie mo¿na za³adowaæ domeny %s z globalnej bazy danych domy¶lnych (%s)"
  
 -#: ../src/defaults.c:816 ../src/defaults.c:895
-+#: ../src/defaults.c:1169 ../src/screen.c:460
++#: ../src/defaults.c:1241 ../src/screen.c:425
  #, c-format
 -msgid "could not load domain %s from global defaults database"
 -msgstr "nie mo¿na za³adowaæ domeny %s z globalnej bazy danych"
--
++msgid "could not load logo image for panels: %s"
++msgstr "nie mo¿na za³adowaæ obrazka z logo dla paneli: %s"
+ 
 -#: ../src/defaults.c:1266
 -#, c-format, fuzzy
 -msgid "wrong option value for key \"%s\". Should be one of %s"
 -msgstr "niew³a¶ciwa warto¶æ dla klucza \"%s\". Powinno byæ jedno z: %s"
-+msgid "could not load logo image for panels: %s"
-+msgstr "nie mo¿na za³adowaæ obrazka z logo dla paneli: %s"
- 
+-
 -#: ../src/defaults.c:1313
 +#. --------------------------- Local -----------------------
-+#: ../src/defaults.c:1417 ../src/defaults.c:1559 ../src/defaults.c:1671
-+#: ../src/defaults.c:2150 ../src/defaults.c:2167 ../src/defaults.c:2212
-+#: ../src/defaults.c:2259 ../src/defaults.c:2732 ../src/wdefaults.c:571
++#: ../src/defaults.c:1490 ../src/defaults.c:1632 ../src/defaults.c:1744
++#: ../src/defaults.c:2223 ../src/defaults.c:2240 ../src/defaults.c:2285
++#: ../src/defaults.c:2332 ../src/defaults.c:2805 ../src/wdefaults.c:571
 +#: ../src/wdefaults.c:607
  #, c-format
 -msgid "can't convert \"%s\" to boolean for key \"%s\""
@@ -3041,19 +3116,19 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/defaults.c:1498 ../src/defaults.c:1510 ../src/defaults.c:1858
 -#: ../src/defaults.c:1875 ../src/defaults.c:1888 ../src/defaults.c:1921
 -#: ../src/defaults.c:1937 ../src/defaults.c:1968 ../src/defaults.c:2041
-+#: ../src/defaults.c:1419 ../src/defaults.c:1500 ../src/defaults.c:1532
-+#: ../src/defaults.c:1564 ../src/defaults.c:1577 ../src/defaults.c:1592
-+#: ../src/defaults.c:1606 ../src/defaults.c:1676 ../src/defaults.c:1688
-+#: ../src/defaults.c:2155 ../src/defaults.c:2172 ../src/defaults.c:2185
-+#: ../src/defaults.c:2217 ../src/defaults.c:2233 ../src/defaults.c:2264
-+#: ../src/defaults.c:2351 ../src/defaults.c:2737 ../src/defaults.c:2748
++#: ../src/defaults.c:1492 ../src/defaults.c:1573 ../src/defaults.c:1605
++#: ../src/defaults.c:1637 ../src/defaults.c:1650 ../src/defaults.c:1665
++#: ../src/defaults.c:1679 ../src/defaults.c:1749 ../src/defaults.c:1761
++#: ../src/defaults.c:2228 ../src/defaults.c:2245 ../src/defaults.c:2258
++#: ../src/defaults.c:2290 ../src/defaults.c:2306 ../src/defaults.c:2337
++#: ../src/defaults.c:2424 ../src/defaults.c:2810 ../src/defaults.c:2821
  #, c-format
  msgid "using default \"%s\" instead"
 -msgstr "u¿ywam domy¶lnego \"%s\""
 +msgstr "u¿ycie w zamian domy¶lnego \"%s\""
  
 -#: ../src/defaults.c:1349
-+#: ../src/defaults.c:1450
++#: ../src/defaults.c:1523
  #, c-format
 -msgid "can't convert \"%s\" to integer for key \"%s\""
 -msgstr "nie mo¿na zmieniæ \"%s\" na liczbê ca³kowit± dla klucza \"%s\""
@@ -3063,33 +3138,33 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/defaults.c:1379 ../src/defaults.c:1493 ../src/defaults.c:1853
 -#: ../src/defaults.c:1870 ../src/defaults.c:1916 ../src/defaults.c:1963
 -#: ../src/wdefaults.c:541 ../src/wdefaults.c:577
-+#: ../src/defaults.c:1495
++#: ../src/defaults.c:1568
  #, c-format
 -msgid "Wrong option format for key \"%s\". Should be %s."
 -msgstr "Niew³a¶ciwy format opcji dla klucza \"%s\". Powinno byæ %s."
 +msgid "can't convert \"%s\" to boolean for key \"%s\""
 +msgstr "nie mo¿na zamieniæ \"%s\" na warto¶æ logiczn± dla klucza \"%s\""
-+
-+#: ../src/defaults.c:1529
+ 
+-#: ../src/defaults.c:1392
++#: ../src/defaults.c:1602
 +#, c-format
 +msgid "can't convert \"%s\" to integer for key \"%s\""
 +msgstr "nie mo¿na zamieniæ \"%s\" na liczbê ca³kowit± dla klucza \"%s\""
- 
--#: ../src/defaults.c:1392
-+#: ../src/defaults.c:1572
++
++#: ../src/defaults.c:1645
  #, c-format
  msgid "Incorrect number of elements in array for key \"%s\"."
  msgstr "Niew³a¶ciwa liczba elementów w tablicy dla klucza \"%s\"."
  
 -#: ../src/defaults.c:1407
-+#: ../src/defaults.c:1587
++#: ../src/defaults.c:1660
  #, c-format
  msgid "Wrong value for key \"%s\". Should be Coordinate."
 -msgstr "Niew³a¶ciwa warto¶æ dla klucza \"%s\". Powinna byæ Wspó³rzêdna."
 +msgstr "Niew³a¶ciwa warto¶æ dla klucza \"%s\". Powinna byæ wspó³rzêdna."
  
 -#: ../src/defaults.c:1422
-+#: ../src/defaults.c:1602
++#: ../src/defaults.c:1675
  #, c-format
  msgid "can't convert array to integers for \"%s\"."
  msgstr "nie mo¿na zamieniæ tablicy na liczby ca³kowite dla \"%s\"."
@@ -3097,147 +3172,147 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/defaults.c:1619 ../src/defaults.c:1651 ../src/defaults.c:1667
 -#: ../src/defaults.c:1713 ../src/defaults.c:1753 ../src/defaults.c:1791
 -#: ../src/defaults.c:1807
-+#: ../src/defaults.c:1800 ../src/defaults.c:1832 ../src/defaults.c:1848
-+#: ../src/defaults.c:1877 ../src/defaults.c:1900 ../src/defaults.c:1953
-+#: ../src/defaults.c:1993 ../src/defaults.c:2031 ../src/defaults.c:2047
++#: ../src/defaults.c:1873 ../src/defaults.c:1905 ../src/defaults.c:1921
++#: ../src/defaults.c:1950 ../src/defaults.c:1973 ../src/defaults.c:2026
++#: ../src/defaults.c:2066 ../src/defaults.c:2104 ../src/defaults.c:2120
  #, c-format
  msgid "\"%s\" is not a valid color name"
 -msgstr "\"%s\" nie jest w³a¶ciw± nazw± koloru"
 +msgstr "\"%s\" nie jest prawid³ow± nazw± koloru"
  
 -#: ../src/defaults.c:1632
-+#: ../src/defaults.c:1813 ../src/defaults.c:1865
++#: ../src/defaults.c:1886 ../src/defaults.c:1938
  msgid "bad number of arguments in gradient specification"
  msgstr "niew³a¶ciwa liczba argumentów w okre¶leniu gradientu"
  
 -#: ../src/defaults.c:1686
-+#: ../src/defaults.c:1926
++#: ../src/defaults.c:1999
  msgid "too few arguments in multicolor gradient specification"
  msgstr "zbyt ma³o argumentów w okre¶leniu wielokolorowego gradientu"
  
 -#: ../src/defaults.c:1780
-+#: ../src/defaults.c:2020
++#: ../src/defaults.c:2093
  msgid "bad number of arguments in textured gradient specification"
  msgstr "niew³a¶ciwa liczba argumentów w okre¶leniu gradientu z tekstury"
  
 -#: ../src/defaults.c:1823
-+#: ../src/defaults.c:2063
++#: ../src/defaults.c:2136
  #, c-format
  msgid "bad opacity value for tgradient texture \"%s\". Should be [0..255]"
 -msgstr "niew³a¶ciwa warto¶æ opacity dla gradientowanej tekstury \"%s\". Powinna byæ liczba z zakresu [0..255]"
 +msgstr "b³êdna warto¶æ opacity dla gradientowanej tekstury \"%s\". Powinna byæ z przedzia³u [0..255]"
-+
-+#: ../src/defaults.c:2123
+ 
+-#: ../src/defaults.c:1836
++#: ../src/defaults.c:2196
 +#, c-format
 +msgid "could not initialize library %s"
 +msgstr "nie mo¿na zainicjalizowaæ biblioteki: %s"
 +
-+#: ../src/defaults.c:2126
++#: ../src/defaults.c:2199
 +#, c-format
 +msgid "could not find function %s::%s"
 +msgstr "nie mo¿na znale¼æ funkcji %s::%s"
- 
--#: ../src/defaults.c:1836
-+#: ../src/defaults.c:2133
++
++#: ../src/defaults.c:2206
  #, c-format
  msgid "invalid texture type %s"
  msgstr "niew³a¶ciwy typ tekstury %s"
  
 -#: ../src/defaults.c:1883
-+#: ../src/defaults.c:2180
++#: ../src/defaults.c:2253
  #, c-format
  msgid "Error in texture specification for key \"%s\""
  msgstr "B³±d w okre¶leniu tekstury dla klucza \"%s\""
  
 -#: ../src/defaults.c:1933
-+#: ../src/defaults.c:2229
++#: ../src/defaults.c:2302
  msgid "Wrong type for workspace background. Should be a texture type."
  msgstr "Niew³a¶ciwy typ t³a pulpitu. Powinna byæ tekstura."
  
 -#: ../src/defaults.c:1981
-+#: ../src/defaults.c:2277
++#: ../src/defaults.c:2350
  #, c-format
  msgid "Wrong type for background of workspace %i. Should be a texture."
  msgstr "Niew³a¶ciwy typ t³a pulpitu %i. Powinna byæ tekstura."
  
 -#: ../src/defaults.c:2006
-+#: ../src/defaults.c:2319
++#: ../src/defaults.c:2392
  msgid "could not load any usable font!!!"
  msgstr "nie mo¿na za³adowaæ ¿adnego fontu!!!"
  
 -#: ../src/defaults.c:2036
-+#: ../src/defaults.c:2346
++#: ../src/defaults.c:2419
  #, c-format
  msgid "could not get color for key \"%s\""
 -msgstr "nie mo¿na wzi±æ koloru dla klucza \"%s\""
 +msgstr "nie mo¿na uzyskaæ koloru dla klucza \"%s\""
  
 -#: ../src/defaults.c:2095 ../src/rootmenu.c:450
-+#: ../src/defaults.c:2404 ../src/rootmenu.c:526
++#: ../src/defaults.c:2477 ../src/rootmenu.c:531
  #, c-format
  msgid "%s:invalid key modifier \"%s\""
  msgstr "%s:niew³a¶ciwy modyfikator klucza \"%s\""
  
 -#: ../src/defaults.c:2107
-+#: ../src/defaults.c:2416
++#: ../src/defaults.c:2489
  #, c-format
  msgid "%s:invalid kbd shortcut specification \"%s\""
  msgstr "%s:niew³a¶ciwe okre¶lenie skrótu klawiaturowego \"%s\""
  
 -#: ../src/defaults.c:2114
-+#: ../src/defaults.c:2423
++#: ../src/defaults.c:2496
  #, c-format
  msgid "%s:invalid key in shortcut \"%s\""
  msgstr "%s:niew³a¶ciwy klawisz w skrócie \"%s\""
  
 -#: ../src/defaults.c:2140
-+#: ../src/defaults.c:2448
++#: ../src/defaults.c:2521
  #, c-format
  msgid "%s: modifier key %s is not valid"
 -msgstr "%s: klawisz zmiany %s nie jest w³a¶ciwy"
 +msgstr "%s: klawisz zmiany %s nie jest prawid³owy"
- 
--#: ../src/defaults.c:2216
-+#: ../src/defaults.c:2480
++
++#: ../src/defaults.c:2553
 +#, c-format
 +msgid "could not load image in option %s: %s"
 +msgstr "nie mo¿na za³adowaæ obrazka w opcji %s: %s"
 +
-+#: ../src/defaults.c:2597
++#: ../src/defaults.c:2670
 +#, c-format
 +msgid "failed to open bitmap file \"%s\""
 +msgstr "otwarcie pliku bitmapy \"%s\" nie powiod³o siê"
-+
-+#: ../src/defaults.c:2600
+ 
+-#: ../src/defaults.c:2216
++#: ../src/defaults.c:2673
 +#, c-format
 +msgid "\"%s\" is not a valid bitmap file"
 +msgstr "\"%s\" nie jest prawid³owym plikiem bitmapy"
 +
-+#: ../src/defaults.c:2603
++#: ../src/defaults.c:2676
 +#, c-format
 +msgid "out of memory reading bitmap file \"%s\""
 +msgstr "wyczerpano pamiêæ podczas czytania pliku bitmapy \"%s\""
 +
-+#: ../src/defaults.c:2642 ../src/defaults.c:2675
++#: ../src/defaults.c:2715 ../src/defaults.c:2748
 +msgid "bad number of arguments in cursor specification"
 +msgstr "niew³a¶ciwa liczba argumentów w okre¶leniu kursora"
 +
-+#: ../src/defaults.c:2658
++#: ../src/defaults.c:2731
 +#, c-format
 +msgid "unknown builtin cursor name \"%s\""
 +msgstr "nieznana nazwa wbudowanego kursora \"%s\""
 +
-+#: ../src/defaults.c:2685 ../src/defaults.c:2697
++#: ../src/defaults.c:2758 ../src/defaults.c:2770
 +#, c-format
 +msgid "could not find cursor bitmap file \"%s\""
 +msgstr "nie mo¿na znale¼æ pliku bitmapy kursora \"%s\""
 +
-+#: ../src/defaults.c:2744
++#: ../src/defaults.c:2817
 +#, c-format
 +msgid "Error in cursor specification for key \"%s\""
 +msgstr "B³±d w okre¶leniu kursora dla klucza \"%s\""
 +
-+#: ../src/defaults.c:2829
++#: ../src/defaults.c:2902
  msgid "could not render texture for icon background"
 -msgstr "nie mo¿na pokazaæ tekstury dla t³a ikony"
 +msgstr "nie mo¿na wy¶wietliæ tekstury dla t³a ikony"
@@ -3245,96 +3320,97 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/dialog.c:115 ../src/dialog.c:467 ../src/dock.c:424
 -#: ../src/dockedapp.c:356 ../src/rootmenu.c:187 ../src/rootmenu.c:225
 -#: ../src/rootmenu.c:239
-+#: ../src/dialog.c:157
++#: ../src/dialog.c:147
 +msgid "Save workspace state"
 +msgstr "Zapisz stan pulpitu"
 +
-+#: ../src/dialog.c:201 ../src/dialog.c:758 ../src/dock.c:558
-+#: ../src/dockedapp.c:431 ../src/rootmenu.c:198 ../src/rootmenu.c:248
++#: ../src/dialog.c:192 ../src/dialog.c:731 ../src/dock.c:565
++#: ../src/dockedapp.c:432 ../src/rootmenu.c:198 ../src/rootmenu.c:248
 +#: ../src/rootmenu.c:264
  msgid "Cancel"
  msgstr "Anuluj"
  
 -#: ../src/dialog.c:211
-+#: ../src/dialog.c:299
++#: ../src/dialog.c:290
  msgid "Could not open directory "
  msgstr "Nie mo¿na otworzyæ katalogu "
  
 -#: ../src/dialog.c:267
-+#: ../src/dialog.c:354
++#: ../src/dialog.c:345
  msgid "Could not load image file "
  msgstr "Nie mo¿na za³adowaæ pliku z obrazkiem "
  
 -#: ../src/dialog.c:404
-+#: ../src/dialog.c:685
++#: ../src/dialog.c:658
  msgid "Directories"
  msgstr "Katalogi"
  
 -#: ../src/dialog.c:413
-+#: ../src/dialog.c:694
++#: ../src/dialog.c:667
  msgid "Icons"
  msgstr "Ikony"
  
 -#: ../src/dialog.c:450
-+#: ../src/dialog.c:727
++#: ../src/dialog.c:700
 +msgid "Preview"
 +msgstr "Podgl±d"
 +
-+#: ../src/dialog.c:740
++#: ../src/dialog.c:713
  msgid "File Name:"
  msgstr "Nazwa Pliku:"
  
 -#: ../src/dialog.c:473
-+#: ../src/dialog.c:764
++#: ../src/dialog.c:737
  msgid "Choose File"
  msgstr "Wybierz Plik"
  
 -#: ../src/dialog.c:483
-+#: ../src/dialog.c:783 ../src/dialog.c:785
++#: ../src/dialog.c:756 ../src/dialog.c:758
  msgid "Icon Chooser"
  msgstr "Katalog Ikon"
  
-+#: ../src/dialog.c:1265 ../src/dialog.c:1375
+-#: ../src/dock.c:213
++#: ../src/dialog.c:1192 ../src/dialog.c:1301
 +#, c-format
 +msgid "Version %s"
 +msgstr "Wersja %s"
 +
-+#: ../src/dialog.c:1372
++#: ../src/dialog.c:1299
 +msgid "Window Manager for X"
 +msgstr "Zarz±dca Okien dla X"
 +
-+#: ../src/dialog.c:1397
++#: ../src/dialog.c:1323
 +#, c-format
 +msgid "Using visual 0x%x: %s %ibpp "
 +msgstr "U¿ywanie palety 0x%x: %s %ibpp "
 +
-+#: ../src/dialog.c:1405
++#: ../src/dialog.c:1331
 +msgid "(32 thousand colors)\n"
 +msgstr "(32 tysi±ce kolorów)\n"
 +
-+#: ../src/dialog.c:1408
++#: ../src/dialog.c:1334
 +msgid "(64 thousand colors)\n"
 +msgstr "(64 tysi±ce kolorów)\n"
 +
-+#: ../src/dialog.c:1412
++#: ../src/dialog.c:1338
 +msgid "(16 million colors)\n"
 +msgstr "(16 milionów kolorów)\n"
 +
-+#: ../src/dialog.c:1415
++#: ../src/dialog.c:1341
 +#, c-format
 +msgid "(%d colors)\n"
 +msgstr "(%d kolorów)\n"
 +
-+#: ../src/dialog.c:1425
++#: ../src/dialog.c:1351
 +#, c-format
 +msgid "Total allocated memory: %i kB. Total memory in use: %i kB.\n"
 +msgstr "Suma przydzielonej pamiêci: %i kB. Suma u¿ywanej pamiêci: %i kB.\n"
 +
-+#: ../src/dialog.c:1432
++#: ../src/dialog.c:1358
 +msgid "Supported image formats: "
 +msgstr "Obs³ugiwane formaty obrazków: "
 +
-+#: ../src/dialog.c:1439
++#: ../src/dialog.c:1365
 +msgid ""
 +"\n"
 +"Additional support for: "
@@ -3342,11 +3418,11 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"\n"
 +"Dodatkowa obs³uga: "
 +
-+#: ../src/dialog.c:1462
++#: ../src/dialog.c:1388
 +msgid " and "
 +msgstr " i "
 +
-+#: ../src/dialog.c:1472
++#: ../src/dialog.c:1398
 +msgid ""
 +"\n"
 +"Sound disabled"
@@ -3354,7 +3430,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"\n"
 +"D¼wiêk wy³±czony"
 +
-+#: ../src/dialog.c:1474
++#: ../src/dialog.c:1400
 +msgid ""
 +"\n"
 +"Sound enabled"
@@ -3362,15 +3438,19 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"\n"
 +"D¼wiêk w³±czony"
 +
-+#: ../src/dialog.c:1503
++#: ../src/dialog.c:1404
++msgid "; Antialiased text"
++msgstr "; Tekst z antyaliasingiem"
++
++#: ../src/dialog.c:1433
 +msgid "Info"
 +msgstr "Informacja"
 +
-+#: ../src/dialog.c:1527
++#: ../src/dialog.c:1457
 +msgid "Merry Christmas!"
 +msgstr "Weso³ych ¦wi±t!"
 +
-+#: ../src/dialog.c:1597
++#: ../src/dialog.c:1527
 +msgid ""
 +"    Window Maker is free software; you can redistribute it and/or\n"
 +"modify it under the terms of the GNU General Public License as\n"
@@ -3402,19 +3482,19 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,\n"
 +"USA."
 +
-+#: ../src/dialog.c:1621
++#: ../src/dialog.c:1551
 +msgid "Legal"
 +msgstr "Licencja"
 +
-+#: ../src/dialog.c:1773 ../src/startup.c:394
++#: ../src/dialog.c:1703 ../src/startup.c:394
 +msgid "cannot open connection for crashing dialog panel. Aborting."
 +msgstr "nie mo¿na otworzyæ po³±czenia dla awaryjnego panelu dialogowego. Przerwanie pracy."
 +
-+#: ../src/dialog.c:1799
++#: ../src/dialog.c:1729
 +msgid "Fatal error"
 +msgstr "B³±d krytyczny"
 +
-+#: ../src/dialog.c:1810
++#: ../src/dialog.c:1740
 +#, c-format
 +msgid ""
 +"Window Maker received signal %i\n"
@@ -3423,40 +3503,36 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"Window Maker otrzyma³ sygna³ %i\n"
 +"(%s)."
 +
-+#: ../src/dialog.c:1813
++#: ../src/dialog.c:1743
 +#, c-format
 +msgid "Window Maker received signal %i."
 +msgstr "Window Maker otrzyma³ sygna³ %i."
 +
-+#: ../src/dialog.c:1822
-+msgid ""
-+" This fatal error occured probably due to a bug. Please fill the included "
-+"BUGFORM and report it to bugs@windowmaker.org."
-+msgstr ""
-+" Ten krytyczy b³±d prawdopodobnie jest skutkiem b³êdu w kodzie. Prosimy "
-+"o wype³nienie formularza BUGFORM i wys³anie go na adres bugs@windowmaker.org."
++#: ../src/dialog.c:1752
++msgid " This fatal error occured probably due to a bug. Please fill the included BUGFORM and report it to bugs@windowmaker.org."
++msgstr " Ten krytyczy b³±d prawdopodobnie jest skutkiem b³êdu w kodzie. Prosimy o wype³nienie formularza BUGFORM i wys³anie go na adres bugs@windowmaker.org."
 +
-+#: ../src/dialog.c:1831
++#: ../src/dialog.c:1761
 +msgid "What do you want to do now?"
 +msgstr "Co teraz zrobiæ?"
 +
-+#: ../src/dialog.c:1837
++#: ../src/dialog.c:1767
 +msgid "Select action"
 +msgstr "Wybierz akcjê"
 +
-+#: ../src/dialog.c:1838
++#: ../src/dialog.c:1768
 +msgid "Abort and leave a core file"
 +msgstr "Przerwij pozostawiaj±c plik zrzutu pamiêci (core)"
 +
-+#: ../src/dialog.c:1839
++#: ../src/dialog.c:1769
 +msgid "Restart Window Maker"
 +msgstr "Zrestartuj Window Makera"
 +
-+#: ../src/dialog.c:1840
++#: ../src/dialog.c:1770
 +msgid "Start alternate window manager"
 +msgstr "Uruchom innego zarz±dcê okien"
 +
-+#: ../src/dialog.c:2018
++#: ../src/dialog.c:1948
 +msgid ""
 +"Window Maker is part of the GNUstep project.\n"
 +"The GNUstep project aims to create a free\n"
@@ -3478,90 +3554,78 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"o ten szkielet. Wiêcej informacji na temat\n"
 +"GNUstepa mo¿na znale¼æ na stronie www.gnustep.org."
 +
-+#: ../src/dialog.c:2041
++#: ../src/dialog.c:1971
 +msgid "About GNUstep"
 +msgstr "O GNUstepie"
 +
- #: ../src/dock.c:213
++#: ../src/dock.c:211
  #, c-format
  msgid "Type the name for workspace %i:"
 -msgstr "Wpisz nazwê dla pulpitu %i:"
 +msgstr "Nazwa dla pulpitu %i:"
  
 -#: ../src/dock.c:214 ../src/dock.c:1044
-+#: ../src/dock.c:214 ../src/dock.c:1142 ../src/dock.c:1145 ../src/dock.c:3410
++#: ../src/dock.c:212 ../src/dock.c:1150 ../src/dock.c:1153 ../src/dock.c:3445
  msgid "Rename Workspace"
  msgstr "Zmieñ Nazwê Pulpitu"
  
 -#: ../src/dock.c:422
-+#: ../src/dock.c:520 ../src/dock.c:528
++#: ../src/dock.c:527 ../src/dock.c:535
 +msgid "Warning"
 +msgstr "Ostrze¿enie"
 +
-+#: ../src/dock.c:521
-+msgid ""
-+"Some icons cannot be made omnipresent. Please make sure that no other icon "
-+"is docked in the same positions on the other workspaces and the Clip is not "
-+"full in some workspace."
-+msgstr ""
-+"Niektórych ikon nie mo¿na uczyniæ zawsze widocznymi. Proszê uprawniæ siê, ¿e "
-+"¿adna inna ikona nie jest zadokowana w tych samych miejscach na innych "
-+"pulpitach oraz ¿e Spinacz nie jest pe³ny na którym¶ biurku."
++#: ../src/dock.c:528
++msgid "Some icons cannot be made omnipresent. Please make sure that no other icon is docked in the same positions on the other workspaces and the Clip is not full in some workspace."
++msgstr "Niektórych ikon nie mo¿na uczyniæ zawsze widocznymi. Proszê uprawniæ siê, ¿e ¿adna inna ikona nie jest zadokowana w tych samych miejscach na innych pulpitach oraz ¿e Spinacz nie jest pe³ny na którym¶ biurku."
 +
-+#: ../src/dock.c:529
-+msgid ""
-+"Icon cannot be made omnipresent. Please make sure that no other icon is "
-+"docked in the same position on the other workspaces and the Clip is not full "
-+"in some workspace."
-+msgstr ""
-+"Ikony nie mo¿na uczyniæ zawsze widoczn±. Proszê upewniæ siê, ¿e ¿adna inna "
-+"ikona nie jest zadokowana w tym samym miejscu na innych biurkach oraz ¿e "
-+"Spinacz nie jest pe³ny na którym¶ biurku."
++#: ../src/dock.c:536
++msgid "Icon cannot be made omnipresent. Please make sure that no other icon is docked in the same position on the other workspaces and the Clip is not full in some workspace."
++msgstr "Ikony nie mo¿na uczyniæ zawsze widoczn±. Proszê upewniæ siê, ¿e ¿adna inna ikona nie jest zadokowana w tym samym miejscu na innych biurkach oraz ¿e Spinacz nie jest pe³ny na którym¶ biurku."
 +
-+#: ../src/dock.c:556
++#: ../src/dock.c:563
  msgid "Workspace Clip"
  msgstr "Spinacz Pulpitu"
  
 -#: ../src/dock.c:423
-+#: ../src/dock.c:557
++#: ../src/dock.c:564
  msgid "All selected icons will be removed!"
  msgstr "Wszystkie zaznaczone ikony zostan± usuniête!"
  
 -#: ../src/dock.c:470
-+#: ../src/dock.c:608 ../src/dock.c:1157 ../src/dock.c:1159 ../src/dock.c:3446
++#: ../src/dock.c:616 ../src/dock.c:1165 ../src/dock.c:1167 ../src/dock.c:3481
  msgid "Keep Icon"
  msgstr "Trzymaj Ikonê"
  
 -#: ../src/dock.c:471 ../src/dock.c:1977 ../src/dock.c:2106
-+#: ../src/dock.c:609 ../src/dock.c:2138 ../src/dock.c:2279
++#: ../src/dock.c:617 ../src/dock.c:2157 ../src/dock.c:2298
  msgid "Type the command used to launch the application"
  msgstr "Wpisz polecenie u¿ywane do odpalenia aplikacji"
  
 -#: ../src/dock.c:857
-+#: ../src/dock.c:965
++#: ../src/dock.c:973
  #, c-format
  msgid "could not launch application %s\n"
 -msgstr "nie mo¿na odpaliæ aplikacji %s\n"
 +msgstr "nie mo¿na uruchomiæ aplikacji %s\n"
  
 -#: ../src/dock.c:912
-+#: ../src/dock.c:1020
++#: ../src/dock.c:1028
  msgid "could not create workspace submenu for Clip menu"
  msgstr "nie mo¿na stworzyæ podmenu pulpitu dla menu Spinacza"
  
 -#: ../src/dock.c:975
-+#: ../src/dock.c:1079
++#: ../src/dock.c:1087
  msgid "could not create options submenu for Clip menu"
  msgstr "nie mo¿na stworzyæ podmenu opcji dla menu Spinacza"
  
 -#: ../src/dock.c:979 ../src/dock.c:1033 ../src/winmenu.c:383
 -msgid "Keep on top"
-+#: ../src/dock.c:1083 ../src/dock.c:1131
++#: ../src/dock.c:1091 ../src/dock.c:1139
 +msgid "Keep on Top"
  msgstr "Trzymaj na wierzchu"
  
 -#: ../src/dock.c:985
-+#: ../src/dock.c:1089
++#: ../src/dock.c:1097
  msgid "Collapsed"
  msgstr "Zwiniêty"
  
@@ -3580,20 +3644,20 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/dock.c:1009
 -msgid "Keep Attracted Icons"
 -msgstr "Trzymaj Wy³apane Ikony"
-+#: ../src/dock.c:1095
++#: ../src/dock.c:1103
 +msgid "Autocollapse"
 +msgstr "Samozwijanie"
 +
-+#: ../src/dock.c:1101
++#: ../src/dock.c:1109
 +msgid "Autoraise"
 +msgstr "Samopodnoszenie"
 +
-+#: ../src/dock.c:1107
++#: ../src/dock.c:1115
 +msgid "Autoattract Icons"
 +msgstr "Samowy³apywanie ikon"
  
 -#: ../src/dock.c:1039
-+#: ../src/dock.c:1137
++#: ../src/dock.c:1145
  msgid "Clip Options"
  msgstr "Opcje Spinacza"
  
@@ -3616,29 +3680,29 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/dock.c:1058
 -msgid "Remove Icon(s)"
 -msgstr "Usuñ Ikonê(y)"
-+#: ../src/dock.c:1147
++#: ../src/dock.c:1155
 +msgid "Selected"
 +msgstr "Wybrane"
 +
-+#: ../src/dock.c:1152 ../src/dock.c:1155 ../src/dock.c:3437
++#: ../src/dock.c:1160 ../src/dock.c:1163 ../src/dock.c:3472
 +msgid "Select All Icons"
 +msgstr "Zaznacz Wszystkie Ikony"
 +
-+#: ../src/dock.c:1161 ../src/dock.c:1163 ../src/dock.c:3454
++#: ../src/dock.c:1169 ../src/dock.c:1171 ../src/dock.c:3489
 +msgid "Move Icon To"
 +msgstr "Przenie¶ Ikonê Do"
 +
-+#: ../src/dock.c:1168 ../src/dock.c:1171 ../src/dock.c:3465
++#: ../src/dock.c:1176 ../src/dock.c:1179 ../src/dock.c:3500
 +msgid "Remove Icon"
 +msgstr "Usuñ Ikonê"
  
 -#: ../src/dock.c:1060
-+#: ../src/dock.c:1173
++#: ../src/dock.c:1181
  msgid "Attract Icons"
  msgstr "Wy³ap Ikony"
  
 -#: ../src/dock.c:1063
-+#: ../src/dock.c:1176
++#: ../src/dock.c:1184
  msgid "Launch"
 -msgstr "Odpal"
 -
@@ -3648,148 +3712,148 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +msgstr "Uruchom"
  
 -#: ../src/dock.c:1069
-+#: ../src/dock.c:1184
++#: ../src/dock.c:1192
  msgid "Settings..."
  msgstr "Ustawienia..."
  
 -#: ../src/dock.c:1454 ../src/dock.c:1468 ../src/dock.c:1482 ../src/dock.c:1492
-+#: ../src/dock.c:1549 ../src/dock.c:1656
++#: ../src/dock.c:1558 ../src/dock.c:1665
  #, c-format
  msgid "bad value in docked icon state info %s"
 -msgstr "z³a warto¶æ w informacji o stanie zadokowanej ikony %s"
 +msgstr "b³êdna warto¶æ w informacji o stanie zadokowanej ikony %s"
  
 -#: ../src/dock.c:1500
-+#: ../src/dock.c:1664
++#: ../src/dock.c:1673
  #, c-format
  msgid "bad value in docked icon position %i,%i"
 -msgstr "z³a warto¶æ w pozycji zadokowanej ikony %i,%i"
 +msgstr "b³êdna warto¶æ w pozycji zadokowanej ikony %i,%i"
- 
--#: ../src/dock.c:1744
-+#: ../src/dock.c:1684
++
++#: ../src/dock.c:1693
 +#, c-format
 +msgid "bad value in dock state info:%s"
 +msgstr "b³êdna warto¶æ w informacji o stanie doku:%s"
-+
-+#: ../src/dock.c:1920
+ 
+-#: ../src/dock.c:1744
++#: ../src/dock.c:1939
  msgid "there are too many icons stored in dock. Ignoring what doesn't fit"
 -msgstr "zbyt wiele ikon trzymanych w Doku. Ignorujê te, które siê nie mieszcz±"
 +msgstr "zbyt wiele ikon trzymanych w doku. Ignorowanie nie mieszcz±cych siê"
  
  #. icon->forced_dock = 1;
 -#: ../src/dock.c:1976 ../src/dock.c:2105
-+#: ../src/dock.c:2137 ../src/dock.c:2278
++#: ../src/dock.c:2156 ../src/dock.c:2297
  msgid "Dock Icon"
  msgstr "Ikona Doku"
  
 -#: ../src/dock.c:3052 ../src/dock.c:3056
-+#: ../src/dock.c:3324
++#: ../src/dock.c:3359
  #, c-format
  msgid "Could not execute command \"%s\""
  msgstr "Nie mo¿na wykonaæ polecenia \"%s\""
  
 -#: ../src/dockedapp.c:128
-+#: ../src/dock.c:3416
++#: ../src/dock.c:3451
 +msgid "Toggle Omnipresent"
 +msgstr "Zmieñ Widoczno¶æ Zawsze"
 +
-+#: ../src/dock.c:3421 ../src/kwm.c:637 ../src/winmenu.c:418
++#: ../src/dock.c:3456 ../src/kwm.c:639 ../src/winmenu.c:420
 +#: ../src/winspector.c:1375
 +msgid "Omnipresent"
 +msgstr "Zawsze widoczny"
 +
-+#: ../src/dock.c:3435
++#: ../src/dock.c:3470
 +msgid "Unselect All Icons"
 +msgstr "Odznacz Wszystkie Ikony"
 +
-+#: ../src/dock.c:3444
++#: ../src/dock.c:3479
 +msgid "Keep Icons"
 +msgstr "Trzymaj Ikony"
 +
-+#: ../src/dock.c:3452
++#: ../src/dock.c:3487
 +msgid "Move Icons To"
 +msgstr "Przenie¶ Ikony Do"
 +
-+#: ../src/dock.c:3463
++#: ../src/dock.c:3498
 +msgid "Remove Icons"
 +msgstr "Usuñ Ikony"
 +
-+#: ../src/dock.c:3494 ../src/kwm.c:643
++#: ../src/dock.c:3529 ../src/kwm.c:645
 +msgid "Bring Here"
 +msgstr "Przenie¶ Tutaj"
 +
-+#: ../src/dockedapp.c:149
++#: ../src/dockedapp.c:150
  #, c-format
  msgid "could not find icon %s, used in a docked application"
  msgstr "nie mo¿na znale¼æ ikony %s, u¿ywanej w zadokowanej aplikacji"
  
 -#: ../src/dockedapp.c:205
-+#: ../src/dockedapp.c:229
++#: ../src/dockedapp.c:230
  #, c-format
 -msgid "Could not open specified icon file:%s"
 -msgstr "Nie mo¿na otworzyæ okre¶lonego pliku z ikon±:%s"
 +msgid "Could not open specified icon file: %s"
 +msgstr "Nie mo¿na otworzyæ okre¶lonego pliku z ikon±: %s"
 +
-+#: ../src/dockedapp.c:231
++#: ../src/dockedapp.c:232
 +msgid "Ignore"
 +msgstr "Ignoruj"
++
++#: ../src/dockedapp.c:334
++msgid "Start when Window Maker is started"
++msgstr "Uruchom podczas startu Window Makera"
  
 -#: ../src/dockedapp.c:291
 -msgid "Start when WindowMaker is started"
 -msgstr "Wystartowaæ podczas startu WindowMakera"
-+#: ../src/dockedapp.c:333
-+msgid "Start when Window Maker is started"
-+msgstr "Uruchom podczas startu Window Makera"
- 
--#: ../src/dockedapp.c:298
-+#: ../src/dockedapp.c:340
++#: ../src/dockedapp.c:341
 +msgid "Lock (prevent accidental removal)"
 +msgstr "Zablokuj (przed przypadkowym usuniêciem)"
-+
-+#: ../src/dockedapp.c:344
+ 
+-#: ../src/dockedapp.c:298
++#: ../src/dockedapp.c:345
  msgid "Application path and arguments"
  msgstr "¦cie¿ka do aplikacji i argumenty"
  
 -#: ../src/dockedapp.c:309
-+#: ../src/dockedapp.c:357
++#: ../src/dockedapp.c:358
 +msgid "Command for middle-click launch"
 +msgstr "Polecenie do uruchamiania ¶rodkowym przyciskiem"
 +
-+#: ../src/dockedapp.c:371
++#: ../src/dockedapp.c:372
 +#, c-format
 +msgid "%s will be replaced with current selection"
 +msgstr "%s zostanie zast±pione aktualnym wyborem"
 +
-+#: ../src/dockedapp.c:376
++#: ../src/dockedapp.c:377
  msgid "Command for files dropped with DND"
  msgstr "Polecenie dla plików upuszczonych z DND"
  
 -#: ../src/dockedapp.c:321
-+#: ../src/dockedapp.c:390
++#: ../src/dockedapp.c:391
  #, c-format
  msgid "%d will be replaced with the file name"
  msgstr "%d zostanie zast±pione nazw± pliku"
  
 -#: ../src/dockedapp.c:325
-+#: ../src/dockedapp.c:394
++#: ../src/dockedapp.c:395
  msgid "DND support was not compiled in"
 -msgstr "nie wkompilowano wspomagania DND"
 +msgstr "nie wkompilowano obs³ugi DND"
  
 -#: ../src/dockedapp.c:331
-+#: ../src/dockedapp.c:399
++#: ../src/dockedapp.c:400
  msgid "Icon Image"
  msgstr "Obrazek Ikony"
  
 -#: ../src/dockedapp.c:343 ../src/winspector.c:1235
-+#: ../src/dockedapp.c:413 ../src/winspector.c:1513
++#: ../src/dockedapp.c:414 ../src/winspector.c:1513
  msgid "Browse..."
  msgstr "Przegl±daj..."
  
 -#: ../src/dockedapp.c:388
-+#: ../src/dockedapp.c:466
++#: ../src/dockedapp.c:475
  msgid "Docked Application Settings"
  msgstr "Ustawienia Zadokowanej Aplikacji"
  
@@ -3805,30 +3869,30 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/framewin.c:501 ../src/framewin.c:516 ../src/framewin.c:527
 -#: ../src/framewin.c:534 ../src/framewin.c:541 ../src/icon.c:296
 -#: ../src/texture.c:578
-+#: ../src/framewin.c:649 ../src/framewin.c:744 ../src/menu.c:456
++#: ../src/framewin.c:647 ../src/framewin.c:742 ../src/menu.c:456
 +#: ../src/texture.c:594
 +#, c-format
 +msgid "could not render texture: %s"
 +msgstr "nie mo¿na wy¶wietliæ tekstury: %s"
 +
-+#: ../src/framewin.c:672 ../src/framewin.c:683 ../src/framewin.c:699
-+#: ../src/framewin.c:710 ../src/framewin.c:717 ../src/framewin.c:724
++#: ../src/framewin.c:670 ../src/framewin.c:681 ../src/framewin.c:697
++#: ../src/framewin.c:708 ../src/framewin.c:715 ../src/framewin.c:722
 +#: ../src/icon.c:350 ../src/menu.c:485
  #, c-format
  msgid "error rendering image:%s"
 -msgstr "b³±d podczas pokazywania obrazka:%s"
 +msgstr "b³±d podczas wy¶wietlania obrazka:%s"
-+
-+#: ../src/framewin.c:777
+ 
+-#: ../src/icon.c:182 ../src/wdefaults.c:411
++#: ../src/framewin.c:775
 +#, c-format
 +msgid "error rendering image: %s"
 +msgstr "b³±d podczas pokazywania obrazka: %s"
 +
-+#: ../src/gnome.c:225 ../src/gnome.c:362 ../src/gnome.c:420
++#: ../src/gnome.c:226 ../src/gnome.c:363 ../src/gnome.c:421
 +msgid "out of memory while updating GNOME hints"
 +msgstr "wyczerpano pamiêæ podczas uaktualniania podpowiedzi GNOME"
- 
--#: ../src/icon.c:182 ../src/wdefaults.c:411
++
 +#: ../src/icon.c:229 ../src/wdefaults.c:443
  #, c-format
  msgid "error loading image file \"%s\""
@@ -3864,35 +3928,35 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#. * entries, you must update the command #defines in the top of
 +#. * this file.
 +#.
-+#: ../src/kwm.c:633 ../src/winmenu.c:441 ../src/winmenu.c:583
++#: ../src/kwm.c:635 ../src/winmenu.c:443 ../src/winmenu.c:585
 +msgid "Maximize"
 +msgstr "Powiêksz"
++
++#: ../src/kwm.c:636 ../src/winmenu.c:580
++msgid "Unmaximize"
++msgstr "Odwróæ Powiêkszenie"
  
 -#: ../src/main.c:242
 -#, c-format
 -msgid "%s aborted.\n"
 -msgstr "%s zaniechany.\n"
-+#: ../src/kwm.c:634 ../src/winmenu.c:578
-+msgid "Unmaximize"
-+msgstr "Odwróæ Powiêkszenie"
-+
-+#: ../src/kwm.c:635 ../src/winmenu.c:449 ../src/winmenu.c:569
++#: ../src/kwm.c:637 ../src/winmenu.c:451 ../src/winmenu.c:571
 +msgid "Miniaturize"
 +msgstr "Pomniejsz"
 +
-+#: ../src/kwm.c:636 ../src/winmenu.c:564
++#: ../src/kwm.c:638 ../src/winmenu.c:566
 +msgid "Deminiaturize"
 +msgstr "Odwróæ Pomniejszenie"
 +
-+#: ../src/kwm.c:638
++#: ../src/kwm.c:640
 +msgid "Not Omnipresent"
 +msgstr "Nie zawsze widoczny"
 +
-+#: ../src/kwm.c:639
++#: ../src/kwm.c:641
 +msgid "Move"
 +msgstr "Przenie¶"
 +
-+#: ../src/kwm.c:640
++#: ../src/kwm.c:642
 +msgid "Resize"
 +msgstr "Zmieñ Rozmiar"
 +
@@ -3900,16 +3964,16 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#. entry = wMenuAddCallback(menu, _("Select Shortcut"), NULL, NULL);
 +#. wMenuEntrySetCascade(menu, entry, makeMakeShortcutMenu(scr));
 +#.
-+#: ../src/kwm.c:641 ../src/rootmenu.c:248 ../src/winmenu.c:513
++#: ../src/kwm.c:643 ../src/rootmenu.c:248 ../src/winmenu.c:515
 +msgid "Close"
 +msgstr "Zamknij"
- 
--#: ../src/main.c:253
-+#: ../src/kwm.c:642 ../src/winmenu.c:497
++
++#: ../src/kwm.c:644 ../src/winmenu.c:499
 +msgid "Move To"
 +msgstr "Przenie¶ Do"
-+
-+#: ../src/kwm.c:1096
+ 
+-#: ../src/main.c:253
++#: ../src/kwm.c:1111
  #, c-format
 -msgid "usage: %s [-options]\n"
 -msgstr "sk³adnia: %s [-options]\n"
@@ -3956,12 +4020,12 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#, c-format
 +msgid "Usage: %s [options]\n"
 +msgstr "Sk³adnia: %s [opcje]\n"
- 
--#: ../src/main.c:264
++
 +#: ../src/main.c:440
 +msgid "The Window Maker window manager for the X window system"
 +msgstr "Zarz±dca okien Window Maker dla systemu X Window"
-+
+ 
+-#: ../src/main.c:264
 +#: ../src/main.c:442
  msgid " -display host:dpy\tdisplay to use"
  msgstr " -display host:dpy\tu¿ywany panel graficzny"
@@ -3972,15 +4036,11 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#: ../src/main.c:444
 +msgid " --no-cpp \t\tdisable preprocessing of configuration files"
 +msgstr " --no-cpp \t\twy³±czenie przetwarzania plików konfiguracyjnych"
- 
--#: ../src/main.c:266
--msgid " -version\t\tprint version and exit"
--msgstr " -version\t\twy¶wietl informacjê o wersji i zakoñcz"
++
 +#: ../src/main.c:446
 +msgid " --no-dock\t\tdo not open the application Dock"
 +msgstr " --no-dock\t\tbez Doku z aplikacjami"
- 
--#: ../src/main.c:278
++
 +#: ../src/main.c:447
 +msgid " --no-clip\t\tdo not open the workspace Clip"
 +msgstr " --no-clip\t\tbez Spinacza na pulpicie"
@@ -4026,36 +4086,35 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +msgstr " --help\t\t\tpokazanie tego opisu"
 +
 +#: ../src/main.c:474
- #, c-format
--msgid "could not find user GNUstep directory (%s).\nMake sure you have installed Window Maker correctly and run wmaker.inst"
--msgstr "nie mo¿na znale¼æ katalogu GNUstep u¿ytkownika (%s).\nUpewnij siê ¿e Window Maker zosta³ zainstalowany poprawnie i uruchom skrypt wmaker.inst"
++#, c-format
 +msgid ""
 +"could not find user GNUstep directory (%s).\n"
 +"Make sure you have installed Window Maker correctly and run wmaker.inst"
 +msgstr ""
 +"nie mo¿na znale¼æ katalogu GNUstep u¿ytkownika (%s).\n"
-+"Proszê upewniæ siê, ¿e Window Maker zosta³ zainstalowany poprawnie "
-+"i uruchomiæ skrypt wmaker.inst"
- 
--#: ../src/main.c:297
++"Proszê upewniæ siê, ¿e Window Maker zosta³ zainstalowany poprawnie i uruchomiæ skrypt wmaker.inst"
++
 +#: ../src/main.c:479
 +#, c-format
 +msgid "could not find user GNUstep directory (%s)."
 +msgstr "nie mo¿na znale¼æ katalogu GNUstep u¿ytkownika (%s)."
-+
+ 
+-#: ../src/main.c:266
+-msgid " -version\t\tprint version and exit"
+-msgstr " -version\t\twy¶wietl informacjê o wersji i zakoñcz"
 +#: ../src/main.c:482
-+msgid ""
-+"There was an error while creating GNUstep directory, please make sure you "
-+"have installed Window Maker correctly and run wmaker.inst"
-+msgstr ""
-+"Wyst±pi³ b³±d podczas tworzenia katalogu GNUstep - proszê upewniæ siê, ¿e Window "
-+"Maker zosta³ zainstalowany poprawnie i uruchomiæ wmaker.inst"
-+
++msgid "There was an error while creating GNUstep directory, please make sure you have installed Window Maker correctly and run wmaker.inst"
++msgstr "Wyst±pi³ b³±d podczas tworzenia katalogu GNUstep - proszê upewniæ siê, ¿e Window Maker zosta³ zainstalowany poprawnie i uruchomiæ wmaker.inst"
+ 
+-#: ../src/main.c:278
 +#: ../src/main.c:485
-+#, c-format
+ #, c-format
+-msgid "could not find user GNUstep directory (%s).\nMake sure you have installed Window Maker correctly and run wmaker.inst"
+-msgstr "nie mo¿na znale¼æ katalogu GNUstep u¿ytkownika (%s).\nUpewnij siê ¿e Window Maker zosta³ zainstalowany poprawnie i uruchom skrypt wmaker.inst"
 +msgid "%s directory created with default configuration."
 +msgstr "utworzono katalog %s z domy¶lnymi ustawieniami."
-+
+ 
+-#: ../src/main.c:297
 +#: ../src/main.c:505 ../src/main.c:510
  #, c-format
  msgid "%s:could not execute initialization script"
@@ -4111,18 +4170,52 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/menu.c:285
 -msgid "wrealloc() failed while trying to add menu item"
 -msgstr "wykonanie wrealloc() nie powiod³o siê podczas próby dodania pozycji menu"
-+#: ../src/menu.c:1264
++#: ../src/menu.c:1266
 +msgid "could not grab keyboard"
 +msgstr "nie mo¿na przechwyciæ klawiatury"
 +
-+#: ../src/menu.c:2578
++#: ../src/menu.c:2607
 +#, c-format
 +msgid "bad value in menus state info:%s"
 +msgstr "b³êdna warto¶æ w informacjach o stanie menu:%s"
++
++#: ../src/menureader.c:264 ../src/rootmenu.c:738
++#, c-format
++msgid "%s:could not stat menu"
++msgstr "%s:nie mo¿na wykonaæ stat na menu"
++
++#: ../src/menureader.c:341 ../src/menureader.c:380
++#, c-format
++msgid "could not stat() menu file '%s'"
++msgstr "nie mo¿na wykonaæ stat na pliku menu '%s'"
++
++#: ../src/menureader.c:416
++#, c-format
++msgid "could not find menu file '%s' referenced in WMRootMenu"
++msgstr "nie mo¿na znale¼æ pliku menu '%s' okre¶lonego w WMRootMenu"
++
++#: ../src/menureader.c:423
++#, c-format
++msgid "could not find any usable menu files. Please check '%s'"
++msgstr "nie mo¿na znale¼æ ¿adnego u¿ywalnego pliku menu. Proszê sprawdziæ '%s'"
++
++#: ../src/menureader.c:438 ../src/rootmenu.c:1674
++#, c-format
++msgid "using default menu file \"%s\" as the menu referenced in WMRootMenu could not be found "
++msgstr "u¿yto domy¶lnego pliku menu \"%s\" poniewa¿ nie znaleziono pliku okre¶lonego w WMRootMenu "
++
++#: ../src/menureader.c:457
++#, c-format
++msgid ""
++"invalid content in menu file '%s'.\n"
++"It should either be a property list menu or the path to the file, enclosed in \"."
++msgstr ""
++"B³êdna zawarto¶æ pliku menu '%s'.\n"
++"Plik powinien zawieraæ menu w postaci listy w³asno¶ci lub ¶cie¿kê do pliku zawart± w \"."
  
  #: ../src/misc.c:71
  #, c-format
-@@ -563,374 +1021,317 @@
+@@ -562,374 +1043,291 @@
  #: ../src/misc.c:101
  #, c-format
  msgid "could not get password entry for UID %i"
@@ -4209,13 +4302,13 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
  msgstr "zaznaczenie niedostêpne"
  
 -#: ../src/misc.c:1127 ../src/misc.c:1133
-+#: ../src/misc.c:972 ../src/misc.c:978
++#: ../src/misc.c:960 ../src/misc.c:966
  #, c-format
  msgid "bad window name value in %s state info"
  msgstr "z³a warto¶æ nazwy okna w polu %s informacji stanu"
  
 -#: ../src/misc.c:1387
-+#: ../src/misc.c:1235
++#: ../src/misc.c:1205
  msgid "could not send message to background image helper"
 -msgstr "nie mo¿na wys³aæ komunikatu do programu pomocniczego zajmuj±cego siê t³em pulpitu"
 +msgstr "nie mo¿na wys³aæ komunikatu do programu obs³uguj±cego t³o"
@@ -4372,206 +4465,187 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"(wszystkie programy zostan± zakoñczone)"
  
 -#: ../src/rootmenu.c:463
-+#: ../src/rootmenu.c:539
++#: ../src/rootmenu.c:544
  #, c-format
  msgid "%s:invalid kbd shortcut specification \"%s\" for entry %s"
 -msgstr "%s:niew³a¶ciwe okre¶lenie skrótu klawiaturowego \"%s\" dla pozycji %s"
 +msgstr "%s:nieprawid³owe okre¶lenie skrótu klawiaturowego \"%s\" dla pozycji %s"
  
 -#: ../src/rootmenu.c:471
-+#: ../src/rootmenu.c:547
++#: ../src/rootmenu.c:552
  #, c-format
  msgid "%s:invalid key in shortcut \"%s\" for entry %s"
 -msgstr "%s:niew³a¶ciwy klawisz w skrócie \"%s\" dla pozycji %s"
 +msgstr "%s:nieprawid³owy klawisz w skrócie \"%s\" dla pozycji %s"
  
 -#: ../src/rootmenu.c:524
-+#: ../src/rootmenu.c:600
++#: ../src/rootmenu.c:605
  #, c-format
  msgid "%s: unmatched '\"' in menu file"
  msgstr "%s: nie zakoñczone '\"' w pliku menu"
  
 -#: ../src/rootmenu.c:574
-+#: ../src/rootmenu.c:650
++#: ../src/rootmenu.c:655
  #, c-format
  msgid "%s: missing command"
  msgstr "%s: brakuj±ce polecenie"
  
 -#: ../src/rootmenu.c:607
-+#: ../src/rootmenu.c:682
++#: ../src/rootmenu.c:687
  #, c-format
  msgid "invalid OPEN_MENU specification: %s"
 -msgstr "niew³a¶ciwe okre¶lenie OPEN_MENU: %s"
 +msgstr "nieprawid³owe okre¶lenie OPEN_MENU: %s"
  
 -#: ../src/rootmenu.c:680
-+#: ../src/rootmenu.c:733
- #, c-format
- msgid "%s:could not stat menu"
+-#, c-format
+-msgid "%s:could not stat menu"
 -msgstr "%s:niezrozumia³e menu"
-+msgstr "%s:nie mo¿na wykonaæ stat na menu"
- 
+-
 -#: ../src/rootmenu.c:688
-+#: ../src/rootmenu.c:741
++#: ../src/rootmenu.c:746
  #, c-format
  msgid "%s:could not stat menu:%s"
 -msgstr "%s:niezrozumia³e menu:%s"
 +msgstr "%s:nie mo¿na wykonaæ stat na menu:%s"
  
 -#: ../src/rootmenu.c:706
-+#: ../src/rootmenu.c:759
++#: ../src/rootmenu.c:764
  #, c-format
  msgid "too many parameters in OPEN_MENU: %s"
  msgstr "zbyt wiele parametrów w OPEN_MENU: %s"
  
 -#: ../src/rootmenu.c:742
--msgid "There are more than one WORKSPACE_MENU commands in the applications menu. Only one is allowed."
--msgstr "Jest wiêcej ni¿ jedno polecenie WORKSPACE_MENU w menu aplikacji. Tylko jedno jest dozwolone."
-+#: ../src/rootmenu.c:803
-+msgid ""
-+"There are more than one WORKSPACE_MENU commands in the applications menu. "
-+"Only one is allowed."
-+msgstr ""
-+"Jest wiêcej ni¿ jedno polecenie WORKSPACE_MENU w menu aplikacji. Tylko jedno "
-+"jest dozwolone."
++#: ../src/rootmenu.c:808
+ msgid "There are more than one WORKSPACE_MENU commands in the applications menu. Only one is allowed."
+ msgstr "Jest wiêcej ni¿ jedno polecenie WORKSPACE_MENU w menu aplikacji. Tylko jedno jest dozwolone."
  
 -#: ../src/rootmenu.c:771 ../src/rootmenu.c:789
-+#: ../src/rootmenu.c:837
-+msgid ""
-+"There are more than one WINDOWS_MENU commands in the applications menu. Only "
-+"one is allowed."
-+msgstr ""
-+"Jest wiêcej ni¿ jedno polecenie WINDOWS_MENU w menu aplikacji. Tylko jedno "
-+"jest dozwolone."
-+
 +#: ../src/rootmenu.c:842
++msgid "There are more than one WINDOWS_MENU commands in the applications menu. Only one is allowed."
++msgstr "Jest wiêcej ni¿ jedno polecenie WINDOWS_MENU w menu aplikacji. Tylko jedno jest dozwolone."
++
++#: ../src/rootmenu.c:847
 +msgid "Window List"
 +msgstr "Lista Okien"
 +
-+#: ../src/rootmenu.c:871 ../src/rootmenu.c:889 ../src/rootmenu.c:899
++#: ../src/rootmenu.c:876 ../src/rootmenu.c:894 ../src/rootmenu.c:904
  #, c-format
  msgid "%s:missing parameter for menu command \"%s\""
  msgstr "%s:brakuj±cy parametr w poleceniu menu \"%s\""
  
 -#: ../src/rootmenu.c:852
-+#: ../src/rootmenu.c:967
++#: ../src/rootmenu.c:972
  #, c-format
  msgid "%s:unknown command \"%s\" in menu config."
  msgstr "%s:nieznane polecenie \"%s\" w ustawieniach menu."
  
 -#: ../src/rootmenu.c:860
-+#: ../src/rootmenu.c:975
++#: ../src/rootmenu.c:980
  #, c-format
  msgid "%s:can't add shortcut for entry \"%s\""
  msgstr "%s:nie mo¿na dodaæ skrótu do pozycji \"%s\""
  
 -#: ../src/rootmenu.c:997
-+#: ../src/rootmenu.c:1112
++#: ../src/rootmenu.c:1117
  #, c-format
  msgid "%s:maximal line size exceeded in menu config: %s"
  msgstr "%s:przekroczono maksymaln± dopuszczaln± d³ugo¶æ linii w ustawieniach menu: %s"
  
 -#: ../src/rootmenu.c:1019 ../src/rootmenu.c:1111 ../src/rootmenu.c:1212
-+#: ../src/rootmenu.c:1134 ../src/rootmenu.c:1227 ../src/rootmenu.c:1330
++#: ../src/rootmenu.c:1139 ../src/rootmenu.c:1232 ../src/rootmenu.c:1336
  #, c-format
  msgid "%s:missing command in menu config: %s"
 -msgstr "%s:brakujêce polecenie e ustawieniach menu: %s"
 +msgstr "%s:brakuj±ce polecenie e ustawieniach menu: %s"
  
 -#: ../src/rootmenu.c:1049
-+#: ../src/rootmenu.c:1164
++#: ../src/rootmenu.c:1169
  #, c-format
  msgid "%s:syntax error in menu file:END declaration missing"
  msgstr "%s:b³±d sk³adniowy w pliku menu:brak deklaracji END"
  
 -#: ../src/rootmenu.c:1078 ../src/rootmenu.c:1177
-+#: ../src/rootmenu.c:1193 ../src/rootmenu.c:1294
++#: ../src/rootmenu.c:1198 ../src/rootmenu.c:1300
  msgid "could not make arguments for menu file preprocessor"
  msgstr "nie mo¿na stworzyæ argumentów do programu przetwarzaj±cego menu"
  
 -#: ../src/rootmenu.c:1084 ../src/rootmenu.c:1184
-+#: ../src/rootmenu.c:1200 ../src/rootmenu.c:1302
++#: ../src/rootmenu.c:1205 ../src/rootmenu.c:1308
  #, c-format
  msgid "%s:could not open/preprocess menu file"
  msgstr "%s:nie mo¿na otworzyæ/przetworzyæ pliku menu"
  
 -#: ../src/rootmenu.c:1096 ../src/rootmenu.c:1197
-+#: ../src/rootmenu.c:1212 ../src/rootmenu.c:1315
++#: ../src/rootmenu.c:1217 ../src/rootmenu.c:1321
  #, c-format
  msgid "%s:could not open menu file"
  msgstr "%s:nie mo¿na otworzyæ pliku menu"
  
 -#: ../src/rootmenu.c:1123
-+#: ../src/rootmenu.c:1239
++#: ../src/rootmenu.c:1244
  #, c-format
  msgid "%s:invalid menu file. MENU command is missing"
  msgstr "%s:niew³a¶ciwy plik menu. Brak polecenia MENU"
  
 -#: ../src/rootmenu.c:1132
-+#: ../src/rootmenu.c:1248
++#: ../src/rootmenu.c:1253
  msgid "error reading preprocessed menu data"
  msgstr "b³±d podczas czytania przetworzonego menu"
  
 -#: ../src/rootmenu.c:1224
-+#: ../src/rootmenu.c:1342
++#: ../src/rootmenu.c:1348
  #, c-format
  msgid "%s:no title given for the root menu"
  msgstr "%s:g³ówne menu nie ma tytu³u"
  
 -#: ../src/rootmenu.c:1307 ../src/rootmenu.c:1374 ../src/rootmenu.c:1418
-+#: ../src/rootmenu.c:1433 ../src/rootmenu.c:1506 ../src/rootmenu.c:1547
++#: ../src/rootmenu.c:1439 ../src/rootmenu.c:1512 ../src/rootmenu.c:1553
  #, c-format
  msgid "out of memory while constructing directory menu %s"
  msgstr "wyczerpano pamiêæ podczas tworzenia menu katalogu %s"
  
 -#: ../src/rootmenu.c:1317
-+#: ../src/rootmenu.c:1443
++#: ../src/rootmenu.c:1449
  #, c-format
  msgid "%s:could not stat file \"%s\" in menu directory"
 -msgstr "%s:nie mo¿na znale¼æ pliku \"%s\" w katalogu menu"
 +msgstr "%s:nie mo¿na wykonaæ stat na pliku \"%s\" w katalogu menu"
  
 -#: ../src/rootmenu.c:1472
-+#: ../src/rootmenu.c:1601
++#: ../src/rootmenu.c:1607
  msgid "Commands"
  msgstr "Polecenia"
  
 -#: ../src/rootmenu.c:1475
-+#: ../src/rootmenu.c:1604
++#: ../src/rootmenu.c:1610
  msgid "Restart"
  msgstr "Restart"
  
 -#: ../src/rootmenu.c:1476
-+#: ../src/rootmenu.c:1605
++#: ../src/rootmenu.c:1611
  msgid "Exit..."
  msgstr "Koniec..."
  
 -#: ../src/rootmenu.c:1549
-+#: ../src/rootmenu.c:1650
++#: ../src/rootmenu.c:1656
  #, c-format
  msgid "could not find menu file \"%s\" referenced in WMRootMenu"
  msgstr "nie mo¿na znale¼æ pliku menu \"%s\" okre¶lonego w WMRootMenu"
  
 -#: ../src/rootmenu.c:1556
-+#: ../src/rootmenu.c:1657
++#: ../src/rootmenu.c:1663
  #, c-format
  msgid "could not access menu \"%s\" referenced in WMRootMenu"
  msgstr "brak dostêpu do menu \"%s\" okre¶lonego w WMRootMenu"
  
 -#: ../src/rootmenu.c:1567
-+#: ../src/rootmenu.c:1668
- #, c-format
+-#, c-format
 -msgid "using default menu file \"%s\" as the menu referenced in WMRootMenu could not be found "
 -msgstr "u¿yto domy¶lnego pliku menu \"%s\" poniewa¿ nie znaleziono pliku okre¶lonego w WMRootMenu "
-+msgid ""
-+"using default menu file \"%s\" as the menu referenced in WMRootMenu could "
-+"not be found "
-+msgstr ""
-+"u¿yto domy¶lnego pliku menu \"%s\" poniewa¿ nie znaleziono pliku okre¶lonego "
-+"w WMRootMenu "
- 
+-
 -#: ../src/rootmenu.c:1590 ../src/rootmenu.c:1666
-+#: ../src/rootmenu.c:1691 ../src/rootmenu.c:1767
++#: ../src/rootmenu.c:1697 ../src/rootmenu.c:1773
  #, c-format
  msgid "%s:format error in root menu configuration \"%s\""
  msgstr "%s:b³±d formatowania w ustawieniach menu g³ównego \"%s\""
@@ -4585,26 +4659,24 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -msgid "error making logo image for panel:%s"
 -msgstr "b³±d podczas tworzenia obrazka logo dla panelu:%s"
 +#: ../src/rootmenu.c:1855
-+msgid ""
-+"The applications menu could not be loaded. Look at the console output for a "
-+"detailed description of the errors."
-+msgstr ""
-+"Menu aplikacji nie mo¿e byæ wczytane. Dok³adny opis b³êdów mo¿na zobaczyæ na "
-+"terminalu."
++msgid "The applications menu could not be loaded. Look at the console output for a detailed description of the errors."
++msgstr "Menu aplikacji nie mo¿e byæ wczytane. Dok³adny opis b³êdów mo¿na zobaczyæ na terminalu."
  
 -#: ../src/screen.c:612
-+#: ../src/screen.c:747
++#: ../src/screen.c:715
  #, c-format
  msgid "could not initialize graphics library context: %s"
  msgstr "nie mo¿na zainicjalizowaæ graficznego kontekstu biblioteki: %s"
  
 -#: ../src/screen.c:644
-+#: ../src/screen.c:778
- msgid "could not do initialization of WINGs widget set"
- msgstr "nie mo¿na zainicjalizowaæ biblioteki WINGs"
+-msgid "could not do initialization of WINGs widget set"
+-msgstr "nie mo¿na zainicjalizowaæ biblioteki WINGs"
++#: ../src/screen.c:743
++msgid "could not initialize WINGs widget set"
++msgstr "nie mo¿na zainicjalizowaæ zestawu widgetów WINGs"
  
 -#: ../src/screen.c:961
-+#: ../src/screen.c:1144
++#: ../src/screen.c:1252
  #, c-format
  msgid "could not save session state in %s"
  msgstr "nie mo¿na zapisaæ stanu sesji w %s"
@@ -4624,7 +4696,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
  msgid "end of memory while saving session state"
  msgstr "zabrak³o pamiêci podczas zapisywania stanu sesji"
  
-@@ -940,352 +1341,588 @@
+@@ -939,352 +1337,587 @@
  #. * If the sm was the last client of session, then we'll die
  #. * anyway, otherwise we can continue doing our stuff.
  #.
@@ -4663,23 +4735,23 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +msgstr "z³apano wygna³ %i (%s) - ponowne odczytywanie warto¶ci domy¶lnych\n"
 +
 +#: ../src/startup.c:274
- #, c-format
--msgid "%s: Received signal SIGTERM. Exiting..."
--msgstr "%s: Otrzymano sygna³ SIGTERM. Koñczenie..."
++#, c-format
 +msgid "got signal %i - rereading defaults\n"
 +msgstr "z³apano sygna³ %i - ponowne odczytywanie warto¶ci domy¶lnych\n"
- 
--#: ../src/startup.c:285
++
 +#: ../src/startup.c:284
 +#, c-format
 +msgid "got signal %i (%s) - exiting...\n"
 +msgstr "z³apano wygna³ %i (%s) - koñczenie...\n"
 +
 +#: ../src/startup.c:286
-+#, c-format
+ #, c-format
+-msgid "%s: Received signal SIGTERM. Exiting..."
+-msgstr "%s: Otrzymano sygna³ SIGTERM. Koñczenie..."
 +msgid "got signal %i - exiting...\n"
 +msgstr "z³apano sygna³ %i - koñczenie...\n"
-+
+ 
+-#: ../src/startup.c:285
 +#: ../src/startup.c:329
  #, c-format
  msgid "got signal %i (%s)\n"
@@ -4692,25 +4764,14 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
  msgstr "z³apano sygna³ %i\n"
  
 -#: ../src/startup.c:293
--msgid "crashed while trying to do some post-crash cleanup. Aborting immediatelly."
++#: ../src/startup.c:342
+ msgid "crashed while trying to do some post-crash cleanup. Aborting immediatelly."
 -msgstr "za³amanie podczas próby uporz±dkowania po za³amaniu. Wyj¶cie awaryjne."
--
++msgstr "za³amanie podczas próby uporz±dkowania po za³amaniu. Natychmiastowe przerwanie."
+ 
 -#: ../src/startup.c:304
 -msgid "a fatal error has occured, probably due to a bug. Please fill the included BUGFORM and report it."
 -msgstr "wyst±pi³ powa¿ny b³±d, prawdopodobnie pluskwa. Prosimy o wype³nienie formularza BUGFORM i wys³anie go do nas."
--
--#. restart another window manager so that the X session doesn't
--#. * go to space
--#: ../src/startup.c:311
--msgid "trying to start alternative window manager..."
--msgstr "próbujê wystartowaæ alternatywny mened¿er okien..."
-+#: ../src/startup.c:342
-+msgid ""
-+"crashed while trying to do some post-crash cleanup. Aborting immediatelly."
-+msgstr ""
-+"za³amanie podczas próby uporz±dkowania po za³amaniu. Natychmiastowe przerwanie."
- 
--#: ../src/startup.c:710
 +#. we try to restart Window Maker
 +#: ../src/startup.c:406
 +msgid "trying to restart Window Maker..."
@@ -4723,47 +4784,49 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#: ../src/startup.c:417
 +msgid "failed to start alternate window manager. Aborting."
 +msgstr "uruchamianie innego zarz±dcy okien nie powiod³o siê. Przerwanie pracy."
-+
+ 
+-#. restart another window manager so that the X session doesn't
+-#. * go to space
+-#: ../src/startup.c:311
+-msgid "trying to start alternative window manager..."
+-msgstr "próbujê wystartowaæ alternatywny mened¿er okien..."
 +#: ../src/startup.c:419
-+msgid ""
-+"a fatal error has occured, probably due to a bug. Please fill the included "
-+"BUGFORM and report it."
-+msgstr ""
-+"wyst±pi³ krytyczny b³±d, prawdopodobnie z powodu b³êdu w kodzie. Prosimy "
-+"o wype³nienie formularza BUGFORM i wys³anie go."
-+
++msgid "a fatal error has occured, probably due to a bug. Please fill the included BUGFORM and report it."
++msgstr "wyst±pi³ krytyczny b³±d, prawdopodobnie z powodu b³êdu w kodzie. Prosimy o wype³nienie formularza BUGFORM i wys³anie go."
+ 
+-#: ../src/startup.c:710
 +#: ../src/startup.c:894
  #, c-format
  msgid "icon size is configured to %i, but it's too small. Using 16, instead\n"
 -msgstr "rozmiar ikony jest ustawiony na %i, lecz jest zbyt ma³y. U¿yto 16\n"
 +msgstr "rozmiar ikony jest ustawiony na %i, lecz jest zbyt ma³y. U¿ycie 16\n"
++
++#: ../src/startup.c:923
++msgid "XKB is not supported. KbdModeLock is automatically disabled."
++msgstr "XKB nie jest obs³ugiwane. KbdModeLock jest automatycznie wy³±czone."
  
 -#: ../src/startup.c:754
 -msgid "it seems that there already is a window manager running"
 -msgstr "wygl±da na to ¿e ju¿ dzia³a jaki¶ mened¿er okien"
-+#: ../src/startup.c:922
-+msgid "XKB is not supported. KbdModeLock is automatically disabled."
-+msgstr "XKB nie jest obs³ugiwane. KbdModeLock jest automatycznie wy³±czone."
- 
--#: ../src/startup.c:760
--#, c-format
-+#: ../src/startup.c:941
++#: ../src/startup.c:942
 +msgid "it seems that there is already a window manager running"
 +msgstr "wygl±da na to, ¿e ju¿ dzia³a jaki¶ zarz±dca okien"
-+
-+#: ../src/startup.c:947
+ 
+-#: ../src/startup.c:760
++#: ../src/startup.c:948
+ #, c-format
  msgid "could not manage screen %i"
 -msgstr "nie mogê uzyskaæ kontroli nad ekranem %i"
 +msgstr "nie mo¿na uzyskaæ kontroli nad ekranem %i"
  
 -#: ../src/startup.c:820
-+#: ../src/startup.c:1015
++#: ../src/startup.c:1020
  msgid "could not manage any screen"
 -msgstr "nie mogê uzyskaæ kontroli nad ekranem"
 +msgstr "nie mo¿na uzyskaæ kontroli nad ¿adnym ekranem"
  
 -#: ../src/switchmenu.c:114
-+#: ../src/switchmenu.c:137
++#: ../src/switchmenu.c:145
  msgid "Windows"
  msgstr "Okna"
  
@@ -4786,8 +4849,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -msgstr "nie mo¿na pokazaæ tekstury: %s"
 +msgid "library \"%s\" cound not be opened."
 +msgstr "nie mo¿na otworzyæ biblioteki \"%s\"."
- 
--#: ../src/wdefaults.c:405
++
 +#: ../src/texture.c:446
 +#, c-format
 +msgid "function \"%s\" not found in library \"%s\""
@@ -4800,7 +4862,8 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#: ../src/texture.c:598
 +msgid "could not allocate image buffer"
 +msgstr "nie mo¿na przydzieliæ bufora obrazków"
-+
+ 
+-#: ../src/wdefaults.c:405
 +#: ../src/wdefaults.c:437
  #, c-format
  msgid "could not find icon file \"%s\""
@@ -4809,15 +4872,14 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/window.c:2282 ../src/window.c:2414
 -msgid "the NumLock, ScrollLock or similar key seems to be turned on.\nTurn it off or some mouse actions and keyboard shortcuts will not work."
 -msgstr "wygl±da na to, ¿e klawisze NumLock, ScrollLock lub podobne s± w³±czone.\nWy³±cz je lub niektóre akcje myszki i klawiatury nie zadzia³aj±."
-+#: ../src/window.c:2942 ../src/window.c:3081
++#: ../src/window.c:3026 ../src/window.c:3167
 +msgid ""
 +"the NumLock, ScrollLock or similar key seems to be turned on.\n"
 +"Turn it off or some mouse actions and keyboard shortcuts will not work."
 +msgstr ""
 +"wygl±da na to, ¿e klawisze NumLock, ScrollLock lub podobne s± w³±czone.\n"
 +"Bez ich wy³±czenia niektóre akcje myszki i skróty klawiaturowe nie zadzia³aj±."
- 
--#: ../src/winmenu.c:249 ../src/winmenu.c:257
++
 +#: ../src/winmenu.c:126
 +msgid ""
 +"This will kill the application.\n"
@@ -4827,13 +4889,14 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"To zabije aplikacjê.\n"
 +"Wszystkie nie zachowane zmiany zostan± stracone.\n"
 +"Proszê potwierdziæ."
-+
-+#: ../src/winmenu.c:272 ../src/winmenu.c:281
+ 
+-#: ../src/winmenu.c:249 ../src/winmenu.c:257
++#: ../src/winmenu.c:274 ../src/winmenu.c:283
  msgid "Set Shortcut"
  msgstr "Ustaw Skrót"
  
 -#: ../src/winmenu.c:333 ../src/winmenu.c:379
-+#: ../src/winmenu.c:359 ../src/winmenu.c:404
++#: ../src/winmenu.c:361 ../src/winmenu.c:406
  msgid "could not create submenu for window menu"
  msgstr "nie mo¿na utworzyæ podmenu dla menu okien"
  
@@ -4853,33 +4916,33 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/winmenu.c:416 ../src/winmenu.c:551
 -msgid "Maximize"
 -msgstr "Powiêksz"
-+#: ../src/winmenu.c:408
++#: ../src/winmenu.c:410
 +msgid "Keep on top"
 +msgstr "Trzymaj na wierzchu"
  
 -#: ../src/winmenu.c:424 ../src/winmenu.c:537
 -msgid "Miniaturize"
 -msgstr "Pomniejsz"
-+#: ../src/winmenu.c:413
++#: ../src/winmenu.c:415
 +msgid "Keep at bottom"
 +msgstr "Trzymaj na dnie"
  
 -#: ../src/winmenu.c:433 ../src/winmenu.c:565
-+#: ../src/winmenu.c:457 ../src/winmenu.c:600
++#: ../src/winmenu.c:459 ../src/winmenu.c:602
  msgid "Shade"
  msgstr "Zwiñ"
  
 -#: ../src/winmenu.c:449
-+#: ../src/winmenu.c:473
++#: ../src/winmenu.c:475
 +msgid "Hide Others"
 +msgstr "Ukryj Inne"
 +
-+#: ../src/winmenu.c:481
++#: ../src/winmenu.c:483
  msgid "Resize/Move"
  msgstr "Zmieñ Rozmiar/Pozycjê"
  
 -#: ../src/winmenu.c:457
-+#: ../src/winmenu.c:489
++#: ../src/winmenu.c:491
  msgid "Select"
  msgstr "Zaznacz"
  
@@ -4888,12 +4951,12 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -msgstr "Przenie¶ Do"
 -
 -#: ../src/winmenu.c:470
-+#: ../src/winmenu.c:502
++#: ../src/winmenu.c:504
  msgid "Attributes..."
  msgstr "Atrybuty..."
  
 -#: ../src/winmenu.c:472
-+#: ../src/winmenu.c:504
++#: ../src/winmenu.c:506
  msgid "Options"
  msgstr "Ustawienia"
  
@@ -4906,7 +4969,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -msgstr "Odwróæ Powiêkszenie"
 -
 -#: ../src/winmenu.c:560
-+#: ../src/winmenu.c:595
++#: ../src/winmenu.c:597
  msgid "Unshade"
  msgstr "Rozwiñ"
  
@@ -5147,14 +5210,12 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 -#: ../src/winspector.c:1181
 -msgid "Don't bind keyboard shortcuts"
 -msgstr "Nie stosuj skrótów klawiaturowych"
--
--#: ../src/winspector.c:1185
--msgid "Don't bind mouse clicks"
--msgstr "Nie stosuj klikniêæ mysz±"
 +#: ../src/winspector.c:1428
 +msgid "Do not bind keyboard shortcuts"
 +msgstr "Nie stosuj skrótów klawiszowych"
-+
+ 
+-#: ../src/winspector.c:1185
+-msgid "Don't bind mouse clicks"
 +#: ../src/winspector.c:1430
 +msgid ""
 +"Do not bind keyboard shortcuts from Window Maker\n"
@@ -5169,8 +5230,9 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +
 +#: ../src/winspector.c:1436
 +msgid "Do not bind mouse clicks"
-+msgstr "Nie stosuj klikniêæ mysz±"
-+
+ msgstr "Nie stosuj klikniêæ mysz±"
+ 
+-#: ../src/winspector.c:1189
 +#: ../src/winspector.c:1438
 +msgid ""
 +"Do not bind mouse actions, such as `Alt'+drag\n"
@@ -5191,8 +5253,7 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +#: ../src/winspector.c:1448
 +msgid "Do not let it take focus"
 +msgstr "Nie pozwól byæ aktywnym oknem"
- 
--#: ../src/winspector.c:1189
++
 +#: ../src/winspector.c:1450
 +msgid ""
 +"Do not let the window take keyboard focus when you\n"
@@ -5359,28 +5420,32 @@ diff -Nur WindowMaker-0.80.2.orig/po/pl.po WindowMaker-0.80.2/po/pl.po
 +"Powoduje u¿ycie pojedynczej dzielonej ikony aplikacji\n"
 +"dla wszystkich instancji tej aplikacji.\n"
 +
-+#: ../src/workspace.c:107 ../src/workspace.c:108 ../src/workspace.c:893
++#: ../src/wmspec.c:277
++msgid "out of memory while updating wm hints"
++msgstr "wyczerpano pamiêæ podczas uaktualniania podpowiedzi wm"
++
++#: ../src/workspace.c:105 ../src/workspace.c:106 ../src/workspace.c:902
  #, c-format
  msgid "Workspace %i"
  msgstr "Pulpit %i"
  
 -#: ../src/workspace.c:529
-+#: ../src/workspace.c:943
++#: ../src/workspace.c:952
  msgid "Workspaces"
  msgstr "Pulpity"
  
 -#: ../src/workspace.c:531
-+#: ../src/workspace.c:945
++#: ../src/workspace.c:954
  msgid "could not create Workspace menu"
  msgstr "nie mo¿na stworzyæ menu Pulpitu"
  
 -#: ../src/workspace.c:538
-+#: ../src/workspace.c:952
++#: ../src/workspace.c:961
  msgid "New"
  msgstr "Nowy"
  
 -#: ../src/workspace.c:539
-+#: ../src/workspace.c:953
++#: ../src/workspace.c:962
  msgid "Destroy Last"
  msgstr "Zniszcz Ostatni"
 -
