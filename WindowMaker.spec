@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
 Summary(pl):	Mened¿er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.62.1
-Release:	13
+Release:	14
 Group:		X11/Window Managers
 Group(es):	X11/Administraadores De Ventanas
 Group(fr):	X11/Gestionnaires De Fenêtres
@@ -15,6 +15,8 @@ Source0:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 Source2:	ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-extra-%{extraver}.tar.gz
 Source3:	%{name}.desktop
+Source4:	%{name}.RunWM
+Source5:	%{name}.wm_style
 Patch0:		%{name}-CFLAGS.patch
 Patch1:		%{name}-wmconfig.patch
 Patch2:		%{name}-a_macro.patch
@@ -37,10 +39,11 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libungif-devel
 BuildRequires:	xpm-devel
-Requires:	wmconfig
+Requires:	wmconfig >= 0.9.9-5
 Requires:	/lib/cpp
 Requires:	%{name}-libs = %{version}
 Requires:	tk
+Requires:	xinitrc >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -195,7 +198,8 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/{pixmaps,gnome/wm-properties}
+install -d $RPM_BUILD_ROOT%{_datadir}/{pixmaps,gnome/wm-properties} \
+	$RPM_BUILD_ROOT/etc/sysconfig/wmstyle
 
 %{__make} install \
 	LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
@@ -209,6 +213,9 @@ install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_datadir}/pixmaps
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
+
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.sh
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/%{name}.names
 
 (cd %{name}-extra-%{extraver};
 %{__make} DESTDIR=$RPM_BUILD_ROOT install )
@@ -234,6 +241,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_sysconfdir}/WindowMaker
 %config %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
+
+%attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
+/etc/sysconfig/wmstyle/*.names
 
 %{_mandir}/man1/*
 
