@@ -1,6 +1,8 @@
 %define		extraver	0.1
 %define		_snap		20040718
 
+%bcond_without	xft	# disable xft support, doesn't work, bug in sources
+
 Summary:	NeXT-alike window manager
 Summary(es):	Administrador de Ventanas parecido con el NeXT
 Summary(fr):	Gestionnaire de fenêtres avec le look NeXT
@@ -273,7 +275,8 @@ perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#e
 	--enable-kde \
 	--enable-shared \
 	--enable-static \
-	--enable-usermenu
+	--enable-usermenu \
+%{!?with_xft:--disable-xft}
 
 touch WindowMaker/Defaults/W*.in
 
