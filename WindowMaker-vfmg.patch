@@ -1,80 +1,73 @@
-diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu WindowMaker-CVS-20040321/WindowMaker/plmenu
---- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu	2002-05-11 02:44:03.000000000 +0200
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu	2004-07-08 01:18:48.890573952 +0200
-@@ -8,49 +8,10 @@
-   ("Manual Browser", EXEC, "xman")
-   ),
+diff -ur WindowMaker-0.90.0/WindowMaker/plmenu WindowMaker-0.90.0-vfmg/WindowMaker/plmenu
+--- WindowMaker-0.90.0/WindowMaker/plmenu	2004-10-23 05:49:23.000000000 +0200
++++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu	2004-10-28 16:07:17.212615960 +0200
+@@ -9,48 +9,9 @@
+  ),
   ("Run...", SHEXEC, "%a(Run,Type command to run:)"),
-- ("XTerm", EXEC, "xterm -sb"),
-- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
-+ ("XTerm", EXEC, "xterm"),
-+ ("ATerm", EXEC, "aterm"),
+  ("XTerm", EXEC, "xterm -sb"),
++ ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+- ("Mozilla Firefox", EXEC, "firefox"),
   ("Workspaces", WORKSPACE_MENU),
 - ("Applications",
--  ("Graphics",
--   ("Gimp", SHEXEC, "gimp >/dev/null"),
--   ("XV", EXEC, "xv"),
--   ("XPaint", EXEC, "xpaint"),
--   ("XFig", EXEC, "xfig")
--   ),
--  ("X File Manager", EXEC, "xfm"),
--  ("OffiX Files", EXEC, "files"),
--  ("LyX", EXEC, "lyx"),
--  ("Netscape", EXEC, "netscape"),
+-  ("Gimp", SHEXEC, "gimp >/dev/null"),
 -  ("Ghostview", EXEC, "ghostview %a(Enter file to view)"),
--  ("Acrobat", EXEC, "/usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)"),
--  ("TkDesk", EXEC, "tkdesk")
+-  ("Xpdf", EXEC, "xpdf %a(Enter PDF to view)"),
+-  ("Abiword", EXEC, "abiword"),
+-  ("Dia", EXEC, "dia"),
+-  ("OpenOffice.org",
+-   ("OpenOffice.org", EXEC, "ooffice"),
+-   ("Writer", EXEC, "oowriter"),
+-   ("Spreadsheet", EXEC, "oocalc"),
+-   ("Draw", EXEC, "oodraw"),
+-   ("Impress", EXEC, "ooimpress")
 -  ),
-- ("Editors",
--  ("XFte", EXEC, "xfte"),
--  ("XEmacs", EXEC, "xemacs"),
--  ("Emacs", EXEC, "emacs"),
--  ("XJed", EXEC, "xjed"),
--  ("NEdit", EXEC, "nedit"),
--  ("Xedit", EXEC, "xedit"),
--  ("VI", EXEC, "xterm -e vi")
+-  ("Editors",
+-   ("XEmacs", EXEC, "xemacs"),
+-   ("Emacs", EXEC, "emacs"),
+-   ("XJed", EXEC, "xjed"),
+-   ("VI", EXEC, "xterm -e vi"),
+-   ("GVIM", EXEC, "gvim"),
+-   ("NEdit", EXEC, "nedit"),
+-   ("Xedit", EXEC, "xedit")
 -  ),
-- ("Miscellaneous",
--  ("Xmcd", SHEXEC, "xmcd 2> /dev/null"),
--  ("Xplaycd", EXEC, "xplaycd"),
--  ("Xmixer", EXEC, "xmixer")
--  ),
+-  ("Multimedia",
+-   ("XMMS", 
+-    ("XMMS", EXEC, "xmms"),
+-    ("XMMS play/pause", EXEC, "xmms -t"),
+-    ("XMMS stop", EXEC, "xmms -s")
+-   ),
+-   ("Xine video player", EXEC, "xine"),
+-   ("MPlayer", EXEC, "mplayer")
+-  )
+- ),
 - ("Utils",
 -  ("Calculator", EXEC, "xcalc"),
 -  ("Window Properties", SHEXEC, "xprop | xmessage -center -title 'xprop' -file -"),
 -  ("Font Chooser", EXEC, "xfontsel"),
--  ("Terminal Emulator", EXEC, "xminicom"),
--  ("Magnify", EXEC, "xmag"),
+-  ("Magnify", EXEC, "wmagnify"),
 -  ("Colormap", EXEC, "xcmap"),
--  ("XKill", EXEC, "xkill"),
--  ("ASClock", EXEC, "asclock -shape"),
--  ("Clipboard", EXEC, "xclipboard")
--  ),
+-  ("Kill X Application", EXEC, "xkill")
+- ),
 + ("Applications", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
   ("Selection",
    ("Copy", SHEXEC, "echo '%s' | wxcopy"),
    ("Mail To", EXEC, "xterm -name mail -T Pine -e pine %s"),
-@@ -95,7 +56,7 @@
+@@ -93,7 +53,7 @@
     ),   
-   ("Save Theme", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Theme name)\""),
-   ("Save IconSet", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(IconSet name)\""),
--  ("Preferences Utility", EXEC, "/usr/local/GNUstep/Apps/WPrefs.app/WPrefs")
-+  ("Preferences Utility", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
-   ), 
-  ("Exit",
-   ("Restart", RESTART),
-diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20040321/WindowMaker/plmenu.de
---- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de	2000-01-04 22:45:57.000000000 +0100
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.de	2004-07-08 01:19:09.547433632 +0200
-@@ -8,48 +8,10 @@
-   ("Man-Page-Betrachter", EXEC, "xman")
-   ),
-  ("Ausführen...", SHEXEC, "%a(Ausführen,Auszuführender Befehl:)"),
-- ("XTerm", EXEC, "xterm -sb"),
-- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
-+ ("XTerm", EXEC, "xterm"),
-+ ("ATerm", EXEC, "aterm"),
-  ("Arbeitsflächen", WORKSPACE_MENU),
+    ("Save Theme", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Theme name)\""),
+    ("Save IconSet", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(IconSet name)\""),
+-   ("Preferences Utility", EXEC, "/usr/local/GNUstep/Applications/WPrefs.app/WPrefs")
++   ("Preferences Utility", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
+    ), 
+    ("Session",
+     ("Save Session", SAVE_SESSION),
+diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.de WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.de
+--- WindowMaker-0.90.0/WindowMaker/plmenu.de	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.de	2004-10-28 15:49:29.774356168 +0200
+@@ -11,45 +11,7 @@
+  ("XTerm", EXEC, "xterm -sb"),
+  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+  ("ArbeitsflÃ¤chen", WORKSPACE_MENU),
 - ("Anwendungen",
 -  ("Grafik",
 -   ("Gimp", SHEXEC, "gimp >/dev/null"),
@@ -106,9 +99,9 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20
 - ("Werkzeuge",
 -  ("Taschenrechner", EXEC, "xcalc"),
 -  ("Fenstereigenschaften", SHEXEC, "xprop | xmessage -center -title 'xprop' -file -"),
--  ("Schriftartwähler", EXEC, "xfontsel"),
+-  ("SchriftartwÃ¤hler", EXEC, "xfontsel"),
 -  ("Terminalemulator", EXEC, "xminicom"),
--  ("Vergrößern", EXEC, "xmag"),
+-  ("VergrÃ¶ÃŸern", EXEC, "xmag"),
 -  ("Colormap", EXEC, "xcmap"),
 -  ("XKill", EXEC, "xkill"),
 -  ("ASClock", EXEC, "asclock -shape"),
@@ -119,15 +112,15 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20
    ("Kopieren", SHEXEC, "echo '%s' | wxcopy"),
    ("Mail an", EXEC, "xterm -name mail -T Pine -e pine %s"),
 @@ -66,9 +28,9 @@
-   ("Gespeicherte Sitzung löschen", CLEAR_SESSION)
+   ("Gespeicherte Sitzung lÃ¶schen", CLEAR_SESSION)
    ),
   ("Erscheinungsbild",
 -  ("Themen", OPEN_MENU, "-noext /usr/local/share/WindowMaker/Themes /home/mawa/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
 -  ("Stile", OPEN_MENU, "-noext /usr/local/share/WindowMaker/Styles /home/mawa/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
--  ("Iconsätze", OPEN_MENU, "-noext /usr/local/share/WindowMaker/IconSets /home/mawa/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
+-  ("IconsÃ¤tze", OPEN_MENU, "-noext /usr/local/share/WindowMaker/IconSets /home/mawa/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
 +  ("Themen", OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
 +  ("Stile", OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
-+  ("Iconsätze", OPEN_MENU, "-noext #wmdatadir#/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
++  ("IconsÃ¤tze", OPEN_MENU, "-noext #wmdatadir#/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
    ("Hintergrund",
     ("Einfarbig",
      ("Schwarz", EXEC, "wdwrite WindowMaker WorkspaceBack '(solid, black)'"),
@@ -142,21 +135,16 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.de WindowMaker-CVS-20
 -  ("Iconsatz speichern", SHEXEC, "geticonset /home/mawa/GNUstep/Library/WindowMaker/IconSets/\"%a(Iconsatz-Name)\"")
 +  ("Thema speichern", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Themenname)\""),
 +  ("Iconsatz speichern", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(Iconsatz-Name)\""),
-+  ("Einstellung", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
++  ("Einstellung", EXEC, "/usr/lib/GNUstep/Applications/WPrefs.app/WPrefs")
    ), 
   ("Beenden",
    ("Neustart", RESTART),
-diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es WindowMaker-CVS-20040321/WindowMaker/plmenu.es
---- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es	2000-06-16 02:16:35.000000000 +0200
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.es	2004-07-08 01:18:48.906571520 +0200
-@@ -8,48 +8,10 @@
-   ("Paginas del Manual", EXEC, "xman")
-   ),
-  ("Ejecutar...", SHEXEC, "%a(Run,Type command to run:)"),
-- ("XTerm", EXEC, "xterm -sb"),
-- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
-+ ("XTerm", EXEC, "xterm"),
-+ ("ATerm", EXEC, "aterm"),
+diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.es WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.es
+--- WindowMaker-0.90.0/WindowMaker/plmenu.es	2004-10-23 05:50:00.000000000 +0200
++++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.es	2004-10-28 15:51:06.099712488 +0200
+@@ -11,45 +11,7 @@
+  ("XTerm", EXEC, "xterm -sb"),
+  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
   ("Espacio de Trabajo", WORKSPACE_MENU),
 - ("Aplicaciones",
 -  ("Graficas",
@@ -209,7 +197,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es WindowMaker-CVS-20
 -  ("Estilos", OPEN_MENU, "-noext /usr/local/share/WindowMaker/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
 -  ("Grupos de iconos", OPEN_MENU, "-noext /usr/local/share/WindowMaker/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
 +  ("Temas", OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
-+  ("Estilos", OPEN_MENU, "-noext #wmdatadir#/WindowMaker/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
++  ("Estilos", OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
 +  ("Grupos de iconos", OPEN_MENU, "-noext #wmdatadir#/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
    ("Papel Tapiz",
     ("Solido",
@@ -223,22 +211,17 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.es WindowMaker-CVS-20
     ),   
    ("Guardar tema", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Theme name)\""),
    ("Guardar iconos", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(IconSet name)\""),
--  ("Preferencias", EXEC, "/usr/local/GNUstep/Apps/WPrefs.app/WPrefs")
-+  ("Preferencias", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
+-  ("Preferencias", EXEC, "/usr/local/GNUstep/Applications/WPrefs.app/WPrefs")
++  ("Preferencias", EXEC, "/usr/lib/GNUstep/Applications/WPrefs.app/WPrefs")
    ), 
   ("Salir",
    ("Reiniciar", RESTART),
-diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr WindowMaker-CVS-20040321/WindowMaker/plmenu.fr
---- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr	1999-05-29 23:41:26.000000000 +0200
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.fr	2004-07-08 01:19:24.528156216 +0200
-@@ -8,48 +8,10 @@
-     ("Butineur d'aide", EXEC, "xman")
-    ),
-   ("Démarrer...", SHEXEC, "%a(Démarrer,Tapez une commande à démarrer:)"),
--  ("Terminal X", EXEC, "xterm -sb"),
--  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
-+  ("XTerm", EXEC, "xterm"),
-+  ("ATerm", EXEC, "aterm"),
+diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.fr WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.fr
+--- WindowMaker-0.90.0/WindowMaker/plmenu.fr	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.fr	2004-10-28 15:52:26.763449736 +0200
+@@ -11,45 +11,7 @@
+   ("Terminal X", EXEC, "xterm -sb"),
+   ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
    ("Bureau", WORKSPACE_MENU),
 -  ("Applications",
 -	("Graphismes",
@@ -270,57 +253,52 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.fr WindowMaker-CVS-20
 -  ),
 - ("Utilitaires",
 -   ("Calculatrice", EXEC, "xcalc"),
--   ("Propriétés de la fenêtre", SHEXEC, "xprop | xmessage -center -title 'xprop' -file -"),
--   ("Sélecteur de polices", EXEC, "xfontsel"),
+-   ("PropriÃ©tÃ©s de la fenÃªtre", SHEXEC, "xprop | xmessage -center -title 'xprop' -file -"),
+-   ("SÃ©lecteur de polices", EXEC, "xfontsel"),
 -   ("Emulateur de terminal", EXEC, "xminicom"),
 -   ("Loupe", EXEC, "xmag"),
 -   ("Carte des couleurs", EXEC, "xcmap"),
 -   ("XKill", EXEC, "xkill"),
 -   ("ASClock", EXEC, "asclock -shape"),
--   ("Sélections", EXEC, "xclipboard")
+-   ("SÃ©lections", EXEC, "xclipboard")
 -  ),
 + ("Applications", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
-  ("Sélection",
+  ("SÃ©lection",
     ("Copier", SHEXEC, "echo '%s' | wxcopy"),
-    ("Envoyer à", EXEC, "xterm -name mail -T Pine -e pine %s"),
+    ("Envoyer Ã ", EXEC, "xterm -name mail -T Pine -e pine %s"),
 @@ -66,9 +28,9 @@
     ("Effacer la session", CLEAR_SESSION)
    ),
   ("Apparence",
--   ("Thèmes", OPEN_MENU, "-noext /opt/share/WindowMaker/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
+-   ("ThÃ¨mes", OPEN_MENU, "-noext /opt/share/WindowMaker/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
 -   ("Styles", OPEN_MENU, "-noext /opt/share/WindowMaker/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
--   ("Jeu d'icônes", OPEN_MENU, "-noext /opt/share/WindowMaker/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
-+   ("Thèmes", OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
+-   ("Jeu d'icÃ´nes", OPEN_MENU, "-noext /opt/share/WindowMaker/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
++   ("ThÃ¨mes", OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
 +   ("Styles", OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
-+   ("Jeu d'icônes", OPEN_MENU, "-noext #wmdatadir#/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
-    ("Fond d'écran",
-      ("Unifié",
++   ("Jeu d'icÃ´nes", OPEN_MENU, "-noext #wmdatadir#/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
+    ("Fond d'Ã©cran",
+      ("UnifiÃ©",
         ("Noir", EXEC, "wdwrite WindowMaker WorkspaceBack '(solid, black)'"),
 @@ -88,10 +50,11 @@
-        ("Dégradés de Gris",    EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, \"#636380\", \"#131318\")'"),
-        ("Dégradés de Bordeau", EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, \"#600040\", \"#180010\")'")
+        ("DÃ©gradÃ©s de Gris",    EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, \"#636380\", \"#131318\")'"),
+        ("DÃ©gradÃ©s de Bordeau", EXEC, "wdwrite WindowMaker WorkspaceBack '(vgradient, \"#600040\", \"#180010\")'")
        ),
 -     ("Images", OPEN_MENU, "-noext /opt/share/WindowMaker/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
 +     ("Images", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
        ),
-    ("Sauver le thème", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes /\"%a(Nom du thème,Entrez un nom de fichier:)\""),
--   ("Sauver le jeu d'icônes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icônes,Entrez un nom de fichier:)\"")  
-+   ("Sauver le jeu d'icônes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icônes,Entrez un nom de fichier:)\""),
-+  ("Préférence", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
+    ("Sauver le thÃ¨me", SHEXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes /\"%a(Nom du thÃ¨me,Entrez un nom de fichier:)\""),
+-   ("Sauver le jeu d'icÃ´nes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icÃ´nes,Entrez un nom de fichier:)\"")  
++   ("Sauver le jeu d'icÃ´nes", SHEXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets /\"%a(Nom du jeu d'icÃ´nes,Entrez un nom de fichier:)\""),
++   ("Préférence", EXEC, "/usr/lib/GNUstep/Applications/WPrefs.app/WPrefs")
    ),
   ("Quitter",
-    ("Redémarrer", RESTART),
-diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20040321/WindowMaker/plmenu.it
---- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it	2000-01-04 22:45:57.000000000 +0100
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.it	2004-07-08 01:19:32.131000408 +0200
-@@ -8,48 +8,10 @@
-   ("Ricerca Manuali", EXEC, "xman")
-   ),
-  ("Esegui...", EXEC, "%a(Esegui,Scrivi il comando da eseguire:)"),
-- ("XTerm", EXEC, "xterm -sb"),
-- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
-+ ("XTerm", EXEC, "xterm"),
-+ ("ATerm", EXEC, "aterm"),
+    ("RedÃ©marrer", RESTART),
+diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.it WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.it
+--- WindowMaker-0.90.0/WindowMaker/plmenu.it	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.it	2004-10-28 15:54:19.582298664 +0200
+@@ -11,45 +11,7 @@
+  ("XTerm", EXEC, "xterm -sb"),
+  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
   ("Workspace", WORKSPACE_MENU),
 - ("Programmi",
 -  ("Grafica",
@@ -350,9 +328,9 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20
 -  ("Xplaycd", EXEC, "xplaycd"),
 -  ("Xmixer", EXEC, "xmixer")
 -  ),
-- ("Utilità",
+- ("UtilitÃ ",
 -  ("Calcolatrice", EXEC, "xcalc"),
--  ("Proprietà finestra", EXEC, "xprop | xmessage -center -title 'xprop' -file -"),
+-  ("ProprietÃ  finestra", EXEC, "xprop | xmessage -center -title 'xprop' -file -"),
 -  ("Selezione Font", EXEC, "xfontsel"),
 -  ("Emulatore di terminale", EXEC, "xminicom"),
 -  ("Lente", EXEC, "xmag"),
@@ -372,9 +350,9 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20
 -  ("Temi", OPEN_MENU, "-noext /usr/X11R6/share/WindowMaker/Themes ~/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
 -  ("Stili", OPEN_MENU, "-noext /usr/X11R6/share/WindowMaker/Styles ~/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
 -  ("Set di Icone", OPEN_MENU, "-noext /usr/X11R6/share/WindowMaker/IconSets ~/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
-+  ("Temi", OPEN_MENU, "-noext #wmdatadir#/WindowMaker/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
-+  ("Stili", OPEN_MENU, "-noext #wmdatadir#/WindowMaker/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
-+  ("Set di Icone", OPEN_MENU, "-noext #wmdatadir#/WindowMaker/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
++  ("Temi", OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
++  ("Stili", OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
++  ("Set di Icone", OPEN_MENU, "-noext #wmdatadir#/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons"),
    ("Sfondo",
     ("Tinta unita",
      ("Nero", EXEC, "wdwrite WindowMaker WorkspaceBack '(solid, black)'"),
@@ -389,44 +367,43 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.it WindowMaker-CVS-20
 -  ("Salva il set icone", EXEC, "geticonset ~/GNUstep/Library/WindowMaker/IconSets/\"%a(Nome IconSet)\"")
 +  ("Salva il tema", EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/\"%a(Nome Tema)\""),
 +  ("Salva il set icone", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/\"%a(Nome IconSet)\""),
-+  ("Preferezioni", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
++  ("Preferezioni", EXEC, "/usr/lib/GNUstep/Applicationss/WPrefs.app/WPrefs")
    ), 
   ("Esci",
    ("Riavvia", RESTART),
-diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20040321/WindowMaker/plmenu.pl
---- WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl	2000-01-04 22:45:57.000000000 +0100
-+++ WindowMaker-CVS-20040321/WindowMaker/plmenu.pl	2004-07-08 01:20:42.817254464 +0200
+diff -ur WindowMaker-0.90.0/WindowMaker/plmenu.pl WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.pl
+--- WindowMaker-0.90.0/WindowMaker/plmenu.pl	2004-10-17 08:28:07.000000000 +0200
++++ WindowMaker-0.90.0-vfmg/WindowMaker/plmenu.pl	2004-10-28 15:58:53.930591384 +0200
 @@ -1,135 +1,39 @@
  ("WindowMaker",
  	("Informacja",
 -		("Informacja o WMaker...", INFO_PANEL),
--		("Legalno¶æ...",           LEGAL_PANEL),
+-		("LegalnoÅ›Ä‡...",           LEGAL_PANEL),
 -		("Konsola Systemu",        EXEC, "xconsole"),
--		("Obci±¿enie Systemu",     EXEC, "xosview || xload"),
--		("Lista Procesów",         EXEC, "xterm -T 'Lista Procesów' -e top"),
--		("Przegl±darka Manuali",   EXEC, "xman")
+-		("ObciÄ…Å¼enie Systemu",     EXEC, "xosview || xload"),
+-		("Lista ProcesÃ³w",         EXEC, "xterm -T 'Lista ProcesÃ³w' -e top"),
+-		("PrzeglÄ…darka Manuali",   EXEC, "xman")
 +		("Informacja o WindowMakerze...", INFO_PANEL),
 +		("Informacja o licencji...",           LEGAL_PANEL),
 +		("Konsola systemu",        EXEC, "xconsole"),
-+		("Obci±¿enie systemu",     SHEXEC, "xosview || xload"),
-+		("Lista procesów",         EXEC, "xterm -T 'Lista procesów' -e top"),
-+		("Przegl±darka manuali",   EXEC, "xman")
++		("ObciÄ…Å¼enie systemu",     SHEXEC, "xosview || xload"),
++		("Lista procesÃ³w",         EXEC, "xterm -T 'Lista procesÃ³w' -e top"),
++		("PrzeglÄ…darka manuali",   EXEC, "xman")
  	),
  	
  	("Konfiguracja",	
 -		("Edycja menu",       EXEC, "xterm -T 'Edycja menu' -e vi $HOME/GNUstep/Library/WindowMaker/menu"),
 +		("Edycja menu",       EXEC, "xterm -T 'Edycja menu' -e vi $HOME/GNUstep/Library/Defaults/WMRootMenu"),
- 		("Ustawienie fontów", EXEC, "xterm -T 'Ustawienie fontów' -e vi $HOME/GNUstep/Defaults/WMGLOBAL"),
+ 		("Ustawienie fontÃ³w", EXEC, "xterm -T 'Ustawienie fontÃ³w' -e vi $HOME/GNUstep/Defaults/WMGLOBAL"),
  		("Konfiguracja",      EXEC, "xterm -T 'Konfiguracja' -e vi $HOME/GNUstep/Defaults/WindowMaker")
  	),
  	
  	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
--	("Terminal",   EXEC, "xterm -T 'Mój ulubiony terminal' -sb"),
+-	("Terminal",   EXEC, "xterm -T 'MÃ³j ulubiony terminal' -sb"),
 -	("Edytor",     EXEC, "xterm -T 'Moj ulubiony edytor' -e vi %a(Edytor,Podaj plik do edycji:)"),
-+	("XTerm", EXEC, "xterm"),
-+	("ATerm", EXEC, "aterm"),
++	("Terminal",   EXEC, "xterm -sb"),
  	("Pulpity",    WORKSPACE_MENU),
--	
+ 	
 -	("Aplikacje",
 -		("Grafika",
 -			("Gimp",        EXEC, "gimp > /dev/null"),
@@ -453,7 +430,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 -	),
 -	
 -	("Internet",
--		("Przegl±darki",
+-		("PrzeglÄ…darki",
 -			("Netscape", EXEC, "netscape"), 
 -			("Arena",    EXEC, "arena"),
 -			("Lynx",     EXEC, "xterm -e lynx %a(Lynx,Podaj URL:)")
@@ -485,7 +462,7 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 -		("VI",      EXEC, "xterm -e vi")
 -	),
 -	
--	("D¼wiêk",
+-	("DÅºwiÄ™k",
 -		("Xmcd",    EXEC, "xmcd 2> /dev/null"),
 -		("Xplaycd", EXEC, "xplaycd"),
 -		("Xmixer",  EXEC, "xmixer")
@@ -508,13 +485,13 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 -    	("XBill",     EXEC, "xbill")
 -    ),
 -	
--	("U¿ytki",
+-	("UÅ¼ytki",
 -		("Kalkulator",          EXEC, "xcalc"),
 -		("Zegarek",             EXEC, "xclock"),
 -		("Opcje Okna",          EXEC, "xprop | xmessage -center -title 'xprop' -file -"),
--		("Przegl±darka Fontów", EXEC, "xfontsel"),
--		("Szk³o Powiêkszaj±ce", EXEC, "xmag"),
--		("Mapa Kolorów",        EXEC, "xcmap"),
+-		("PrzeglÄ…darka FontÃ³w", EXEC, "xfontsel"),
+-		("SzkÅ‚o PowiÄ™kszajÄ…ce", EXEC, "xmag"),
+-		("Mapa KolorÃ³w",        EXEC, "xcmap"),
 -		("XKill",               EXEC, "xkill"),
 -		("Clipboard",           EXEC, "xclipboard")
 -	),
@@ -524,18 +501,18 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 -		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
 -		("Serfuj do ...",          EXEC, "netscape %s"),
 -		("Pobierz Manual ...",     EXEC, "MANUAL_SEARCH(%s)"),
--		("Po³±cz siê z ...",       EXEC, "telnet %s"),
+-		("PoÅ‚Ä…cz siÄ™ z ...",       EXEC, "telnet %s"),
 -		("Pobierz plik z FTP ...", EXEC, "ftp %s")
 -	),
 -
 -	("Ekran",
--		("Ukryj Pozosta³e",         HIDE_OTHERS),
--		("Poka¿ wszystko",          SHOW_ALL),
--		("Uporz±dkowanie icon",     ARRANGE_ICONS),
--		("Odswie¿",                 REFRESH),
+-		("Ukryj PozostaÅ‚e",         HIDE_OTHERS),
+-		("PokaÅ¼ wszystko",          SHOW_ALL),
+-		("UporzÄ…dkowanie icon",     ARRANGE_ICONS),
+-		("OdswieÅ¼",                 REFRESH),
 -		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
 -		("Zachowaj Sesje",          SAVE_SESSION),
--		("Wyczy¶æ zachowan± sesje", CLEAR_SESSION)
+-		("WyczyÅ›Ä‡ zachowanÄ… sesje", CLEAR_SESSION)
 -	),
 -
 +	("Aplikacje", OPEN_MENU, "| vfmg -i -f -x -c wmaker-old "),
@@ -546,15 +523,15 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 +		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)")
 +  	),
 +  	("Ekran",
-+		("Ukryj pozosta³e",         HIDE_OTHERS),
-+  		("Poka¿ wszystko",          SHOW_ALL),
-+		("Uporz±dkuj ikony",     ARRANGE_ICONS),
-+		("Od¶wie¿",                 REFRESH),
++		("Ukryj pozostaÅ‚e",         HIDE_OTHERS),
++  		("PokaÅ¼ wszystko",          SHOW_ALL),
++		("UporzÄ…dkuj ikony",     ARRANGE_ICONS),
++		("OdÅ›wieÅ¼",                 REFRESH),
 +  		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
-+		("Zachowaj sesjê",          SAVE_SESSION),
-+		("Wyczy¶æ zachowan± sesjê", CLEAR_SESSION)
++		("Zachowaj sesjÄ™",          SAVE_SESSION),
++		("WyczyÅ›Ä‡ zachowanÄ… sesjÄ™", CLEAR_SESSION)
 +  	),
- 	("Wygl±d",
+ 	("WyglÄ…d",
  		("Tematy",          OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
  		("Style",           OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
 @@ -155,10 +59,11 @@
@@ -564,11 +541,11 @@ diff -urN WindowMaker-CVS-20040321.orig/WindowMaker/plmenu.pl WindowMaker-CVS-20
 -			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t)")
 +			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
  		),
--		("Zaoamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
--		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
-+		("Zapamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
-+		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'"),
-+		("Ustawienia", EXEC, "/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs")
+-		("ZaoamiÄ™tanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
+-		("ZapamiÄ™tanie UstawieÅ„ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
++		("ZapamiÄ™tanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
++		("ZapamiÄ™tanie UstawieÅ„ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'"),
++		("Ustawienia", EXEC, "/usr/lib/GNUstep/Applications/WPrefs.app/WPrefs")
  	),
  
- 	("Wyj¶cie",
+ 	("WyjÅ›cie",
