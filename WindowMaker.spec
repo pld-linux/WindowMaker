@@ -5,7 +5,7 @@ Summary(fr):	Gestionnaire de fenЙtres avec le look NeXT
 Summary(pl):	Mened©er okien w stylu NeXT
 Name:		WindowMaker
 Version:	0.70.0
-Release:	3
+Release:	4
 Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
 Group(es):	X11/Administraadores De Ventanas
@@ -106,6 +106,7 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
+Obsoletes:	libwraster2
 
 %description libs
 This package contains shared libraries for run WindowMaker.
@@ -127,6 +128,7 @@ Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
+Obsoletes:	libwraster2-devel
 
 %description devel
 This package contains libraries for building WindowMaker-enhanced
