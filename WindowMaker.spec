@@ -113,7 +113,7 @@ echo "b" | \
 LINGUAS="cs de el es fi fr gl hr it ja ko nl no pl pt ro ru  \
 	 se sk tr zh_CN zh_TW.Big5" \
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" CPP_PATH="/lib/cpp" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr/X11R6 \
 	--with-nlsdir=/usr/X11R6/share/locale \
 	--sysconfdir=/etc/X11 \
