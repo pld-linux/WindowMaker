@@ -9,8 +9,8 @@ Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
 Version:	0.80.0
-Release:	8
-License:	GPL
+Release:	10
+License:	GPL2
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.bz2
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
@@ -217,8 +217,8 @@ utilizando componentes estáticos (raramente necessário).
 %patch8 -p1
 
 for f in WindowMaker/*menu*; do
-    sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
-    mv -f $f.new $f
+	sed s,/usr/local/GNUstep/,/usr/X11R6/lib/GNUstep/, $f >$f.new
+	mv -f $f.new $f
 done
 
 %build
