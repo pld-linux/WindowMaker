@@ -3,14 +3,18 @@ Summary(fr): Gestionnaire de fenêtres avec le look NeXT
 Summary(pl): Mened¿er okien w stylu NeXT
 Name:        WindowMaker
 Version:     0.20.1
-Release:     1
+Release:     2
 Group:       X11/Window Managers
 Copyright:   GPL
 Vendor:      Dan Pascu <dan@services.iiruc.ro>
 URL:         http://www.windowmaker.org
 Source:      ftp://ftp.windowmaker.org/pub/beta/srcs/%{name}-%{version}.tar.bz2
+Source1:     ftp://windowmaker.org/pub/WindowMaker-data.tar.gz
+Source2:     WindowMaker-asclock.tar.gz
 Patch0:      WindowMaker.patch
 Patch1:      WindowMaker-po.patch
+Patch2:      WindowMaker-0.19.3-wmclock.patch
+Patch3:      WindowMaker-0.20.1-redhat.patch
 BuildRoot:   /tmp/%{name}-%{version}-root
 
 %description
@@ -51,9 +55,11 @@ Ten pakiet zawiera pliki nag³ówkowe i biblioteki niezbêdne do tworzenia
 aplikacji wykorzystuj±cych mo¿liwo¶ci mened¿era okien WindowMaker.
 
 %prep
-%setup -q
+%setup -q -a 1 -a 2
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 aclocal; automake; autoconf
@@ -65,8 +71,16 @@ CFLAGS=$RPM_OPT_FLAGS LDFLAGS="-s" ./configure \
 	--enable-sound \
 	--with-gnome \
 	--disable-shm \
+	--enable-superfluous \
+	--enable-newstyle \
 	--disable-debug
 make
+make Makefile -C asclock
+make -C asclock
+
+install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+make install DESTDIR=$RPM_BUILD_ROOT -C asclock
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -75,7 +89,9 @@ make install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	nlsdir=$RPM_BUILD_ROOT/usr/X11R6/share/locale
 
-install util/bughint $RPM_BUILD_ROOT/usr/X11R6/bin
+install -d $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+make install DESTDIR=$RPM_BUILD_ROOT -C asclock
 
 %clean
 rm -r $RPM_BUILD_ROOT
@@ -86,6 +102,7 @@ rm -r $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/X11R6/bin/*
 /usr/X11R6/share/WINGs
 /usr/X11R6/share/WindowMaker
+/usr/X11R6/share/pixmaps/*
 
 %dir /usr/X11R6/GNUstep
 %dir /usr/X11R6/GNUstep/Apps
@@ -121,6 +138,13 @@ rm -r $RPM_BUILD_ROOT
 /usr/X11R6/lib/lib*.a
 
 %changelog
+* Sun Oct  4 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.20.1-2]
+- added icons (WindowMaker-data.tar.gz),
+- removed installing bughint,
+- added --enable-superfluous and --enable-newstyle configure options,
+- added patches from rawhide.
+
 * Sat Sep 26 1998 Pawe³ Gajda <pagaj@shadow.eu.org>
   [0.20.0-1]
 - added --disable-shm option to configure script,
