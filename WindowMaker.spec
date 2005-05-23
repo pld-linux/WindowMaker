@@ -43,6 +43,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	libungif-devel
+BuildRequires:	perl-base
 BuildRequires:	xft-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
@@ -253,7 +254,7 @@ cd %{name}-extra-%{extraver}
 	%{__automake}
 cd ..
 
-perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
+%{__perl} -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
 	WindowMaker/Defaults/WMWindowAttributes.in
 
 %configure \
