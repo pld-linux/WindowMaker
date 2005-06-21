@@ -9,7 +9,7 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
-Version:	0.81.0
+Version:	0.92.0
 Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Window Managers
