@@ -1,5 +1,5 @@
 %define		extraver	0.1
-%define		_snap		20040321
+%define		_snap		20050409
 
 Summary:	NeXT-alike window manager
 Summary(es):	Administrador de Ventanas parecido con el NeXT
@@ -14,7 +14,7 @@ Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
-# Source0-md5:	ecbd8f1cee5e2ad1adb99baadb142169
+# Source0-md5:	362e05b20d50ad0ecde59a333b7e76da
 Source1:	ftp://windowmaker.org/pub/%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
