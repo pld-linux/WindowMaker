@@ -1,105 +1,110 @@
-diff -Nur WindowMaker-0.80.1.orig/WindowMaker/menu WindowMaker-0.80.1/WindowMaker/menu
---- WindowMaker-0.80.1.orig/WindowMaker/menu	Tue Jul  2 02:30:25 2002
-+++ WindowMaker-0.80.1/WindowMaker/menu	Mon Jul 15 19:51:47 2002
-@@ -116,49 +116,10 @@
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu WindowMaker-0.92.0/WindowMaker/menu
+--- WindowMaker-0.92.0.orig/WindowMaker/menu	2005-06-21 19:48:05.851700760 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu	2005-06-21 19:50:30.702680064 +0200
+@@ -116,54 +116,10 @@
  		"Process List" EXEC xterm -e top
  		"Manual Browser" EXEC xman
  	"Info" END
 -	"Run..." SHEXEC %a(Run,Type command to run:)
  	"XTerm" EXEC xterm -sb 
- 	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
+ 	"Mozilla Firefox" EXEC firefox
  	"Workspaces" WORKSPACE_MENU
 -	"Applications" MENU
--		"Graphics" MENU
--			"Gimp" SHEXEC gimp >/dev/null
--			"XV" EXEC xv
--			"XPaint" EXEC xpaint
--			"XFig" EXEC xfig
--		"Graphics" END
--		"X File Manager" EXEC xfm
--		"OffiX Files" EXEC files
--		"LyX" EXEC lyx
--		"Netscape" EXEC netscape 
+-		"Gimp" SHEXEC gimp >/dev/null
 -  		"Ghostview" EXEC ghostview %a(GhostView,Enter file to view)
--		"Acrobat" EXEC /usr/local/Acrobat3/bin/acroread %a(Acrobar,Enter PDF to view)
--  		"TkDesk" EXEC tkdesk
+-		"Xpdf" EXEC xpdf %a(Xpdf,Enter PDF to view)
+-		"Abiword" EXEC abiword
+-		"Dia" EXEC dia
+-		"OpenOffice.org" MENU
+-			"OpenOffice.org" EXEC ooffice
+-			"Writer" EXEC oowriter
+-			"Spreadsheet" EXEC oocalc
+-			"Draw" EXEC oodraw
+-			"Impress" EXEC ooimpress
+-		"OpenOffice.org" END 
+-
+-		"Editors" MENU
+-			"XEmacs" EXEC xemacs
+-			"Emacs" EXEC emacs
+-			"XJed" EXEC xjed 
+-			"VI" EXEC xterm -e vi
+-			"GVIM" EXEC gvim
+-			"NEdit" EXEC nedit
+-			"Xedit" EXEC xedit
+-		"Editors" END
+-
+-		"Multimedia" MENU
+-			"XMMS" MENU
+-				"XMMS" EXEC xmms
+-				"XMMS play/pause" EXEC xmms -t
+-				"XMMS stop" EXEC xmms -s
+-			"XMMS" END
+-			"Xine video player" EXEC xine
+-			"MPlayer" EXEC mplayer
+-		"Multimedia" END
 -	"Applications" END
--	"Editors" MENU
--		"XFte" EXEC xfte
--		"XEmacs" EXEC xemacs
--		"Emacs" EXEC emacs
--		"XJed" EXEC xjed 
--		"NEdit" EXEC nedit
--		"Xedit" EXEC xedit
--		"VI" EXEC xterm -e vi
--	"Editors" END
--	"Miscellaneous" MENU
--		"Xmcd" SHEXEC xmcd 2> /dev/null
--		"Xplaycd" EXEC xplaycd
--		"Xmixer" EXEC xmixer
--	"Miscellaneous" END
+-
 -	"Utils" MENU
 -		"Calculator" EXEC xcalc
 -		"Window Properties" SHEXEC xprop | xmessage -center -title 'xprop' -file -
 -		"Font Chooser" EXEC xfontsel
--		"Terminal Emulator" EXEC xminicom
--		"Magnify" EXEC xmag
+-		"Magnify" EXEC wmagnify
 -		"Colormap" EXEC xcmap
--		"XKill" EXEC xkill
--		"Clipboard" EXEC xclipboard
+-		"Kill X Application" EXEC xkill
 -	"Utils" END
+-
 +	"Applications" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
- 
  	"Selection" MENU
  		"Copy" SHEXEC echo '%s' | wxcopy
-diff -Nur WindowMaker-0.80.1.orig/WindowMaker/plmenu WindowMaker-0.80.1/WindowMaker/plmenu
---- WindowMaker-0.80.1.orig/WindowMaker/plmenu	Tue Jul  2 02:30:25 2002
-+++ WindowMaker-0.80.1/WindowMaker/plmenu	Mon Jul 15 19:52:58 2002
+ 		"Mail To" EXEC xterm -name mail -T "Pine" -e pine %s
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/plmenu WindowMaker-0.92.0/WindowMaker/plmenu
+--- WindowMaker-0.92.0.orig/WindowMaker/plmenu	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/plmenu	2005-06-21 19:52:00.963958264 +0200
 @@ -11,46 +11,7 @@
   ("XTerm", EXEC, "xterm -sb"),
-  ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+  ("Mozilla Firefox", EXEC, "firefox"),
   ("Workspaces", WORKSPACE_MENU),
 - ("Applications",
--  ("Graphics",
--   ("Gimp", SHEXEC, "gimp >/dev/null"),
--   ("XV", EXEC, "xv"),
--   ("XPaint", EXEC, "xpaint"),
--   ("XFig", EXEC, "xfig")
--   ),
--  ("X File Manager", EXEC, "xfm"),
--  ("OffiX Files", EXEC, "files"),
--  ("LyX", EXEC, "lyx"),
--  ("Netscape", EXEC, "netscape"),
+-  ("Gimp", SHEXEC, "gimp >/dev/null"),
 -  ("Ghostview", EXEC, "ghostview %a(Enter file to view)"),
--  ("Acrobat", EXEC, "/usr/local/Acrobat3/bin/acroread %a(Enter PDF to view)"),
--  ("TkDesk", EXEC, "tkdesk")
+-  ("Xpdf", EXEC, "xpdf %a(Enter PDF to view)"),
+-  ("Abiword", EXEC, "abiword"),
+-  ("Dia", EXEC, "dia"),
+-  ("OpenOffice.org",
+-   ("OpenOffice.org", EXEC, "ooffice"),
+-   ("Writer", EXEC, "oowriter"),
+-   ("Spreadsheet", EXEC, "oocalc"),
+-   ("Draw", EXEC, "oodraw"),
+-   ("Impress", EXEC, "ooimpress")
 -  ),
-- ("Editors",
--  ("XFte", EXEC, "xfte"),
--  ("XEmacs", EXEC, "xemacs"),
--  ("Emacs", EXEC, "emacs"),
--  ("XJed", EXEC, "xjed"),
--  ("NEdit", EXEC, "nedit"),
--  ("Xedit", EXEC, "xedit"),
--  ("VI", EXEC, "xterm -e vi")
+-  ("Editors",
+-   ("XEmacs", EXEC, "xemacs"),
+-   ("Emacs", EXEC, "emacs"),
+-   ("XJed", EXEC, "xjed"),
+-   ("VI", EXEC, "xterm -e vi"),
+-   ("GVIM", EXEC, "gvim"),
+-   ("NEdit", EXEC, "nedit"),
+-   ("Xedit", EXEC, "xedit")
 -  ),
-- ("Miscellaneous",
--  ("Xmcd", SHEXEC, "xmcd 2> /dev/null"),
--  ("Xplaycd", EXEC, "xplaycd"),
--  ("Xmixer", EXEC, "xmixer")
--  ),
+-  ("Multimedia",
+-   ("XMMS", 
+-    ("XMMS", EXEC, "xmms"),
+-    ("XMMS play/pause", EXEC, "xmms -t"),
+-    ("XMMS stop", EXEC, "xmms -s")
+-   ),
+-   ("Xine video player", EXEC, "xine"),
+-   ("MPlayer", EXEC, "mplayer")
+-  )
+- ),
 - ("Utils",
 -  ("Calculator", EXEC, "xcalc"),
 -  ("Window Properties", SHEXEC, "xprop | xmessage -center -title 'xprop' -file -"),
 -  ("Font Chooser", EXEC, "xfontsel"),
--  ("Terminal Emulator", EXEC, "xminicom"),
--  ("Magnify", EXEC, "xmag"),
+-  ("Magnify", EXEC, "wmagnify"),
 -  ("Colormap", EXEC, "xcmap"),
--  ("XKill", EXEC, "xkill"),
--  ("ASClock", EXEC, "asclock -shape"),
--  ("Clipboard", EXEC, "xclipboard")
--  ),
-+ ("Applications", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
+-  ("Kill X Application", EXEC, "xkill")
+- ),
++("Applications", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
   ("Selection",
    ("Copy", SHEXEC, "echo '%s' | wxcopy"),
    ("Mail To", EXEC, "xterm -name mail -T Pine -e pine %s"),
