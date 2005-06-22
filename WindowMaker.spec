@@ -10,7 +10,7 @@ Summary(ru):	WindowMaker - ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Summary(uk):	WindowMaker - ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ ÄÌÑ X11
 Name:		WindowMaker
 Version:	0.92.0
-Release:	0.%{_snap}.1
+Release:	0.%{_snap}.2
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/snapshots/%{name}-CVS-%{_snap}.tar.gz
@@ -39,6 +39,7 @@ Patch12:	%{name}-wmchlocale-fixes.patch
 Patch13:	http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch14:	%{name}-localenames.patch
 Patch15:	%{name}-CVS-before-xft2.patch
+Patch16:	%{name}-configure.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	Hermes-devel
 BuildRequires:	XFree86-devel
@@ -233,11 +234,12 @@ utilizando componentes estáticos (raramente necessário).
 %patch13 -p1
 #%patch14 -p1	Outdated
 #%patch15 -p1 ???
+%patch16 -p1
 
-#for f in WindowMaker/*menu*; do
-#	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
-#	mv -f $f.new $f
-#done
+for f in WindowMaker/*menu*; do
+	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
+	mv -f $f.new $f
+done
 
 mv -f po/{no,nb}.po
 
@@ -262,7 +264,7 @@ perl -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#e
 		 sk sv tr zh_CN zh_TW" \
 	--disable-rpath \
 	--with-nlsdir=%{_datadir}/locale \
-	--with-appspath=%{_libdir}/GNUstep/Apps \
+	--with-gnustepdir=%{_libdir}/GNUstep \
 	--enable-sound \
 	--enable-gnome \
 	--disable-debug \
