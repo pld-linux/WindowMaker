@@ -1,0 +1,12 @@
+diff -urN WindowMaker-0.92.0.orig/configure.ac WindowMaker-0.92.0/configure.ac
+--- WindowMaker-0.92.0.orig/configure.ac	2005-06-21 19:48:05.615736632 +0200
++++ WindowMaker-0.92.0/configure.ac	2005-06-22 18:12:21.084131296 +0200
+@@ -845,7 +845,7 @@
+ 	gnustepdir=`echo $gnustepdir | sed -e 's|^prefix|${prefix}|'`
+     fi
+ 
+-    wprefs_base_dir=$gnustepdir/Applications
++    wprefs_base_dir=$gnustepdir/Apps
+     wprefs_datadir=$wprefs_base_dir/WPrefs.app
+     wprefs_bindir=$wprefs_base_dir/WPrefs.app
+ fi
