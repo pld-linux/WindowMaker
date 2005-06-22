@@ -2,98 +2,98 @@
 +++ WindowMaker-0.80.1/WindowMaker/menu.pl	Fri Aug  2 10:28:45 2002
 @@ -1,13 +1,13 @@
  /*
-- * Definiowanie Menu G³ównego dla WindowMakera
+- * Definiowanie Menu GÅ‚Ã³wnego dla WindowMakera
 - * Fonty w standardzie ISO8895-2
-+ * Definiowanie Menu G³ównego WindowMakera
++ * Definiowanie Menu GÅ‚Ã³wnego WindowMakera
 + * Fonty w standardzie ISO8859-2
   *
-  * Sk³adnia jest nastêpuj±ca:
+  * SkÅ‚adnia jest nastÄ™pujÄ…ca:
   *
-- * <Tytu³> [SHORTCUT <Skrut>] <Komenda> <Paramery>
-+ * <Tytu³> [SHORTCUT <Skrót>] <Komenda> <Parametry>
+- * <TytuÅ‚> [SHORTCUT <Skrut>] <Komenda> <Paramery>
++ * <TytuÅ‚> [SHORTCUT <SkrÃ³t>] <Komenda> <Parametry>
   *
-  * <Tytu³> Tytu³ mo¿e byæ dowolnym ci±giem znaków. Je¶li bêd± w nim wystêpowaæ
-- *         spacje umie¶c go w cudzys³owie np. "Tytu³ ze spacj±"
-+ *         spacje umie¶æ go w cudzys³owie np. "Tytu³ ze spacj±"
+  * <TytuÅ‚> TytuÅ‚ moÅ¼e byÄ‡ dowolnym ciÄ…giem znakÃ³w. JeÅ›li bÄ™dÄ… w nim wystÄ™powaÄ‡
+- *         spacje umieÅ›c go w cudzysÅ‚owie np. "TytuÅ‚ ze spacjÄ…"
++ *         spacje umieÅ›Ä‡ go w cudzysÅ‚owie np. "TytuÅ‚ ze spacjÄ…"
   * 
-  * SHORTCUT Definiowanie skrótu.
-  * <Skrót> Nazwa rodzaju skrótu umieszczonego w pliku
+  * SHORTCUT Definiowanie skrÃ³tu.
+  * <SkrÃ³t> Nazwa rodzaju skrÃ³tu umieszczonego w pliku
 @@ -46,23 +46,22 @@
-  *                  ¿adnych zmian w pliku SaveSessionOnExit .
-  *  INFO - Wy¶wietlenie informacji o WindowMakerze
+  *                  Å¼adnych zmian w pliku SaveSessionOnExit .
+  *  INFO - WyÅ›wietlenie informacji o WindowMakerze
   *
 - * <Parametry> zalezne od uruchamianego programu.
-+ * <Parametry> zale¿ne od uruchamianego programu.
++ * <Parametry> zaleÅ¼ne od uruchamianego programu.
   *
   * ** Opcje w lini komend EXEC:
 - * %s - znak jest zastepowany przez text znajdujacy sie w ,,schowku''
-- * %a(tytu³[,komunikat]) - otwiera dodatkowe okno o tytule tytu³, komunikacie
-- *                         komunikat i czeka na podanie parametrów, które 
-- *                         zostan± wstawione zamiast %a. Niestety nie udalo mi
-- *                         siê uzyskaæ polskich fontów w tej pocji :( 
+- * %a(tytuÅ‚[,komunikat]) - otwiera dodatkowe okno o tytule tytuÅ‚, komunikacie
+- *                         komunikat i czeka na podanie parametrÃ³w, ktÃ³re 
+- *                         zostanÄ… wstawione zamiast %a. Niestety nie udalo mi
+- *                         siÄ™ uzyskaÄ‡ polskich fontÃ³w w tej pocji :( 
 - * %w - znak jest zastepowany przez XID aktywnego okna
 - * %W - znak jest zastepowany przez numer aktywnego pulpitu
-+ * %s - znak jest zastêpowany przez text znajduj±cy siê w 'schowku'
-+ * %a(tytu³[,komunikat]) - otwiera dodatkowe okno o tytule 'tytu³', komunikacie
-+ *                         'komunikat' i czeka na podanie parametrów, które 
-+ *                         zostan± wstawione zamiast %a. 
-+ * %w - znak jest zastêpowany przez XID aktywnego okna
-+ * %W - znak jest zastêpowany przez numer aktywnego pulpitu
++ * %s - znak jest zastÄ™powany przez text znajdujÄ…cy siÄ™ w 'schowku'
++ * %a(tytuÅ‚[,komunikat]) - otwiera dodatkowe okno o tytule 'tytuÅ‚', komunikacie
++ *                         'komunikat' i czeka na podanie parametrÃ³w, ktÃ³re 
++ *                         zostanÄ… wstawione zamiast %a. 
++ * %w - znak jest zastÄ™powany przez XID aktywnego okna
++ * %W - znak jest zastÄ™powany przez numer aktywnego pulpitu
   * 
-- * Aby u¿ywaæ specjalnych znaków ( takich jak % czy " ) nale¿y poprzedzic je znakiem \
-+ * Aby u¿ywaæ specjalnych znaków ( takich jak % czy " ) nale¿y poprzedziæ je znakiem \
-  * np. :xterm -T "\"Witaj ¦wiecie\""
+- * Aby uÅ¼ywaÄ‡ specjalnych znakÃ³w ( takich jak % czy " ) naleÅ¼y poprzedzic je znakiem \
++ * Aby uÅ¼ywaÄ‡ specjalnych znakÃ³w ( takich jak % czy " ) naleÅ¼y poprzedziÄ‡ je znakiem \
+  * np. :xterm -T "\"Witaj Åšwiecie\""
   *
-- * Mo¿na u¿ywac znaków specjalnych, takich jak \n
-+ * Mo¿na u¿ywaæ znaków specjalnych, takich jak \n
+- * MoÅ¼na uÅ¼ywac znakÃ³w specjalnych, takich jak \n
++ * MoÅ¼na uÅ¼ywaÄ‡ znakÃ³w specjalnych, takich jak \n
   *
-- * Sekcja MENU musi byæ zakoñczona sekcja END, pod t± sama nazw±.
-+ * Sekcja MENU musi byæ zakoñczona sekcj± END, pod t± sam± nazw±.
+- * Sekcja MENU musi byÄ‡ zakoÅ„czona sekcja END, pod tÄ… sama nazwÄ….
++ * Sekcja MENU musi byÄ‡ zakoÅ„czona sekcjÄ… END, pod tÄ… samÄ… nazwÄ….
   *
-  * Przyk³ad:
+  * PrzykÅ‚ad:
   *
 @@ -70,7 +69,7 @@
   *  "XTerm" EXEC xterm
   *      // stworzenie podmenu z plikami w podkatalogu /usr/openwin/bin
   *  "XView apps" OPEN_MENU "/usr/openwin/bin"
-- *      // umieszcza w jednym podmenu pliki z róznych podkatalogów
-+ *      // umieszcza w jednym podmenu pliki z ró¿nych podkatalogów
+- *      // umieszcza w jednym podmenu pliki z rÃ³znych podkatalogÃ³w
++ *      // umieszcza w jednym podmenu pliki z rÃ³Å¼nych podkatalogÃ³w
   *  "X11 apps" OPEN_MENU /usr/X11/bin $HOME/bin/X11
-  *      // ustawienie t³a
+  *      // ustawienie tÅ‚a
   *  "Background" OPEN_MENU -noext $HOME/images /usr/share/images WITH wmsetbg -u *      // wstawienie menu z pliku style.menu
 @@ -95,142 +94,38 @@
                    
  
  #include "wmmacros"
 -#define ULUB_EDYTOR vi 
--/* Je¶li nie lubisz edytora vi zmieñ na swój ulubiony edytor */
+-/* JeÅ›li nie lubisz edytora vi zmieÅ„ na swÃ³j ulubiony edytor */
 -#define ULUB_TERM xterm
--/* A tutaj ustaw swój ulubiony terminal */
+-/* A tutaj ustaw swÃ³j ulubiony terminal */
  
  "WindowMaker" MENU
  	"Informacja" MENU
 -		"Informacja o WMaker..." INFO_PANEL
--		"Legalno¶æ..."           LEGAL_PANEL
+-		"LegalnoÅ›Ä‡..."           LEGAL_PANEL
 -		"Konsola Systemu"        EXEC xconsole
--		"Obci±¿enie Systemu"     EXEC xosview || xload
--		"Lista Procesów"         EXEC ULUB_TERM -T "Lista Procesów" -e top
--		"Przegl±darka Manuali"   EXEC xman
+-		"ObciÄ…Å¼enie Systemu"     EXEC xosview || xload
+-		"Lista ProcesÃ³w"         EXEC ULUB_TERM -T "Lista ProcesÃ³w" -e top
+-		"PrzeglÄ…darka Manuali"   EXEC xman
 +		"Informacja o WindowMakerze..."      INFO_PANEL
 +		"Informacja o licencji..." LEGAL_PANEL
 +		"Konsola systemu"        EXEC xconsole
-+		"Obci±¿enie systemu"     SHEXEC xosview || xload
-+		"Lista procesów"         EXEC xterm -T "Lista procesów" -e top
-+		"Przegl±darka manuali"   EXEC xman
++		"ObciÄ…Å¼enie systemu"     SHEXEC xosview || xload
++		"Lista procesÃ³w"         EXEC xterm -T "Lista procesÃ³w" -e top
++		"PrzeglÄ…darka manuali"   EXEC xman
  	"Informacja" END
  	
 -	"Konfiguracja" MENU	
 -		"Edycja menu"       EXEC ULUB_TERM -T "Edycja menu" -e ULUB_EDYTOR $HOME/GNUstep/Library/WindowMaker/menu
--		"Ustawienie fontów" EXEC ULUB_TERM -T "Ustawienie fontów" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WMGLOBAL
+-		"Ustawienie fontÃ³w" EXEC ULUB_TERM -T "Ustawienie fontÃ³w" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WMGLOBAL
 -		"Konfiguracja"      EXEC ULUB_TERM -T "Konfiguracja" -e ULUB_EDYTOR $HOME/GNUstep/Defaults/WindowMaker
 -	"Konfiguracja" END
 -	
 -	"Uruchom..." EXEC %a(Uruchom,Wpisz komende do uruchomienia:)
--	"Terminal"   EXEC ULUB_TERM -T "Mój ulubiony terminal" -sb 
+-	"Terminal"   EXEC ULUB_TERM -T "MÃ³j ulubiony terminal" -sb 
 -	"Edytor"     EXEC ULUB_TERM -T "Moj ulubiony edytor" -e ULUB_EDYTOR %a(Edytor,Podaj plik do edycji:)
 -	"Pulpity"    WORKSPACE_MENU
 -	
@@ -123,11 +123,11 @@
 -	"Aplikacje" END
 -	
 -	"Internet" MENU
--		"Przegl±darki" MENU
+-		"PrzeglÄ…darki" MENU
 -			"Netscape" EXEC netscape 
 -			"Arena"    EXEC arena
 -			"Lynx"     EXEC ULUB_TERM -e lynx %a(Lynx,Podaj URL:)
--		"Przegl±darki" END
+-		"PrzeglÄ…darki" END
 -		"Programy pocztowe" MENU
 -			"Pine" EXEC ULUB_TERM -T "Program pocztowy Pine" -e pine 
 -			"Elm"  EXEC ULUB_TERM -T "Program pocztowy Elm" -e elm
@@ -155,12 +155,12 @@
 -		"VI"      EXEC ULUB_TERM -e vi
 -	"Editory" END
 -	
--	"D¼wiêk" MENU
+-	"DÅºwiÄ™k" MENU
 -		"CDPlay"  EXEC workbone
 -		"Xmcd"    EXEC xmcd 2> /dev/null
 -		"Xplaycd" EXEC xplaycd
 -		"Xmixer"  EXEC xmixer
--	"D¼wiêk" END
+-	"DÅºwiÄ™k" END
 -	
 -    "Gry" MENU
 -    	"Maze"      EXEC maze
@@ -182,16 +182,16 @@
 +        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
 +	"Pulpity" WORKSPACE_MENU
  	
--	"U¿ytki" MENU
+-	"UÅ¼ytki" MENU
 -		"Kalkulator"          EXEC xcalc
 -		"Zegarek"             EXEC xclock
 -		"Opcje Okna"          EXEC xprop | xmessage -center -title 'xprop' -file -
--		"Przegl±darka Fontów" EXEC xfontsel
--		"Szk³o Powiêkszaj±ce" EXEC xmag
--		"Mapa Kolorów"        EXEC xcmap
+-		"PrzeglÄ…darka FontÃ³w" EXEC xfontsel
+-		"SzkÅ‚o PowiÄ™kszajÄ…ce" EXEC xmag
+-		"Mapa KolorÃ³w"        EXEC xcmap
 -		"XKill"               EXEC xkill
 -		"Clipboard"           EXEC xclipboard
--	"U¿ytki" END
+-	"UÅ¼ytki" END
 +	"Aplikacje" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
  
 -	"Selekcyjne" MENU
@@ -202,28 +202,28 @@
 +		"Poczta do ..."          EXEC xterm -name mail -T "Pine" -e pine %s
  		"Serfuj do ..."          EXEC netscape %s
 -		"Pobierz Manual ..."     EXEC MANUAL_SEARCH(%s)
--		"Po³±cz siê z ..."       EXEC telnet %s
+-		"PoÅ‚Ä…cz siÄ™ z ..."       EXEC telnet %s
 -		"Pobierz plik z FTP ..." EXEC ftp %s
 -	"Selekcyjne" END
 +		"Szukaj w manualach ..."     SHEXEC MANUAL_SEARCH(%s)
 +	"Zaznaczenie" END
  
  	"Ekran" MENU
--		"Ukryj Pozosta³e"         HIDE_OTHERS
-+		"Ukryj pozosta³e"         HIDE_OTHERS
- 		"Poka¿ wszystko"          SHOW_ALL
--		"Uporz±dkowanie icon"     ARRANGE_ICONS
--		"Odswie¿"                 REFRESH
-+		"Uporz±dkuj ikony"        ARRANGE_ICONS
-+		"Od¶wie¿"                 REFRESH
+-		"Ukryj PozostaÅ‚e"         HIDE_OTHERS
++		"Ukryj pozostaÅ‚e"         HIDE_OTHERS
+ 		"PokaÅ¼ wszystko"          SHOW_ALL
+-		"UporzÄ…dkowanie icon"     ARRANGE_ICONS
+-		"OdswieÅ¼"                 REFRESH
++		"UporzÄ…dkuj ikony"        ARRANGE_ICONS
++		"OdÅ›wieÅ¼"                 REFRESH
  		"Zablokuj"                EXEC xlock -allowroot -usefirst
 -		"Zachowaj Sesje"          SAVE_SESSION
--		"Wyczy¶æ zachowan± sesje" CLEAR_SESSION
-+		"Zachowaj sesjê"          SAVE_SESSION
-+		"Wyczy¶æ zachowan± sesjê" CLEAR_SESSION
+-		"WyczyÅ›Ä‡ zachowanÄ… sesje" CLEAR_SESSION
++		"Zachowaj sesjÄ™"          SAVE_SESSION
++		"WyczyÅ›Ä‡ zachowanÄ… sesjÄ™" CLEAR_SESSION
  	"Ekran" END
  
- 	"Wygl±d" MENU
+ 	"WyglÄ…d" MENU
 diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/WindowMaker/plmenu.pl
 --- WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl	Tue Jan  4 22:45:57 2000
 +++ WindowMaker-0.80.1/WindowMaker/plmenu.pl	Fri Aug  2 10:29:13 2002
@@ -231,17 +231,17 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
  ("WindowMaker",
  	("Informacja",
 -		("Informacja o WMaker...", INFO_PANEL),
--		("Legalno¶æ...",           LEGAL_PANEL),
+-		("LegalnoÅ›Ä‡...",           LEGAL_PANEL),
 -		("Konsola Systemu",        EXEC, "xconsole"),
--		("Obci±¿enie Systemu",     EXEC, "xosview || xload"),
--		("Lista Procesów",         EXEC, "xterm -T 'Lista Procesów' -e top"),
--		("Przegl±darka Manuali",   EXEC, "xman")
+-		("ObciÄ…Å¼enie Systemu",     EXEC, "xosview || xload"),
+-		("Lista ProcesÃ³w",         EXEC, "xterm -T 'Lista ProcesÃ³w' -e top"),
+-		("PrzeglÄ…darka Manuali",   EXEC, "xman")
 +		("Informacja o WindowMakerze...", INFO_PANEL),
 +		("Informacja o licencji...",           LEGAL_PANEL),
 +		("Konsola systemu",        EXEC, "xconsole"),
-+		("Obci±¿enie systemu",     SHEXEC, "xosview || xload"),
-+		("Lista procesów",         EXEC, "xterm -T 'Lista procesów' -e top"),
-+		("Przegl±darka manuali",   EXEC, "xman")
++		("ObciÄ…Å¼enie systemu",     SHEXEC, "xosview || xload"),
++		("Lista procesÃ³w",         EXEC, "xterm -T 'Lista procesÃ³w' -e top"),
++		("PrzeglÄ…darka manuali",   EXEC, "xman")
  	),
  	
  	("Konfiguracja",	
@@ -249,7 +249,7 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
  	),
  	
  	("Uruchom...", EXEC, "%a(Uruchom,Wpisz komende do uruchomienia:)"),
--	("Terminal",   EXEC, "xterm -T 'Mój ulubiony terminal' -sb"),
+-	("Terminal",   EXEC, "xterm -T 'MÃ³j ulubiony terminal' -sb"),
 -	("Edytor",     EXEC, "xterm -T 'Moj ulubiony edytor' -e vi %a(Edytor,Podaj plik do edycji:)"),
 +	("XTerm", EXEC, "xterm -sb"),
 +	("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
@@ -281,7 +281,7 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
 -	),
 -	
 -	("Internet",
--		("Przegl±darki",
+-		("PrzeglÄ…darki",
 -			("Netscape", EXEC, "netscape"), 
 -			("Arena",    EXEC, "arena"),
 -			("Lynx",     EXEC, "xterm -e lynx %a(Lynx,Podaj URL:)")
@@ -313,7 +313,7 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
 -		("VI",      EXEC, "xterm -e vi")
 -	),
 -	
--	("D¼wiêk",
+-	("DÅºwiÄ™k",
 -		("Xmcd",    EXEC, "xmcd 2> /dev/null"),
 -		("Xplaycd", EXEC, "xplaycd"),
 -		("Xmixer",  EXEC, "xmixer")
@@ -336,13 +336,13 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
 -    	("XBill",     EXEC, "xbill")
 -    ),
 -	
--	("U¿ytki",
+-	("UÅ¼ytki",
 -		("Kalkulator",          EXEC, "xcalc"),
 -		("Zegarek",             EXEC, "xclock"),
 -		("Opcje Okna",          EXEC, "xprop | xmessage -center -title 'xprop' -file -"),
--		("Przegl±darka Fontów", EXEC, "xfontsel"),
--		("Szk³o Powiêkszaj±ce", EXEC, "xmag"),
--		("Mapa Kolorów",        EXEC, "xcmap"),
+-		("PrzeglÄ…darka FontÃ³w", EXEC, "xfontsel"),
+-		("SzkÅ‚o PowiÄ™kszajÄ…ce", EXEC, "xmag"),
+-		("Mapa KolorÃ³w",        EXEC, "xcmap"),
 -		("XKill",               EXEC, "xkill"),
 -		("Clipboard",           EXEC, "xclipboard")
 -	),
@@ -352,18 +352,18 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
 -		("Poczta do ...",          EXEC, "xterm -name mail -T 'Pine' -e pine %s"),
 -		("Serfuj do ...",          EXEC, "netscape %s"),
 -		("Pobierz Manual ...",     EXEC, "MANUAL_SEARCH(%s)"),
--		("Po³±cz siê z ...",       EXEC, "telnet %s"),
+-		("PoÅ‚Ä…cz siÄ™ z ...",       EXEC, "telnet %s"),
 -		("Pobierz plik z FTP ...", EXEC, "ftp %s")
 -	),
 -
 -	("Ekran",
--		("Ukryj Pozosta³e",         HIDE_OTHERS),
--		("Poka¿ wszystko",          SHOW_ALL),
--		("Uporz±dkowanie icon",     ARRANGE_ICONS),
--		("Odswie¿",                 REFRESH),
+-		("Ukryj PozostaÅ‚e",         HIDE_OTHERS),
+-		("PokaÅ¼ wszystko",          SHOW_ALL),
+-		("UporzÄ…dkowanie icon",     ARRANGE_ICONS),
+-		("OdswieÅ¼",                 REFRESH),
 -		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
 -		("Zachowaj Sesje",          SAVE_SESSION),
--		("Wyczy¶æ zachowan± sesje", CLEAR_SESSION)
+-		("WyczyÅ›Ä‡ zachowanÄ… sesje", CLEAR_SESSION)
 -	),
 -
 +	("Aplikacje", OPEN_MENU, "| wmconfig --output wmaker --rootmenu Applications 2>/dev/null "),
@@ -374,15 +374,15 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
 +		("Szukaj w manualach ...",     SHEXEC, "MANUAL_SEARCH(%s)")
 +  	),
 +  	("Ekran",
-+		("Ukryj pozosta³e",         HIDE_OTHERS),
-+  		("Poka¿ wszystko",          SHOW_ALL),
-+		("Uporz±dkuj ikony",     ARRANGE_ICONS),
-+		("Od¶wie¿",                 REFRESH),
++		("Ukryj pozostaÅ‚e",         HIDE_OTHERS),
++  		("PokaÅ¼ wszystko",          SHOW_ALL),
++		("UporzÄ…dkuj ikony",     ARRANGE_ICONS),
++		("OdÅ›wieÅ¼",                 REFRESH),
 +  		("Zablokuj",                EXEC, "xlock -allowroot -usefirst"),
-+		("Zachowaj sesjê",          SAVE_SESSION),
-+		("Wyczy¶æ zachowan± sesjê", CLEAR_SESSION)
++		("Zachowaj sesjÄ™",          SAVE_SESSION),
++		("WyczyÅ›Ä‡ zachowanÄ… sesjÄ™", CLEAR_SESSION)
 +  	),
- 	("Wygl±d",
+ 	("WyglÄ…d",
  		("Tematy",          OPEN_MENU, "-noext #wmdatadir#/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle"),
  		("Style",           OPEN_MENU, "-noext #wmdatadir#/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle"),
 @@ -155,7 +59,7 @@
@@ -392,6 +392,6 @@ diff -Nuard WindowMaker-0.80.1.orig/WindowMaker/plmenu.pl WindowMaker-0.80.1/Win
 -			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t)")
 +			("Obrazki", OPEN_MENU, "-noext #wmdatadir#/Backgrounds $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t")
  		),
--		("Zaoamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
-+		("Zapamiêtanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
- 		("Zapamiêtanie Ustawieñ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
+-		("ZaoamiÄ™tanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
++		("ZapamiÄ™tanie Tematu",        EXEC, "getstyle -t $HOME/GNUstep/Library/WindowMaker/Themes/'%a(Nazwa tematu,Wpisz nazwe pliku:)'"),
+ 		("ZapamiÄ™tanie UstawieÅ„ Ikon", EXEC, "geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/'%a(Ustawienia ikon,Wpisz nazwe pliku:)'")
