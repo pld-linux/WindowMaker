@@ -1,37 +1,21 @@
-appicon_captions_maxprotect.diff  -  Don't cover captions when maximizing windows
-
-See the screenshot at:
-
-    http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.png
-
-For use with the appicon_captions patch at:
-
- http://www.heily.com/mark/code_samples/appicon_captions.diff  (patch)
- http://www.heily.com/mark/code_samples/appicon_captions.png   (screenshot)
-
-Usage:
-
-	In WPrefs.app, disable the option entitled "When maximizing, don't cover icons"
-	Restart wmaker
-	Maximize a window with a captioned appicon
-
----cut here---cut here-----------cut here---cut here----
---- wm/src/actions.c.orig	Sat Feb 16 18:46:54 2002
-+++ wm/src/actions.c	Sat Feb 16 19:07:16 2002
-@@ -432,6 +432,8 @@
+diff -urN WindowMaker-0.92.0.orig/src/actions.c WindowMaker-0.92.0/src/actions.c
+--- WindowMaker-0.92.0.orig/src/actions.c	2005-06-21 19:48:05.760714592 +0200
++++ WindowMaker-0.92.0/src/actions.c	2005-06-22 14:42:01.627580296 +0200
+@@ -368,7 +368,8 @@
+     int new_width, new_height, new_x, new_y;
      int changed_h, changed_v, shrink_h, shrink_v;
      WArea usableArea, totalArea;
- 
-+    #define CAPTION_HEIGHT ( WMFontHeight(wwin->screen_ptr->clip_title_font) + 3 )
-+
-     if (WFLAGP(wwin, no_resizable))
+-
++    #define CAPTION_HEIGHT ( WMFontHeight(wwin->screen_ptr->clip_title_font) + 3)
++	
+     if (!IS_RESIZABLE(wwin))
          return;
  
-@@ -498,6 +499,7 @@
+@@ -444,6 +445,7 @@
              new_y -= wwin->frame->top_width;
              new_height += wwin->frame->bottom_width - 1;
          }
-+      new_height -= CAPTION_HEIGHT;
++	new_height -= CAPTION_HEIGHT;
      } else if (shrink_v) {
          new_y = wwin->old_geometry.y;
          new_height = wwin->old_geometry.height;
