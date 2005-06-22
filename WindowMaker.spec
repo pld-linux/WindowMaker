@@ -1,3 +1,7 @@
+
+# TODO
+# - either package or remove pkgconf .pc files
+
 %define		extraver	0.1
 %define		_snap		20050409
 
@@ -222,7 +226,6 @@ utilizando componentes estáticos (raramente necessário).
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-#%patch4 -p1	Obsoleted
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
@@ -230,9 +233,7 @@ utilizando componentes estáticos (raramente necessário).
 #%patch9 -p1	ISO-8859-2 or UTF-8? that's the question... 
 %patch10 -p1
 #%patch11 -p1	Temporarily disabled because of no pl.po file in tarball
-#%patch12 -p1	Obsoleted in this sources
 %patch13 -p1
-#%patch14 -p1	Outdated
 #%patch15 -p1 ???
 %patch16 -p1
 
