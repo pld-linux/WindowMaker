@@ -335,6 +335,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_wmpropsdir}/WindowMaker.desktop
 
 %attr(755,root,root) %{_bindir}/bughint
+%attr(755,root,root) %{_bindir}/convertfonts
 %attr(755,root,root) %{_bindir}/geticonset
 %attr(755,root,root) %{_bindir}/getstyle
 %attr(755,root,root) %{_bindir}/seticons
