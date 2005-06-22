@@ -221,27 +221,25 @@ utilizando componentes estáticos (raramente necessário).
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
+#%patch4 -p1	Obsoleted
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
+#%patch9 -p1	ISO-8859-2 or UTF-8? that's the question... 
 %patch10 -p1
-%patch11 -p1
-%patch12 -p1
+#%patch11 -p1	Temporarily disabled because of no pl.po file in tarball
+#%patch12 -p1	Obsoleted in this sources
 %patch13 -p1
-%patch14 -p1
-%patch15 -p1
+#%patch14 -p1	Outdated
+#%patch15 -p1 ???
 
-for f in WindowMaker/*menu*; do
-	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
-	mv -f $f.new $f
-done
+#for f in WindowMaker/*menu*; do
+#	sed s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f >$f.new
+#	mv -f $f.new $f
+#done
 
 mv -f po/{no,nb}.po
-mv -f po/{zh_TW.Big5,zh_TW}.po
-mv -f WPrefs.app/po/{zh_TW.Big5,zh_TW}.po
 
 %build
 %{__libtoolize}
@@ -339,7 +337,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/getstyle
 %attr(755,root,root) %{_bindir}/seticons
 %attr(755,root,root) %{_bindir}/setstyle
-%attr(755,root,root) %{_bindir}/wcopy
+#%attr(755,root,root) %{_bindir}/wcopy
 %attr(755,root,root) %{_bindir}/wdwrite
 %attr(755,root,root) %{_bindir}/wdread
 %attr(755,root,root) %{_bindir}/wkdemenu.pl
@@ -349,9 +347,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wmaker.inst
 %attr(755,root,root) %{_bindir}/wmsetbg
 %attr(755,root,root) %{_bindir}/wmsetup
-%attr(755,root,root) %{_bindir}/wmchlocale
-%attr(755,root,root) %{_bindir}/wpaste
-%attr(755,root,root) %{_bindir}/wsetfont
+#%attr(755,root,root) %{_bindir}/wmchlocale
+#%attr(755,root,root) %{_bindir}/wpaste
+#%attr(755,root,root) %{_bindir}/wsetfont
 %attr(755,root,root) %{_bindir}/wxcopy
 %attr(755,root,root) %{_bindir}/wxpaste
 %attr(755,root,root) %{_bindir}/dockit
