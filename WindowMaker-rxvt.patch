@@ -1,191 +1,186 @@
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu WindowMaker-0.80.1-p/WindowMaker/menu
---- WindowMaker-0.80.1/WindowMaker/menu	Wed Aug 14 07:39:11 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu	Wed Aug 14 07:35:28 2002
-@@ -117,7 +117,6 @@
- 		"Manual Browser" EXEC xman
- 	"Info" END
- 	"XTerm" EXEC xterm -sb 
--	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"Workspaces" WORKSPACE_MENU
- 	"Applications" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
- 
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.bg WindowMaker-0.80.1-p/WindowMaker/menu.bg
---- WindowMaker-0.80.1/WindowMaker/menu.bg	Wed Aug 14 07:39:11 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.bg	Wed Aug 14 07:35:28 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.bg WindowMaker-0.92.0/WindowMaker/menu.bg
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.bg	2005-06-21 19:48:05.851700760 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.bg	2005-06-22 14:22:05.344442976 +0200
 @@ -122,7 +122,6 @@
- 	"»ÌÙÓ" END
- 	"—Ú‡ÚË‡È..." SHEXEC %a(Run,¬˙‚Â‰ÂÚÂ ÍÓÏ‡Ì‰‡, ÍÓˇÚÓ ‰‡ ÒÂ ÒÚ‡ÚË‡:)
+ 	"–ò–Ω—Ñ–æ" END
+ 	"–°—Ç–∞—Ä—Ç–∏—Ä–∞–π..." SHEXEC %a(Run,–í—ä–≤–µ–¥–µ—Ç–µ –∫–æ–º–∞–Ω–¥–∞, –∫–æ—è—Ç–æ –¥–∞ —Å–µ —Å—Ç–∞—Ä—Ç–∏—Ä–∞:)
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"–‡·ÓÚÌË ÏÂÒÚ‡" WORKSPACE_MENU
- 	"œËÎÓÊÂÌËˇ" MENU
- 		"√‡ÙË˜ÌË" MENU
+ 	"–†–∞–±–æ—Ç–Ω–∏ –º–µ—Å—Ç–∞" WORKSPACE_MENU
+ 	"–ü—Ä–∏–ª–æ–∂–µ–Ω–∏—è" MENU
+ 		"–ì—Ä–∞—Ñ–∏—á–Ω–∏" MENU
 @@ -219,4 +218,4 @@
- 		"—Ú‡ÚË‡È IceWM" RESTART icewm
- 		"»ÁıÓ‰..."  EXIT
- 	"»ÁıÓ‰" END
--"œËÎÓÊÂÌËˇ" END
-\ No newline at end of file
-+"œËÎÓÊÂÌËˇ" END
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.ca WindowMaker-0.80.1-p/WindowMaker/menu.ca
---- WindowMaker-0.80.1/WindowMaker/menu.ca	Wed Aug 14 07:39:11 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.ca	Wed Aug 14 07:35:28 2002
+ 		"–°—Ç–∞—Ä—Ç–∏—Ä–∞–π IceWM" RESTART icewm
+ 		"–ò–∑—Ö–æ–¥..."  EXIT
+ 	"–ò–∑—Ö–æ–¥" END
+-"–ü—Ä–∏–ª–æ–∂–µ–Ω–∏—è" END
+\ Brak znaku nowej linii na koÒcu pliku
++"–ü—Ä–∏–ª–æ–∂–µ–Ω–∏—è" END
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.ca WindowMaker-0.92.0/WindowMaker/menu.ca
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.ca	2005-06-21 19:48:05.851700760 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.ca	2005-06-22 14:23:48.069826344 +0200
 @@ -116,7 +116,6 @@
                  "Manual d'instruccions" EXEC xman
-         "InformaciÛ" END
+         "Informaci√≥" END
          "XTerm" EXEC xterm -sb 
 -        "Rxvt" EXEC rxvt -bg black -fg white -fn fixed
          "Escriptoris" WORKSPACE_MENU
          "Aplicacions" MENU
-                 "Gr‡fics" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.da WindowMaker-0.80.1-p/WindowMaker/menu.da
---- WindowMaker-0.80.1/WindowMaker/menu.da	Wed Aug 14 07:39:11 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.da	Wed Aug 14 07:35:28 2002
+                 "Gr√†fics" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.da WindowMaker-0.92.0/WindowMaker/menu.da
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.da	2005-06-21 19:48:05.851700760 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.da	2005-06-22 14:25:12.013065032 +0200
 @@ -110,7 +110,6 @@
          "Info" END
- 	"K¯r..." SHEXEC "%a(K¯r,Indtast kommando der skal udf¯res:)"
+ 	"K√∏r..." SHEXEC "%a(K√∏r,Indtast kommando der skal udf√∏res:)"
          "XTerm" EXEC xterm -sb 
 -        "Rxvt" EXEC rxvt -bg black -fg white 
          "Arbejdsborde" WORKSPACE_MENU
          "Applikationer" MENU
                  "Grafik" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.el WindowMaker-0.80.1-p/WindowMaker/menu.el
---- WindowMaker-0.80.1/WindowMaker/menu.el	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.el	Wed Aug 14 07:35:28 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.el WindowMaker-0.92.0/WindowMaker/menu.el
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.el	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.el	2005-06-22 14:25:33.142852816 +0200
 @@ -125,7 +125,6 @@
- 	"–ÎÁÒÔˆÔÒﬂÂÚ" END
- 	"≈ÍÙ›ÎÂÛÁ..." SHEXEC %a(≈ÍÙ›ÎÂÛÁ,√Ò‹¯Â ÙÁÌ ÂÌÙÔÎﬁ ÒÔÚ ÂÍÙ›ÎÂÛÁ:)
+ 	"Œ†ŒªŒ∑œÅŒøœÜŒøœÅŒØŒµœÇ" END
+ 	"ŒïŒ∫œÑŒ≠ŒªŒµœÉŒ∑..." SHEXEC %a(ŒïŒ∫œÑŒ≠ŒªŒµœÉŒ∑,ŒìœÅŒ¨œàŒµ œÑŒ∑ŒΩ ŒµŒΩœÑŒøŒªŒÆ œÄœÅŒøœÇ ŒµŒ∫œÑŒ≠ŒªŒµœÉŒ∑:)
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn grfixed
- 	"≈Èˆ‹ÌÂÈÂÚ" WORKSPACE_MENU
- 	"–ÒÔ„Ò‹ÏÏ·Ù·" MENU
- 		"√Ò·ˆÈÍ‹" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.fi WindowMaker-0.80.1-p/WindowMaker/menu.fi
---- WindowMaker-0.80.1/WindowMaker/menu.fi	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.fi	Wed Aug 14 07:35:28 2002
+ 	"ŒïœÄŒπœÜŒ¨ŒΩŒµŒπŒµœÇ" WORKSPACE_MENU
+ 	"Œ†œÅŒøŒ≥œÅŒ¨ŒºŒºŒ±œÑŒ±" MENU
+ 		"ŒìœÅŒ±œÜŒπŒ∫Œ¨" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.es WindowMaker-0.92.0/WindowMaker/menu.es
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.es	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.es	2005-06-22 14:26:47.256585816 +0200
+@@ -44,13 +44,11 @@
+ 		"Copyright..." SHEXEC xmessage -center -font variable -title \
+ 	'WindowMaker 'WM_VERSION -file ~/GNUstep/Library/WindowMaker/Copyright
+ 		"Carga del sistema" SHEXEC xosview || xload
+-		"Lista de tarifas (top)" EXEC rxvt -ls -fg white -bg black -fn vga -e top
+ 		"Manual" EXEC xman
+ 	"Informacion ..." END
+ 
+         "Emuladores ..." MENU
+ 	        "Terminal X" EXEC xterm
+-                "Emulador de Terminal" EXEC rxvt -ls -fg white -bg black -fn vga
+         "Emuladores ..." END
+ 
+ 	"Aplicaciones ..." MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.fi WindowMaker-0.92.0/WindowMaker/menu.fi
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.fi	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.fi	2005-06-22 14:27:07.567498088 +0200
 @@ -115,7 +115,6 @@
  	"Tietoja" END
- 	"K‰ynnist‰..." SHEXEC %a(K‰ynnist‰,Kirjoita suoritettava komento:)
+ 	"K√§ynnist√§..." SHEXEC %a(K√§ynnist√§,Kirjoita suoritettava komento:)
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"Tyˆtilat" WORKSPACE_MENU
+ 	"Ty√∂tilat" WORKSPACE_MENU
  	"Sovellukset" MENU
  		"Grafiikka" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.fr WindowMaker-0.80.1-p/WindowMaker/menu.fr
---- WindowMaker-0.80.1/WindowMaker/menu.fr	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.fr	Wed Aug 14 07:35:28 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.fr WindowMaker-0.92.0/WindowMaker/menu.fr
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.fr	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.fr	2005-06-22 14:27:13.788552344 +0200
 @@ -161,7 +161,6 @@
  	"Informations" END
- 	"DÈmarrer..." SHEXEC %a(DÈmarrer,Tapez une commande ‡ dÈmarrer:)
+ 	"D√©marrer..." SHEXEC %a(D√©marrer,Tapez une commande √† d√©marrer:)
  	"Terminal X" EXEC xterm -sb
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
  	"Bureaux" WORKSPACE_MENU
  	"Applications" MENU
  		"Graphismes" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.he WindowMaker-0.80.1-p/WindowMaker/menu.he
---- WindowMaker-0.80.1/WindowMaker/menu.he	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.he	Wed Aug 14 07:35:28 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.he WindowMaker-0.92.0/WindowMaker/menu.he
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.he	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.he	2005-06-22 14:27:32.666682432 +0200
 @@ -102,7 +102,6 @@
  		"Manual Browser" EXEC xman
- 	"Ú„ÈÓ" END
+ 	"◊¢◊ì◊ô◊û" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"‰„Â·Ú È·Á¯Ó" WORKSPACE_MENU
- 	"ÌÈÓÂ˘È" MENU
- 		"‰˜ÈÙ¯‚" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.hr WindowMaker-0.80.1-p/WindowMaker/menu.hr
---- WindowMaker-0.80.1/WindowMaker/menu.hr	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.hr	Wed Aug 14 07:35:28 2002
+ 	"◊î◊ì◊ï◊ë◊¢ ◊ô◊ë◊ó◊®◊û" WORKSPACE_MENU
+ 	"◊ù◊ô◊û◊ï◊©◊ô" MENU
+ 		"◊î◊ß◊ô◊§◊®◊í" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.hr WindowMaker-0.92.0/WindowMaker/menu.hr
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.hr	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.hr	2005-06-22 14:27:42.822138568 +0200
 @@ -103,7 +103,6 @@
-                 "PretraæivaË manuala" EXEC xman
+                 "Pretra≈æivaƒç manuala" EXEC xman
  	"Informacije" END
  	"XTerm u boji" EXEC nxterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
  	"Xisp" EXEX xisp
  	"Radni prostori" WORKSPACE_MENU
  	"Programi" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.hu WindowMaker-0.80.1-p/WindowMaker/menu.hu
---- WindowMaker-0.80.1/WindowMaker/menu.hu	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.hu	Wed Aug 14 07:35:28 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.hu WindowMaker-0.92.0/WindowMaker/menu.hu
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.hu	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.hu	2005-06-22 14:27:52.533662192 +0200
 @@ -118,7 +118,6 @@
- 	"InfÛ" END
- 	"Futtat·s..." SHEXEC %a(Futtat·s,Õrd be a futtatni kÌv·nt programot:)
- 	"X Termin·l" EXEC xterm -sb 
+ 	"Inf√≥" END
+ 	"Futtat√°s..." SHEXEC %a(Futtat√°s,√çrd be a futtatni k√≠v√°nt programot:)
+ 	"X Termin√°l" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"Gnome termin·l" EXEC gnome-terminal --background black --foreground white --font -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-1
- 	"Munkafel¸letek" WORKSPACE_MENU
- 	"Alkalmaz·sok" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.ja WindowMaker-0.80.1-p/WindowMaker/menu.ja
---- WindowMaker-0.80.1/WindowMaker/menu.ja	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.ja	Wed Aug 14 07:35:28 2002
+ 	"Gnome termin√°l" EXEC gnome-terminal --background black --foreground white --font -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-1
+ 	"Munkafel√ºletek" WORKSPACE_MENU
+ 	"Alkalmaz√°sok" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.ja WindowMaker-0.92.0/WindowMaker/menu.ja
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.ja	2005-06-21 19:48:05.852700608 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.ja	2005-06-22 14:28:12.351649400 +0200
 @@ -108,7 +108,6 @@
- 		"•ﬁ•À•Â•¢•Î•÷•È•¶•∂" EXEC xman
- 	"æ Û" END
+ 		"„Éû„Éã„É•„Ç¢„É´„Éñ„É©„Ç¶„Ç∂" EXEC xman
+ 	"ÊÉÖÂ†±" END
  	"KTerm" EXEC kterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white
- 	"•Ô°º•Ø•π•⁄°º•π" WORKSPACE_MENU
- 	"•¢•◊•Í•±°º•∑•Á•Û" MENU
- 		"•∞•È•’•£•√•Ø•π" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.no WindowMaker-0.80.1-p/WindowMaker/menu.no
---- WindowMaker-0.80.1/WindowMaker/menu.no	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.no	Wed Aug 14 07:35:28 2002
+ 	"„ÉØ„Éº„ÇØ„Çπ„Éö„Éº„Çπ" WORKSPACE_MENU
+ 	"„Ç¢„Éó„É™„Ç±„Éº„Ç∑„Éß„É≥" MENU
+ 		"„Ç∞„É©„Éï„Ç£„ÉÉ„ÇØ„Çπ" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.no WindowMaker-0.92.0/WindowMaker/menu.no
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.no	2005-06-21 19:48:05.853700456 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.no	2005-06-22 14:28:34.258319080 +0200
 @@ -105,7 +105,6 @@
  		"Manual leser" EXEC stepman
  	"Info" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"Arbeids-OmrÂder" WORKSPACE_MENU
+ 	"Arbeids-Omr√•der" WORKSPACE_MENU
  	"Applikasjoner" MENU
  		"Grafikk" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.pl WindowMaker-0.80.1-p/WindowMaker/menu.pl
---- WindowMaker-0.80.1/WindowMaker/menu.pl	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.pl	Wed Aug 14 07:35:28 2002
-@@ -106,7 +106,6 @@
- 	"Informacja" END
- 	
-         "XTerm" EXEC xterm -sb
--        "Rxvt"  EXEC rxvt -bg black -fg white -fn fixed	
- 	"Pulpity" WORKSPACE_MENU
- 	
- 	"Aplikacje" OPEN_MENU | wmconfig --output wmaker --rootmenu Applications 2>/dev/null
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.pt WindowMaker-0.80.1-p/WindowMaker/menu.pt
---- WindowMaker-0.80.1/WindowMaker/menu.pt	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.pt	Wed Aug 14 07:35:28 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.pt WindowMaker-0.92.0/WindowMaker/menu.pt
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.pt	2005-06-21 19:48:05.877696808 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.pt	2005-06-22 14:28:46.199503744 +0200
 @@ -112,7 +112,6 @@
  		"Leitor de Manual" EXEC xman
- 	"InformaÁıes" END
+ 	"Informa√ß√µes" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"¡reas de Trabalho" WORKSPACE_MENU
- 	"AplicaÁıes" MENU
- 		"Gr·ficos" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.ro WindowMaker-0.80.1-p/WindowMaker/menu.ro
---- WindowMaker-0.80.1/WindowMaker/menu.ro	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.ro	Wed Aug 14 07:35:28 2002
+ 	"√Åreas de Trabalho" WORKSPACE_MENU
+ 	"Aplica√ß√µes" MENU
+ 		"Gr√°ficos" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.ro WindowMaker-0.92.0/WindowMaker/menu.ro
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.ro	2005-06-21 19:48:05.877696808 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.ro	2005-06-22 14:28:57.921721696 +0200
 @@ -115,7 +115,6 @@
- 	"Informa˛ii" END
- 	"Execut„..." SHEXEC %a(Execut„,Introduce˛i o comand„:)
+ 	"Informa≈£ii" END
+ 	"ExecutƒÉ..." SHEXEC %a(ExecutƒÉ,Introduce≈£i o comandƒÉ:)
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn -misc-fixed-medium-*-*--*-*-*-*-*-*-iso8859-2 -fb -misc-fixed-medium-*-*--*-*-*-*-*-*-iso8859-2
- 	"Spa˛ii de Lucru" WORKSPACE_MENU
- 	"Aplica˛ii" MENU
- 		"Grafic„" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.ru WindowMaker-0.80.1-p/WindowMaker/menu.ru
---- WindowMaker-0.80.1/WindowMaker/menu.ru	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.ru	Wed Aug 14 07:35:28 2002
+ 	"Spa≈£ii de Lucru" WORKSPACE_MENU
+ 	"Aplica≈£ii" MENU
+ 		"GraficƒÉ" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.ru WindowMaker-0.92.0/WindowMaker/menu.ru
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.ru	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.ru	2005-06-22 14:29:11.001733232 +0200
 @@ -62,7 +62,6 @@
- 		"“œ”Õœ‘“ Ú’Àœ◊œƒ”‘◊" EXEC xman
- 	"ÈŒ∆œ“Õ¡√…—" END
+ 		"–ü—Ä–æ—Å–º–æ—Ç—Ä –†—É–∫–æ–≤–æ–¥—Å—Ç–≤" EXEC xman
+ 	"–ò–Ω—Ñ–æ—Ä–º–∞—Ü–∏—è" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
  	"XJed"	EXEC xjed 
- 	"Ú¡¬œﬁ…≈ Õ≈”‘¡" WORKSPACE_MENU
- 	"“…Ãœ÷≈Œ…—" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.se WindowMaker-0.80.1-p/WindowMaker/menu.se
---- WindowMaker-0.80.1/WindowMaker/menu.se	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.se	Wed Aug 14 07:35:28 2002
+ 	"–†–∞–±–æ—á–∏–µ –º–µ—Å—Ç–∞" WORKSPACE_MENU
+ 	"–ü—Ä–∏–ª–æ–∂–µ–Ω–∏—è" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.se WindowMaker-0.92.0/WindowMaker/menu.se
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.se	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.se	2005-06-22 14:29:21.786093760 +0200
 @@ -111,8 +111,6 @@
- 		"Manuall‰sare" EXEC xman
+ 		"Manuall√§sare" EXEC xman
  	"Info" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt (fixed)" EXEC rxvt -bg black -fg white -fn fixed
@@ -193,57 +188,65 @@ diff -Naur WindowMaker-0.80.1/WindowMaker/menu.se WindowMaker-0.80.1-p/WindowMak
  	"Arbetsbord" WORKSPACE_MENU
  	"Program" MENU
  		"Grafik" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.sk WindowMaker-0.80.1-p/WindowMaker/menu.sk
---- WindowMaker-0.80.1/WindowMaker/menu.sk	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.sk	Wed Aug 14 07:35:29 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.sk WindowMaker-0.92.0/WindowMaker/menu.sk
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.sk	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.sk	2005-06-22 14:29:49.623861776 +0200
 @@ -129,7 +129,6 @@
- 	"Inform·cie" END
- 	"Spustiª..." SHEXEC %a(Spustiª,Zadajte prÌkaz:)
+ 	"Inform√°cie" END
+ 	"Spusti≈•..." SHEXEC %a(Spusti≈•,Zadajte pr√≠kaz:)
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"PracovnÈ plochy" WORKSPACE_MENU
- 	"Aplik·cie" MENU
+ 	"Pracovn√© plochy" WORKSPACE_MENU
+ 	"Aplik√°cie" MENU
  		"Grafika" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.sl WindowMaker-0.80.1-p/WindowMaker/menu.sl
---- WindowMaker-0.80.1/WindowMaker/menu.sl	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.sl	Wed Aug 14 07:35:29 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.sl WindowMaker-0.92.0/WindowMaker/menu.sl
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.sl	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.sl	2005-06-22 14:29:57.953595464 +0200
 @@ -111,7 +111,6 @@
- 		"PomoË (Iskalec man strani)" EXEC xman
+ 		"Pomoƒç (Iskalec man strani)" EXEC xman
  	"Informacije" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
  	"Delovni prostori" WORKSPACE_MENU
  	"Aplikacije" MENU
  		"Grafika" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.tr WindowMaker-0.80.1-p/WindowMaker/menu.tr
---- WindowMaker-0.80.1/WindowMaker/menu.tr	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.tr	Wed Aug 14 07:35:29 2002
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.tr WindowMaker-0.92.0/WindowMaker/menu.tr
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.tr	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.tr	2005-06-22 14:30:05.153500912 +0200
 @@ -97,7 +97,6 @@
- 		"K˝lavuz Taray˝c˝s˝" EXEC xman
+ 		"Kƒ±lavuz Tarayƒ±cƒ±sƒ±" EXEC xman
  	"Bilgi" END
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"«al˝˛ma Alanlar˝" WORKSPACE_MENU
+ 	"√áalƒ±≈üma Alanlarƒ±" WORKSPACE_MENU
  	"Uygulamalar" MENU
- 		"Gˆr¸nt¸" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/menu.zh_CN WindowMaker-0.80.1-p/WindowMaker/menu.zh_CN
---- WindowMaker-0.80.1/WindowMaker/menu.zh_CN	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/menu.zh_CN	Wed Aug 14 07:35:29 2002
+ 		"G√∂r√ºnt√º" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/menu.zh_CN WindowMaker-0.92.0/WindowMaker/menu.zh_CN
+--- WindowMaker-0.92.0.orig/WindowMaker/menu.zh_CN	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/menu.zh_CN	2005-06-22 14:30:18.803425808 +0200
 @@ -115,7 +115,6 @@
- 	"–≈œ¢" END
- 	"‘À––..." EXEC %a(‘À––,“™÷¥––µƒ√¸¡Ó:)
+ 	"‰ø°ÊÅØ" END
+ 	"ËøêË°å..." EXEC %a(ËøêË°å,Ë¶ÅÊâßË°åÁöÑÂëΩ‰ª§:)
  	"XTerm" EXEC xterm -sb 
 -	"Rxvt" EXEC rxvt -bg black -fg white -fn fixed
- 	"π§◊˜ø’º‰" WORKSPACE_MENU
- 	"”¶”√≥Ã–Ú" OPEN_MENU
- 		"Õº–Œ" MENU
-diff -Naur WindowMaker-0.80.1/WindowMaker/plmenu.bg WindowMaker-0.80.1-p/WindowMaker/plmenu.bg
---- WindowMaker-0.80.1/WindowMaker/plmenu.bg	Wed Aug 14 07:39:12 2002
-+++ WindowMaker-0.80.1-p/WindowMaker/plmenu.bg	Wed Aug 14 07:35:29 2002
-@@ -103,4 +103,4 @@
-   ("—Ú‡ÚË‡È IceWM", RESTART, icewm),
-   ("»ÁıÓ‰...", EXIT)
+ 	"Â∑•‰ΩúÁ©∫Èó¥" WORKSPACE_MENU
+ 	"Â∫îÁî®Á®ãÂ∫è" OPEN_MENU
+ 		"ÂõæÂΩ¢" MENU
+diff -urN WindowMaker-0.92.0.orig/WindowMaker/plmenu.bg WindowMaker-0.92.0/WindowMaker/plmenu.bg
+--- WindowMaker-0.92.0.orig/WindowMaker/plmenu.bg	2005-06-21 19:48:05.878696656 +0200
++++ WindowMaker-0.92.0/WindowMaker/plmenu.bg	2005-06-22 14:31:18.283383480 +0200
+@@ -9,7 +9,6 @@
+   ),
+  ("–°—Ç–∞—Ä—Ç–∏—Ä–∞–π...", SHEXEC, "%a(Run,–í—ä–≤–µ–¥–µ—Ç–µ –∫–æ–º–∞–Ω–¥–∞, –∫–æ—è—Ç–æ –¥–∞ —Å–µ —Å—Ç–∞—Ä—Ç–∏—Ä–∞:)"),
+  ("XTerm", EXEC, "xterm -sb"),
+- ("Rxvt", EXEC, "rxvt -bg black -fg white -fn fixed"),
+  ("–†–∞–±–æ—Ç–Ω–∏ –º–µ—Å—Ç–∞", WORKSPACE_MENU),
+  ("–ü—Ä–∏–ª–æ–∂–µ–Ω–∏—è",
+   ("–ì—Ä–∞—Ñ–∏—á–Ω–∏",
+@@ -103,4 +102,4 @@
+   ("–°—Ç–∞—Ä—Ç–∏—Ä–∞–π IceWM", RESTART, icewm),
+   ("–ò–∑—Ö–æ–¥...", EXIT)
   )
 -)
-\ No newline at end of file
+\ Brak znaku nowej linii na koÒcu pliku
 +)
