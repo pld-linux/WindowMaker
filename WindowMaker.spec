@@ -8,12 +8,12 @@ Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
 Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
-Version:	0.91.0
-Release:	7
+Version:	0.92.0
+Release:	0.1
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
-# Source0-md5:	be07953e905d1e42fe7a65ac2193a5f9
+# Source0-md5:	678cb4a9b22a557cfb524dc3cb457c08
 Source1:	%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
 Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
@@ -31,8 +31,7 @@ Patch7:		%{name}-dockit.patch
 Patch8:		%{name}-pl.po-update.patch
 Patch9:		http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch10:	%{name}-localenames.patch
-Patch11:	%{name}-updateIconImage.patch
-Patch12:	%{name}-0.91.0-translucency-1.patch
+Patch11:	%{name}-0.91.0-translucency-1.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -226,7 +225,6 @@ utilizando componentes estАticos (raramente necessАrio).
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
-%patch12 -p1
 
 for f in WindowMaker/*menu*; do
 	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
@@ -242,6 +240,9 @@ mv -f po/{no,nb}.po
 %{__perl} -pi -e 's/test \$x86 = 1/false/' configure.ac
 
 %build
+%ifarch %{x8664}
+export ac_cv_c_inline_asm=no
+%endif
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
@@ -267,7 +268,12 @@ cd ..
 	--enable-static \
 	--enable-usermenu \
 	--with-appspath=%{_libdir}/GNUstep/Apps \
-	--with-nlsdir=%{_datadir}/locale
+	--with-nlsdir=%{_datadir}/locale \
+	--with-gnustepdir=%{_libdir}/GNUstep \
+	--enable-sound \
+	--enable-gnome \
+	--enable-kde
+	
 
 touch WindowMaker/Defaults/W*.in
 
@@ -349,15 +355,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xsessions/WindowMaker.desktop
 
 # the first one is shared with gnustep-make...
-%dir %{_libdir}/GNUstep/Apps
-%dir %{_libdir}/GNUstep/Apps/WPrefs.app
+%dir %{_libdir}/GNUstep/Applications
+%dir %{_libdir}/GNUstep/Applications/WPrefs.app
 
-%attr(755,root,root) %{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs
+%attr(755,root,root) %{_libdir}/GNUstep/Applications/WPrefs.app/WPrefs
 
-%{_libdir}/GNUstep/Apps/WPrefs.app/tiff
-%{_libdir}/GNUstep/Apps/WPrefs.app/xpm
-%{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs.tiff
-%{_libdir}/GNUstep/Apps/WPrefs.app/WPrefs.xpm
+%{_libdir}/GNUstep/Applications/WPrefs.app/tiff
+%{_libdir}/GNUstep/Applications/WPrefs.app/xpm
+%{_libdir}/GNUstep/Applications/WPrefs.app/WPrefs.tiff
+%{_libdir}/GNUstep/Applications/WPrefs.app/WPrefs.xpm
 
 %files libs
 %defattr(644,root,root,755)

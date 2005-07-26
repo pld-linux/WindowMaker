@@ -11,16 +11,12 @@
  POTFILES  = \
 --- WindowMaker-0.80.2/configure.ac.orig	Fri Jan 30 15:16:44 2004
 +++ WindowMaker-0.80.2/configure.ac	Fri Jan 30 15:31:17 2004
-@@ -244,9 +244,9 @@
+@@ -281,7 +281,7 @@
  
  dnl List of supported locales
  dnl -------------------------
--supported_locales="be bg bs ca cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW.Big5"
--supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW.Big5"
--supported_wings_locales="bg ca cs de fr pl sk"
+-supported_locales="be bg bs ca cs da de el es et fi fr gl hr hu it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW"
 +supported_locales="be bg bs ca cs da de el es et fi fr gl hr hu it ja ko ms nl nb pl pt ro ru sk sv tr zh_CN zh_TW"
-+supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW"
-+supported_wings_locales="bg ca cs de fr pl sk"
+ supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pl pt ru sk zh_CN zh_TW"
+ supported_wings_locales="bg ca cs de fr pl sk"
  
- for lang in $LINGUAS; do
- 	ok=0
