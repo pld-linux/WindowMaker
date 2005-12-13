@@ -37,8 +37,8 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libjpeg-devel >= 6b
+BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	libungif-devel
@@ -273,7 +273,7 @@ cd ..
 	--enable-sound \
 	--enable-gnome \
 	--enable-kde
-	
+
 
 touch WindowMaker/Defaults/W*.in
 
@@ -324,7 +324,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGFORM BUGS ChangeLog FAQ NEWS README
 
 %dir %{_sysconfdir}/WindowMaker
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/WindowMaker/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/WindowMaker/*
 
 %{_mandir}/man1/*
 %lang(sk) %{_mandir}/sk/man1/*
