@@ -199,3 +199,16 @@ diff -ur WindowMaker-0.64.0/src/icon.c WindowMaker-0.64.0.new/src/icon.c
              return;
  
          }
+--- WindowMaker-0.92.0/WPrefs.app/po/pl.po.orig	2006-02-02 23:40:48.467023000 +0100
++++ WindowMaker-0.92.0/WPrefs.app/po/pl.po	2006-02-02 23:44:37.461334500 +0100
+@@ -402,6 +402,10 @@
+ msgid "Smooth font edges (needs restart)."
+ msgstr "Gładkie krawędzie fontów (wymagają restartu)."
+ 
++#: ../../WPrefs.app/Expert.c:83
++msgid "Launch applications and restore windows with a single click"
++msgstr "Uruchamiaj aplikacje i odtwarzaj okna pojedynczym kliknięciem"
++
+ #: ../../WPrefs.app/Expert.c:117
+ msgid "Expert User Preferences"
+ msgstr "Ustawienia zaawansowanego użytkownika"
