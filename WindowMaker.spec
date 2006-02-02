@@ -9,7 +9,7 @@ Summary(ru):	WindowMaker - оконный менеджер для X11
 Summary(uk):	WindowMaker - в╕конний менеджер для X11
 Name:		WindowMaker
 Version:	0.92.0
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
@@ -20,20 +20,19 @@ Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.
 # Source2-md5:	07c7700daaaf232bc490f5abaabef085
 Source3:	%{name}.desktop
 Source6:	%{name}-xsession.desktop
-Patch0:		%{name}-CFLAGS.patch
-Patch1:		%{name}-vfmg.patch
-Patch2:		%{name}-pixmaps.patch
-Patch3:		%{name}-shared.patch
-Patch4:		%{name}-IconPosition.patch
-Patch5:		%{name}-singleclick.patch
-Patch6:		%{name}-plmenu.patch
-Patch7:		%{name}-dockit.patch
-Patch8:		%{name}-pl.po-update.patch
+Patch0:		%{name}-cvs.patch
+Patch1:		%{name}-pl.po-update.patch
+Patch2:		%{name}-CFLAGS.patch
+Patch3:		%{name}-vfmg.patch
+Patch4:		%{name}-shared.patch
+Patch5:		%{name}-IconPosition.patch
+Patch6:		%{name}-singleclick.patch
+Patch7:		%{name}-plmenu.patch
+Patch8:		%{name}-dockit.patch
 Patch9:		http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch10:	%{name}-localenames.patch
 Patch11:	%{name}-0.91.0-translucency-1.patch
 Patch12:	%{name}-gnustep.patch
-Patch13:	%{name}-cvs.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -215,7 +214,6 @@ utilizando componentes estАticos (raramente necessАrio).
 
 %prep
 %setup -q -a 1 -a 2
-%patch13 -p1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
