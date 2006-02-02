@@ -33,6 +33,7 @@ Patch9:		http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch10:	%{name}-localenames.patch
 Patch11:	%{name}-0.91.0-translucency-1.patch
 Patch12:	%{name}-gnustep.patch
+Patch13:	%{name}-cvs.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -214,6 +215,7 @@ utilizando componentes estáticos (raramente necessário).
 
 %prep
 %setup -q -a 1 -a 2
+%patch13 -p1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -235,26 +237,21 @@ done
 
 mv -f po/{no,nb}.po
 
-# don't use x86 asm, it's broken
-# (wrlib/x86_specific.c contains far too many assumptions about function
-#  frame used by gcc, so it can crash depending on gcc version and
-#  optimizations - and did so in Ac i686 packages)
-%{__perl} -pi -e 's/test \$x86 = 1/false/' configure.ac
-
 %build
-%ifarch %{x8664}
-export ac_cv_c_inline_asm=no
-%endif
+#%ifarch %{x8664}
+# hack, should be obsolete - needs check
+#export ac_cv_c_inline_asm=no
+#%endif
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
 %{__automake}
 %{__autoconf}
 cd %{name}-extra-%{extraver}
-	%{__libtoolize}
-	%{__aclocal}
-	%{__autoconf}
-	%{__automake}
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 cd ..
 
 %{__perl} -pi -e 's/defaultAppIcon.#extension#;SharedAppIcon = Yes;/defaultAppIcon.#extension#;/' \
@@ -275,7 +272,6 @@ cd ..
 	--enable-sound \
 	--enable-gnome \
 	--enable-kde
-
 
 touch WindowMaker/Defaults/W*.in
 
@@ -308,10 +304,8 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
 
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
-cd %{name}-extra-%{extraver}
-%{__make} install \
+%{__make} -C %{name}-extra-%{extraver} install \
 	DESTDIR=$RPM_BUILD_ROOT
-cd ..
 
 %find_lang %{name} --all-name
 
