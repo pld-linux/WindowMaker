@@ -638,9 +638,9 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  
  POTFILES  = \
  	$(top_builddir)/WPrefs.app/Appearance.c \
---- WindowMaker-0.91.0/WPrefs.app/po/pl.po.orig	1970-01-01 01:00:00.000000000 +0100
-+++ WindowMaker-0.91.0/WPrefs.app/po/pl.po	2004-11-07 18:34:13.590967832 +0100
-@@ -0,0 +1,2087 @@
+--- WindowMaker-0.92.0/WPrefs.app/po/pl.po.orig	1970-01-01 01:00:00.000000000 +0100
++++ WindowMaker-0.92.0/WPrefs.app/po/pl.po	2006-02-02 23:30:28.932304750 +0100
+@@ -0,0 +1,2105 @@
 +# Polish translations for WPrefs.app.
 +# This file is distributed under the same license as the WPrefs package.
 +# Jakub Bogusz <qboosh@pld-linux.org.pl>, 2002, 2004.
@@ -649,9 +649,10 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#
 +msgid ""
 +msgstr ""
-+"Project-Id-Version: WPrefs.app 0.91.0\n"
-+"POT-Creation-Date: 2004-11-07 17:59+0100\n"
-+"PO-Revision-Date: 2004-11-07 18:01+0100\n"
++"Project-Id-Version: WPrefs.app 0.92.0\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2006-02-02 23:27+0100\n"
++"PO-Revision-Date: 2006-02-02 23:30+0100\n"
 +"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 +"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 +"MIME-Version: 1.0\n"
@@ -675,6 +676,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgstr "Właściciel okna aktywnego"
 +
 +#: ../../WPrefs.app/Appearance.c:1570 ../../WPrefs.app/Appearance.c:1893
++#: ../../WPrefs.app/FontSimple.c:108
 +msgid "Menu Title"
 +msgstr "Tytuł menu"
 +
@@ -1015,43 +1017,39 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"różnych opcji i ustawienie liczby kolorów\n"
 +"zarezerwowanych dla Window Makera przy 8bpp."
 +
-+#: ../../WPrefs.app/Expert.c:76
++#: ../../WPrefs.app/Expert.c:75
 +msgid "Disable miniwindows (icons for minimized windows). For use with KDE/GNOME."
 +msgstr "Wyłącz miniokna (ikony dla pomniejszonych okien). Do używania z KDE/GNOME."
 +
-+#: ../../WPrefs.app/Expert.c:77
++#: ../../WPrefs.app/Expert.c:76
 +msgid "Do not set non-WindowMaker specific parameters (do not use xset)."
 +msgstr "Nie ustawiaj parametrów innych niż WindowMakerowe (nie używaj xset)."
 +
-+#: ../../WPrefs.app/Expert.c:78
++#: ../../WPrefs.app/Expert.c:77
 +msgid "Automatically save session when exiting Window Maker."
 +msgstr "Automatycznie zachowuj sesję przy opuszczaniu Window Makera."
 +
-+#: ../../WPrefs.app/Expert.c:79
++#: ../../WPrefs.app/Expert.c:78
 +msgid "Use SaveUnder in window frames, icons, menus and other objects."
 +msgstr "Używaj ZapiszPod w ramkach okien, ikonach, menu i innych obiektach."
 +
-+#: ../../WPrefs.app/Expert.c:80
++#: ../../WPrefs.app/Expert.c:79
 +msgid "Disable confirmation panel for the Kill command."
 +msgstr "Wyłącz panel potwierdzenia dla polecenia Zabij."
 +
-+#: ../../WPrefs.app/Expert.c:81
++#: ../../WPrefs.app/Expert.c:80
 +msgid "Disable selection animation for selected icons."
 +msgstr "Wyłącz animację wyboru dla zaznaczonych ikon."
 +
-+#: ../../WPrefs.app/Expert.c:82
++#: ../../WPrefs.app/Expert.c:81
 +msgid "Smooth font edges (needs restart)."
 +msgstr "Gładkie krawędzie fontów (wymagają restartu)."
 +
-+#: ../../WPrefs.app/Expert.c:83
-+msgid "Launch applications and restore windows with a single click"
-+msgstr "Uruchamiaj aplikacje i odtwarzaj okna pojedynczym kliknięciem"
-+
-+#: ../../WPrefs.app/Expert.c:120
++#: ../../WPrefs.app/Expert.c:117
 +msgid "Expert User Preferences"
 +msgstr "Ustawienia zaawansowanego użytkownika"
 +
-+#: ../../WPrefs.app/Expert.c:122
++#: ../../WPrefs.app/Expert.c:119
 +msgid ""
 +"Options for people who know what they're doing...\n"
 +"Also have some other misc. options."
@@ -1121,27 +1119,47 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"Sposób przejmowania klawiatury, przełączania mapy\n"
 +"kolorów przy 8bpp i inne podobne opcje."
 +
-+#: ../../WPrefs.app/FontSimple.c:689
++#: ../../WPrefs.app/FontSimple.c:107
++msgid "Window Title"
++msgstr "Tytuł okna"
++
++#: ../../WPrefs.app/FontSimple.c:109
++msgid "Menu Text"
++msgstr "Tekst menu"
++
++#: ../../WPrefs.app/FontSimple.c:110
++msgid "Icon Title"
++msgstr "Tytuł ikony"
++
++#: ../../WPrefs.app/FontSimple.c:111
++msgid "Clip Title"
++msgstr "Tytuł spinacza"
++
++#: ../../WPrefs.app/FontSimple.c:112
++msgid "Desktop Caption"
++msgstr "Podpis pulpitu"
++
++#: ../../WPrefs.app/FontSimple.c:692
 +msgid "Sample Text"
 +msgstr "Przykładowy tekst"
 +
-+#: ../../WPrefs.app/FontSimple.c:707
++#: ../../WPrefs.app/FontSimple.c:710
 +msgid "Family"
 +msgstr "Rodzina"
 +
-+#: ../../WPrefs.app/FontSimple.c:736
++#: ../../WPrefs.app/FontSimple.c:739
 +msgid "Style"
 +msgstr "Styl"
 +
-+#: ../../WPrefs.app/FontSimple.c:739
++#: ../../WPrefs.app/FontSimple.c:742
 +msgid "Size"
 +msgstr "Rozmiar"
 +
-+#: ../../WPrefs.app/FontSimple.c:777
++#: ../../WPrefs.app/FontSimple.c:780
 +msgid "Font Configuration"
 +msgstr "Ustawienia fontów"
 +
-+#: ../../WPrefs.app/FontSimple.c:779
++#: ../../WPrefs.app/FontSimple.c:782
 +msgid "Configure fonts for Window Maker titlebars, menus etc."
 +msgstr "Ustawienia fontów dla pasków tytułowych Window Makera, menu itp."
 +
@@ -2707,37 +2725,37 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgid " --help\t\tprint this message and exit"
 +msgstr " --help\t\twypisanie tego opisu i zakończenie działania"
 +
-+#: ../../WPrefs.app/main.c:122
++#: ../../WPrefs.app/main.c:136
 +#, c-format
 +msgid "too few arguments for %s"
 +msgstr "za mało argumentów dla %s"
 +
-+#: ../../WPrefs.app/main.c:145
++#: ../../WPrefs.app/main.c:159
 +msgid "X server does not support locale"
 +msgstr "X serwer nie obsługuje lokalizacji"
 +
-+#: ../../WPrefs.app/main.c:148
++#: ../../WPrefs.app/main.c:162
 +msgid "cannot set locale modifiers"
 +msgstr "nie można ustawić modyfikatorów lokalizacji"
 +
-+#: ../../WPrefs.app/main.c:154
++#: ../../WPrefs.app/main.c:168
 +#, c-format
 +msgid "could not open display %s"
 +msgstr "nie można otworzyć ekranu %s"
 +
-+#: ../../WPrefs.app/main.c:162
++#: ../../WPrefs.app/main.c:176
 +msgid "could not initialize application"
 +msgstr "nie można zainicjalizować aplikacji"
---- WindowMaker-0.91.0/po/pl.po.orig	2004-10-17 08:28:08.000000000 +0200
-+++ WindowMaker-0.91.0/po/pl.po	2004-11-07 18:39:27.921182376 +0100
-@@ -1,935 +1,1344 @@
+--- WindowMaker-0.92.0/po/pl.po.orig	2004-10-17 08:28:08.000000000 +0200
++++ WindowMaker-0.92.0/po/pl.po	2006-02-02 23:36:31.702976500 +0100
+@@ -1,935 +1,1294 @@
 -# Pre-translation has bean done using PePeSza v0.6
 -# get your own copy of PePeSza from http://www.ids.pl/~pkollegu/pepesza.html
 -#
  # Window Maker Polish translation.
  # Copyright (C) 1999 Free Software Foundation, Inc.
  # Piotr Dembiński <pdemb@fanthom.math.put.poznan.pl>, 1998.
-+# Jakub Bogusz <qboosh@pld-linux.org.pl>, 2002, 2004.
++# Jakub Bogusz <qboosh@pld-linux.org.pl>, 2002-2006.
 +#
 +# Pre-translation has bean done using PePeSza v0.6
 +# get your own copy of PePeSza from http://www.ids.pl/~pkollegu/pepesza.html
@@ -2751,9 +2769,10 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -"PO-Revision-Date: 2003-04-15 20:21+0200\n"
 -"Last-Translator: Piotr Dembiński <pdemb@fanthom.math.put.poznan.pl>\n"
 -"Language-Team: Polish <pl@li.org>\n"
-+"Project-Id-Version: WindowMaker 0.91.0\n"
-+"POT-Creation-Date: 2004-11-02 01:43+0100\n"
-+"PO-Revision-Date: 2004-11-07 18:30+0100\n"
++"Project-Id-Version: WindowMaker 0.92.0\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2006-02-02 23:33+0100\n"
++"PO-Revision-Date: 2006-02-02 23:35+0100\n"
 +"Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 +"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
  "MIME-Version: 1.0\n"
@@ -2779,7 +2798,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/dock.c:3060 ../src/dockedapp.c:206 ../src/dockedapp.c:350
 -#: ../src/winspector.c:284 ../src/winspector.c:300
 +#: ../src/appicon.c:417 ../src/dialog.c:192 ../src/dialog.c:295
-+#: ../src/dialog.c:725 ../src/dialog.c:1796 ../src/dock.c:515
++#: ../src/dialog.c:725 ../src/dialog.c:1797 ../src/dock.c:515
 +#: ../src/dock.c:523 ../src/dock.c:547 ../src/dock.c:3336
 +#: ../src/dockedapp.c:232 ../src/dockedapp.c:427 ../src/main.c:271
 +#: ../src/rootmenu.c:1858 ../src/winspector.c:395 ../src/winspector.c:412
@@ -2850,22 +2869,22 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgid "recreating missing icon '%s'"
 +msgstr "odtwarzanie brakującej ikony '%s'"
 +
-+#: ../src/defaults.c:936 ../src/defaults.c:1098
++#: ../src/defaults.c:930 ../src/defaults.c:1148
 +#, c-format
 +msgid "Domain %s (%s) of global defaults database is corrupted!"
 +msgstr "Domena %s (%s) w globalnej bazie danych jest zniszczona!"
 +
-+#: ../src/defaults.c:941
++#: ../src/defaults.c:935
 +#, c-format
 +msgid "could not load domain %s from global defaults database"
 +msgstr "nie można załadować domeny %s z globalnej bazy danych"
 +
-+#: ../src/defaults.c:993 ../src/defaults.c:1008
++#: ../src/defaults.c:1034 ../src/defaults.c:1049
 +#, c-format
 +msgid "invalid global menu file %s"
 +msgstr "błędny plik globalnego menu %s"
 +
-+#: ../src/defaults.c:1036 ../src/startup.c:762 ../src/startup.c:780
++#: ../src/defaults.c:1077 ../src/startup.c:762 ../src/startup.c:780
 +#: ../src/startup.c:787
  #, c-format
  msgid "could not read domain \"%s\" from defaults database"
@@ -2873,22 +2892,22 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  
 -#: ../src/defaults.c:781 ../src/defaults.c:905 ../src/defaults.c:944
 -#: ../src/defaults.c:974
-+#: ../src/defaults.c:1082 ../src/defaults.c:1187 ../src/defaults.c:1228
-+#: ../src/defaults.c:1284
++#: ../src/defaults.c:1123 ../src/defaults.c:1237 ../src/defaults.c:1278
++#: ../src/defaults.c:1334
  #, c-format
  msgid "Domain %s (%s) of defaults database is corrupted!"
  msgstr "Domena %s (%s) w bazie danych jest zniszczona!"
  
 -#: ../src/defaults.c:786 ../src/defaults.c:926 ../src/defaults.c:957
 -#: ../src/defaults.c:983
-+#: ../src/defaults.c:1087 ../src/defaults.c:1207 ../src/defaults.c:1264
-+#: ../src/defaults.c:1294
++#: ../src/defaults.c:1137 ../src/defaults.c:1257 ../src/defaults.c:1314
++#: ../src/defaults.c:1344
  #, c-format
  msgid "could not load domain %s from user defaults database"
  msgstr "nie można załadować domeny %s z bazy danych użytkownika"
  
 -#: ../src/defaults.c:797 ../src/defaults.c:890
-+#: ../src/defaults.c:1117
++#: ../src/defaults.c:1167
  #, c-format
 -msgid "Domain %s (%s) of global defaults database is corrupted!"
 -msgstr "Domena %s (%s) w globalnej bazie danych jest zniszczona!"
@@ -2896,23 +2915,23 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgstr "nie można załadować domeny %s z globalnej bazy danych domyślnych (%s)"
  
 -#: ../src/defaults.c:816 ../src/defaults.c:895
-+#: ../src/defaults.c:1254 ../src/screen.c:419
++#: ../src/defaults.c:1304 ../src/screen.c:419
  #, c-format
 -msgid "could not load domain %s from global defaults database"
 -msgstr "nie można załadować domeny %s z globalnej bazy danych"
-+msgid "could not load logo image for panels: %s"
-+msgstr "nie można załadować obrazka z logo dla paneli: %s"
- 
+-
 -#: ../src/defaults.c:1266
 -#, c-format, fuzzy
 -msgid "wrong option value for key \"%s\". Should be one of %s"
 -msgstr "niewłaściwa wartość dla klucza \"%s\". Powinno być jedno z: %s"
--
++msgid "could not load logo image for panels: %s"
++msgstr "nie można załadować obrazka z logo dla paneli: %s"
+ 
 -#: ../src/defaults.c:1313
 +#. --------------------------- Local -----------------------
-+#: ../src/defaults.c:1503 ../src/defaults.c:1642 ../src/defaults.c:1768
-+#: ../src/defaults.c:2246 ../src/defaults.c:2263 ../src/defaults.c:2308
-+#: ../src/defaults.c:2355 ../src/defaults.c:2828 ../src/wdefaults.c:571
++#: ../src/defaults.c:1553 ../src/defaults.c:1692 ../src/defaults.c:1812
++#: ../src/defaults.c:2290 ../src/defaults.c:2307 ../src/defaults.c:2352
++#: ../src/defaults.c:2399 ../src/defaults.c:2872 ../src/wdefaults.c:571
 +#: ../src/wdefaults.c:604
  #, c-format
 -msgid "can't convert \"%s\" to boolean for key \"%s\""
@@ -2925,19 +2944,19 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/defaults.c:1498 ../src/defaults.c:1510 ../src/defaults.c:1858
 -#: ../src/defaults.c:1875 ../src/defaults.c:1888 ../src/defaults.c:1921
 -#: ../src/defaults.c:1937 ../src/defaults.c:1968 ../src/defaults.c:2041
-+#: ../src/defaults.c:1505 ../src/defaults.c:1586 ../src/defaults.c:1616
-+#: ../src/defaults.c:1647 ../src/defaults.c:1660 ../src/defaults.c:1675
-+#: ../src/defaults.c:1689 ../src/defaults.c:1773 ../src/defaults.c:1785
-+#: ../src/defaults.c:2251 ../src/defaults.c:2268 ../src/defaults.c:2281
-+#: ../src/defaults.c:2313 ../src/defaults.c:2329 ../src/defaults.c:2360
-+#: ../src/defaults.c:2447 ../src/defaults.c:2833 ../src/defaults.c:2844
++#: ../src/defaults.c:1555 ../src/defaults.c:1636 ../src/defaults.c:1666
++#: ../src/defaults.c:1697 ../src/defaults.c:1710 ../src/defaults.c:1725
++#: ../src/defaults.c:1739 ../src/defaults.c:1817 ../src/defaults.c:1829
++#: ../src/defaults.c:2295 ../src/defaults.c:2312 ../src/defaults.c:2325
++#: ../src/defaults.c:2357 ../src/defaults.c:2373 ../src/defaults.c:2404
++#: ../src/defaults.c:2491 ../src/defaults.c:2877 ../src/defaults.c:2888
  #, c-format
  msgid "using default \"%s\" instead"
 -msgstr "używam domyślnego \"%s\""
 +msgstr "użycie w zamian domyślnego \"%s\""
  
 -#: ../src/defaults.c:1349
-+#: ../src/defaults.c:1536
++#: ../src/defaults.c:1586
  #, c-format
 -msgid "can't convert \"%s\" to integer for key \"%s\""
 -msgstr "nie można zmienić \"%s\" na liczbę całkowitą dla klucza \"%s\""
@@ -2947,7 +2966,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/defaults.c:1379 ../src/defaults.c:1493 ../src/defaults.c:1853
 -#: ../src/defaults.c:1870 ../src/defaults.c:1916 ../src/defaults.c:1963
 -#: ../src/wdefaults.c:541 ../src/wdefaults.c:577
-+#: ../src/defaults.c:1581
++#: ../src/defaults.c:1631
  #, c-format
 -msgid "Wrong option format for key \"%s\". Should be %s."
 -msgstr "Niewłaściwy format opcji dla klucza \"%s\". Powinno być %s."
@@ -2955,25 +2974,25 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgstr "nie można zamienić \"%s\" na wartość logiczną dla klucza \"%s\""
  
 -#: ../src/defaults.c:1392
-+#: ../src/defaults.c:1613
++#: ../src/defaults.c:1663
 +#, c-format
 +msgid "can't convert \"%s\" to integer for key \"%s\""
 +msgstr "nie można zamienić \"%s\" na liczbę całkowitą dla klucza \"%s\""
 +
-+#: ../src/defaults.c:1655
++#: ../src/defaults.c:1705
  #, c-format
  msgid "Incorrect number of elements in array for key \"%s\"."
  msgstr "Niewłaściwa liczba elementów w tablicy dla klucza \"%s\"."
  
 -#: ../src/defaults.c:1407
-+#: ../src/defaults.c:1670
++#: ../src/defaults.c:1720
  #, c-format
  msgid "Wrong value for key \"%s\". Should be Coordinate."
 -msgstr "Niewłaściwa wartość dla klucza \"%s\". Powinna być Współrzędna."
 +msgstr "Niewłaściwa wartość dla klucza \"%s\". Powinna być współrzędna."
  
 -#: ../src/defaults.c:1422
-+#: ../src/defaults.c:1685
++#: ../src/defaults.c:1735
  #, c-format
  msgid "can't convert array to integers for \"%s\"."
  msgstr "nie można zamienić tablicy na liczby całkowite dla \"%s\"."
@@ -2981,181 +3000,176 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/defaults.c:1619 ../src/defaults.c:1651 ../src/defaults.c:1667
 -#: ../src/defaults.c:1713 ../src/defaults.c:1753 ../src/defaults.c:1791
 -#: ../src/defaults.c:1807
-+#: ../src/defaults.c:1718
-+#, c-format
-+msgid "Wrong value for key \"%s\". Should be an array."
-+msgstr "Niewłaściwa wartość dla klucza \"%s\". Powinna być tablica."
-+
-+#: ../src/defaults.c:1896 ../src/defaults.c:1928 ../src/defaults.c:1944
-+#: ../src/defaults.c:1973 ../src/defaults.c:1996 ../src/defaults.c:2049
-+#: ../src/defaults.c:2089 ../src/defaults.c:2127 ../src/defaults.c:2143
++#: ../src/defaults.c:1940 ../src/defaults.c:1972 ../src/defaults.c:1988
++#: ../src/defaults.c:2017 ../src/defaults.c:2040 ../src/defaults.c:2093
++#: ../src/defaults.c:2133 ../src/defaults.c:2171 ../src/defaults.c:2187
  #, c-format
  msgid "\"%s\" is not a valid color name"
 -msgstr "\"%s\" nie jest właściwą nazwą koloru"
 +msgstr "\"%s\" nie jest prawidłową nazwą koloru"
  
 -#: ../src/defaults.c:1632
-+#: ../src/defaults.c:1909 ../src/defaults.c:1961
++#: ../src/defaults.c:1953 ../src/defaults.c:2005
  msgid "bad number of arguments in gradient specification"
  msgstr "niewłaściwa liczba argumentów w określeniu gradientu"
  
 -#: ../src/defaults.c:1686
-+#: ../src/defaults.c:2022
++#: ../src/defaults.c:2066
  msgid "too few arguments in multicolor gradient specification"
  msgstr "zbyt mało argumentów w określeniu wielokolorowego gradientu"
  
 -#: ../src/defaults.c:1780
-+#: ../src/defaults.c:2116
++#: ../src/defaults.c:2160
  msgid "bad number of arguments in textured gradient specification"
  msgstr "niewłaściwa liczba argumentów w określeniu gradientu z tekstury"
  
 -#: ../src/defaults.c:1823
-+#: ../src/defaults.c:2159
++#: ../src/defaults.c:2203
  #, c-format
  msgid "bad opacity value for tgradient texture \"%s\". Should be [0..255]"
 -msgstr "niewłaściwa wartość opacity dla gradientowanej tekstury \"%s\". Powinna być liczba z zakresu [0..255]"
-+msgstr ""
-+"błędna wartość opacity dla gradientowanej tekstury \"%s\". Powinna być z "
-+"przedziału [0..255]"
++msgstr "błędna wartość opacity dla gradientowanej tekstury \"%s\". Powinna być z przedziału [0..255]"
 +
-+#: ../src/defaults.c:2219
++#: ../src/defaults.c:2263
 +#, c-format
 +msgid "could not initialize library %s"
 +msgstr "nie można zainicjalizować biblioteki: %s"
 +
-+#: ../src/defaults.c:2222
++#: ../src/defaults.c:2266
 +#, c-format
 +msgid "could not find function %s::%s"
 +msgstr "nie można znaleźć funkcji %s::%s"
  
 -#: ../src/defaults.c:1836
-+#: ../src/defaults.c:2229
++#: ../src/defaults.c:2273
  #, c-format
  msgid "invalid texture type %s"
  msgstr "niewłaściwy typ tekstury %s"
  
 -#: ../src/defaults.c:1883
-+#: ../src/defaults.c:2276
++#: ../src/defaults.c:2320
  #, c-format
  msgid "Error in texture specification for key \"%s\""
  msgstr "Błąd w określeniu tekstury dla klucza \"%s\""
  
 -#: ../src/defaults.c:1933
-+#: ../src/defaults.c:2325
++#: ../src/defaults.c:2369
  msgid "Wrong type for workspace background. Should be a texture type."
  msgstr "Niewłaściwy typ tła pulpitu. Powinna być tekstura."
  
 -#: ../src/defaults.c:1981
-+#: ../src/defaults.c:2373
++#: ../src/defaults.c:2417
  #, c-format
  msgid "Wrong type for background of workspace %i. Should be a texture."
  msgstr "Niewłaściwy typ tła pulpitu %i. Powinna być tekstura."
  
 -#: ../src/defaults.c:2006
-+#: ../src/defaults.c:2415
++#: ../src/defaults.c:2459
  msgid "could not load any usable font!!!"
  msgstr "nie można załadować żadnego fontu!!!"
  
 -#: ../src/defaults.c:2036
-+#: ../src/defaults.c:2442
++#: ../src/defaults.c:2486
  #, c-format
  msgid "could not get color for key \"%s\""
 -msgstr "nie można wziąć koloru dla klucza \"%s\""
 +msgstr "nie można uzyskać koloru dla klucza \"%s\""
  
 -#: ../src/defaults.c:2095 ../src/rootmenu.c:450
-+#: ../src/defaults.c:2500 ../src/rootmenu.c:531
++#: ../src/defaults.c:2544 ../src/rootmenu.c:531
  #, c-format
- msgid "%s:invalid key modifier \"%s\""
- msgstr "%s:niewłaściwy modyfikator klucza \"%s\""
+-msgid "%s:invalid key modifier \"%s\""
+-msgstr "%s:niewłaściwy modyfikator klucza \"%s\""
++msgid "%s: invalid key modifier \"%s\""
++msgstr "%s: niewłaściwy modyfikator klucza \"%s\""
  
 -#: ../src/defaults.c:2107
-+#: ../src/defaults.c:2512
++#: ../src/defaults.c:2556
  #, c-format
  msgid "%s:invalid kbd shortcut specification \"%s\""
  msgstr "%s:niewłaściwe określenie skrótu klawiaturowego \"%s\""
  
 -#: ../src/defaults.c:2114
-+#: ../src/defaults.c:2519
++#: ../src/defaults.c:2563
  #, c-format
  msgid "%s:invalid key in shortcut \"%s\""
  msgstr "%s:niewłaściwy klawisz w skrócie \"%s\""
  
 -#: ../src/defaults.c:2140
-+#: ../src/defaults.c:2544
++#: ../src/defaults.c:2588
  #, c-format
  msgid "%s: modifier key %s is not valid"
 -msgstr "%s: klawisz zmiany %s nie jest właściwy"
 +msgstr "%s: klawisz zmiany %s nie jest prawidłowy"
 +
-+#: ../src/defaults.c:2576
++#: ../src/defaults.c:2620
 +#, c-format
 +msgid "could not load image in option %s: %s"
 +msgstr "nie można załadować obrazka w opcji %s: %s"
 +
-+#: ../src/defaults.c:2693
++#: ../src/defaults.c:2737
 +#, c-format
 +msgid "failed to open bitmap file \"%s\""
 +msgstr "otwarcie pliku bitmapy \"%s\" nie powiodło się"
 +
-+#: ../src/defaults.c:2696
++#: ../src/defaults.c:2740
 +#, c-format
 +msgid "\"%s\" is not a valid bitmap file"
 +msgstr "\"%s\" nie jest prawidłowym plikiem bitmapy"
 +
-+#: ../src/defaults.c:2699
++#: ../src/defaults.c:2743
 +#, c-format
 +msgid "out of memory reading bitmap file \"%s\""
 +msgstr "wyczerpano pamięć podczas czytania pliku bitmapy \"%s\""
 +
-+#: ../src/defaults.c:2738 ../src/defaults.c:2771
++#: ../src/defaults.c:2782 ../src/defaults.c:2815
 +msgid "bad number of arguments in cursor specification"
 +msgstr "niewłaściwa liczba argumentów w określeniu kursora"
 +
-+#: ../src/defaults.c:2754
++#: ../src/defaults.c:2798
 +#, c-format
 +msgid "unknown builtin cursor name \"%s\""
 +msgstr "nieznana nazwa wbudowanego kursora \"%s\""
 +
-+#: ../src/defaults.c:2781 ../src/defaults.c:2793
++#: ../src/defaults.c:2825 ../src/defaults.c:2837
 +#, c-format
 +msgid "could not find cursor bitmap file \"%s\""
 +msgstr "nie można znaleźć pliku bitmapy kursora \"%s\""
-+
-+#: ../src/defaults.c:2840
+ 
+-#: ../src/defaults.c:2216
++#: ../src/defaults.c:2884
 +#, c-format
 +msgid "Error in cursor specification for key \"%s\""
 +msgstr "Błąd w określeniu kursora dla klucza \"%s\""
- 
--#: ../src/defaults.c:2216
-+#: ../src/defaults.c:2925
++
++#: ../src/defaults.c:2969
  msgid "could not render texture for icon background"
 -msgstr "nie można pokazać tekstury dla tła ikony"
 +msgstr "nie można wyświetlić tekstury dla tła ikony"
- 
--#: ../src/dialog.c:115 ../src/dialog.c:467 ../src/dock.c:424
--#: ../src/dockedapp.c:356 ../src/rootmenu.c:187 ../src/rootmenu.c:225
--#: ../src/rootmenu.c:239
-+#: ../src/defaults.c:3545 ../src/defaults.c:3620
++
++#: ../src/defaults.c:3597 ../src/defaults.c:3672
 +#, c-format
 +msgid "Invalid arguments for option \"%s\""
 +msgstr "Błędne argumenty dla opcji \"%s\""
 +
-+#: ../src/defaults.c:3552 ../src/defaults.c:3627
++#: ../src/defaults.c:3604 ../src/defaults.c:3679
 +#, c-format
 +msgid "Could not find image \"%s\" for option \"%s\""
 +msgstr "Nie można znaleźć obrazka \"%s\" w opcji \"%s\""
 +
-+#: ../src/defaults.c:3558 ../src/defaults.c:3635
++#: ../src/defaults.c:3610 ../src/defaults.c:3687
 +#, c-format
 +msgid "Could not load image \"%s\" for option \"%s\""
 +msgstr "Nie można załadować obrazka \"%s\" w opcji \"%s\""
 +
-+#: ../src/defaults.c:3570
++#: ../src/defaults.c:3622
 +msgid "Invalid split sizes for SwitchPanel back image."
 +msgstr "Błędne rozmiary podziału dla obrazka w tle panelu przełączania"
-+
-+#: ../src/defaults.c:3643
+ 
+-#: ../src/dialog.c:115 ../src/dialog.c:467 ../src/dock.c:424
+-#: ../src/dockedapp.c:356 ../src/rootmenu.c:187 ../src/rootmenu.c:225
+-#: ../src/rootmenu.c:239
++#: ../src/defaults.c:3695
 +#, c-format
 +msgid "Invalid number of arguments for option \"%s\""
 +msgstr "Niewłaściwa liczba argumentów dla opcji \"%s\""
@@ -3210,47 +3224,47 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  msgstr "Katalog Ikon"
  
 -#: ../src/dock.c:213
-+#: ../src/dialog.c:1196 ../src/dialog.c:1304
++#: ../src/dialog.c:1197 ../src/dialog.c:1305
 +#, c-format
 +msgid "Version %s"
 +msgstr "Wersja %s"
 +
-+#: ../src/dialog.c:1302
++#: ../src/dialog.c:1303
 +msgid "Window Manager for X"
 +msgstr "Zarządca Okien dla X"
 +
-+#: ../src/dialog.c:1325
++#: ../src/dialog.c:1326
 +#, c-format
 +msgid "Using visual 0x%x: %s %ibpp "
 +msgstr "Używanie palety 0x%x: %s %ibpp "
 +
-+#: ../src/dialog.c:1333
++#: ../src/dialog.c:1334
 +msgid "(32 thousand colors)\n"
 +msgstr "(32 tysiące kolorów)\n"
 +
-+#: ../src/dialog.c:1336
++#: ../src/dialog.c:1337
 +msgid "(64 thousand colors)\n"
 +msgstr "(64 tysiące kolorów)\n"
 +
-+#: ../src/dialog.c:1340
++#: ../src/dialog.c:1341
 +msgid "(16 million colors)\n"
 +msgstr "(16 milionów kolorów)\n"
 +
-+#: ../src/dialog.c:1343
++#: ../src/dialog.c:1344
 +#, c-format
 +msgid "(%d colors)\n"
 +msgstr "(%d kolorów)\n"
 +
-+#: ../src/dialog.c:1353
++#: ../src/dialog.c:1354
 +#, c-format
 +msgid "Total allocated memory: %i kB. Total memory in use: %i kB.\n"
 +msgstr "Suma przydzielonej pamięci: %i kB. Suma używanej pamięci: %i kB.\n"
 +
-+#: ../src/dialog.c:1360
++#: ../src/dialog.c:1361
 +msgid "Supported image formats: "
 +msgstr "Obsługiwane formaty obrazków: "
 +
-+#: ../src/dialog.c:1367
++#: ../src/dialog.c:1368
 +msgid ""
 +"\n"
 +"Additional support for: "
@@ -3258,11 +3272,11 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"\n"
 +"Dodatkowa obsługa: "
 +
-+#: ../src/dialog.c:1384
++#: ../src/dialog.c:1385
 +msgid " and "
 +msgstr " i "
 +
-+#: ../src/dialog.c:1394
++#: ../src/dialog.c:1395
 +msgid ""
 +"\n"
 +"Sound disabled"
@@ -3270,7 +3284,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"\n"
 +"Dźwięk wyłączony"
 +
-+#: ../src/dialog.c:1396
++#: ../src/dialog.c:1397
 +msgid ""
 +"\n"
 +"Sound enabled"
@@ -3278,35 +3292,35 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"\n"
 +"Dźwięk włączony"
 +
-+#: ../src/dialog.c:1401
++#: ../src/dialog.c:1402
 +msgid ", VirtualDesktop enabled"
 +msgstr ", VirtualDesktop włączony"
 +
-+#: ../src/dialog.c:1403
++#: ../src/dialog.c:1404
 +msgid ", VirtualDesktop disabled"
 +msgstr ", VirtualDesktop wyłączony"
 +
-+#: ../src/dialog.c:1407
++#: ../src/dialog.c:1408
 +msgid "\n"
 +msgstr "\n"
 +
-+#: ../src/dialog.c:1409
++#: ../src/dialog.c:1410
 +msgid "Solaris "
 +msgstr "Solaris "
 +
-+#: ../src/dialog.c:1411
++#: ../src/dialog.c:1412
 +msgid "Xinerama: "
 +msgstr "Xinerama: "
 +
-+#: ../src/dialog.c:1445
++#: ../src/dialog.c:1446
 +msgid "Info"
 +msgstr "Informacja"
 +
-+#: ../src/dialog.c:1469
++#: ../src/dialog.c:1470
 +msgid "Merry Christmas!"
 +msgstr "Wesołych Świąt!"
 +
-+#: ../src/dialog.c:1539
++#: ../src/dialog.c:1540
 +msgid ""
 +"    Window Maker is free software; you can redistribute it and/or\n"
 +"modify it under the terms of the GNU General Public License as\n"
@@ -3338,21 +3352,19 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,\n"
 +"USA."
 +
-+#: ../src/dialog.c:1563
++#: ../src/dialog.c:1564
 +msgid "Legal"
 +msgstr "Licencja"
 +
-+#: ../src/dialog.c:1719
++#: ../src/dialog.c:1720
 +msgid "cannot open connection for crashing dialog panel. Aborting."
-+msgstr ""
-+"nie można otworzyć połączenia dla awaryjnego panelu dialogowego. Przerwanie "
-+"pracy."
++msgstr "nie można otworzyć połączenia dla awaryjnego panelu dialogowego. Przerwanie pracy."
 +
-+#: ../src/dialog.c:1745
++#: ../src/dialog.c:1746
 +msgid "Fatal error"
 +msgstr "Błąd krytyczny"
 +
-+#: ../src/dialog.c:1756
++#: ../src/dialog.c:1757
 +#, c-format
 +msgid ""
 +"Window Maker received signal %i\n"
@@ -3361,40 +3373,36 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"Window Maker otrzymał sygnał %i\n"
 +"(%s)."
 +
-+#: ../src/dialog.c:1759
++#: ../src/dialog.c:1760
 +#, c-format
 +msgid "Window Maker received signal %i."
 +msgstr "Window Maker otrzymał sygnał %i."
 +
-+#: ../src/dialog.c:1768
-+msgid ""
-+" This fatal error occured probably due to a bug. Please fill the included "
-+"BUGFORM and report it to bugs@windowmaker.org."
-+msgstr ""
-+" Ten krytyczny błąd prawdopodobnie jest skutkiem błędu w kodzie. Prosimy o "
-+"wypełnienie formularza BUGFORM i wysłanie go na adres bugs@windowmaker.org."
++#: ../src/dialog.c:1769
++msgid " This fatal error occured probably due to a bug. Please fill the included BUGFORM and report it to bugs@windowmaker.org."
++msgstr " Ten krytyczny błąd prawdopodobnie jest skutkiem błędu w kodzie. Prosimy o wypełnienie formularza BUGFORM i wysłanie go na adres bugs@windowmaker.org."
 +
-+#: ../src/dialog.c:1777
++#: ../src/dialog.c:1778
 +msgid "What do you want to do now?"
 +msgstr "Co teraz zrobić?"
 +
-+#: ../src/dialog.c:1783
++#: ../src/dialog.c:1784
 +msgid "Select action"
 +msgstr "Wybierz akcję"
 +
-+#: ../src/dialog.c:1784
++#: ../src/dialog.c:1785
 +msgid "Abort and leave a core file"
 +msgstr "Przerwij pozostawiając plik zrzutu pamięci (core)"
 +
-+#: ../src/dialog.c:1785
++#: ../src/dialog.c:1786
 +msgid "Restart Window Maker"
 +msgstr "Zrestartuj Window Makera"
 +
-+#: ../src/dialog.c:1786
++#: ../src/dialog.c:1787
 +msgid "Start alternate window manager"
 +msgstr "Uruchom innego zarządcę okien"
 +
-+#: ../src/dialog.c:1964
++#: ../src/dialog.c:1965
 +msgid ""
 +"Window Maker is part of the GNUstep project.\n"
 +"The GNUstep project aims to create a free\n"
@@ -3416,7 +3424,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"o ten szkielet. Więcej informacji na temat\n"
 +"GNUstepa można znaleźć na stronie www.gnustep.org."
 +
-+#: ../src/dialog.c:1987
++#: ../src/dialog.c:1988
 +msgid "About GNUstep"
 +msgstr "O GNUstepie"
 +
@@ -3437,24 +3445,12 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgstr "Ostrzeżenie"
 +
 +#: ../src/dock.c:510
-+msgid ""
-+"Some icons cannot be made omnipresent. Please make sure that no other icon "
-+"is docked in the same positions on the other workspaces and the Clip is not "
-+"full in some workspace."
-+msgstr ""
-+"Niektórych ikon nie można uczynić zawsze widocznymi. Proszę uprawnić się, że "
-+"żadna inna ikona nie jest zadokowana w tych samych miejscach na innych "
-+"pulpitach oraz że Spinacz nie jest pełny na którymś biurku."
++msgid "Some icons cannot be made omnipresent. Please make sure that no other icon is docked in the same positions on the other workspaces and the Clip is not full in some workspace."
++msgstr "Niektórych ikon nie można uczynić zawsze widocznymi. Proszę uprawnić się, że żadna inna ikona nie jest zadokowana w tych samych miejscach na innych pulpitach oraz że Spinacz nie jest pełny na którymś biurku."
 +
 +#: ../src/dock.c:518
-+msgid ""
-+"Icon cannot be made omnipresent. Please make sure that no other icon is "
-+"docked in the same position on the other workspaces and the Clip is not full "
-+"in some workspace."
-+msgstr ""
-+"Ikony nie można uczynić zawsze widoczną. Proszę upewnić się, że żadna inna "
-+"ikona nie jest zadokowana w tym samym miejscu na innych biurkach oraz że "
-+"Spinacz nie jest pełny na którymś biurku."
++msgid "Icon cannot be made omnipresent. Please make sure that no other icon is docked in the same position on the other workspaces and the Clip is not full in some workspace."
++msgstr "Ikony nie można uczynić zawsze widoczną. Proszę upewnić się, że żadna inna ikona nie jest zadokowana w tym samym miejscu na innych biurkach oraz że Spinacz nie jest pełny na którymś biurku."
 +
 +#: ../src/dock.c:545
  msgid "Workspace Clip"
@@ -3672,19 +3668,19 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/dockedapp.c:232
 +msgid "Ignore"
 +msgstr "Ignoruj"
- 
--#: ../src/dockedapp.c:291
--msgid "Start when WindowMaker is started"
--msgstr "Wystartować podczas startu WindowMakera"
++
 +#: ../src/dockedapp.c:334
 +msgid "Start when Window Maker is started"
 +msgstr "Uruchom podczas startu Window Makera"
  
--#: ../src/dockedapp.c:298
+-#: ../src/dockedapp.c:291
+-msgid "Start when WindowMaker is started"
+-msgstr "Wystartować podczas startu WindowMakera"
 +#: ../src/dockedapp.c:341
 +msgid "Lock (prevent accidental removal)"
 +msgstr "Zablokuj (przed przypadkowym usunięciem)"
-+
+ 
+-#: ../src/dockedapp.c:298
 +#: ../src/dockedapp.c:345
  msgid "Application path and arguments"
  msgstr "Ścieżka do aplikacji i argumenty"
@@ -3795,7 +3791,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/main.c:220
 +msgid "failed to restart Window Maker."
 +msgstr "nie udało się uruchomić ponownie Window Makera."
-+
+ 
+-#: ../src/main.c:242
 +#: ../src/main.c:223
 +#, c-format
 +msgid "could not exec %s"
@@ -3804,8 +3801,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/main.c:269
 +msgid "Could not execute command: "
 +msgstr "Nie można wykonać polecenia: "
- 
--#: ../src/main.c:242
++
 +#: ../src/main.c:426
  #, c-format
  msgid "%s aborted.\n"
@@ -3819,41 +3815,32 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -msgstr "składnia: %s [-options]\n"
 +msgid "Usage: %s [options]\n"
 +msgstr "Składnia: %s [opcje]\n"
- 
--#: ../src/main.c:254
--msgid "options:"
--msgstr "opcje:"
++
 +#: ../src/main.c:438
 +msgid "The Window Maker window manager for the X window system"
 +msgstr "Zarządca okien Window Maker dla systemu X Window"
- 
--#: ../src/main.c:256
--msgid " -nocpp \t\tdisable preprocessing of configuration files"
--msgstr " -nocpp \t\twyłącz przetwarzanie plików konfiguracyjnych"
++
 +#: ../src/main.c:440
 +msgid " -display host:dpy\tdisplay to use"
 +msgstr " -display host:dpy\tużywany panel graficzny"
  
--#: ../src/main.c:258
--msgid " -nodock\t\tdo not open the application Dock"
--msgstr " -nodock\t\tbez Doku z aplikacjami"
+-#: ../src/main.c:254
+-msgid "options:"
+-msgstr "opcje:"
 +#: ../src/main.c:442
 +msgid " --no-cpp \t\tdisable preprocessing of configuration files"
 +msgstr " --no-cpp \t\twyłączenie przetwarzania plików konfiguracyjnych"
  
--#: ../src/main.c:259
--msgid " -noclip\t\tdo not open the workspace Clip"
--msgstr " -noclip\t\tbez Spinacza na pulpicie"
+-#: ../src/main.c:256
+-msgid " -nocpp \t\tdisable preprocessing of configuration files"
+-msgstr " -nocpp \t\twyłącz przetwarzanie plików konfiguracyjnych"
 +#: ../src/main.c:444
 +msgid " --no-dock\t\tdo not open the application Dock"
 +msgstr " --no-dock\t\tbez Doku z aplikacjami"
  
--#.
--#. puts(_(" -locale locale		locale to use"));
--#.
--#: ../src/main.c:263
--msgid " -visualid visualid\tvisual id of visual to use"
--msgstr " -visualid visualid\tidentyfikator używanej palety"
+-#: ../src/main.c:258
+-msgid " -nodock\t\tdo not open the application Dock"
+-msgstr " -nodock\t\tbez Doku z aplikacjami"
 +#: ../src/main.c:445
 +msgid " --no-clip\t\tdo not open the workspace Clip"
 +msgstr " --no-clip\t\tbez Spinacza na pulpicie"
@@ -3862,30 +3849,27 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgid " --no-autolaunch\tdo not autolaunch applications"
 +msgstr " --no-autolaunch\tbez automatycznego uruchamiania aplikacji"
  
--#: ../src/main.c:264
--msgid " -display host:dpy\tdisplay to use"
--msgstr " -display host:dpy\tużywany panel graficzny"
+-#: ../src/main.c:259
+-msgid " -noclip\t\tdo not open the workspace Clip"
+-msgstr " -noclip\t\tbez Spinacza na pulpicie"
 +#: ../src/main.c:447
 +msgid " --dont-restore\t\tdo not restore saved session"
 +msgstr " --dont-restore\t\tbez odtwarzania zapisanej sesji"
  
--#: ../src/main.c:265
--msgid " -static\t\tdo not update or save configurations"
--msgstr " -static\t\tnie zapisuj ani odświeżaj ustawień"
+-#.
+-#. puts(_(" -locale locale		locale to use"));
+-#.
+-#: ../src/main.c:263
+-msgid " -visualid visualid\tvisual id of visual to use"
+-msgstr " -visualid visualid\tidentyfikator używanej palety"
 +#: ../src/main.c:449
 +msgid " --locale locale\tlocale to use"
 +msgstr " --locale lokalizacja\tużycie podanej lokalizacji"
 +
 +#: ../src/main.c:451
-+msgid ""
-+" --create-stdcmap\tcreate the standard colormap hint in PseudoColor visuals"
-+msgstr ""
-+" --create-stdcmap\tutworzenie standardowych podpowiedzi mapy kolorów dla "
-+"palet PseudoColor"
- 
--#: ../src/main.c:266
--msgid " -version\t\tprint version and exit"
--msgstr " -version\t\twyświetl informację o wersji i zakończ"
++msgid " --create-stdcmap\tcreate the standard colormap hint in PseudoColor visuals"
++msgstr " --create-stdcmap\tutworzenie standardowych podpowiedzi mapy kolorów dla palet PseudoColor"
++
 +#: ../src/main.c:452
 +msgid " --visual-id visualid\tvisual id of visual to use"
 +msgstr " --visual-id visualid\tidentyfikator używanej palety"
@@ -3910,38 +3894,42 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgid " --help\t\t\tshow this message"
 +msgstr " --help\t\t\tpokazanie tego opisu"
  
--#: ../src/main.c:278
+-#: ../src/main.c:264
+-msgid " -display host:dpy\tdisplay to use"
+-msgstr " -display host:dpy\tużywany panel graficzny"
 +#: ../src/main.c:473
- #, c-format
--msgid "could not find user GNUstep directory (%s).\nMake sure you have installed Window Maker correctly and run wmaker.inst"
--msgstr "nie można znaleźć katalogu GNUstep użytkownika (%s).\nUpewnij się że Window Maker został zainstalowany poprawnie i uruchom skrypt wmaker.inst"
++#, c-format
 +msgid ""
 +"could not find user GNUstep directory (%s).\n"
 +"Make sure you have installed Window Maker correctly and run wmaker.inst"
 +msgstr ""
 +"nie można znaleźć katalogu GNUstep użytkownika (%s).\n"
-+"Proszę upewnić się, że Window Maker został zainstalowany poprawnie i "
-+"uruchomić skrypt wmaker.inst"
++"Proszę upewnić się, że Window Maker został zainstalowany poprawnie i uruchomić skrypt wmaker.inst"
  
--#: ../src/main.c:297
+-#: ../src/main.c:265
+-msgid " -static\t\tdo not update or save configurations"
+-msgstr " -static\t\tnie zapisuj ani odświeżaj ustawień"
 +#: ../src/main.c:478
 +#, c-format
 +msgid "could not find user GNUstep directory (%s)."
 +msgstr "nie można znaleźć katalogu GNUstep użytkownika (%s)."
-+
+ 
+-#: ../src/main.c:266
+-msgid " -version\t\tprint version and exit"
+-msgstr " -version\t\twyświetl informację o wersji i zakończ"
 +#: ../src/main.c:481
-+msgid ""
-+"There was an error while creating GNUstep directory, please make sure you "
-+"have installed Window Maker correctly and run wmaker.inst"
-+msgstr ""
-+"Wystąpił błąd podczas tworzenia katalogu GNUstep - proszę upewnić się, że "
-+"Window Maker został zainstalowany poprawnie i uruchomić wmaker.inst"
-+
++msgid "There was an error while creating GNUstep directory, please make sure you have installed Window Maker correctly and run wmaker.inst"
++msgstr "Wystąpił błąd podczas tworzenia katalogu GNUstep - proszę upewnić się, że Window Maker został zainstalowany poprawnie i uruchomić wmaker.inst"
+ 
+-#: ../src/main.c:278
 +#: ../src/main.c:484
-+#, c-format
+ #, c-format
+-msgid "could not find user GNUstep directory (%s).\nMake sure you have installed Window Maker correctly and run wmaker.inst"
+-msgstr "nie można znaleźć katalogu GNUstep użytkownika (%s).\nUpewnij się że Window Maker został zainstalowany poprawnie i uruchom skrypt wmaker.inst"
 +msgid "%s directory created with default configuration."
 +msgstr "utworzono katalog %s z domyślnymi ustawieniami."
-+
+ 
+-#: ../src/main.c:297
 +#: ../src/main.c:506 ../src/main.c:511
  #, c-format
  msgid "%s:could not execute initialization script"
@@ -3998,16 +3986,16 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/menu.c:285
 -msgid "wrealloc() failed while trying to add menu item"
 -msgstr "wykonanie wrealloc() nie powiodło się podczas próby dodania pozycji menu"
-+#: ../src/menu.c:1273
++#: ../src/menu.c:1276
 +msgid "could not grab keyboard"
 +msgstr "nie można przechwycić klawiatury"
-+
-+#: ../src/menu.c:2612
-+#, c-format
-+msgid "bad value in menus state info:%s"
-+msgstr "błędna wartość w informacjach o stanie menu:%s"
  
 -#: ../src/misc.c:71
++#: ../src/menu.c:2615
++#, c-format
++msgid "bad value in menus state info: %s"
++msgstr "błędna wartość w informacjach o stanie menu: %s"
++
 +#: ../src/misc.c:65
  #, c-format
  msgid "could not define value for %s for cpp"
@@ -4032,12 +4020,12 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  #, c-format
  msgid "your machine is misconfigured. HOST is set to %s"
 -msgstr "twój komputer jest źle skonfigurowany. HOST jest ustawiony na %s"
-+msgstr "ten komputer jest źle skonfigurowany. HOST jest ustawiony na %s"
- 
+-
 -#: ../src/misc.c:773
 -msgid "selection timed-out"
 -msgstr "zaznaczenie straciło ważność"
--
++msgstr "ten komputer jest źle skonfigurowany. HOST jest ustawiony na %s"
+ 
 -#: ../src/misc.c:788
 +#: ../src/misc.c:621
  msgid "Program Arguments"
@@ -4051,8 +4039,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/misc.c:884
 -msgid "unable to get dropped data from DND drop"
 -msgstr "nie można wziąć upuszczonych danych protokołu DND"
-+msgstr "Argumenty programu:"
- 
+-
 -#: ../src/misc.c:892
 -msgid "error getting dropped data from DND drop"
 -msgstr "błąd podczas brania upuszczonych danych protokołu DND"
@@ -4060,7 +4047,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/misc.c:898
 -msgid "out of memory while getting data from DND drop"
 -msgstr "wyczerpano pamięć podczas brania danych protokołu DND"
--
++msgstr "Argumenty programu:"
+ 
 -#: ../src/misc.c:942 ../src/misc.c:1062
 +#: ../src/misc.c:736 ../src/misc.c:874
  #, c-format
@@ -4262,8 +4250,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  #, c-format
  msgid "%s:invalid kbd shortcut specification \"%s\" for entry %s"
 -msgstr "%s:niewłaściwe określenie skrótu klawiaturowego \"%s\" dla pozycji %s"
-+msgstr ""
-+"%s:nieprawidłowe określenie skrótu klawiaturowego \"%s\" dla pozycji %s"
++msgstr "%s:nieprawidłowe określenie skrótu klawiaturowego \"%s\" dla pozycji %s"
  
 -#: ../src/rootmenu.c:471
 +#: ../src/rootmenu.c:552
@@ -4312,25 +4299,15 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  msgstr "zbyt wiele parametrów w OPEN_MENU: %s"
  
 -#: ../src/rootmenu.c:742
--msgid "There are more than one WORKSPACE_MENU commands in the applications menu. Only one is allowed."
--msgstr "Jest więcej niż jedno polecenie WORKSPACE_MENU w menu aplikacji. Tylko jedno jest dozwolone."
 +#: ../src/rootmenu.c:808
-+msgid ""
-+"There are more than one WORKSPACE_MENU commands in the applications menu. "
-+"Only one is allowed."
-+msgstr ""
-+"Jest więcej niż jedno polecenie WORKSPACE_MENU w menu aplikacji. Tylko jedno "
-+"jest dozwolone."
-+
-+#: ../src/rootmenu.c:842
-+msgid ""
-+"There are more than one WINDOWS_MENU commands in the applications menu. Only "
-+"one is allowed."
-+msgstr ""
-+"Jest więcej niż jedno polecenie WINDOWS_MENU w menu aplikacji. Tylko jedno "
-+"jest dozwolone."
+ msgid "There are more than one WORKSPACE_MENU commands in the applications menu. Only one is allowed."
+ msgstr "Jest więcej niż jedno polecenie WORKSPACE_MENU w menu aplikacji. Tylko jedno jest dozwolone."
  
 -#: ../src/rootmenu.c:771 ../src/rootmenu.c:789
++#: ../src/rootmenu.c:842
++msgid "There are more than one WINDOWS_MENU commands in the applications menu. Only one is allowed."
++msgstr "Jest więcej niż jedno polecenie WINDOWS_MENU w menu aplikacji. Tylko jedno jest dozwolone."
++
 +#: ../src/rootmenu.c:847
 +msgid "Window List"
 +msgstr "Lista Okien"
@@ -4356,9 +4333,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/rootmenu.c:1117
  #, c-format
  msgid "%s:maximal line size exceeded in menu config: %s"
--msgstr "%s:przekroczono maksymalną dopuszczalną długość linii w ustawieniach menu: %s"
-+msgstr ""
-+"%s:przekroczono maksymalną dopuszczalną długość linii w ustawieniach menu: %s"
+ msgstr "%s:przekroczono maksymalną dopuszczalną długość linii w ustawieniach menu: %s"
  
 -#: ../src/rootmenu.c:1019 ../src/rootmenu.c:1111 ../src/rootmenu.c:1212
 +#: ../src/rootmenu.c:1139 ../src/rootmenu.c:1232 ../src/rootmenu.c:1336
@@ -4450,14 +4425,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/rootmenu.c:1567
 +#: ../src/rootmenu.c:1674
  #, c-format
--msgid "using default menu file \"%s\" as the menu referenced in WMRootMenu could not be found "
--msgstr "użyto domyślnego pliku menu \"%s\" ponieważ nie znaleziono pliku określonego w WMRootMenu "
-+msgid ""
-+"using default menu file \"%s\" as the menu referenced in WMRootMenu could "
-+"not be found "
-+msgstr ""
-+"użyto domyślnego pliku menu \"%s\" ponieważ nie znaleziono pliku określonego "
-+"w WMRootMenu "
+ msgid "using default menu file \"%s\" as the menu referenced in WMRootMenu could not be found "
+ msgstr "użyto domyślnego pliku menu \"%s\" ponieważ nie znaleziono pliku określonego w WMRootMenu "
  
 -#: ../src/rootmenu.c:1590 ../src/rootmenu.c:1666
 +#: ../src/rootmenu.c:1697 ../src/rootmenu.c:1773
@@ -4468,19 +4437,15 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/screen.c:423
 -msgid "could not load logo image for panels"
 -msgstr "nie można załadować obrazka z logo dla paneli"
--
++#: ../src/rootmenu.c:1855
++msgid "The applications menu could not be loaded. Look at the console output for a detailed description of the errors."
++msgstr "Menu aplikacji nie może być wczytane. Dokładny opis błędów można zobaczyć na terminalu."
+ 
 -#: ../src/screen.c:426
 -#, c-format
 -msgid "error making logo image for panel:%s"
 -msgstr "błąd podczas tworzenia obrazka logo dla panelu:%s"
-+#: ../src/rootmenu.c:1855
-+msgid ""
-+"The applications menu could not be loaded. Look at the console output for a "
-+"detailed description of the errors."
-+msgstr ""
-+"Menu aplikacji nie może być wczytane. Dokładny opis błędów można zobaczyć na "
-+"terminalu."
- 
+-
 -#: ../src/screen.c:612
 +#: ../src/screen.c:709
  #, c-format
@@ -4495,7 +4460,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgstr "nie można zainicjalizować zestawu widgetów WINGs"
  
 -#: ../src/screen.c:961
-+#: ../src/screen.c:1144
++#: ../src/screen.c:1146
  #, c-format
  msgid "could not save session state in %s"
  msgstr "nie można zapisać stanu sesji w %s"
@@ -4515,7 +4480,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
  msgid "end of memory while saving session state"
  msgstr "zabrakło pamięci podczas zapisywania stanu sesji"
  
-@@ -939,352 +1348,544 @@
+@@ -939,352 +1298,544 @@
  #. * If the sm was the last client of session, then we'll die
  #. * anyway, otherwise we can continue doing our stuff.
  #.
@@ -4652,14 +4617,13 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 -#: ../src/window.c:2282 ../src/window.c:2414
 -msgid "the NumLock, ScrollLock or similar key seems to be turned on.\nTurn it off or some mouse actions and keyboard shortcuts will not work."
 -msgstr "wygląda na to, że klawisze NumLock, ScrollLock lub podobne są włączone.\nWyłącz je lub niektóre akcje myszki i klawiatury nie zadziałają."
-+#: ../src/window.c:3052 ../src/window.c:3193
++#: ../src/window.c:3041 ../src/window.c:3182
 +msgid ""
 +"the NumLock, ScrollLock or similar key seems to be turned on.\n"
 +"Turn it off or some mouse actions and keyboard shortcuts will not work."
 +msgstr ""
 +"wygląda na to, że klawisze NumLock, ScrollLock lub podobne są włączone.\n"
-+"Bez ich wyłączenia niektóre akcje myszki i skróty klawiaturowe nie "
-+"zadziałają."
++"Bez ich wyłączenia niektóre akcje myszki i skróty klawiaturowe nie zadziałają."
 +
 +#: ../src/winmenu.c:125
 +msgid ""
@@ -4957,7 +4921,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/winspector.c:1394
 +msgid "Start maximized"
 +msgstr "Uruchom powiększone"
-+
+ 
+-#: ../src/winspector.c:1167
 +#: ../src/winspector.c:1396
 +msgid ""
 +"Make the window be automatically maximized when it's\n"
@@ -4965,8 +4930,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +msgstr ""
 +"Powoduje automatyczne powiększenie okna kiedy pokazuje\n"
 +"się po raz pierwszy."
- 
--#: ../src/winspector.c:1167
++
 +#: ../src/winspector.c:1400
 +msgid "Full screen maximization"
 +msgstr "Powiększenie na cały ekran"
@@ -4995,7 +4959,9 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/winspector.c:1436
 +msgid "Do not bind keyboard shortcuts"
 +msgstr "Nie stosuj skrótów klawiszowych"
-+
+ 
+-#: ../src/winspector.c:1185
+-msgid "Don't bind mouse clicks"
 +#: ../src/winspector.c:1438
 +msgid ""
 +"Do not bind keyboard shortcuts from Window Maker\n"
@@ -5007,9 +4973,7 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +"Window Makera, kiedy to okno jest aktywne. Pozwoli\n"
 +"to przekazywać do okna wszystkie kombinacje klawiszy\n"
 +"niezależnie od ustawień skrótów."
- 
--#: ../src/winspector.c:1185
--msgid "Don't bind mouse clicks"
++
 +#: ../src/winspector.c:1444
 +msgid "Do not bind mouse clicks"
  msgstr "Nie stosuj kliknięć myszą"
@@ -5018,7 +4982,8 @@ diff -Nur WindowMaker-0.80.2.orig/WPrefs.app/po/Makefile.am WindowMaker-0.80.2/W
 +#: ../src/winspector.c:1446
 +msgid ""
 +"Do not bind mouse actions, such as `Alt'+drag\n"
-+"in the window (when alt is the modifier you haveconfigured)."
++"in the window (when alt is the modifier you have\n"
++"configured)."
 +msgstr ""
 +"Wyłącza przechwytywanie akcji myszki, takich jak\n"
 +"`Alt'+przeciągnięcie w okienku (kiedy alt jest ustawionym\n"
