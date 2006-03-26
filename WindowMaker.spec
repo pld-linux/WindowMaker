@@ -150,8 +150,8 @@ Summary(ru):	Библиотеки поддержки и .h файлы для WindowMaker
 Summary(uk):	Б╕бл╕отеки п╕дтримки та .h файли для WindowMaker
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	XFree86-devel
-Requires:	xft-devel
+Requires:	xorg-lib-libXft-devel
+Requires:	xorg-lib-libXpm-devel
 Obsoletes:	libwraster2-devel
 
 %description devel
