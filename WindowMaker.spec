@@ -34,7 +34,6 @@ Patch10:	%{name}-localenames.patch
 Patch11:	%{name}-0.91.0-translucency-1.patch
 Patch12:	%{name}-gnustep.patch
 URL:		http://www.windowmaker.org/
-BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
@@ -44,7 +43,8 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	libungif-devel
 BuildRequires:	perl-base
-BuildRequires:	xft-devel
+BuildRequires:	xorg-lib-libXft-devel
+BuildRequires:	xorg-lib-libXpm-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cpp
 Requires:	gnustep-dirs
