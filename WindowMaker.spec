@@ -43,6 +43,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	libungif-devel
 BuildRequires:	perl-base
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires:	%{name}-libs = %{version}-%{release}
@@ -150,6 +151,7 @@ Summary(ru):	Библиотеки поддержки и .h файлы для WindowMaker
 Summary(uk):	Б╕бл╕отеки п╕дтримки та .h файли для WindowMaker
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXft-devel
 Requires:	xorg-lib-libXpm-devel
 Obsoletes:	libwraster2-devel
