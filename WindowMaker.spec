@@ -12,11 +12,11 @@ Version:	0.92.0
 Release:	1
 License:	GPL
 Group:		X11/Window Managers
-Source0:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-%{version}.tar.gz
+Source0:	ftp://windowmaker.info/pub/source/release/%{name}-%{version}.tar.gz
 # Source0-md5:	678cb4a9b22a557cfb524dc3cb457c08
 Source1:	%{name}-data.tar.gz
 # Source1-md5:	6ea0c37314ea9e9ab27e8bdf45a31a82
-Source2:	ftp://ftp.windowmaker.org/pub/source/release/%{name}-extra-%{extraver}.tar.gz
+Source2:	ftp://windowmaker.info/pub/source/release/%{name}-extra-%{extraver}.tar.gz
 # Source2-md5:	07c7700daaaf232bc490f5abaabef085
 Source3:	%{name}.desktop
 Source6:	%{name}-xsession.desktop
@@ -33,7 +33,7 @@ Patch9:		http://www.heily.com/mark/code_samples/appicon_captions_maxprotect.diff
 Patch10:	%{name}-localenames.patch
 Patch11:	%{name}-0.91.0-translucency-1.patch
 Patch12:	%{name}-gnustep.patch
-URL:		http://www.windowmaker.org/
+URL:		http://www.windowmaker.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
