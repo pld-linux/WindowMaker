@@ -1,12 +1,12 @@
 %define		extraver	0.1
 
 Summary:	NeXT-alike window manager
-Summary(es.UTF-8):   Administrador de Ventanas parecido con el NeXT
-Summary(fr.UTF-8):   Gestionnaire de fenêtres avec le look NeXT
-Summary(pl.UTF-8):   Zarządca okien w stylu NeXT
-Summary(pt_BR.UTF-8):   Gerente de Janelas parecido com o NeXT
-Summary(ru.UTF-8):   WindowMaker - оконный менеджер для X11
-Summary(uk.UTF-8):   WindowMaker - віконний менеджер для X11
+Summary(es.UTF-8):	Administrador de Ventanas parecido con el NeXT
+Summary(fr.UTF-8):	Gestionnaire de fenêtres avec le look NeXT
+Summary(pl.UTF-8):	Zarządca okien w stylu NeXT
+Summary(pt_BR.UTF-8):	Gerente de Janelas parecido com o NeXT
+Summary(ru.UTF-8):	WindowMaker - оконный менеджер для X11
+Summary(uk.UTF-8):	WindowMaker - віконний менеджер для X11
 Name:		WindowMaker
 Version:	0.92.0
 Release:	1
@@ -129,7 +129,7 @@ WindowMaker - це віконний менеджер, що емулює інте
 
 %package libs
 Summary:	WindowMaker shared libraries
-Summary(pl.UTF-8):   Biblioteki współdzielone WindowMakera
+Summary(pl.UTF-8):	Biblioteki współdzielone WindowMakera
 Group:		Libraries
 Obsoletes:	libwraster2
 
@@ -142,12 +142,12 @@ zarządcy okien WindowMaker.
 
 %package devel
 Summary:	WindowMaker libraries - development part
-Summary(es.UTF-8):   Bibliotecas y archivos de inclusión para WindowMaker
-Summary(fr.UTF-8):   Librairies de WindowMaker
-Summary(pl.UTF-8):   Biblioteki WindowMakera - część dla programistów
-Summary(pt_BR.UTF-8):   Arquivos de inclusão e bibliotecas para o WindowMaker
-Summary(ru.UTF-8):   Библиотеки поддержки и .h файлы для WindowMaker
-Summary(uk.UTF-8):   Бібліотеки підтримки та .h файли для WindowMaker
+Summary(es.UTF-8):	Bibliotecas y archivos de inclusión para WindowMaker
+Summary(fr.UTF-8):	Librairies de WindowMaker
+Summary(pl.UTF-8):	Biblioteki WindowMakera - część dla programistów
+Summary(pt_BR.UTF-8):	Arquivos de inclusão e bibliotecas para o WindowMaker
+Summary(ru.UTF-8):	Библиотеки поддержки и .h файлы для WindowMaker
+Summary(uk.UTF-8):	Бібліотеки підтримки та .h файли для WindowMaker
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	xorg-lib-libXext-devel
@@ -186,11 +186,11 @@ baseados no WindowMaker
 
 %package static
 Summary:	WindowMaker static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne WindowMakera
-Summary(ru.UTF-8):   Статические библиотеки поддержки для WindowMaker
-Summary(uk.UTF-8):   Статичні бібліотеки підтримки для WindowMaker
+Summary(pl.UTF-8):	Biblioteki statyczne WindowMakera
+Summary(ru.UTF-8):	Статические библиотеки поддержки для WindowMaker
+Summary(uk.UTF-8):	Статичні бібліотеки підтримки для WindowMaker
 Group:		Development/Libraries
-Summary(pt_BR.UTF-8):   Componentes estáticos de desenvolvimento para o WindowMaker
+Summary(pt_BR.UTF-8):	Componentes estáticos de desenvolvimento para o WindowMaker
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
