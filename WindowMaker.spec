@@ -6,12 +6,12 @@
 %define		_snap		20050409
 
 Summary:	NeXT-alike window manager
-Summary(es):	Administrador de Ventanas parecido con el NeXT
-Summary(fr):	Gestionnaire de fenЙtres avec le look NeXT
-Summary(pl):	Zarz╠dca okien w stylu NeXT
-Summary(pt_BR):	Gerente de Janelas parecido com o NeXT
-Summary(ru):	WindowMaker - оконный менеджер для X11
-Summary(uk):	WindowMaker - в╕конний менеджер для X11
+Summary(es.UTF-8):   Administrador de Ventanas parecido con el NeXT
+Summary(fr.UTF-8):   Gestionnaire de fenц╙tres avec le look NeXT
+Summary(pl.UTF-8):   Zarzд┘dca okien w stylu NeXT
+Summary(pt_BR.UTF-8):   Gerente de Janelas parecido com o NeXT
+Summary(ru.UTF-8):   WindowMaker - п╬п╨п╬п╫п╫я▀п╧ п╪п╣п╫п╣п╢п╤п╣я─ п╢п╩я▐ X11
+Summary(uk.UTF-8):   WindowMaker - п╡я√п╨п╬п╫п╫п╦п╧ п╪п╣п╫п╣п╢п╤п╣я─ п╢п╩я▐ X11
 Name:		WindowMaker
 Version:	0.92.0
 Release:	0.%{_snap}.2
@@ -84,80 +84,80 @@ install the WindowMaker package, you may also want to install the
 AfterStep-APPS package, which includes applets that will work with
 both AfterStep and Window Maker window managers.
 
-%description -l es
+%description -l es.UTF-8
 WindowMaker es un administrador de ventanas proyectado para emular la
 apariencia de parte de la interface de usuario del NEXTSTEP(tm). Se
-hizo para ser rАpido, relativamente pequeЯo, rico en caracterМsticas y
-de configuraciСn fАcil, con una apariencia sencilla y elegante
+hizo para ser rц║pido, relativamente pequeц╠o, rico en caracterц╜sticas y
+de configuraciцЁn fц║cil, con una apariencia sencilla y elegante
 prestada del NEXTSTEP(tm).
 
-%description -l fr
-Window Maker est un gestionnaire de fenЙtres pour X11 qui cherche Ю
+%description -l fr.UTF-8
+Window Maker est un gestionnaire de fenц╙tres pour X11 qui cherche ц═
 reproduire l'allure et l'ergonomie ("look & feel") de l'interface
 graphique NeXTSTEP(tm) (aka OpenStep). Il est relativement rapide,
-ИvoluИ, et facile Ю configurer et Ю utiliser. Window Maker fait
+ц╘voluц╘, et facile ц═ configurer et ц═ utiliser. Window Maker fait
 officiellement partie du projet GNU, ce qui signifie que Window Maker
-peut coopИrer avec d'autres projets GNU, comme par exemple GNOME.
+peut coopц╘rer avec d'autres projets GNU, comme par exemple GNOME.
 
-Window Maker permet de changer de thХmes facilement, de placer ses
+Window Maker permet de changer de thц╗mes facilement, de placer ses
 applications favorites soit sur un "dock" similaire au programme Wharf
-de AfterStep, soit sur un dock intИgrИ Ю l'espace de travail, appelИ
-"clip" (trombone), et qui permet d'Иtendre les possibilitИs du dock
+de AfterStep, soit sur un dock intц╘grц╘ ц═ l'espace de travail, appelц╘
+"clip" (trombone), et qui permet d'ц╘tendre les possibilitц╘s du dock
 principal.
 
-Vous devriez installer ce package si votre gestionnaire de fenЙtres
+Vous devriez installer ce package si votre gestionnaire de fenц╙tres
 est Window Maker, ou si vous voulez l'essayer. Si vous installez le
-package Window Maker, vous voudrez peut-Йtre installer aussi le
+package Window Maker, vous voudrez peut-ц╙tre installer aussi le
 package AfterStep-APPS, qui contient des "applets" (petites
-applications) qui fonctionnent Ю la fois dans les gestionnaires de
-fenЙtres AfterStep et Window Maker.
+applications) qui fonctionnent ц═ la fois dans les gestionnaires de
+fenц╙tres AfterStep et Window Maker.
 
-%description -l pl
-WindowMaker jest zarz╠dc╠ okien przypominaj╠cym wygl╠dem i wygod╠
-obsЁugi interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo maЁy,
-o du©ych mo©liwo╤ciach i Ёatwy w konfiguracji. Konfiguruje siЙ go
-myszk╠, za pomoc╠ programu WPrefs wchodz╠cego w skЁad tego pakietu.
+%description -l pl.UTF-8
+WindowMaker jest zarzд┘dcд┘ okien przypominajд┘cym wyglд┘dem i wygodд┘
+obsе┌ugi interfejs systemu NeXTSTEP(tm). Jest szybki, stosunkowo maе┌y,
+o duе╪ych moе╪liwoе⌡ciach i е┌atwy w konfiguracji. Konfiguruje siд≥ go
+myszkд┘, za pomocд┘ programu WPrefs wchodzд┘cego w skе┌ad tego pakietu.
 
-%description -l pt_BR
-WindowMaker И um gerente de janelas projetado para emular a aparЙncia
-de parte da interface de usuАrio do NEXTSTEP(tm). Feito para ser
-rАpido, relativamente pequeno, rico em caracterМsticas e de
-configuraГЦo fАcil, com uma aparЙncia simples e elegante emprestada do
+%description -l pt_BR.UTF-8
+WindowMaker ц╘ um gerente de janelas projetado para emular a aparц╙ncia
+de parte da interface de usuц║rio do NEXTSTEP(tm). Feito para ser
+rц║pido, relativamente pequeno, rico em caracterц╜sticas e de
+configuraц╖цёo fц║cil, com uma aparц╙ncia simples e elegante emprestada do
 NEXTSTEP(tm).
 
-%description -l ru
-WindowMaker - это оконный менеджер, эмулирующий часть экранной среды
-NEXTSTEP(tm). Подразумевается что он относительно невелик, быстр,
-богат возможностями, легко настраивается и имеет простую и элегантную
-внешность, позаимствованную у NEXTSTEP(tm).
+%description -l ru.UTF-8
+WindowMaker - я█я┌п╬ п╬п╨п╬п╫п╫я▀п╧ п╪п╣п╫п╣п╢п╤п╣я─, я█п╪я┐п╩п╦я─я┐я▌я┴п╦п╧ я┤п╟я│я┌я▄ я█п╨я─п╟п╫п╫п╬п╧ я│я─п╣п╢я▀
+NEXTSTEP(tm). п÷п╬п╢я─п╟п╥я┐п╪п╣п╡п╟п╣я┌я│я▐ я┤я┌п╬ п╬п╫ п╬я┌п╫п╬я│п╦я┌п╣п╩я▄п╫п╬ п╫п╣п╡п╣п╩п╦п╨, п╠я▀я│я┌я─,
+п╠п╬пЁп╟я┌ п╡п╬п╥п╪п╬п╤п╫п╬я│я┌я▐п╪п╦, п╩п╣пЁп╨п╬ п╫п╟я│я┌я─п╟п╦п╡п╟п╣я┌я│я▐ п╦ п╦п╪п╣п╣я┌ п©я─п╬я│я┌я┐я▌ п╦ я█п╩п╣пЁп╟п╫я┌п╫я┐я▌
+п╡п╫п╣я┬п╫п╬я│я┌я▄, п©п╬п╥п╟п╦п╪я│я┌п╡п╬п╡п╟п╫п╫я┐я▌ я┐ NEXTSTEP(tm).
 
-%description -l uk
-WindowMaker - це в╕конний менеджер, що емулю╓ ╕нтерфейс екранного
-середовища NEXTSTEP(tm). Його вважають в╕дносно невеликим, швидким,
-багатим можливостями, легким для налагодження; в╕н ма╓ просту та
-елегантну зовн╕шн╕сть, запозичену в NEXTSTEP(tm).
+%description -l uk.UTF-8
+WindowMaker - я├п╣ п╡я√п╨п╬п╫п╫п╦п╧ п╪п╣п╫п╣п╢п╤п╣я─, я┴п╬ п╣п╪я┐п╩я▌я■ я√п╫я┌п╣я─я└п╣п╧я│ п╣п╨я─п╟п╫п╫п╬пЁп╬
+я│п╣я─п╣п╢п╬п╡п╦я┴п╟ NEXTSTEP(tm). п≥п╬пЁп╬ п╡п╡п╟п╤п╟я▌я┌я▄ п╡я√п╢п╫п╬я│п╫п╬ п╫п╣п╡п╣п╩п╦п╨п╦п╪, я┬п╡п╦п╢п╨п╦п╪,
+п╠п╟пЁп╟я┌п╦п╪ п╪п╬п╤п╩п╦п╡п╬я│я┌я▐п╪п╦, п╩п╣пЁп╨п╦п╪ п╢п╩я▐ п╫п╟п╩п╟пЁп╬п╢п╤п╣п╫п╫я▐; п╡я√п╫ п╪п╟я■ п©я─п╬я│я┌я┐ я┌п╟
+п╣п╩п╣пЁп╟п╫я┌п╫я┐ п╥п╬п╡п╫я√я┬п╫я√я│я┌я▄, п╥п╟п©п╬п╥п╦я┤п╣п╫я┐ п╡ NEXTSTEP(tm).
 
 %package libs
 Summary:	WindowMaker shared libraries
-Summary(pl):	Biblioteki wspСЁdzielone WindowMakera
+Summary(pl.UTF-8):   Biblioteki wspцЁе┌dzielone WindowMakera
 Group:		Libraries
 Obsoletes:	libwraster2
 
 %description libs
 This package contains shared libraries for run WindowMaker.
 
-%description libs -l pl
-Ten pakiet zawiera biblioteki wspСЁdzielone niezbЙdne do pracy
-zarz╠dcy okien WindowMaker.
+%description libs -l pl.UTF-8
+Ten pakiet zawiera biblioteki wspцЁе┌dzielone niezbд≥dne do pracy
+zarzд┘dcy okien WindowMaker.
 
 %package devel
 Summary:	WindowMaker libraries - development part
-Summary(es):	Bibliotecas, archivos de inclusiСn, e etc. para desarrollar aplicaciones WindowMaker
-Summary(fr):	Librairies de WindowMaker
-Summary(pl):	Biblioteki WindowMakera - czЙ╤Ф dla programistСw
-Summary(pt_BR):	Arquivos de inclusЦo e bibliotecas para o WindowMaker
-Summary(ru):	Библиотеки поддержки и .h файлы для WindowMaker
-Summary(uk):	Б╕бл╕отеки п╕дтримки та .h файли для WindowMaker
+Summary(es.UTF-8):   Bibliotecas, archivos de inclusiцЁn, e etc. para desarrollar aplicaciones WindowMaker
+Summary(fr.UTF-8):   Librairies de WindowMaker
+Summary(pl.UTF-8):   Biblioteki WindowMakera - czд≥е⌡д┤ dla programistцЁw
+Summary(pt_BR.UTF-8):   Arquivos de inclusцёo e bibliotecas para o WindowMaker
+Summary(ru.UTF-8):   п▒п╦п╠п╩п╦п╬я┌п╣п╨п╦ п©п╬п╢п╢п╣я─п╤п╨п╦ п╦ .h я└п╟п╧п╩я▀ п╢п╩я▐ WindowMaker
+Summary(uk.UTF-8):   п▒я√п╠п╩я√п╬я┌п╣п╨п╦ п©я√п╢я┌я─п╦п╪п╨п╦ я┌п╟ .h я└п╟п╧п╩п╦ п╢п╩я▐ WindowMaker
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}
 Obsoletes:	libwraster2-devel
@@ -166,59 +166,59 @@ Obsoletes:	libwraster2-devel
 This package contains libraries for building WindowMaker-enhanced
 applications.
 
-%description devel -l es
-Bibliotecas, archivos de inclusiСn, e etc. para desarrollar
+%description devel -l es.UTF-8
+Bibliotecas, archivos de inclusiцЁn, e etc. para desarrollar
 aplicaciones WindowMaker
 
-%description devel -l fr
+%description devel -l fr.UTF-8
 Ce paquet contient des librairies pour faire des applications mise en
 valeur par WindowMaker.
 
-%description devel -l pl
-Ten pakiet zawiera pliki nagЁСwkowe i biblioteki niezbЙdne do
-tworzenia aplikacji wykorzystuj╠cych mo©liwo╤ci zarz╠dcy okien
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagе┌цЁwkowe i biblioteki niezbд≥dne do
+tworzenia aplikacji wykorzystujд┘cych moе╪liwoе⌡ci zarzд┘dcy okien
 WindowMaker.
 
-%description devel -l pt_BR
-Arquivos de inclusЦo e bibliotecas para o desenvolvimento de programas
+%description devel -l pt_BR.UTF-8
+Arquivos de inclusцёo e bibliotecas para o desenvolvimento de programas
 baseados no WindowMaker
 
-%description devel -l ru
-Этот пакет содержит библиотеки и .h файлы, предназначенные для сборки
-приложений, использующих возможности WindowMaker.
+%description devel -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ я│п╬п╢п╣я─п╤п╦я┌ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ п╦ .h я└п╟п╧п╩я▀, п©я─п╣п╢п╫п╟п╥п╫п╟я┤п╣п╫п╫я▀п╣ п╢п╩я▐ я│п╠п╬я─п╨п╦
+п©я─п╦п╩п╬п╤п╣п╫п╦п╧, п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦я┘ п╡п╬п╥п╪п╬п╤п╫п╬я│я┌п╦ WindowMaker.
 
-%description devel -l uk
-Цей пакет м╕стить б╕бл╕отеки та .h файли, призначен╕ для прикладних
-програм, що використовують можливост╕ WindowMaker.
+%description devel -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╪я√я│я┌п╦я┌я▄ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ я┌п╟ .h я└п╟п╧п╩п╦, п©я─п╦п╥п╫п╟я┤п╣п╫я√ п╢п╩я▐ п©я─п╦п╨п╩п╟п╢п╫п╦я┘
+п©я─п╬пЁя─п╟п╪, я┴п╬ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ п╪п╬п╤п╩п╦п╡п╬я│я┌я√ WindowMaker.
 
 %package static
 Summary:	WindowMaker static libraries
-Summary(pl):	Biblioteki statyczne WindowMakera
-Summary(ru):	Статические библиотеки поддержки для WindowMaker
-Summary(uk):	Статичн╕ б╕бл╕отеки п╕дтримки для WindowMaker
+Summary(pl.UTF-8):   Biblioteki statyczne WindowMakera
+Summary(ru.UTF-8):   п║я┌п╟я┌п╦я┤п╣я│п╨п╦п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ п©п╬п╢п╢п╣я─п╤п╨п╦ п╢п╩я▐ WindowMaker
+Summary(uk.UTF-8):   п║я┌п╟я┌п╦я┤п╫я√ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ п©я√п╢я┌я─п╦п╪п╨п╦ п╢п╩я▐ WindowMaker
 Group:		Development/Libraries
-Summary(pt_BR):	Componentes estАticos de desenvolvimento para o WindowMaker
+Summary(pt_BR.UTF-8):   Componentes estц║ticos de desenvolvimento para o WindowMaker
 Requires:	%{name}-devel = %{version}
 
 %description static
 This package contains static libraries for building
 WindowMaker-enhanced applications.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Ten pakiet zawiera statyczne biblioteki do tworzenia aplikacji
-wykorzystuj╠cych mo©liwo╤ci zarz╠dcy okien WindowMaker.
+wykorzystujд┘cych moе╪liwoе⌡ci zarzд┘dcy okien WindowMaker.
 
-%description static -l pt_BR
-Instale este pacote se vocЙ deseja desenvolver para o WindowMaker,
-utilizando componentes estАticos (raramente necessАrio).
+%description static -l pt_BR.UTF-8
+Instale este pacote se vocц╙ deseja desenvolver para o WindowMaker,
+utilizando componentes estц║ticos (raramente necessц║rio).
 
-%description static -l ru
-Этот пакет содержит статические библиотеки предназначенные для сборки
-приложений, использующих возможности WindowMaker.
+%description static -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ я│п╬п╢п╣я─п╤п╦я┌ я│я┌п╟я┌п╦я┤п╣я│п╨п╦п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ п©я─п╣п╢п╫п╟п╥п╫п╟я┤п╣п╫п╫я▀п╣ п╢п╩я▐ я│п╠п╬я─п╨п╦
+п©я─п╦п╩п╬п╤п╣п╫п╦п╧, п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦я┘ п╡п╬п╥п╪п╬п╤п╫п╬я│я┌п╦ WindowMaker.
 
-%description static -l uk
-Цей пакет м╕стить статичн╕ б╕бл╕отеки, призначен╕ для прикладних
-програм, що використовують можливост╕ WindowMaker.
+%description static -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╪я√я│я┌п╦я┌я▄ я│я┌п╟я┌п╦я┤п╫я√ п╠я√п╠п╩я√п╬я┌п╣п╨п╦, п©я─п╦п╥п╫п╟я┤п╣п╫я√ п╢п╩я▐ п©я─п╦п╨п╩п╟п╢п╫п╦я┘
+п©я─п╬пЁя─п╟п╪, я┴п╬ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ п╪п╬п╤п╩п╦п╡п╬я│я┌я√ WindowMaker.
 
 %prep
 %setup -q -a 1 -a 2
