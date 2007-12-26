@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Window Maker
 Name[da]=WindowMaker
 Name[gl]=WindowMaker
@@ -9,7 +8,6 @@ Name[pl]=Window Maker
 Name[uk]=Window Maker
 Exec=wmaker
 TryExec=wmaker
-
 [Window Manager]
 SessionManaged=false
 ConfigExec=/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs
