@@ -37,11 +37,11 @@ URL:		http://www.windowmaker.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	giflib-devel
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
-BuildRequires:	giflib-devel
 BuildRequires:	perl-base
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
