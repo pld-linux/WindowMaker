@@ -51,6 +51,7 @@ Requires:	cpp
 Requires:	gnustep-dirs
 Requires:	tk
 Requires:	vfmg >= 0.9.95
+Provides:	WallpaperChanger
 Conflicts:	filesystem < 3.0-20
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -188,10 +189,10 @@ baseados no WindowMaker
 %package static
 Summary:	WindowMaker static libraries
 Summary(pl.UTF-8):	Biblioteki statyczne WindowMakera
+Summary(pt_BR.UTF-8):	Componentes estáticos de desenvolvimento para o WindowMaker
 Summary(ru.UTF-8):	Статические библиотеки поддержки для WindowMaker
 Summary(uk.UTF-8):	Статичні бібліотеки підтримки для WindowMaker
 Group:		Development/Libraries
-Summary(pt_BR.UTF-8):	Componentes estáticos de desenvolvimento para o WindowMaker
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
@@ -231,8 +232,8 @@ utilizando componentes estáticos (raramente necessário).
 %patch12 -p0
 
 for f in WindowMaker/*menu*; do
-	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
-	sed -i s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f
+	sed -i s,%{_libdir}/GNUstep/,%{_libdir}/GNUstep/, $f
+sed -i s,%{_prefix}/local/GNUstep/,%{_libdir}/GNUstep/, $f
 done
 
 mv -f po/{no,nb}.po
@@ -283,7 +284,7 @@ touch WindowMaker/Defaults/W*.in
 cd %{name}-extra-%{extraver}
 %configure \
 	--with-nlsdir=%{_datadir}/locale \
-	--with-iconsdir=%{_datadir}/pixmaps
+	--with-iconsdir=%{_pixmapsdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
