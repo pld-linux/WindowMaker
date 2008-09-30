@@ -232,8 +232,8 @@ utilizando componentes estáticos (raramente necessário).
 %patch12 -p0
 
 for f in WindowMaker/*menu*; do
-	sed -i s,%{_libdir}/GNUstep/,%{_libdir}/GNUstep/, $f
-sed -i s,%{_prefix}/local/GNUstep/,%{_libdir}/GNUstep/, $f
+	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
+	sed -i s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f
 done
 
 mv -f po/{no,nb}.po
