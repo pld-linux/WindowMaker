@@ -231,7 +231,7 @@ utilizando componentes estáticos (raramente necessário).
 %patch10 -p1
 %patch11 -p1
 %patch12 -p0
-%patch14 -p0
+%patch13 -p0
 
 for f in WindowMaker/*menu*; do
 	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
