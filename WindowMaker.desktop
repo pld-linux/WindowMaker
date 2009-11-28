@@ -10,5 +10,5 @@ Exec=wmaker
 TryExec=wmaker
 [Window Manager]
 SessionManaged=false
-ConfigExec=/usr/lib/GNUstep/Apps/WPrefs.app/WPrefs
+ConfigExec=@LIBDIR@/GNUstep/Applications/WPrefs.app/WPrefs
 # vi: encoding=utf-8
