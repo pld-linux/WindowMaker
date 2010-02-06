@@ -45,6 +45,7 @@ BuildRequires:	libpng-devel >= 2:1.4.0
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
+BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
 BuildRequires:	xorg-lib-libXpm-devel
