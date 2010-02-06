@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	WindowMaker - оконный менеджер для X11
 Summary(uk.UTF-8):	WindowMaker - віконний менеджер для X11
 Name:		WindowMaker
 Version:	0.92.0
-Release:	11
+Release:	12
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://windowmaker.info/pub/source/release/%{name}-%{version}.tar.gz
@@ -34,13 +34,14 @@ Patch10:	%{name}-localenames.patch
 Patch11:	%{name}-0.91.0-translucency-1.patch
 Patch12:	%{name}-gnustep.patch
 Patch13:	%{name}-wine.patch
+Patch14:	%{name}-libpng14.patch
 URL:		http://www.windowmaker.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	libjpeg-devel >= 6b
-BuildRequires:	libpng-devel >= 1.0.8
+BuildRequires:	libpng-devel >= 2:1.4.0
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
@@ -232,13 +233,13 @@ utilizando componentes estáticos (raramente necessário).
 %patch11 -p1
 %patch12 -p0
 %patch13 -p1
+%patch14 -p1
 
 for f in WindowMaker/*menu*; do
 	sed -i s,/GNUstep/Apps,/GNUstep/Applications, $f
 	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
 	sed -i s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f
 done
-
 
 mv -f po/{no,nb}.po
 
