@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	WindowMaker - оконный менеджер для X11
 Summary(uk.UTF-8):	WindowMaker - віконний менеджер для X11
 Name:		WindowMaker
 Version:	0.92.0
-Release:	12
+Release:	13
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://windowmaker.info/pub/source/release/%{name}-%{version}.tar.gz
@@ -46,10 +46,12 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	Esetroot
 Requires:	cpp >= 6:4.0.0
 Requires:	gnustep-dirs
 Requires:	tk
@@ -237,9 +239,9 @@ utilizando componentes estáticos (raramente necessário).
 %patch14 -p1
 
 for f in WindowMaker/*menu*; do
-	sed -i s,/GNUstep/Apps,/GNUstep/Applications, $f
-	sed -i s,/usr/lib/GNUstep/,%{_libdir}/GNUstep/, $f
-	sed -i s,/usr/local/GNUstep/,%{_libdir}/GNUstep/, $f
+	%{__sed} -i s,/GNUstep/Apps,/GNUstep/Applications, $f
+	%{__sed} -i s,%{_libdir}/GNUstep/,%{_libdir}/GNUstep/, $f
+	%{__sed} -i s,%{_prefix}/local/GNUstep/,%{_libdir}/GNUstep/, $f
 done
 
 mv -f po/{no,nb}.po
@@ -308,10 +310,10 @@ install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
 #install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
-sed s,@LIBDIR@,%{_libdir}, %{SOURCE3} > $RPM_BUILD_ROOT%{_wmpropsdir}/WindowMaker.desktop
+%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE3} > $RPM_BUILD_ROOT%{_wmpropsdir}/WindowMaker.desktop
 
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
-#sed s,@LIBDIR@,%{_libdir}, %{SOURCE6} >  $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
+#%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE6} >  $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
 
 %{__make} -C %{name}-extra-%{extraver} install \
