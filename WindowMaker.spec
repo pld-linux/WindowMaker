@@ -49,6 +49,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
+BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXpm-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	Esetroot
@@ -244,7 +245,7 @@ for f in WindowMaker/*menu*; do
 	%{__sed} -i s,%{_prefix}/local/GNUstep/,%{_libdir}/GNUstep/, $f
 done
 
-mv -f po/{no,nb}.po
+%{__mv} po/{no,nb}.po
 
 %build
 #%ifarch %{x8664}
@@ -285,7 +286,7 @@ cd ..
 
 touch WindowMaker/Defaults/W*.in
 
-%{__make} \
+%{__make} -j1 \
 	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}"
 
@@ -316,9 +317,10 @@ install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 #%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE6} > $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
-
 %{__make} -C %{name}-extra-%{extraver} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
 %find_lang %{name} --all-name
 
@@ -335,29 +337,21 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/WindowMaker
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/WindowMaker/*
 
-%{_mandir}/man1/*
-%lang(sk) %{_mandir}/sk/man1/*
+%{_mandir}/man1/*.1*
+%lang(sk) %{_mandir}/sk/man1/*.1*
 
-%{_pixmapsdir}/*
+%{_pixmapsdir}/*.xpm
 %{_wmpropsdir}/WindowMaker.desktop
 
 %attr(755,root,root) %{_bindir}/convertfonts
 %attr(755,root,root) %{_bindir}/bughint
 %attr(755,root,root) %{_bindir}/geticonset
 %attr(755,root,root) %{_bindir}/getstyle
-%attr(755,root,root) %{_bindir}/seticons
-%attr(755,root,root) %{_bindir}/setstyle
-%attr(755,root,root) %{_bindir}/wdwrite
-%attr(755,root,root) %{_bindir}/wdread
+%attr(755,root,root) %{_bindir}/set*
+%attr(755,root,root) %{_bindir}/wd*
 %attr(755,root,root) %{_bindir}/wkdemenu.pl
-%attr(755,root,root) %{_bindir}/wm-oldmenu2new
-%attr(755,root,root) %{_bindir}/wmagnify
-%attr(755,root,root) %{_bindir}/wmaker
-%attr(755,root,root) %{_bindir}/wmaker.inst
-%attr(755,root,root) %{_bindir}/wmsetbg
-%attr(755,root,root) %{_bindir}/wmsetup
-%attr(755,root,root) %{_bindir}/wxcopy
-%attr(755,root,root) %{_bindir}/wxpaste
+%attr(755,root,root) %{_bindir}/wm*
+%attr(755,root,root) %{_bindir}/wx*
 %attr(755,root,root) %{_bindir}/dockit
 
 %{_datadir}/WindowMaker
@@ -390,7 +384,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/get-wraster-flags
 %attr(755,root,root) %{_bindir}/get-wutil-flags
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
 
