@@ -274,6 +274,7 @@ cd ..
 	--disable-rpath \
 	--enable-shared \
 	--enable-static \
+	--enable-xinerama \
 	--enable-usermenu \
 	--with-appspath=%{_libdir}/GNUstep/Applications \
 	--with-nlsdir=%{_datadir}/locale \
@@ -313,7 +314,7 @@ install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
 %{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE3} > $RPM_BUILD_ROOT%{_wmpropsdir}/WindowMaker.desktop
 
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
-#%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE6} >  $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
+#%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE6} > $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 
 
 %{__make} -C %{name}-extra-%{extraver} install \
