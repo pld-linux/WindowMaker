@@ -1,5 +1,8 @@
+#
+# Conditional build:
+%bcond_with	gnome		# build with support for GNOME2 wm-properties
+#
 %define		extraver	0.1
-
 Summary:	NeXT-alike window manager
 Summary(es.UTF-8):	Administrador de Ventanas parecido con el NeXT
 Summary(fr.UTF-8):	Gestionnaire de fenêtres avec le look NeXT
@@ -9,7 +12,7 @@ Summary(ru.UTF-8):	WindowMaker - оконный менеджер для X11
 Summary(uk.UTF-8):	WindowMaker - віконний менеджер для X11
 Name:		WindowMaker
 Version:	0.92.0
-Release:	13
+Release:	14
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://windowmaker.info/pub/source/release/%{name}-%{version}.tar.gz
@@ -311,8 +314,8 @@ install contrib/dockit   $RPM_BUILD_ROOT%{_bindir}
 install contrib/dockit.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install WindowMaker-data/pixmaps/* $RPM_BUILD_ROOT%{_pixmapsdir}
-#install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}
-%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE3} > $RPM_BUILD_ROOT%{_wmpropsdir}/WindowMaker.desktop
+#%{?with_gnome:install %{SOURCE3} $RPM_BUILD_ROOT%{_wmpropsdir}}
+%{?with_gnome:%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE3} > $RPM_BUILD_ROOT%{_wmpropsdir}/WindowMaker.desktop}
 
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
 #%{__sed} s,@LIBDIR@,%{_libdir}, %{SOURCE6} > $RPM_BUILD_ROOT%{_datadir}/xsessions/WindowMaker.desktop
@@ -341,7 +344,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sk) %{_mandir}/sk/man1/*.1*
 
 %{_pixmapsdir}/*.xpm
-%{_wmpropsdir}/WindowMaker.desktop
+%{?with_gnome:%{_wmpropsdir}/WindowMaker.desktop}
 
 %attr(755,root,root) %{_bindir}/convertfonts
 %attr(755,root,root) %{_bindir}/bughint
