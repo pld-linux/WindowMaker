@@ -1,0 +1,11 @@
+--- WindowMaker-0.92.0/wrlib/png.c~	2004-10-12 20:22:04.000000000 +0200
++++ WindowMaker-0.92.0/wrlib/png.c	2012-02-08 17:01:46.922810472 +0100
+@@ -97,7 +97,7 @@
+     }
+ 
+     RErrorCode = RERR_INTERNAL;
+-    if (setjmp(png->jmpbuf)) {
++    if (setjmp(png_jmpbuf(png))) {
+         fclose(f);
+         png_destroy_read_struct(&png, &pinfo, &einfo);
+         if (image)
