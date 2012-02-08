@@ -12,7 +12,7 @@ Summary(ru.UTF-8):	WindowMaker - оконный менеджер для X11
 Summary(uk.UTF-8):	WindowMaker - віконний менеджер для X11
 Name:		WindowMaker
 Version:	0.92.0
-Release:	16
+Release:	17
 License:	GPL
 Group:		X11/Window Managers
 Source0:	ftp://windowmaker.info/pub/source/release/%{name}-%{version}.tar.gz
@@ -38,6 +38,7 @@ Patch11:	%{name}-0.91.0-translucency-1.patch
 Patch12:	%{name}-gnustep.patch
 Patch13:	%{name}-wine.patch
 Patch14:	%{name}-libpng14.patch
+Patch15:	%{name}-libpng15.patch
 URL:		http://www.windowmaker.info/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -241,6 +242,7 @@ utilizando componentes estáticos (raramente necessário).
 %patch12 -p0
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 for f in WindowMaker/*menu*; do
 	%{__sed} -i s,/GNUstep/Apps,/GNUstep/Applications, $f
