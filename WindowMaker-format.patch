@@ -1,0 +1,14 @@
+--- WindowMaker-0.92.0/wrlib/nxpm.c~	2004-10-12 20:21:53.000000000 +0200
++++ WindowMaker-0.92.0/wrlib/nxpm.c	2013-11-07 13:40:23.762829654 +0100
+@@ -644,9 +644,9 @@
+             if (!a || *a>127) {
+                 tmpc = lookfor(colormap, (unsigned)*r<<16|(unsigned)*g<<8|(unsigned)*b);
+ 
+-                fprintf(file, index2str(buf, tmpc->index, charsPerPixel));
++                fprintf(file, "%s", index2str(buf, tmpc->index, charsPerPixel));
+             } else {
+-                fprintf(file, transp);
++                fprintf(file, "%s", transp);
+             }
+ 
+             if (a) {
